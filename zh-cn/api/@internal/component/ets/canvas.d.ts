@@ -191,8 +191,8 @@ declare class CanvasGradient {
   addColorStop(offset: number, color: string): void;
 
   /**
-   * 设置渐变断点值，包括偏移和颜色。支持设置rgb或argb格式颜色。支持通过传入[ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型设置P3广色域颜色值，从API版
-   * 本26.0.0开始，新增支持BT2020广色域和HDR提亮。
+   * 设置渐变断点值，包括偏移和颜色。支持设置rgb或argb格式颜色。支持通过传入[ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型设置P3广色域颜色值<!--Del-->，从API版
+   * 本26.0.0开始，新增支持BT2020广色域和HDR提亮<!--DelEnd-->。
    *
    * @param { number } offset - 设置渐变点距离起点的位置占总体长度的比例，范围为[0, 1]。
    *     <br>设置offset<0或offset>1无渐变效果。

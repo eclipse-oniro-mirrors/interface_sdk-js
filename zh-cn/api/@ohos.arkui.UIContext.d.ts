@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIContext实例
  * @kit ArkUI
  */
 
@@ -1746,6 +1746,20 @@ export interface PageInfo {
 }
 
 /**
+ * 定义拦截Overlay侧滑返回事件的回调类型。
+ *
+ * @returns { boolean } Whether to intercept the back-press event.
+ *     If **true** is returned, the event is intercepted and is prevented from reaching the lower-layer component.
+ *     If **false** is returned, the event is transparently transmitted to the lower-layer component.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.0 dynamic
+ */
+export declare type OnOverlayBackPressCallback = () => boolean;
+
+/**
 * 初始化OverlayManager时所用参数。
 * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1830,7 +1844,7 @@ export interface OrderOverlayOptions {
   levelMode?: LevelMode;
 
   /**
-   * The uniqueId of any node in the router or navigation page.
+   * 路由器或导航页面中任何节点的唯一ID。
    *
    * @type { ?int }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1862,26 +1876,22 @@ export interface OrderOverlayOptions {
 export class UIObserver {
 
   /**
+   * 通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   *     The value is fixed at **'navDestinationUpdate'**, which indicates the state change event
-   *     <br>of the **NavDestination** component.
-   * @param { object } options - ID of the target **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current
-   *     <br>state of the **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
+   * 通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   *     The value is fixed at **'navDestinationUpdate'**, which indicates the state change event
-   *     <br>of the **NavDestination** component.
-   * @param { object } options - ID of the target **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current
-   *     <br>state of the **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1891,26 +1901,22 @@ export class UIObserver {
   on(type: 'navDestinationUpdate', options: { navigationId: ResourceStr }, callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
+   * 取消通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationUpdate'.
-   * @param { object } options - Specify the id of observed navigation.
-   * @param { Callback<observer.NavDestinationInfo> } callback - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and
-   *     navigation ID will be removed.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 需要取消的监听回调。不指定具体的回调函数时，取消options指定的Navigation上所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
+   * 取消通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationUpdate'.
-   * @param { object } options - The options object.
-   * @param { Callback<observer.NavDestinationInfo> } callback - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and
-   *     navigation ID will be removed.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 需要取消的监听回调。不指定具体的回调函数时，取消options指定的Navigation上所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1920,26 +1926,20 @@ export class UIObserver {
   off(type: 'navDestinationUpdate', options: { navigationId: ResourceStr }, callback?: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Subscribes to status changes of this **NavDestination** component.
+   * 监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   * The value is fixed at **'navDestinationUpdate'**, which indicates the state change event of
-   * <br>the **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current state of
-   * <brthe **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
-   * Subscribes to status changes of this **NavDestination** component.
+   * 监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   *     The value is fixed at **'navDestinationUpdate'**,
-   *     <br>which indicates the state change event of the **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current state of
-   *     <br>the **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1949,26 +1949,20 @@ export class UIObserver {
   on(type: 'navDestinationUpdate', callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate'} type - The type of event to remove the listener for. Must be 'navDestinationUpdate
-   *     '.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'navDestinationUpdate'} type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate'} type - The type of event to remove the listener for. Must be 'navDestinationUpdate
-   *     '.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'navDestinationUpdate'} type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1978,13 +1972,11 @@ export class UIObserver {
   off(type: 'navDestinationUpdate', callback?: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the navigation destination is updated.
+   * 通过Navigation的uniqueId监听NavDestination组件的状态变化，uniqueId可通过queryNavigationInfo获取。
    *
-   * @param { 'navDestinationUpdateByUniqueId' } type - The type of event to listen for. Must be '
-   *     navDestinationUpdateByUniqueId'.
-   * @param { number } navigationUniqueId - The uniqueId of the navigation.
-   * @param { Callback<observer.NavDestinationInfo> } callback - The callback function to be called when the navigation
-   *     destination is updated.
+   * @param { 'navDestinationUpdateByUniqueId' } type - 监听事件，固定为'navDestinationUpdateByUniqueId'，即NavDestination组件的状态变化。
+   * @param { number } navigationUniqueId - 指定监听的Navigation的uniqueId，可以通过queryNavigationInfo获取。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1994,14 +1986,11 @@ export class UIObserver {
   on(type: 'navDestinationUpdateByUniqueId', navigationUniqueId: number, callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消通过Navigation的uniqueId监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdateByUniqueId'} type - The type of event to remove the listener for. Must be '
-   *     navDestinationUpdateByUniqueId'.
-   * @param { number } navigationUniqueId - The uniqueId of the navigation.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'navDestinationUpdateByUniqueId'} type - 监听事件，固定为'navDestinationUpdateByUniqueId'，即NavDestination组件的状态变化。
+   * @param { number } navigationUniqueId - 指定监听的Navigation的uniqueId，可以通过queryNavigationInfo获取。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2011,12 +2000,12 @@ export class UIObserver {
   off(type: 'navDestinationUpdateByUniqueId', navigationUniqueId: number, callback?: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event start or stop.
+   * 监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent' } type - The type of event to listen for. Must be 'scrollEvent'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2026,13 +2015,13 @@ export class UIObserver {
   on(type: 'scrollEvent', options: observer.ObserverOptions, callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent' } type - The type of event to remove the listener for. Must be 'scrollEvent'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and
-   *     scroll ID will be removed.
+   * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 需要取消的滚动事件监听回调。
+   *     当只需要取消 options 指定滚动组件上的指定回调时传入该参数；不传参数时，
+   *     取消 options 指定滚动组件上的所有滚动事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2042,11 +2031,11 @@ export class UIObserver {
   off(type: 'scrollEvent', options: observer.ObserverOptions, callback?: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event start or stop.
+   * 监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent' } type - The type of event to listen for. Must be 'scrollEvent'.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2056,12 +2045,12 @@ export class UIObserver {
   on(type: 'scrollEvent', callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent'} type - The type of event to remove the listener for. Must be 'scrollEvent'.
-   * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'scrollEvent'} type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { Callback<observer.ScrollEventInfo> } [callback] - 需要取消的滚动事件监听回调。
+   *     当只需要取消指定回调时传入该参数；不传参数时，
+   *     取消所有滚动事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2071,22 +2060,20 @@ export class UIObserver {
   off(type: 'scrollEvent', callback?: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Unsubscribes to state changes of the page in the router.
+   * 监听router中page页面的状态变化。
    *
-   * @param { 'routerPageUpdate' } type - Event type.
-   *     <br>The value is fixed at 'routerPageUpdate', which indicates the state change event of the page in the router.
-   * @param { Callback<observer.RouterPageInfo> } callback - Callback to be unregistered.
+   * @param { 'routerPageUpdate' } type - 监听事件，固定为'routerPageUpdate'，即router中page页面的状态变化。
+   * @param { Callback<observer.RouterPageInfo> } callback - 回调函数。携带RouterPageInfo，返回当前的page页面状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
-   * Unsubscribes to state changes of the page in the router.
+   * 监听router中page页面的状态变化。
    *
-   * @param { 'routerPageUpdate' } type - Event type.
-   *     <br>The value is fixed at 'routerPageUpdate', which indicates the state change event of the page in the router.
-   * @param { Callback<observer.RouterPageInfo> } callback - Callback to be unregistered.
+   * @param { 'routerPageUpdate' } type - 监听事件，固定为'routerPageUpdate'，即router中page页面的状态变化。
+   * @param { Callback<observer.RouterPageInfo> } callback - 回调函数。携带RouterPageInfo，返回当前的page页面状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2096,12 +2083,10 @@ export class UIObserver {
   on(type: 'routerPageUpdate', callback: Callback<observer.RouterPageInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听router中page页面的状态变化。
    *
-   * @param { 'routerPageUpdate' } type - The type of event to remove the listener for. Must be 'routerPageUpdate'.
-   * @param { Callback<observer.RouterPageInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'routerPageUpdate' } type - 监听事件，固定为'routerPageUpdate'，即router中page页面的状态变化。
+   * @param { Callback<observer.RouterPageInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有router中page页面状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2191,11 +2176,10 @@ export class UIObserver {
   off(type: 'didLayout', callback?: Callback<void>): void;
 
   /**
-   * Registers a callback function to be called when the navigation switched to a new navDestination.
+   * 监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to listen for. Must be 'navDestinationSwitch'.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - The callback function to be called when
-   *                                                                   the navigation switched to a new navDestination.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - 回调函数。携带NavDestinationSwitchInfo，返回页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2208,13 +2192,10 @@ export class UIObserver {
   ): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationSwitch'.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove. If not
-   *     provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有Navigation页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2227,12 +2208,11 @@ export class UIObserver {
   ): void;
 
   /**
-   * Registers a callback function to be called when the navigation switched to a new navDestination.
+   * 通过监听选项监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to listen for. Must be 'navDestinationSwitch'.
-   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - Options.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - The callback function to be called when the
-   *                                                                   navigation switched to a new navDestination.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - 页面切换监听选项，用于指定需要监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - 回调函数。携带NavDestinationSwitchInfo，返回页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2246,14 +2226,11 @@ export class UIObserver {
   ): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消通过监听选项监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationSwitch'.
-   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - Options.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove. If not
-   *     provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - 页面切换监听选项，用于指定需要取消监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2267,11 +2244,10 @@ export class UIObserver {
   ): void;
 
   /**
-   * Registers a callback function to be called before clickEvent is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。回调类型为[ClickEventListenerCallback]{@link ClickEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to listen for.
-   * @param { ClickEventListenerCallback } callback - The callback function to be called
-   *                                                  when the clickEvent will be trigger or after.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。
+   * @param { ClickEventListenerCallback } callback - 回调函数。可以获得点击事件的[ClickEvent]{@link ClickEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2281,11 +2257,10 @@ export class UIObserver {
   on(type: 'willClick', callback: ClickEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called before clickEvent is called.
+   * 取消监听on('willClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to remove the listener for.
-   * @param { ClickEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                    all callbacks for the given event type will be removed.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，即点击事件指令下发情况。
+   * @param { ClickEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2295,11 +2270,10 @@ export class UIObserver {
   off(type: 'willClick', callback?: ClickEventListenerCallback): void;
 
   /**
-   * Registers a callback function to be called after clickEvent is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。回调类型为[ClickEventListenerCallback]{@link ClickEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to listen for.
-   * @param { ClickEventListenerCallback } callback - The callback function to be called
-   *                                                  when the clickEvent will be trigger or after.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。
+   * @param { ClickEventListenerCallback } callback - 回调函数。可以获得点击事件的[ClickEvent]{@link ClickEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2309,11 +2283,10 @@ export class UIObserver {
   on(type: 'didClick', callback: ClickEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called after clickEvent is called.
+   * 取消监听on('didClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to remove the listener for.
-   * @param { ClickEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                    all callbacks for the given event type will be removed.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，即点击事件指令下发情况。
+   * @param { ClickEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2323,11 +2296,10 @@ export class UIObserver {
   off(type: 'didClick', callback?: ClickEventListenerCallback): void;
 
   /**
-   * Registers a callback function to be called before tapGesture is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。回调类型为[GestureEventListenerCallback]{@link GestureEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to listen for.
-   * @param { GestureEventListenerCallback } callback - The callback function to be called
-   *                                                    when the clickEvent will be trigger or after.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。
+   * @param { GestureEventListenerCallback } callback - 回调函数。可以获得点击事件的[GestureEvent]{@link GestureEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2337,11 +2309,10 @@ export class UIObserver {
   on(type: 'willClick', callback: GestureEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called before tapGesture is called.
+   * 取消监听on('willClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to remove the listener for.
-   * @param { GestureEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                      all callbacks for the given event type will be removed.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，即点击事件指令下发情况。
+   * @param { GestureEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2351,11 +2322,10 @@ export class UIObserver {
   off(type: 'willClick', callback?: GestureEventListenerCallback): void;
 
   /**
-   * Registers a callback function to be called after tapGesture is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。回调类型为[GestureEventListenerCallback]{@link GestureEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to listen for.
-   * @param { GestureEventListenerCallback } callback - The callback function to be called
-   *                                                    when the clickEvent will be trigger or after.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。
+   * @param { GestureEventListenerCallback } callback - 回调函数。可以获得点击事件的[GestureEvent]{@link GestureEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2365,11 +2335,10 @@ export class UIObserver {
   on(type: 'didClick', callback: GestureEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called after tapGesture is called.
+   * 取消监听on('didClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to remove the listener for.
-   * @param { GestureEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                      all callbacks for the given event type will be removed.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，即点击事件指令下发情况。
+   * @param { GestureEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2513,12 +2482,11 @@ export class UIObserver {
   off(type: 'afterPanEnd', callback?: PanListenerCallback): void;
 
   /**
-   * Registers a callback function to be called when the tabContent is showed or hidden.
+   * 监听指定Tabs组件id的TabContent页面切换事件。相比on('tabChange')，本接口不支持监听Tabs组件初始化时，显示首个页签的事件。
    *
-   * @param { 'tabContentUpdate' } type - The type of event to listen for. Must be 'tabContentUpdate'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to be called
-   *                                                         when the tabContent show or hide.
+   * @param { 'tabContentUpdate' } type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { observer.ObserverOptions } options - 指定监听的Tabs组件的id。
+   * @param { Callback<observer.TabContentInfo> } callback - 回调函数。携带TabContentInfo，返回TabContent页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2528,12 +2496,11 @@ export class UIObserver {
   on(type: 'tabContentUpdate', options: observer.ObserverOptions, callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听指定Tabs组件id的TabContent页面切换事件。
    *
-   * @param { 'tabContentUpdate' } type - The type of event to remove the listener for. Must be 'tabContentUpdate'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to remove. If not provided,
-   *                                              all callbacks for the given event type and Tabs ID will be removed.
+   * @param { 'tabContentUpdate' } type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { observer.ObserverOptions } options - 指定监听的Tabs组件的id。
+   * @param { Callback<observer.TabContentInfo> } callback - 需要被注销的回调函数。不传参数时，取消options指定的Tabs组件上的所有TabContent页面切换事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2543,11 +2510,10 @@ export class UIObserver {
   off(type: 'tabContentUpdate', options: observer.ObserverOptions, callback?: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Registers a callback function to be called when the tabContent is showed or hidden.
+   * 监听TabContent页面的切换事件。相比on('tabChange')，本接口不支持监听Tabs组件初始化时，显示首个页签的事件。
    *
-   * @param { 'tabContentUpdate' } type - The type of event to listen for. Must be 'tabContentUpdate'.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to be called
-   *                                                         when the tabContent is showed or hidden.
+   * @param { 'tabContentUpdate' } type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { Callback<observer.TabContentInfo> } callback - 回调函数。携带TabContentInfo，返回TabContent页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2557,11 +2523,10 @@ export class UIObserver {
   on(type: 'tabContentUpdate', callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听TabContent页面的切换事件。
    *
-   * @param { 'tabContentUpdate'} type - The type of event to remove the listener for. Must be 'tabContentUpdate'.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to remove. If not provided,
-   *                                              all callbacks for the given event type and Tabs ID will be removed.
+   * @param { 'tabContentUpdate'} type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { Callback<observer.TabContentInfo> } callback - 需要被注销的回调函数。不传参数时，取消所有TabContent页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2734,11 +2699,10 @@ export class UIObserver {
   offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
-   * Registers a callback function to be called when text field's content is changed.
+   * 全局监听输入框文本变化。
    *
-   * @param { 'textChange' } type - The type of event to listen for. Must be 'textChange'.
-   * @param { Callback<observer.TextChangeEventInfo> } callback - The callback function to be called when
-   *     text field's content is changed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { Callback<observer.TextChangeEventInfo> } callback - 回调函数，返回文本变化的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2748,11 +2712,10 @@ export class UIObserver {
   on(type: 'textChange', callback: Callback<observer.TextChangeEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消输入框文本变化的全局监听。
    *
-   * @param { 'textChange' } type - The type of event to remove the listener for. Must be 'textChange'.
-   * @param { Callback<observer.TextChangeEventInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { Callback<observer.TextChangeEventInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消输入框文本变化的所有全局监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2762,12 +2725,11 @@ export class UIObserver {
   off(type: 'textChange', callback?: Callback<observer.TextChangeEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when text field's content is changed.
+   * 指定id的输入框文本变化的局部监听。
    *
-   * @param { 'textChange' } type - The type of event to listen for. Must be 'textChange'.
-   * @param { observer.ObserverOptions } identity - Identity options.
-   * @param { Callback<observer.TextChangeEventInfo> } callback - The callback function to be called when the
-   *     text field's content is changed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { observer.ObserverOptions } identity - 指定监听的文本输入组件的id。
+   * @param { Callback<observer.TextChangeEventInfo> } callback - 回调函数，返回文本变化的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2777,12 +2739,11 @@ export class UIObserver {
   on(type: 'textChange', identity: observer.ObserverOptions, callback: Callback<observer.TextChangeEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消指定ID对应输入框文本变化的局部监听。
    *
-   * @param { 'textChange' } type - The type of event to remove the listener for. Must be 'textChange'.
-   * @param { observer.ObserverOptions } identity - Identity options.
-   * @param { Callback<observer.TextChangeEventInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { observer.ObserverOptions } identity - 指定监听的文本输入组件的id。
+   * @param { Callback<observer.TextChangeEventInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消指定ID输入框文本变化的所有局部监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3069,8 +3030,20 @@ export class ComponentUtils {
 }
 
 /**
-* class OverlayManager
-*
+ * 提供绘制浮层的能力。
+ *
+ * > **说明：**
+ * >
+ * > - 该类的初始API从API version 12开始支持。
+ * >
+ * > - 在以下API示例中，必须先在**UIContext**中使用[getOverlayManager()]{@link UIContext#getOverlayManager}获取**OverlayManager**实例，然后使用该实例调用API。
+ * >
+ * > - **OverlayManager**上的节点位于页面层级之上，但在**Dialog**、**Popup**、**Menu**、**BindSheet**、**BindContentCover**和**Toast**等组件之下。
+ * >
+ * > - **OverlayManager**上节点在安全区内外的绘制方式与页面一致，键盘避让方式也与页面相同。
+ * >
+ * > - 对于与**OverlayManager**相关的属性，建议使用AppStorage在应用内进行全局存储，以避免切换页面时属性值发生变化导致业务错误。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3080,18 +3053,17 @@ export class ComponentUtils {
 export class OverlayManager {
 
   /**
-   * Adds a specified ComponentContent node to the OverlayManager.
+   * 向OverlayManager添加指定的ComponentContent节点。
    *
-   * @param { ComponentContent } content -  Content to add to the target node on the **OverlayManager**.<br>
-   *     **NOTE**<br>
-   *     By default, the new node is centered on the page and stacked according to its stacking level.
-   * @param { number } [ index ] - Stacking level of the new node on the **OverlayManager**.<br>
-   *     **NOTE**<br>
-   *     If the value is greater than or equal to 0, a larger value means a higher layer for
-   *     the **ComponentContent** node. If multiple **ComponentContent** nodes have the same index,
-   *     the later-added ones appear above earlier ones.<br>If the value is less than 0, **null**, or **undefined**,
-   *     the **ComponentContent** node is added at the highest level by default.<br>
-   *     If the same **ComponentContent** node is added multiple times, only the last added one is retained.
+   * @param { ComponentContent } content -  添加到**OverlayManager**目标节点上的内容。<br>
+   *     **注意**<br>
+   *     默认情况下，新节点在页面中居中，并根据其堆叠级别进行堆叠。
+   * @param { number } [ index ] - 新节点在**OverlayManager**上的堆叠级别。<br>
+   *     **注意**<br>
+   *     如果值大于等于0，值越大表示**ComponentContent**节点的层级越高。
+   *     如果多个**ComponentContent**节点具有相同的index，后添加的节点显示在先添加的节点上方。<br>如果值小于0、**null**或**undefined**，
+   *     **ComponentContent**节点默认添加到最高层级。<br>
+   *     如果同一个**ComponentContent**节点被多次添加，仅保留最后添加的节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3101,15 +3073,15 @@ export class OverlayManager {
   addComponentContent(content: ComponentContent, index?: number): void;
 
   /**
-   * Creates a floating layer node with the specified display order.
-   * This API allows you to define the stacking order of the nodes when they are created.
+   * 创建具有指定显示顺序的浮层节点。
+   * 该接口允许在创建节点时定义节点的堆叠顺序。
    *
-   * @param { ComponentContent } content - Content to add to the target node on the **OverlayManager**.
-   *     <br>**NOTE**<br>
-   *     By default, the new node is centered on the page and stacked according to its stacking level.
-   * @param { LevelOrder } [ levelOrder ] - Display order of the new floating layer node.<br>
-   *     **NOTE**<br>
-   *     - Default value: **LevelOrder.clamp(0)**
+   * @param { ComponentContent } content - 添加到**OverlayManager**目标节点上的内容。
+   *     <br>**注意**<br>
+   *     默认情况下，新节点在页面中居中，并根据其堆叠级别进行堆叠。
+   * @param { LevelOrder } [ levelOrder ] - 新浮层节点的显示顺序。<br>
+   *     **注意**<br>
+   *     - 默认值：**LevelOrder.clamp(0)**
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3119,9 +3091,9 @@ export class OverlayManager {
   addComponentContentWithOrder(content: ComponentContent, levelOrder?: LevelOrder): void;
 
   /**
-   * Removes a specified ComponentContent node from the OverlayManager
+   * 从OverlayManager移除指定的ComponentContent节点。
    *
-   * @param { ComponentContent } content - Content to remove from the **OverlayManager**.
+   * @param { ComponentContent } content - 要从**OverlayManager**中移除的内容。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3131,9 +3103,9 @@ export class OverlayManager {
   removeComponentContent(content: ComponentContent): void;
 
   /**
-   * Show the ComponentContent.
+   * 显示ComponentContent。
    *
-   * @param { ComponentContent } content - Content to show on the **OverlayManager**.
+   * @param { ComponentContent } content - 要在**OverlayManager**上显示的内容。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3143,9 +3115,9 @@ export class OverlayManager {
   showComponentContent(content: ComponentContent): void;
 
   /**
-   * Hide the ComponentContent.
+   * 隐藏ComponentContent。
    *
-   * @param { ComponentContent } content - Content to hide on the **OverlayManager**.
+   * @param { ComponentContent } content - 要在**OverlayManager**上隐藏的内容。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3155,7 +3127,7 @@ export class OverlayManager {
   hideComponentContent(content: ComponentContent): void;
 
   /**
-   * Show all ComponentContents on the OverlayManager.
+   * 显示OverlayManager上的所有ComponentContent。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3166,7 +3138,7 @@ export class OverlayManager {
   showAllComponentContents(): void;
 
   /**
-   * Hide all ComponentContents on the OverlayManager.
+   * 隐藏OverlayManager上的所有ComponentContent。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3263,8 +3235,8 @@ export class Magnifier {
 }
 
 /**
-* interface AtomicServiceBar
-*
+ * AtomicServiceBar提供对原子化服务menuBar的属性设置能力，支持设置menuBar的可见性、背景颜色、标题内容、标题字体样式、图标颜色，以及获取menuBar的布局信息和监听布局变化。适用于需要在原子化服务中自定义menuBar外观和行为的场景。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3997,7 +3969,7 @@ export declare class ContextMenuController {
 * > [onFrame]{@link FrameCallback#onFrame}或[onIdle]{@link FrameCallback#onIdle}方法，实现具体的业务逻辑。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @FaAndStageModel
+ * @stagemodelonly
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
@@ -5075,29 +5047,24 @@ export class UIContext {
   getLuminanceSampler(target: TargetInfo): LuminanceSampler | undefined;
 
   /**
-   * get the filtered attributes of the component tree.
+   * 获取组件树及组件属性。此接口耗时较长，仅适用于测试场景。
    *
-   * @param { Array<string> } [filters] - List of component attributes used for filtering. Currently, only the following
-   *     filter fields are supported:
-   *     <br>**"id"**: unique ID of the component.
-   *     <br>**"src"**: source of the resource.
-   *     <br>**"content"**: information or data contained in the element, component, or object.
-   *     <br>**"editable"**: whether the component is editable.
-   *     <br>**"scrollable"**: whether the component is scrollable.
-   *     <br>**"selectable"**: whether the component is selectable.
-   *     <br>**"focusable"**: whether the component is focusable.
-   *     <br>**"focused"**: whether the component is currently focused.
-   *     <br>If **filters** includes one or more fields, unspecified fields will be filtered out from the results.
-   *     <br>If **filters** is not provided or is an empty array, none of the aforementioned fields
-   *     <br>will be filtered out.
-   *     <br>The following filter field is supported since API version 20:
-   *     <br>**"isLayoutInspector"**: whether the component tree contains custom components.
-   *     <br>If **filters** is omitted or
-   *     <br>does not contain **"isLayoutInspector"**, the returned component tree
-   *     <br>will not include custom component details.
-   *     <br>Other filter fields are used only in testing scenarios.
-   * @returns { string } JSON string of the component tree and component attributes. For details about each field in
-   *     the component, see the return value description of [getInspectorInfo]{@link FrameNode#getInspectorInfo}.
+   * @param { Array<string> } [filters] - 需要获取的组件属性的过滤列表。目前仅支持过滤字段：
+   *     <br>"id"：组件唯一标识。
+   *     <br>"src"：资源来源。
+   *     <br>"content"：元素、组件或对象所包含的信息或数据。
+   *     <br>"editable"：是否可编辑。
+   *     <br>"scrollable"：是否可滚动。
+   *     <br>"selectable"：是否可选择。
+   *     <br>"focusable"：是否可聚焦。
+   *     <br>"focused"：是否已聚焦。
+   *     <br>如果在filters参数中包含以上一个或者多个字段，则未包含的字段会在组件属性查询结果中被过滤掉。如果用户未传入filters参数或者filters参数为空数组，则以上字段全部不会在组件属性查询结果中被过滤掉。
+   *     <br>从API version 20开始，支持该过滤字段：
+   *     <br>"isLayoutInspector"：返回组件树是否包含自定义组件。如果用户未传入filters参数或者filters数组不包含isLayoutInspector，返回的组件树将缺少自定义组件的信息。
+   *     <br>从API版本26.1.0开始，支持该过滤字段：
+   *     <br>"isWebEnable"：返回的组件树是否包含Web组件所加载网页的组件树。如果用户未传入filters参数或者filters数组不包含isWebEnable，返回的组件树将缺少Web组件所加载网页的组件树信息。
+   *     <br>其余字段仅供测试场景使用。
+   * @returns { string } - 获取组件树及组件属性的JSON字符串。组件中每个字段的含义请参考[getInspectorInfo]{@link FrameNode#getInspectorInfo}的返回值说明。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -5111,31 +5078,24 @@ export class UIContext {
   getFilteredInspectorTree(filters?: Array<string>): string;
 
   /**
-   * get the filtered attributes of the component tree with the specified id and depth
+   * 获取指定的组件及其子组件的属性。此接口耗时较长，仅适用于测试场景。
    *
-   * @param { string } id - [ID]{@link CommonMethod#id} of the target component.
-   * @param { number } depth - Number of layers of child components. If the value is **0**, the attributes of the
-   *     specified component and all its child components are obtained. If the value is **1**, only the attributes of
-   *     <br>the specified component are obtained. If the value is **2**, the attributes of
-   *     <br>the specified component and its
-   *     <br>level-1 child components are obtained. The rest can be deduced by analogy.
-   * @param { Array<string> } [filters] - List of component attributes used for filtering. Currently, only the following
-   *     filter fields are supported:
-   *     <br>**"id"**: unique ID of the component.
-   *     <br>**"src"**: source of the resource.
-   *     <br>**"content"**: information or data contained in the element, component, or object.
-   *     <br>**"editable"**: whether the component is editable.
-   *     <br>**"scrollable"**: whether the component is scrollable.
-   *     <br>**"selectable"**: whether the component is selectable.
-   *     <br>**"focusable"**: whether the component is focusable.
-   *     <br>**"focused"**: whether the component is currently focused.
-   *     <br>If **filters** includes one or more fields, unspecified fields will be filtered out from the results.
-   *     <br>If **filters** is not provided or is an empty array, none of the aforementioned fields
-   *     <br>will be filtered out.
-   *     <br>Other filter fields are used only in testing scenarios.
-   * @returns { string } JSON string of the attributes of the specified component and its child components. For details
-   *     about each field in the component, see the return value
-   *     <br>description of [getInspectorInfo]{@link FrameNode#getInspectorInfo}.
+   * @param { string } id - 指定的[组件标识]{@link CommonMethod#id}id。
+   * @param { number } depth - 获取子组件的层数。当取值0时，获取指定的组件及其所有的子孙组件的属性。当取值1时，仅获取指定的组件的属性。当取值2时，指定的组件及其1层子组件的属性。以此类推。
+   * @param { Array<string> } [filters] - 需要获取的组件属性的过滤列表。目前仅支持过滤字段：
+   *     <br>"id"：组件唯一标识。
+   *     <br>"src"：资源来源。
+   *     <br>"content"：元素、组件或对象所包含的信息或数据。
+   *     <br>"editable"：是否可编辑。
+   *     <br>"scrollable"：是否可滚动。
+   *     <br>"selectable"：是否可选择。
+   *     <br>"focusable"：是否可聚焦。
+   *     <br>"focused"：是否已聚焦。
+   *     <br>如果在filters参数中包含以上一个或者多个字段，则未包含的字段会在组件属性查询结果中被过滤掉。如果用户未传入filters参数或者filters参数为空数组，则以上字段全部不会在组件属性查询结果中被过滤掉。
+   *     <br>从API版本26.1.0开始，支持该过滤字段：
+   *     <br>"isWebEnable"：返回的组件树是否包含Web组件所加载网页的组件树。如果用户未传入filters参数或者filters数组不包含isWebEnable，返回的组件树将缺少Web组件所加载网页的组件树信息。
+   *     <br>其余字段仅供测试场景使用。
+   * @returns { string } - 获取指定的组件及其子组件的属性的JSON字符串。组件中每个字段的含义请参考[getInspectorInfo]{@link FrameNode#getInspectorInfo}的返回值说明。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -5149,9 +5109,9 @@ export class UIContext {
   getFilteredInspectorTreeById(id: string, depth: number, filters?: Array<string>): string;
 
   /**
-   * Obtains a Router object.
+   * 获取Router对象。
    *
-   * @returns { Router } Router object.
+   * @returns { Router } 返回Router实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5161,9 +5121,9 @@ export class UIContext {
   getRouter(): Router;
 
   /**
-   * get object PromptAction.
+   * 获取PromptAction对象。
    *
-   * @returns { PromptAction } PromptAction object.
+   * @returns { PromptAction } 返回PromptAction实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5185,9 +5145,9 @@ export class UIContext {
   getDialogPresenter(): DialogPresenter;
 
   /**
-   * get object ComponentUtils.
+   * 获取ComponentUtils对象。
    *
-   * @returns { ComponentUtils } object ComponentUtils.
+   * @returns { ComponentUtils } 返回ComponentUtils实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5209,9 +5169,9 @@ export class UIContext {
   getUIObserver(): UIObserver;
 
   /**
-   * Obtains the OverlayManager object.
+   * 获取OverlayManager对象。
    *
-   * @returns { OverlayManager } OverlayManager instance obtained.
+   * @returns { OverlayManager } 返回OverlayManager实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5233,11 +5193,11 @@ export class UIContext {
   getMagnifier(): Magnifier;
 
   /**
-   * Init OverlayManager.
+   * 初始化OverlayManager。
    *
-   * @param { OverlayManagerOptions } options - Options.
-   * @returns { boolean } Returns true if it is called first and before getting an OverlayManager instance; returns
-   *     false otherwise.
+   * @param { OverlayManagerOptions } options - 选项。
+   * @returns { boolean } 在首次调用且在获取OverlayManager实例之前调用时返回true；否则
+   *     返回false。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5247,9 +5207,9 @@ export class UIContext {
   setOverlayManagerOptions(options: OverlayManagerOptions): boolean;
 
   /**
-   * Get object OverlayManagerOptions.
+   * 获取OverlayManagerOptions对象。
    *
-   * @returns { OverlayManagerOptions } object OverlayManagerOptions.
+   * @returns { OverlayManagerOptions } 返回OverlayManagerOptions对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5309,7 +5269,7 @@ export class UIContext {
    * > - 在组件出现和消失时，可以通过[组件内转场]{@link CommonMethod}添加动画效果。
    * >
    * > - 组件内转场不支持的属性，可以参考[显式动画]{@link CommonMethod}中的
-   * > [示例2]{@link CommonMethod}，使用animateTo实现动画执行结束后组件消失的效
+   * > [示例2](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#示例2动画执行结束后组件消失)，使用animateTo实现动画执行结束后组件消失的效
    * > 果。
    * >
    * > - 某些场景下，在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中使用animateTo动画，会产生异常效果，
@@ -5330,10 +5290,9 @@ export class UIContext {
   animateTo(value: AnimateParam, event: () => void): void;
 
   /**
-   * alertDialog display.
+   * 显示警告弹窗组件，可设置文本内容与响应回调。
    *
-   * @param { AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions } options - Shows
-   *     an AlertDialog component in the given settings.
+   * @param { AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions } options - 定义并显示AlertDialog组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5343,9 +5302,9 @@ export class UIContext {
   showAlertDialog(options: AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions): void;
 
   /**
-   * Shows an action sheet in the given settings.
+   * 定义列表弹窗并弹出。
    *
-   * @param { ActionSheetOptions } value - Parameters of the action sheet.
+   * @param { ActionSheetOptions } value - 配置列表弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5355,9 +5314,9 @@ export class UIContext {
   showActionSheet(value: ActionSheetOptions): void;
 
   /**
-   * datePickerDialog display.
+   * 定义日期滑动选择器弹窗并弹出。
    *
-   * @param { DatePickerDialogOptions } options - Options.
+   * @param { DatePickerDialogOptions } options - 配置日期滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5367,9 +5326,9 @@ export class UIContext {
   showDatePickerDialog(options: DatePickerDialogOptions): void;
 
   /**
-   * timePickerDialog display.
+   * 定义时间滑动选择器弹窗并弹出。
    *
-   * @param { TimePickerDialogOptions } options - Options.
+   * @param { TimePickerDialogOptions } options - 配置时间滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5379,9 +5338,9 @@ export class UIContext {
   showTimePickerDialog(options: TimePickerDialogOptions): void;
 
   /**
-   * textPickerDialog display.
+   * 定义文本滑动选择器弹窗并弹出。
    *
-   * @param { TextPickerDialogOptions } options - Options.
+   * @param { TextPickerDialogOptions } options - 配置文本滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5391,9 +5350,9 @@ export class UIContext {
   showTextPickerDialog(options: TextPickerDialogOptions): void;
 
   /**
-   * textPickerDialog display.
+   * 定义文本滑动选择器弹窗并弹出，相比API version 11，新增了TextPickerDialogOptionsExt参数支持。
    *
-   * @param { TextPickerDialogOptions | TextPickerDialogOptionsExt } style - Dialog style.
+   * @param { TextPickerDialogOptions | TextPickerDialogOptionsExt } style - 配置文本滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5504,11 +5463,12 @@ export class UIContext {
   getPixelRoundMode(): PixelRoundMode;
 
   /**
-   * Dispach keyboard event to the frameNode with inspector key.
+   * 按键事件应分发给指定的组件。为了确保行为的可预测性，目标组件必须位于分发组件的子树中。
    *
-   * @param { number | string } node - The uniqueId or inspector key of the target FrameNode.
-   * @param { KeyEvent } event - The keyboard event.
-   * @returns { boolean } Returns whether the key event is consumed.
+   * @param { number | string } node - 组件的id或者节点UniqueID。
+   * @param { KeyEvent } event - KeyEvent对象。
+   * @returns { boolean } - 按键事件是否成功分发给指定的组件。
+   *     true表示分发成功，false表示分发失败。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5653,11 +5613,12 @@ export class UIContext {
   getPageInfoByUniqueId(id: number): PageInfo;
 
   /**
-   * Get navigation information of the frameNode with uniqueId.
+   * 通过组件的uniqueId获取该节点对应的Navigation页面信息。
+   * 1. 当uniqueId对应的节点在Navigation节点中，返回其对应的Navigation信息；
+   * 2. 当uniqueId对应的节点无对应的Navigation信息时，返回undefined。
    *
-   * @param { number } id - The uniqueId of the target FrameNode.
-   * @returns { observer.NavigationInfo | undefined } - The navigation information of the frameNode with the
-   *     target uniqueId, or undefined if the frameNode is not existed or does not have navigation information.
+   * @param { number } id - 节点对应的UniqueId。
+   * @returns { observer.NavigationInfo | undefined } - 返回节点对应的Navigation信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5683,9 +5644,9 @@ export class UIContext {
   setDynamicDimming(id: string, value: number): void;
 
   /**
-   * Get object cursor controller.
+   * 获取CursorController对象，可通过该对象控制光标。
    *
-   * @returns { CursorController } object cursor controller.
+   * @returns { CursorController } 获取CursorController对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5746,9 +5707,9 @@ export class UIContext {
   removeLocalInputEventMonitor(monitor: InputEventMonitor): void;
 
   /**
-   * Get object context menu controller.
+   * 获取上下文菜单控制器对象。
    *
-   * @returns { ContextMenuController } object context menu controller.
+   * @returns { ContextMenuController } 返回上下文菜单控制器对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6134,9 +6095,10 @@ export class UIContext {
   clearResourceCache(): void;
 
   /**
-   * Checks whether current font scale follows the system.
+   * 获取当前UI上下文是否跟随系统字体倍率。
    *
-   * @returns { boolean } Returns true if current font scale follows the system; returns false otherwise.
+   * @returns { boolean } - 当前UI上下文是否跟随系统字体倍率。
+   *     true表示UI上下文跟随系统倍率，false表示UI上下文不跟随系统倍率。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6146,9 +6108,9 @@ export class UIContext {
   isFollowingSystemFontScale(): boolean;
 
   /**
-   * Get the max font scale.
+   * 获取当前UI上下文最大字体倍率。
    *
-   * @returns { number } The max font scale.
+   * @returns { number } 当前UI上下文最大字体倍率。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6158,7 +6120,7 @@ export class UIContext {
   getMaxFontScale(): number;
 
   /**
-   * Bind tabs to scrollable container component to automatically hide tab bar.
+   * 将页签绑定到可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -6171,7 +6133,7 @@ export class UIContext {
   bindTabsToScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Unbind tabs from scrollable container component.
+   * 将页签从可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -6184,7 +6146,7 @@ export class UIContext {
   unbindTabsFromScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Bind tabs to nested scrollable container components to automatically hide tab bar.
+   * 将页签绑定到嵌套可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -6198,7 +6160,7 @@ export class UIContext {
   bindTabsToNestedScrollable(tabsController: TabsController, parentScroller: Scroller, childScroller: Scroller): void;
 
   /**
-   * Unbind tabs from nested scrollable container components.
+   * 将页签从嵌套可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -6212,9 +6174,9 @@ export class UIContext {
   unbindTabsFromNestedScrollable(tabsController: TabsController, parentScroller: Scroller, childScroller: Scroller): void;
 
   /**
-   * whether to enable or disable swipe to back event.
+   * 设置是否支持应用内横向滑动返回上一级。
    *
-   * @param { Optional<boolean> } enabled - enable or disable swipe to back event.
+   * @param { Optional<boolean> } enabled - 是否支持应用内横向滑动返回，默认值为true。<br>当值为true时，支持应用内横向滑动返回。<br>当值为false时，不支持应用内横向滑动返回。
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @atomicservice
    * @since 18 dynamic
@@ -6260,10 +6222,11 @@ export class UIContext {
   getTextMenuController(): TextMenuController;
 
   /**
-   * 在输入框绑定输入法前设置键盘样式配置
+   * 设置键盘样式，包括模糊效果和流光效果，仅在沉浸式模式下生效，沉浸式定义可参见[KeyboardAppearance]{@link KeyboardAppearance}。
+   * 其中，流光效果依赖于模糊效果，若需启用流光效果，则需同时开启模糊效果，最终显示效果取决于输入法处理。
    *
-   * @param { number } uniqueId - The unique id of the input component.
-   * @param { KeyboardAppearanceConfig } config - The config of keyboard.
+   * @param { number } uniqueId - 组件节点对应的UniqueId。取值范围大于等于0。
+   * @param { KeyboardAppearanceConfig } config - 键盘样式配置参数。
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -6322,6 +6285,18 @@ export class UIContext {
   static setResourceManagerCacheMaxCountForHSP(count: number): void;
 
   /**
+   * 设置应用级是否上报原始触控板事件。
+   *
+   * @param { boolean } enabled - 是否使能应用级原始触控板事件上报。true表示使能，false表示禁用。
+   *     <br>默认值：false。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static enableTouchPadEvent(enabled: boolean): void;
+
+  /**
    * 获取UI实例对象唯一标识，多实例场景下，开发者可使用此唯一标识区分多个UI实例对象，便于管理。
    *
    * @returns { number } 后端实例的唯一标识。取值范围为[-1, +∞)。
@@ -6378,9 +6353,9 @@ export class UIContext {
   getPageRootNode(): FrameNode | null;
 
   /**
-   * 检查当前UI实例是否处于分栏模式。
+   * <!--RP1-->获取当前UI实例的兼容模式分栏状态。<!--RP1End-->
    *
-   * @returns { boolean } 返回当前UI实例是否处于分栏模式。true表示处于分栏模式，false表示未处于分栏模式。
+   * @returns { boolean } <!--RP2-->返回当前UI实例的兼容模式分栏状态。true表示处于分栏模式，false表示未处于分栏模式。<!--RP2End-->
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6424,6 +6399,23 @@ export class UIContext {
    * @since 26.0.0 dynamic
    */
   getSmartGestureController(): SmartGestureController;
+
+  /**
+   * 在EntryAbility或应用首页中应用安全区域沉浸式策略。适用于全屏或沉浸式应用等场景。在应用首次布局前可以统一配置安全区域沉浸式策略。策略应用后，页面处理安全区域的方式会根据指定的策略进行调整。
+   *
+   * > **说明：**
+   * >
+   * > 不支持动态更新。该接口仅在应用首次布局流程开始前调用才生效。如果在页面进入首次布局流程后调用，则应用的策略不变，此接口不生效。
+   *
+   * @param { ImmersiveStrategy[] } types - 应用的沉浸式策略。空数组将清除所有已应用的沉浸式策略。
+   * <br/>设置异常值undefined、null、NaN、Infinity时按空数组处理。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  applyDefaultImmersiveStrategy(...types: ImmersiveStrategy[]): void;
 }
 
 /**
@@ -6438,7 +6430,7 @@ export class UIContext {
 export const enum KeyboardAvoidMode {
 
   /**
-   * Offset Type, the layout moves up.
+   * 上抬模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6449,7 +6441,7 @@ export const enum KeyboardAvoidMode {
   OFFSET = 0,
 
   /**
-   * Resize Type, the layout is resized.
+   * 压缩模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6460,7 +6452,7 @@ export const enum KeyboardAvoidMode {
   RESIZE = 1,
 
   /**
-   * Offset Type, the layout moves up, and this adjustment also occurs if the caret position in the text box changes.
+   * 上抬模式，输入框光标位置发生变化时也会触发避让。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6471,7 +6463,7 @@ export const enum KeyboardAvoidMode {
   OFFSET_WITH_CARET = 2,
 
   /**
-   * Resize Type, the layout moves up, and this adjustment also occurs if the caret position in the text box changes.
+   * 压缩模式，输入框光标位置发生变化时也会触发避让。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6482,7 +6474,7 @@ export const enum KeyboardAvoidMode {
   RESIZE_WITH_CARET = 3,
 
   /**
-   * None Type, the layout is not adjusted to avoid the keyboard.
+   * 不避让键盘。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6569,7 +6561,7 @@ export const enum SwiperDynamicSyncSceneType {
 export const enum MarqueeDynamicSyncSceneType {
 
   /**
-   * Scene type is ANIMATION.
+   * 动画过渡场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6686,13 +6678,7 @@ export class TextMenuController {
 }
 
 /**
-* An enumeration type that identifies the current node's rendering state. The UI components used in
-* the application are automatically managed by the system and controlled for participation in graphical
-* rendering by either mounting them onto the render tree or removing them from it. Only nodes that
-* participate in graphical rendering have the potential to be displayed. However, participating in
-* rendering does not equal to the node's visibility, as there may be many occlusion scenarios in the
-* actual implementation of the application. Nevertheless, if a node does not participate in rendering,
-* it will definitely not be visible.
+* 节点的渲染状态。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -6703,11 +6689,7 @@ export class TextMenuController {
 export const enum NodeRenderState {
 
   /**
-   * The node has been mount on to the render tree and will soon be rendered. Generally, after the next frame,
-   * the user will be able to see this node. However, this is not always the case, as in reality, the node may be
-   * occluded by other nodes, meaning it is rendered but not be visible.
-   * When registering a listener for the render state using the UIObserver interface, the system will immediately
-   * trigger the callback once, and the state notified at this time typically represents the current state.
+   * 该节点已挂载到渲染树上，通常会在下一帧渲染并对用户可见，但节点被渲染不代表一定可见。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6718,10 +6700,7 @@ export const enum NodeRenderState {
   ABOUT_TO_RENDER_IN = 0,
 
   /**
-   * The node has been removed from the render tree and will no longer be rendered shortly. Generally speaking,
-   * after the next frame, the user will no longer be able to see this node.
-   * When registering a listener for the render state using the UIObserver interface, the system will immediately
-   * trigger the callback once, and the state notified at this time typically represents the current state.
+   * 该节点已从渲染树中删除，一般下一帧不会被渲染，用户将不会看到此节点。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

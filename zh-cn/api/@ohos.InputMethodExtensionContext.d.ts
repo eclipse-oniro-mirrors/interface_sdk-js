@@ -119,7 +119,8 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当终止请求成功时，err为undefined；否则为错误对象。
    * @throws { BusinessError } 16000011 - The context does not exist.
-   * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000050 - Ability management request failed. Possible causes include failure to connect
+   *     to the system service or failure of the system service to communicate with a dependent module.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 9 dynamic
@@ -136,7 +137,8 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 16000011 - The context does not exist.
-   * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000050 - Ability management request failed. Possible causes include failure to connect
+   *     to the system service or failure of the system service to communicate with a dependent module.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 9 dynamic
@@ -146,11 +148,8 @@ declare class InputMethodExtensionContext extends ExtensionContext {
 
   /**
    * 销毁输入法ExtensionAbility。使用callback异步回调。
-   * 调用成功仅表示终止请求已被接受，生命周期处理将异步完成。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当销毁输入法应用成功时，err为undefined；否则为错误对象。
-   * @throws { BusinessError } 16000011 - The context does not exist.
-   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @systemapi
    * @stagemodelonly
@@ -162,11 +161,8 @@ declare class InputMethodExtensionContext extends ExtensionContext {
 
   /**
    * 销毁输入法ExtensionAbility。使用Promise异步回调。
-   * 调用成功仅表示终止请求已被接受，生命周期处理将异步完成。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 16000011 - The context does not exist.
-   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @systemapi
    * @stagemodelonly
@@ -300,7 +296,7 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 用于指定目标ServiceExtensionAbility的Want类型信息。
    * @param { ConnectOptions } options - 连接回调，用于返回连接成功、中断或失败的信息。
-   * @returns { number } 连接标识，用于后续断开连接。获取到标识并不代表连接成功，应通过options.onConnect或options.onFailed判断连接结果；本地调度或连接失败时上报错误码1。
+   * @returns { number } 连接的数字标识，用于后续断开连接时传入。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -362,7 +358,7 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 用于指定目标ServiceExtensionAbility的Want类型信息。
    * @param { ConnectOptions } options - 连接回调，用于返回连接成功、中断或失败的信息。.
-   * @returns { number } 连接标识，用于后续断开连接。获取到标识并不代表连接成功，应通过options.onConnect或options.onFailed判断连接结果；本地调度或连接失败时上报错误码1。
+   * @returns { number } 连接的数字标识，用于后续断开连接时传入。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.

@@ -31,7 +31,8 @@ import { FunctionHook, InvokeFunctionParam, FunctionResultWrap } from './applica
  *
  * @namespace functionManager
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.1]
+ * @publicapi [since 26.1.0]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -42,7 +43,8 @@ declare namespace functionManager {
    * invocation.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -51,7 +53,8 @@ declare namespace functionManager {
      * Context of the caller.<br>Note: Currently, only
      *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext} is supported.
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -62,7 +65,8 @@ declare namespace functionManager {
      * The value consists of letters, digits, '_' and '-', with a maximum length of 256.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.1 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
      */
@@ -73,18 +77,32 @@ declare namespace functionManager {
      * The value consists of letters, digits, '_' and '-', with a maximum length of 256.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.1 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
      */
     dmSessionId?: string;
+
+    /**
+     * Indicates the task ID for task attribution. The value must be the task ID specified in
+     * [startTask]{@link @ohos.app.agent.taskManager:taskManager#startTask}, which must contain
+     * 1 to 256 characters.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    taskId?: string;
   }
 
   /**
    * Encapsulates the success or failure status of function invocation.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -95,7 +113,8 @@ declare namespace functionManager {
      * false: Invocation failed, {@link InvokeResult.errorCode } and {@link InvokeResult.errorMsg } contain error information.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -106,7 +125,8 @@ declare namespace functionManager {
      * Only present when {@link InvokeResult.success } is true.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -117,7 +137,8 @@ declare namespace functionManager {
      * Only present when {@link InvokeResult.success } is false.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -128,7 +149,8 @@ declare namespace functionManager {
      * Only present when {@link InvokeResult.success } is false.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -154,6 +176,22 @@ declare namespace functionManager {
   function queryFunctions(): Promise<Array<FunctionInfo>>;
 
   /**
+   * Query public functions. Third-party applications can query public functions
+   * through this API after being granted the required permission via ACL.
+   *
+   * @permission ohos.permission.ACCESS_PUBLIC_FUNCTION
+   * @returns { Promise<Array<FunctionInfo>> } The promise used to return the list of public functions.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
+   *     2. System service failed to communicate with dependency module.
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  function queryPublicFunctions(): Promise<Array<FunctionInfo>>;
+
+  /**
    * Invoke a function by functionNamespace and functionName.
    *
    * @permission ohos.permission.ACCESS_FUNCTION
@@ -176,6 +214,32 @@ declare namespace functionManager {
    * @since 26.0.0 dynamiconly
    */
   function invokeFunction(functionNamespace: string, functionName: string,
+    args: Record<string, Object>, options?: InvokeOptions): Promise<InvokeResult>;
+
+  /**
+   * Invoke a public function by functionNamespace and functionName. Third-party
+   * applications can invoke public functions through this API after being granted
+   * the required permission via ACL.
+   *
+   * @permission ohos.permission.ACCESS_PUBLIC_FUNCTION
+   * @param { string } functionNamespace - The namespace of the target function.
+   * @param { string } functionName - The name of the target function.
+   * @param { Record<string, Object> } args - The input arguments of the function.
+   * @param { InvokeOptions } [options] - The invocation options of the function. Default value: see the default
+   *     values of the specific attributes in {@link InvokeOptions}.
+   * @returns { Promise<InvokeResult> } The promise used to return the function execution result {@link InvokeResult}.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
+   *     2. System service failed to communicate with dependency module.
+   * @throws { BusinessError } 35600060 - The function does not exist.
+   * @throws { BusinessError } 35600061 - The function execute failed.
+   * @throws { BusinessError } 35600062 - The function execute timeout.
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  function invokePublicFunction(functionNamespace: string, functionName: string,
     args: Record<string, Object>, options?: InvokeOptions): Promise<InvokeResult>;
 
   /**

@@ -585,15 +585,14 @@ export declare interface SelectAttribute extends CommonMethod {
      */
     default minKeyboardAvoidDistance(distance: LengthMetrics | undefined): this;
     /**
-     * Set system-styled materials for select's menu. Different materials have different effects, which can influence
-     * the backgroundColor, border, shadow, and other visual attributes of select's menu.
+     * 设置选择器菜单的系统材质。不同的材质具有不同的效果，可以影响
+     * 选择器菜单的backgroundColor、border、shadow等视觉属性。
      * 
-     * Device Behavior Differences:The effect of the same material may vary across different devices depending on
-     * their computing power.
+     * 设备行为差异：相同材质的效果可能因设备的计算能力不同而有所差异。
      *
-     * @param { SystemUiMaterial | undefined } material - The select's menu material, undefined means
-     *     retaining the original visual style of the select's menu.
-     * @returns { SelectAttribute } - The attribute of the select.
+     * @param { SystemUiMaterial | undefined } material - 选择器菜单的材质，undefined表示
+     *     保留选择器菜单的原有视觉样式。
+     * @returns { SelectAttribute } - 选择器的属性。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi [since 23 - 24]
      * @publicapi [since 26.0.0]
@@ -624,10 +623,10 @@ export declare interface SelectAttribute extends CommonMethod {
      */
     default menuBackgroundEffect(effect: BackgroundEffectOptions | undefined): this;
     /**
-     * Sets the distortion animation mode of the select with the new material.
+     * 设置使用新材质的选择器的扭曲动画模式。
      *
-     * @param { DistortionMode | undefined } mode - Animation mode. The default value is DistortionMode.DISTORTION_AUTO.
-     * @returns { SelectAttribute } - the attribute of the select.
+     * @param { DistortionMode | undefined } mode - 动画模式。默认值为DistortionMode.DISTORTION_AUTO。
+     * @returns { SelectAttribute } - 选择器的属性。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -635,11 +634,11 @@ export declare interface SelectAttribute extends CommonMethod {
      */
     default menuDistortionMode(mode: DistortionMode | undefined): this;
     /**
-     * Sets the edgelight animation mode of the select with the new material.
+     * 设置使用新材质的选择器的流光动画模式。
      *
-     * @param { EdgeLightMode | undefined } mode - Animation mode.
-     *     The default value is EdgeLightMode.EDGELIGHT_DISABLED.
-     * @returns { SelectAttribute } - the attribute of the select.
+     * @param { EdgeLightMode | undefined } mode - 动画模式。
+     *     默认值为EdgeLightMode.EDGELIGHT_DISABLED。
+     * @returns { SelectAttribute } - 选择器的属性。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly

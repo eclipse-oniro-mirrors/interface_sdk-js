@@ -14,7 +14,7 @@
 */
 
 /**
-  * @file
+  * @file 媒体会话管理
   * @kit AVSessionKit
  */
 
@@ -4191,6 +4191,19 @@ declare namespace avSession {
      * @since 23 static
      */
     prepare(item: AVQueueItem): Promise<void>;
+
+    /**
+     * 更新投播媒体信息
+     *
+     * @param { AVQueueItem } item - 播放列表中单项的相关属性。
+     * @returns { Promise<void> } 通过promise回调成功。
+     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600109 - The remote connection is not established
+     * @syscap SystemCapability.Multimedia.AVSession.AVCast
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    update(item: AVQueueItem): Promise<void>;
 
     /**
      * 获取当前投播的资源信息。结果通过callback异步回调方式返回。

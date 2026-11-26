@@ -331,7 +331,6 @@ export type TextPickerEnterSelectedAreaCallback = (value: string | string[], ind
  * @noninterop
  */
 export declare interface TextPickerAttribute extends CommonMethod {
-
   /**
    * Sets the text picker options.
    *
@@ -1239,7 +1238,6 @@ export declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * @since 23 static
    */
   selectedBackgroundStyle?: PickerBackgroundStyle;
-
   /**
    * Set system-styled materials for dialog. Different materials have different effects,
    * which can influence backgroundColor, border, shadow, and other visual attributes of dialog.
@@ -1249,9 +1247,8 @@ export declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
-   * Sets the distortion animation Mode of the dialog.
+   * Sets the distortion animation mode for the dialog.
    *
    * @default DistortionMode.DISTORTION_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1260,9 +1257,8 @@ export declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
-   * Sets the edgeLight animation Mode of the dialog.
+   * Sets the edge light animation mode for the dialog.
    *
    * @default EdgeLightMode.EDGELIGHT_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1281,7 +1277,6 @@ export declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * the device, distinguished from the operating hand) reported by the awareness
    * platform; falls back to the current layout when unavailable.
    *
-   * @default HandednessFollowMode.NONE
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -1303,7 +1298,6 @@ export declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
 export declare function TextPicker(
     options?: TextPickerOptions
 ): TextPickerAttribute;
-
 /**
  * Defines the TextPicker component. It requires call setTextPickerOptions at start of the component attribute set-up.
  * ant it requires call applyAttributeFinish at the end of the component attribute set-up.

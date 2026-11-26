@@ -1,0 +1,195 @@
+# 01.1 文件裁剪（build/ohos/sdk/parse_description.py）
+
+> 对应 [01-00gn-generation-overview](./01-00gn-generation-overview.md)「环节 01 · 步骤 01.1」。
+> 按 `sdk_build_public` / `sdk_build_arkts` 两个开关，对 SDK 模块描述 JSON 做
+> 条目裁剪与 `install_dir` 路径改写，输出新的描述文件。
+
+## 1. 脚本定位
+
+| 项       | 内容                                                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 脚本路径 | `build/ohos/sdk/parse_description.py`                                                                                            |
+| 归属领域 | sdk（代码在 build 仓，由 sdk 提供并维护）                                                                                                                 |
+| 调用位置 | `build/ohos/sdk/BUILD.gn`（变量名 `arkts_sdk_config_parser`）                                                                  |
+| 调用方式 | GN 生成期 `exec_script`（不是 ninja 的 action）                                                                                    |
+| 触发条件 | `if (!use_current_sdk)` 成立，且在 hap 裁剪之后始终执行                                                                            |
+| 一句话   | 按 `sdk_build_public` / `sdk_build_arkts` 开关，剔除 bundle_api 与静态/工具专用条目，并把 `ets/dynamic/` 前缀改写成 `ets/`，输出新的描述文件 |
+
+它不负责生成 GN 变量、拷贝模块或打包，只做「描述文件过滤」这一步，产物交给后续的
+`parse_sdk_description.py`（01.2）继续处理。
+
+`BUILD.gn` 中的调用（节选）：
+
+```gn
+arkts_sdk_config_parser = "//build/ohos/sdk/parse_description.py"
+ohos_sdk_arkts_description_file =
+    "${interface_sdk_path}/ohos_sdk_pub_description_std.json"
+
+arkts_sdk_args = [
+  "--sdk-description-file",
+  rebase_path(ohos_sdk_description_file, root_build_dir),
+  "--output-arkts-sdk-desc-file",
+  rebase_path(ohos_sdk_arkts_description_file, root_build_dir),
+  "--sdk-build-public",  "${sdk_build_public}",
+  "--sdk-build-arkts",   "${sdk_build_arkts}",
+]
+exec_script(arkts_sdk_config_parser, arkts_sdk_args)
+ohos_sdk_description_file = ohos_sdk_arkts_description_file
+```
+
+## 2. 命令行参数
+
+四个参数均为必填（`required=True`）：
+
+| 参数                             | 含义                                                             | 实际取值示例                                                                                  |
+| -------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `--sdk-description-file`       | 输入描述文件路径（上一步结果，可能是 hap 裁剪后的文件）          | `out/<产品>/sdk-interface/ohos_sdk_pub_description_std.json`，默认 `build/ohos/sdk/ohos_sdk_description_std.json` |
+| `--output-arkts-sdk-desc-file` | 输出描述文件路径                                                 | `out/<产品>/sdk-interface/ohos_sdk_pub_description_std.json`                                   |
+| `--sdk-build-public`           | 是否构建 public SDK，值为字符串 `"true"` / `"false"`         | `"true"`                                                                                      |
+| `--sdk-build-arkts`            | 是否构建 ArkTS（1.2/static）SDK，字符串 `"true"` / `"false"` | `"false"`                                                                                     |
+
+其中 `interface_sdk_path = ${root_out_dir}/sdk-interface`（见 `build/ohos_var.gni`），
+所以默认输出路径形如 `out/<产品>/sdk-interface/ohos_sdk_pub_description_std.json`。
+
+> 注意：脚本不解析布尔值，判断用的是 `== "true"` / `!= "true"` 字符串比较，
+> 传入 `TRUE`、`1` 等都会被当作「非 true」处理。
+
+## 3. 输入文件格式
+
+输入是 JSON **数组**，每个元素是一条 SDK 模块描述。脚本自身只读取其中两个字段，
+其余字段原样透传（不校验、不增删）。常见字段如下：
+
+| 字段                   | 类型     | 脚本是否使用 | 说明                                                         |
+| ---------------------- | -------- | ------------ | ------------------------------------------------------------ |
+| `module_label`       | string   | 是           | 模块对应的 GN 目标标签，如 `//interface/sdk-js:bundle_api` |
+| `install_dir`        | string   | 是           | 模块在 SDK 中的安装目录，如 `ets/dynamic/`                 |
+| `target_os`          | string[] | 否（透传）   | 支持的 OS 列表，如 `["linux","windows","darwin"]`          |
+| `build_only`         | bool     | 否（透传）   | 只构建、不参与交付                                           |
+| `copy_with_symlinks` | bool     | 否（透传）   | 是否以符号链接方式拷贝                                       |
+
+输入示例（节选）：
+
+```json
+[
+  {
+    "install_dir": "ets/dynamic/",
+    "module_label": "//interface/sdk-js:api",
+    "target_os": ["linux", "windows", "darwin", "ohos"]
+  },
+  {
+    "install_dir": "ets/static/",
+    "module_label": "//interface/sdk-js:static_api",
+    "target_os": ["ohos"]
+  }
+]
+```
+
+读取实现来自 `build/scripts/util/file_utils.py`：
+
+- 文件不存在时打印提示并返回 `None`（随后遍历会抛异常）；
+- 非法 JSON 会打印提示并抛出 `JSONDecodeError`。
+
+## 4. 处理逻辑
+
+核心是 `regenerate_sdk_config_file(options)`：
+
+```mermaid
+flowchart TD
+    A[读取 --sdk-description-file] --> B[遍历每个 info]
+    B --> C{sdk_build_public 为 true?}
+    C -- 是 --> C1{module_label 在 DEL_TARGET?}
+    C1 -- 是 --> SKIP[跳过该条目]
+    C1 -- 否 --> D{sdk_build_arkts != true?}
+    C -- 否 --> D
+    D -- 否 --> KEEP[保留条目, 原样透传]
+    D -- 是 --> E{install_dir 以 ets/static/ 开头?<br/>或 :build_taihe_wrapper 结尾?<br/>或 == arkts_disasm?}
+    E -- 是 --> SKIP
+    E -- 否 --> F{install_dir 以 ets/dynamic/build-tools/interop 开头?}
+    F -- 是 --> SKIP
+    F -- 否 --> G{install_dir 以 ets/dynamic/ 开头?}
+    G -- 是 --> H[改写: ets/dynamic/ → ets/]
+    G -- 否 --> KEEP
+    H --> KEEP
+    KEEP --> I[加入输出列表]
+    SKIP --> B
+    I --> B
+    B --> J[写出 --output-arkts-sdk-desc-file]
+```
+
+**① `sdk_build_public == "true"` 过滤**
+
+```python
+DEL_TARGET = ["//interface/sdk-js:bundle_api"]
+
+if module_label in DEL_TARGET and sdk_build_public == "true":
+    continue
+```
+
+- `sdk_build_public == "true"` 时删除 `module_label == "//interface/sdk-js:bundle_api"` 的条目
+  （`bundle_api` 仅用于 `sdk_build_public != "true"` 构建）；
+- `sdk_build_public != "true"` 时该条件不生效，命中 `DEL_TARGET` 也保留；
+- 该判断最先执行：一旦命中，后续 arkts 过滤与路径改写都不会作用于该条目。
+
+**② ArkTS 过滤与路径改写**
+
+仅当 `sdk_build_arkts != "true"` 时进入本分支，规则按顺序判断：
+
+| 序号 | 条件                                                                                   | 处理                         |
+| ---- | -------------------------------------------------------------------------------------- | ---------------------------- |
+| 1    | `install_dir` 以 `ets/static/` 开头                                                | 删除该条目                   |
+| 2    | `module_label` 以 `:build_taihe_wrapper` 结尾                                      | 删除该条目                   |
+| 3    | `module_label == "//arkcompiler/runtime_core/static_core/disassembler:arkts_disasm"` | 删除该条目                   |
+| 4    | `install_dir` 以 `ets/dynamic/build-tools/interop` 开头                            | 删除该条目                   |
+| 5    | `install_dir` 以 `ets/dynamic/` 开头（未命中前面几条时）                           | `ets/dynamic/` → `ets/` |
+
+规则 1~3 在同一个 `if` 中用 `or` 连接，任一命中即删除；规则 4、5 是 `elif` 分支，互斥。
+
+改写的语义：不构建 ArkTS（static）SDK 时，SDK 只保留一套 ETS 接口，动态接口不再放
+`ets/dynamic/` 子目录，而是提升到 `ets/` 根目录，避免产物出现 `dynamic`/`static` 两层目录结构。
+
+**③ 透传情况**
+
+- `sdk_build_arkts == "true"`：只可能命中 `sdk_build_public == "true"` 过滤，其余条目全部原样保留（含 `ets/static/`、`ets/dynamic/`）；
+- 条目字段只做读取与 `install_dir` 改写，其它字段（`target_os`、`build_only` 等）原样写入输出。
+
+## 5. 输出
+
+- 路径由 `--output-arkts-sdk-desc-file` 指定；
+- 内容仍是与输入同结构的 JSON 数组，只是部分条目被删除、部分 `install_dir` 被改写；
+- 写入使用 `file_utils.write_json_file`：自动创建输出目录（`os.makedirs(..., exist_ok=True)`）、
+  `json.dump(content, f, sort_keys=True, indent=2)`（key 排序、2 空格缩进）、每次重写、不做 diff。
+
+输出示例（输入四条、`sdk_build_public == "false"`、`sdk_build_arkts == "false"`）：
+
+```json
+[
+  { "install_dir": "ets/dynamic/", "module_label": "//interface/sdk-js:api" },
+  { "install_dir": "ets/static/",  "module_label": "//interface/sdk-js:static_api" },
+  { "install_dir": "ets/dynamic/build-tools/interop", "module_label": "//x:interop" },
+  { "install_dir": "ets/dynamic/x", "module_label": "//x:taihe", "note": "keep" }
+]
+```
+
+→
+
+```json
+[
+  { "install_dir": "ets/", "module_label": "//interface/sdk-js:api" },
+  { "install_dir": "ets/x", "module_label": "//x:taihe", "note": "keep" }
+]
+```
+
+（`ets/static/`、`interop` 条目被删除；`ets/dynamic/` 被改写为 `ets/`；未知字段 `note` 保留。）
+
+输出文件由 `BUILD.gn` 重新赋给 `ohos_sdk_description_file`，随后：
+
+1. `parse_sdk_description.py`（01.2）读取它，展开为 `ohos_sdk_modules.gni`、安装路径表、SDK 类型列表。
+
+## 6. 关键细节
+
+1. **字符串比较**：`sdk_build_public` / `sdk_build_arkts` 必须精确为 `"true"` 才视为开启；
+2. **判断顺序**：先 `sdk_build_public == "true"` 过滤，后 arkts 过滤；被前者删除的条目不会再参与路径改写；
+3. **字段缺失容错**：`info.get("module_label")` / `info.get("install_dir")` 缺失时得到 `None`，
+   经 `str()` 变成字符串 `"None"`，不会报错，但也不会命中任何删除/改写规则；
+4. **只影响两个字段**：脚本不补字段、不改 `target_os`，`build_only` 等原样透传；
+5. **无校验**：不检查 `module_label` / `install_dir` 合法性，也不去重；输入质量由 `ohos_sdk_description_std.json` 维护方保证。

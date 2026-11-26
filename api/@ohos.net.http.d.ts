@@ -593,6 +593,59 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
+
+    /**
+     * Whether to convert POST method to GET when following 301/302/303 redirect responses.
+     * Default value: false.
+     * 
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    followRedirectPostToGet?: boolean;
+
+    /**
+     * The host name required for SSL server host name verification.
+     * The default value of sslServerHostnameVerify is true. When sslServerHostnameVerify is set to false, domain name
+     * verification is disabled.
+     * In this scenario, the certificate domain name verification is ignored when the IP address is used for connection.
+     * Default value: true.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    sslServerHostnameVerification?: boolean;
+
+    /**
+     * Low speed limit threshold in bytes per second.
+     * If the transfer speed is lower than this value for longer than lowSpeedTime,
+     * the transfer will be aborted.
+     * The value should be an integer.
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    lowSpeedLimit?: int;
+
+    /**
+     * Low speed duration threshold in milliseconds.
+     * If the transfer speed is lower than lowSpeedLimit for longer than this value,
+     * the transfer will be aborted.
+     * The value should be an integer.
+     *
+     * @type { ?int }
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    lowSpeedTime?: int;
   }
 
   /**
@@ -3134,6 +3187,31 @@ declare namespace http {
      */
     redirectCount: int;
 
+    /**
+     * Total number of bytes actually sent over the HTTP request link, including the request line, request header, and
+     * request body. The unit is byte.
+     * Unit: Byte.
+     * .
+     * . The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    sentTotalBytes?: int;
+
+    /**
+     * Total number of bytes actually received over the HTTP request link, including the status line, response header,
+     * and response body. The unit is byte.
+     * Unit: Byte.
+     * .
+     * . The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    receivedTotalBytes?: int;
   }
 
   /**

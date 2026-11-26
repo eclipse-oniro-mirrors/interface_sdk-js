@@ -23,7 +23,7 @@ import { ResourceStr } from '@ohos.arkui.component';
 
 import { Component } from '@ohos.arkui.component';
 
-import { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
+import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 
 import { Builder } from '@ohos.arkui.component';
 
@@ -44,7 +44,7 @@ import { Component } from './arkui/component/customComponent';
 import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 import { Builder } from './arkui/component/builder';
 /**
- * Declaration of the menu item on the right side.
+ * 声明右侧菜单项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -195,7 +195,7 @@ export declare struct ComposeTitleBar {
    */
   menuItems?: Array<ComposeTitleBarMenuItem>;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

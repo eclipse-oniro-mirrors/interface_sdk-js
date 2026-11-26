@@ -55,7 +55,6 @@ declare namespace power {
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead power.reboot
    */
   function rebootDevice(reason: string): void;
 
@@ -162,6 +161,7 @@ declare namespace power {
 
   /**
    * 设置当前设备的电源模式，不同的电源模式会影响设备的性能与功耗策略。使用callback异步回调。
+   * 如需同时设置电源模式及其子模式，请使用[setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}。
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
@@ -218,6 +218,8 @@ declare namespace power {
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
    * @param { DevicePowerSubMode } [subMode] - 电源模式子模式。各模式含义请参见DevicePowerSubMode枚举说明。
+   *     仅 MODE_EXTREME_POWER_SAVE（603）支持电源模式子模式，subMode 默认值为 SUB_MODE_EMERGENCY（603002）。
+   *     <br>默认值：SUB_MODE_EMERGENCY。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -330,6 +332,72 @@ declare namespace power {
    * @since 23 dynamic&static
    */
   function unregisterShutdownCallback(callback?: Callback<void>): void;
+
+  /**
+   * 定义休眠事件回调接口。
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HibernateCallback {
+    /**
+     * 当设备即将进入休眠时调用的回调。
+     *
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onHibernate(): Promise<void>;
+
+    /**
+     * 当设备退出休眠时调用的回调。
+     *
+     * @param { boolean } hibernateResult - 表示休眠是否成功。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onWakeup(hibernateResult: boolean): Promise<void>;
+  }
+
+  /**
+   * 订阅设备进入或退出休眠的回调。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { HibernateCallback } callback - 回调对象，包含onHibernate和onWakeup方法。
+   *     onHibernate在进入休眠时调用，无参数；
+   *     onWakeup在退出休眠时调用，hibernateResult表示休眠是否成功。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function registerHibernateCallback(callback: HibernateCallback): void;
+
+  /**
+   * 取消订阅设备进入或退出休眠的回调。所有已注册的休眠回调都会被移除。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unregisterHibernateCallback(): void;
 
   /**
    * 按场景名称查询电源配置值。例如，在系统电源管理应用中需要读取特定场景的电源配置参数时使用。
@@ -547,11 +615,12 @@ declare namespace power {
    * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
    *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
    *     <br>默认值：InvokeMode.SYNC。
-   * @returns { void | Promise<void> } 不返回任何值的Promise。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
-   * @throws { BusinessError } 4900101 - 连接服务失败。
-   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API需要的权限。
-   * @throws { BusinessError } 801 - 不支持的功能。该接口不能在汽车设备中使用。
+   * @returns { void | Promise<void> } 同步调用时不返回任何值，异步调用时返回无返回结果的Promise对象。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @stagemodelonly
@@ -572,13 +641,14 @@ declare namespace power {
    * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
    *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
    *     <br>默认值：InvokeMode.SYNC。
-   * @returns { void | Promise<void> } 不返回任何值的Promise。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
-   * @throws { BusinessError } 4900101 - 连接服务失败。
-   * @throws { BusinessError } 4900701 - 挂起设备失败。可能原因：
-   *     1.考试过程中不允许熄屏。
-   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需要的权限。
-   * @throws { BusinessError } 801 - 不支持的功能。该接口不能在汽车设备中使用。
+   * @returns { void | Promise<void> } 同步调用时不返回任何值，异步调用时返回无返回结果的Promise对象。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
+   *     1. Not allowed to turn off the screen during the exam.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @stagemodelonly
@@ -594,10 +664,11 @@ declare namespace power {
    * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
    *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
    *     <br>默认值：InvokeMode.SYNC。
-   * @returns { void | Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需要的权限。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
-   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @returns { void | Promise<void> } 同步调用时不返回任何值，异步调用时返回无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @stagemodelonly
@@ -613,10 +684,11 @@ declare namespace power {
    * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
    *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
    *     <br>默认值：InvokeMode.SYNC。
-   * @returns { void | Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需的权限。
-   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
-   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @returns { void | Promise<void> } 同步调用时不返回任何值，异步调用时返回无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
    * @stagemodelonly

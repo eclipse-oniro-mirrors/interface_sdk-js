@@ -202,7 +202,7 @@ export declare interface GridLayoutOptions {
 export declare enum GridDirection {
 
   /**
-   * The row direction.
+   * 主轴布局方向沿水平方向布局，即自左往右先填满一行，再去填下一行。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -211,7 +211,7 @@ export declare enum GridDirection {
   Row,
 
   /**
-   * The column direction.
+   * 主轴布局方向沿垂直方向布局，即自上往下先填满一列，再去填下一列。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -220,7 +220,7 @@ export declare enum GridDirection {
   Column,
 
   /**
-   * The row reverse direction.
+   * 主轴布局方向沿水平方向反向布局，即自右往左先填满一行，再去填下一行。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -229,7 +229,7 @@ export declare enum GridDirection {
   RowReverse,
 
   /**
-   * The column reverse direction.
+   * 主轴布局方向沿垂直方向反向布局，即自下往上先填满一列，再去填下一列。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

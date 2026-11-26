@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file File Sharing
  * @kit CoreFileKit
  */
 

@@ -29,12 +29,12 @@ import { LocalStorage } from './arkui/stateManagement/storage/localStorage';
 /*** endif */
 
 /**
- * 该模块提供画中画基础功能，包括判断当前系统是否支持画中画功能，以及创建画中画控制器用于启动或停止画中画等。适用于视频播放、视频通话或视频会议场景下，以小窗（画中画）模式呈现内容。
+ * 该模块提供画中画基础功能，包括判断当前系统是否支持画中画功能，以及创建画中画控制器用于启动或停止画中画等。支持用户在进行其他操作是以小窗形式继续观看视频内容，提升多任务处理效率。适用于视频播放、视频通话或视频会议场景。
  *
  * > **说明：**
  * >
- * > - 在<!--RP2-->OpenHarmony 6.0<!--RP2End-->之前，支持在Phone、Tablet设备使用画中画功能，其他设备不可用；从<!--RP2-->OpenHarmony 6.0<!--RP2End--
- * > >开始，支持在Phone、PC/2in1、Tablet设备使用画中画功能，其他设备不可用。
+ * > - 在<!--RP2-->OpenHarmony 6.0<!--RP2End-->之前，支持在Phone、Tablet设备使用画中画功能，其他设备不可用；从<!--RP2-->OpenHarmony 6.0<!--RP2End-->
+ * > 开始，支持在Phone、PC/2in1、Tablet设备使用画中画功能，其他设备不可用。
  * >
  * > - 针对系统能力SystemCapability.Window.SessionManager，请先使用
  * > [canIUse()]{@link canIUse}接口判断当前设备是否支持此syscap及对应接口。

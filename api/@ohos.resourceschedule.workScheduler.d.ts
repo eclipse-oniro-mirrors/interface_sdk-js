@@ -268,7 +268,7 @@ declare namespace workScheduler {
    * @param { WorkInfo } work - The info of work.
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -291,7 +291,7 @@ declare namespace workScheduler {
    *     the task while stopping it, and **false** means to stop the task only. The default value is **false**.
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -313,7 +313,7 @@ declare namespace workScheduler {
    *     information obtained from WorkSchedulerService is returned. Otherwise, an exception is thrown.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -335,7 +335,7 @@ declare namespace workScheduler {
    *     obtained from WorkSchedulerService is returned. Otherwise, an exception is thrown.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -358,7 +358,7 @@ declare namespace workScheduler {
    *     list of all deferred tasks in the current application is returned. Otherwise, an empty list is returned.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -379,7 +379,7 @@ declare namespace workScheduler {
    *     current application. If the list fails to be obtained, an exception is thrown.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -398,7 +398,7 @@ declare namespace workScheduler {
    * @returns { Promise<Array<WorkInfo>> } Promise used to return all the deferred tasks.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -416,7 +416,7 @@ declare namespace workScheduler {
    *
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -440,7 +440,7 @@ declare namespace workScheduler {
    *     out, while **false** indicates the opposite.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -462,7 +462,7 @@ declare namespace workScheduler {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -484,7 +484,7 @@ declare namespace workScheduler {
    *     of the specified task times out, and **false** means the opposite.
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -696,7 +696,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export interface FrequencyInfo {
     /**
@@ -706,7 +706,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     uid: int;
     /**
@@ -716,7 +716,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     workId: int;
     /**
@@ -726,7 +726,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     interval: int;
   }
@@ -743,7 +743,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function setExecFrequency(info: FrequencyInfo): void;
 
@@ -760,7 +760,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function resetExecFrequency(uid: int): void;
 }

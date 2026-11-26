@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 备份恢复
  * @kit CoreFileKit
  */
 

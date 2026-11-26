@@ -731,6 +731,46 @@ declare namespace distributedKVStore {
      * @since 24 dynamic&static
      */
     rootDir?: string;
+
+    /**
+     * Indicates whether to enable the dump-stack on file deletion function for KV storage. This function is used to
+     * locate the problem that database files are deleted unexpectedly.
+     *
+     * **true**: The stack dump function is enabled when a file is deleted. After the KV storage is enabled, the
+     * operation stack is deleted when the file system output invokes the file interface to directly delete database
+     * files(**db**, **wal**, and **shm**).
+     *
+     * **false** (default): Disable dump-stack when deleting files.
+     *
+     * This parameter takes effect only for the **db**, **wal**, and **shm** files of the active/standby database.
+     *
+     * This parameter depends on the dump-stack capability of the device file system. If the file system does not
+     * support this capability, this parameter does not take effect, and the KV storage function is not affected.
+     *
+     * This parameter is not persisted to the metadata database and must be enabled each time the KV is stored. Common
+     * operations such as deleting, restoring, and rebuilding KV storage do not trigger call stack output.
+     *
+     * Default value: false.
+     *
+     * @syscap SystemCapability.DistributedDataManager.KVStore.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dumpStackOnFileDeletion?: boolean;
+
+    /**
+     * Size threshold in KB for starting an automatic checkpoint. When the WAL file size reaches this value,
+     * a checkpoint is triggered to merge the WAL content back into the main database file.
+     * Unit: KB. Value range: [16, 524288]. Default value: 204800.
+     * NOTE:
+     * - Larger values reduce the checkpoint frequency but increase the WAL file size and peak memory usage.
+     *
+     * @syscap SystemCapability.DistributedDataManager.KVStore.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    walStartCheckpointSize?: int;
   }
 
   /**

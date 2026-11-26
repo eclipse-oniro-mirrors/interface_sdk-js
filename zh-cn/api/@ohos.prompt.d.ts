@@ -119,6 +119,7 @@ declare namespace prompt {
    * 对话框的响应结果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @FaAndStageModel
    * @since 8 dynamiconly
    * @deprecated since 9
    * @useinstead ohos.promptAction/promptAction.ShowDialogSuccessResponse
@@ -187,6 +188,7 @@ declare namespace prompt {
    * 操作菜单的响应结果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @FaAndStageModel
    * @since 8 dynamiconly
    * @deprecated since 9
    * @useinstead ohos.promptAction/promptAction.ActionMenuSuccessResponse

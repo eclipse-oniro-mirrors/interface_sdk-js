@@ -121,7 +121,7 @@ export declare enum ProgressType {
  */
 export declare enum ProgressStatus {
     /**
-     * Loading status.
+     * 加载中状态。开启检查更新动效，此时设置进度值不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -129,7 +129,7 @@ export declare enum ProgressStatus {
      */
     LOADING,
     /**
-     * Processing status.
+     * 进度更新中。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -541,7 +541,7 @@ export declare interface ProgressAttribute extends CommonMethod {
      */
     default contentModifier(modifier: ContentModifier<ProgressConfiguration> | undefined): this;
     /**
-     * Set the attribute modifier
+     * 设置组件的动态属性。
      *
      * @param { AttributeModifier<ProgressAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
      * @returns { ProgressAttribute }

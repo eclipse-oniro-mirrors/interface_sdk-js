@@ -1062,6 +1062,62 @@ declare namespace securityManager {
   function uninstallEnterpriseReSignatureCertificate(admin: Want, certificateAlias: string, accountId: int): void;
 
   /**
+   * 企业重签名证书信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface ReSignatureCertificateInfo {
+    /**
+     * 证书别名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    certificateAlias: string;
+
+    /**
+     * 企业名称。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
+
+    /**
+     * 过期时间，单位：毫秒。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    expirationTime: number;
+  }
+
+  /**
+   * 根据账号ID获取企业重签名证书信息。该接口返回信息
+   * 同步，企业可通过该接口查询企业重签名证书详情
+   * 的管理和有效性监控。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 用户ID，必须大于等于0。
+   * @returns { Array<ReSignatureCertificateInfo> } 获取的企业重签名证书信息。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseReSignatureCertificates(accountId: number): Array<ReSignatureCertificateInfo>;
+
+  /**
    * 设置屏幕水印策略，对所有用户生效。
    *
    * > **说明：**
@@ -1498,7 +1554,16 @@ declare namespace securityManager {
      * @stagemodelonly
      * @since 26.0.1
      */
-    EXTENDED_AUTH_REQUIRED = 2
+    EXTENDED_AUTH_REQUIRED = 2,
+
+    /**
+     * 设备关联认证和其他认证方式可选认证
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXTENDED_AUTH_OPTIONAL = 3
   }
 
   /**
@@ -1593,14 +1658,15 @@ declare namespace securityManager {
   }
 
   /**
-   * 获取企业重置策略。该接口同步返回结果。
+   * 获取企业复位策略。同步返回策略。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
    * @returns { EnterpriseResetPolicy } 企业重置策略。
-   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
-   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -1608,16 +1674,45 @@ declare namespace securityManager {
   function getEnterpriseResetPolicy(): EnterpriseResetPolicy;
 
   /**
-   * 设置企业重置策略。
+   * 根据认证Token获取凭证ID。该接口使用promise返回结果。
+   * 企业可以通过该接口解析和查询用户凭证ID（如人脸、指纹ID等）。
+   * 企业设备安全审计、身份认证等场景。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { Uint8Array } authToken - 认证令牌，认证成功后颁发。最大的
+   *     长度为1024字节。
+   * @param { number } allowableDuration - 允许解析认证token的时长，单位为毫秒。
+   *     且小于等于86400000。
+   *     <br>取值应>0。
+   * @returns { Promise<bigint> } Promise对象，返回凭证ID。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201057 - Invalid authentication token.
+   * @throws { BusinessError } 9201058 - The authentication token parsing duration is out of the allowed range.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCredentialId(authToken: Uint8Array, allowableDuration: number): Promise<bigint>;
+
+  /**
+   * 设置企业复位策略。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
    * @param { EnterpriseResetPolicy } policy - 要设置的企业重置策略。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
-   * @throws { BusinessError } 801 - The device does not support this API.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0

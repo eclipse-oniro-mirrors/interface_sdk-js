@@ -22,10 +22,9 @@ import type { Callback } from '@ohos.base';
 import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
- * This module provides the capabilities of connecting to and managing NearLink remote devices, including connecting to
- * and disconnecting from remote devices, pairing with a trusted device and confirmation, adjusting the connection
- * interval, and subscribing to pairing requests.
- *
+ * This module provides the connection and management capabilities of remote devices, including creating remote device
+ * instances, connecting to and disconnecting remote devices, querying remote device information, and subscribing to
+ * device status change events.
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
  * @atomicservice [since 26.1.0]
@@ -111,20 +110,17 @@ declare namespace remoteDevice {
   function createRemoteDevice(address: string): RemoteDevice;
 
   /**
-   * Subscribes to pairing request events from remote NearLink devices.
-   *
-   * This event is accessible only to system applications that granted the ohos.permission.NEARLINK_ACCESS permission.
-   * If the application is granted the ohos.permission.GET_NEARLINK_PEER_MAC permission,
-   * the callback returns the real device address; otherwise, a random device address is returned.
-   * Before calling this API, you may call
+   * Subscribe to pairing request events from remote NearLink devices. Only system applications granted
+   * ohos.permission.ACCESS_NEARLINK permission can access this event. If the application is granted the
+   * ohos.permission.GET_NEARLINK_PEER_MAC permission, The real device address is returned. Otherwise, the random device
+   * address is returned. Before calling this MPI, you can call
    * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported} to check whether the device
-   * supports NearLink.
-   *
+   * supports star blinking.
    * @param { Callback<PairingRequestParam> } callback - Callback used to listen for the pairing request event.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *     1. The hardware does not support the capability;
-   *     2. The chip does not support the capability;
-   *     3. A dependent service feature is not supported.
+   *         1. The hardware does not support the capability;
+   *         2. The chip does not support the capability;
+   *         3. A dependent service feature is not supported.
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
@@ -133,7 +129,7 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offPairingRequest]{@link remoteDevice.offPairingRequest(callback?: Callback<PairingRequestParam>): void}
-   *     Unsubscribes from the pairing request event.
+   *         Unsubscribes from the pairing request event.
    */
   function onPairingRequest(callback: Callback<PairingRequestParam>): void;
 
@@ -563,8 +559,8 @@ declare namespace remoteDevice {
      * Sets the alias of a remote device.
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
-     * @param { string } alias - Alias of the remote device. The value can contain a maximum of 64 characters and cannot
-     *     be empty.
+     * @param { string } alias - Alias of the remote device. The value can contain a maximum of 64 characters and
+     *     cannot be empty.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -860,8 +856,9 @@ declare namespace remoteDevice {
      */
     address: string;
     /**
-     * Key for the device pairing.
-     *
+     * Pass code for device pairing, which is displayed to the user for confirmation. The value is a string of six
+     * digits. This parameter is valid only when pairingType is set to PAIRING_TYPE_PASSCODE or
+     * PAIRING_TYPE_NUMBER_COMPARE.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -892,8 +889,8 @@ declare namespace remoteDevice {
    */
   enum PairingType {
     /**
-     * Pairing type that does not require a passkey. Users do not need to check the pairing code.
-     *
+     * indicates that the pairing mode does not require a passcode, and the user does not need to check the pairing
+     * code.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -1040,8 +1037,7 @@ declare namespace remoteDevice {
      */
     CONNECTION_REMOTE_DISCONNECT = 3,
     /**
-     * Connection failed: ACB connection failed. The remote device may be powered off or out of range.
-     *
+     * Connection failure: The ACB fails to be connected.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -1174,9 +1170,8 @@ declare namespace remoteDevice {
    */
   interface DeviceInformation {
     /**
-     * The manufacturer data of the remote device.
-     * The maximum length is 255.
-     *
+     * Manufacturer data of the remote device. The data is in binary encoding format and can be parsed using
+     * buffer.from(manufacturerData,'binary'). The value contains a maximum of 255 characters.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -1186,9 +1181,8 @@ declare namespace remoteDevice {
     manufacturerData: string;
 
     /**
-     * The model data of the remote device.
-     * The maximum length is 255.
-     *
+     * Model data of the remote device. The data is in binary encoding format and can be parsed using buffer.from(
+     * modelData,'binary'). The value contains a maximum of 255 characters.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]

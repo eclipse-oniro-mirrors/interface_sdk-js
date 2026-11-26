@@ -1625,7 +1625,7 @@ declare namespace dlpPermission {
      * 
      * 该接口用于设置沙箱应用的配置信息，以便应用按需传递自定义参数。
      *
-     * @param { string } configInfo - 沙箱应用配置信息。长度不超过2<sup>22</sup>-1字节，超出此范围抛出错误码401。
+     * @param { string } configInfo - 沙箱应用配置信息。长度不超过4194303字节，超出此范围抛出错误码401。
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     2. Incorrect parameter types.

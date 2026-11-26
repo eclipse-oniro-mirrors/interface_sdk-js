@@ -460,7 +460,7 @@ declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute
 declare const CheckboxGroup: CheckboxGroupInterface;
 
 /**
- * Defines CheckboxGroup Component instance.
+ * 定义CheckboxGroup组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

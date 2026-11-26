@@ -21,10 +21,17 @@
 import { BusinessError, Callback } from './@ohos.base';
 
 /**
- * This module provides the onscreen awareness capability.
+ * This module provides the capability of apperceiving on-screen content, including obtaining page content,
+ * links, screenshots, and other information, identifying application scenarios such as reading and short
+ * video, providing entity information such as article titles and body text, as well as interaction
+ * information such as clicks and scrolling.
  * 
  * > **NOTE**
  * >
+ * > 1.This module provides the capability of apperceiving on-screen content, including obtaining page
+ * content, links, screenshots, and other information, identifying application scenarios such as reading
+ * and short video, providing entity information such as article titles and body text, as well as
+ * interaction information such as clicks and scrolling.
  *
  * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
  * @since 20 dynamic
@@ -136,8 +143,8 @@ declare namespace onScreen {
    */
   export interface ContentOptions {
     /**
-     * ID of the window whose content needs to be obtained. If this parameter is not set or is set to **undefined**, the
-     * content of the full-screen window is obtained by default.
+     * Window ID of the content to be obtained. If not assigned or assigned **undefined**, the
+     * full-screen window is obtained by default.
      *
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
@@ -146,7 +153,8 @@ declare namespace onScreen {
      */
     windowId?: int,
     /**
-     * Whether content understanding is required. The default value is **False**.
+     * Whether to perform content understanding. The value **true** means yes, and **false** means no.
+     * The default value is **false**.
      *
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
@@ -155,7 +163,8 @@ declare namespace onScreen {
      */
     contentUnderstand?: boolean,
     /**
-     * Whether to obtain the page link. The default value is **False**.
+     * Whether to obtain the revisit link. The value **true** means to obtain it, and **false** means
+     * not to obtain it. The default value is **false**.
      *
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
@@ -164,7 +173,8 @@ declare namespace onScreen {
      */
     pageLink?: boolean,
     /**
-     * Whether to obtain only the text and divide the text into paragraphs. The default value is **False**.
+     * Whether to obtain only text and divide it into paragraphs. The value **true** means yes,
+     * and **false** means no. The default value is **false**.
      *
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
@@ -357,7 +367,42 @@ declare namespace onScreen {
   function sendControlEvent(event: ControlEvent): Promise<void>;
 
   /**
-   * Defines onscreen awareness capabilities (including but not limited to awareness in a reading scenario and OCR).
+   * On-screen awareness capabilities (including but not limited to reading scenario awareness, OCR
+   * recognition, and other functions).
+   *
+   * Parameter constraint description:<br>
+   * Users can use the on-screen awareness feature through capability items (**capList**) or group IDs (**groupId**).
+   * * Logical relationship: **capList** and **groupId** are complementary required items. At least one of them must be provided and must not be empty.<br>
+   * * Validation rule: When the API is called, the system checks capList and groupId separately.<br>
+   * * Capability list: Use the on-screen awareness feature by capability item or group ID. The specific definitions are as follows.
+   *   * capList Supported Capability List<br>
+   *     Capabilities preset for specific business scenarios, which can be subscribed to or triggered individually, as follows:
+   *     |capList Capability List|Description|
+   *     | ---- | ------ |
+   *     |Article|Obtains the awareness information of the reading scenario.|
+   *     |ShortVideo|Obtains the awareness information of the short video scenario.|
+   *     |Todo|Obtains the awareness information of the to-do scenario.|
+   *     |Activity|Obtains the awareness information of basic services.|
+   *     |UiImage|Obtains the sub-image information within the page.|
+   *     |JumpContext|Highlights and jumps to the specified context.|
+   *     |QuickSnap|Obtains single screenshot information.<br> **Usage Specification**: Takes effect only when used with the **capture** API and when **capList** passes only "QuickSnap". Other APIs return error code 401.|
+   *     |UiTree|Obtains the JSON tree information within the page.<br> **Since:** 26.0.0|
+   *     |InjectEvent|Injects events.<br> **Since:** 26.0.0|
+   *     |CollectStrategy|Obtains the screen collection strategy.<br> **Since:** 26.0.0|
+   *     |SmartAutoFill|Intelligently fills the content of the page input box.<br> **Since:** 26.0.0|
+   *     |SmartAutoFillSwitch|Subscribes to or unsubscribes from the smart fill switch status of page content.<br> **Usage Specification**: Only the smart fill application (com.huawei.hms.textautofill) is allowed to call this API. Calling by non-trustlisted applications returns error code 34000002.<br> **Since:** 26.0.0|
+   *
+   *   * groupId Capability List<br>
+   *     A set of capabilities preset for business scenarios. Business scenarios can be subscribed to in a unified manner, as follows:
+   *
+   *     |groupId Capability List|Corresponding Sub-Item Capability|Description|
+   *     | ---- | ------ | ------|
+   *     |SmartEdge|Article|Obtains the awareness information of the reading scenario.|
+   *     |SmartEdge|ShortVideo|Obtains the awareness information of the short video scenario.|
+   *     |SmartEdge|Todo|Obtains the awareness information of the to-do scenario.|
+   *     |SmartEdge|Activity|Obtains the awareness information of basic services.|
+   *     |CeliaMemory|Article|Obtains the awareness information of the reading scenario.|
+   *     |SmartBar|SmartAutoFill|Intelligently fills the content of the page input box.|
    *
    * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
    * @systemapi
@@ -608,7 +653,8 @@ declare namespace onScreen {
      */
     appName?: string;
     /**
-     * Applet ID, for example, the ID of WeChat or Alipay.
+     * Mini program ID, for example, the mini program ID of a third-party application such as WeChat
+     * or Alipay.
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
      * @stagemodelonly
@@ -780,6 +826,13 @@ declare namespace onScreen {
   /**
    * Proactively triggers screen content awareness to obtain page information.
    *
+   * The capList capability list supported by the capture API is as follows:
+   * |capList Capability List|Description|
+   * | ---- | ------ |
+   * |UiImage|Obtains the sub-image information in the page.|
+   * |QuickSnap|Obtains the screenshot information.|
+   * |UiTree|Obtains the page JSON tree information.<br> **Since:** 26.0.0|
+   *
    * @permission ohos.permission.GET_SCREEN_CONTENT [since 23 - 24]
    * @permission ohos.permission.GET_SCREEN_CONTENT or ohos.permission.ONSCREEN_AWARENESS [since 26.0.0]
    * @param { OnscreenAwarenessCap } capability - Onscreen awareness capability list. For details, see
@@ -808,6 +861,13 @@ declare namespace onScreen {
    * example, after a link is clicked, the system accurately jumps to the specified paragraph and
    * highlights the text based on the receipt information.
    *
+   * The capList capability list supported by the interact API is as follows:
+   * |capList Capability List|Description|
+   * | ---- | ------ |
+   * |JumpContext|Highlights and jumps to the specified context.|
+   * |InjectEvent|Injects an event. When the capList capability list is **InjectEvent**, the options field is mandatory, and its content must comply with the **InjectEvent** option specification (see the example for details). If options does not comply with the specification, the injection operation fails and error code 34000001 is returned.<br> **Since:** 26.0.0|
+   * |SmartAutoFill|Intelligently fills in the page input box content. When the capList capability list is **SmartAutoFill**, options must contain the **autoFillItems** array (see the example for details); otherwise, the fill operation fails and error code 34000001 is returned.<br> **Since:** 26.0.0|
+   *
    * @permission ohos.permission.GET_SCREEN_CONTENT [since 23 - 24]
    * @permission ohos.permission.GET_SCREEN_CONTENT or ohos.permission.ONSCREEN_AWARENESS [since 26.0.0]
    * @param { OnscreenAwarenessCap } capability - Onscreen awareness capability list. For details, see the following
@@ -833,6 +893,15 @@ declare namespace onScreen {
 
    /**
     * Proactively triggers screen content awareness to obtain the screen content for snapshot analysis.
+    *
+    * The groupId capability list supported by the apperceive API is as follows:
+    * |groupId Capability List|Corresponding Sub-Item Capability|Description|
+    * | ---- | ------ | ------|
+    * |SmartEdge|Article|Obtains the reading scenario awareness information.|
+    * |SmartEdge|ShortVideo|Obtains the short video scenario awareness information.|
+    * |SmartEdge|Todo|Obtains the to-do scenario awareness information.|
+    * |SmartEdge|Activity|Obtains the basic service awareness information.|
+    * |CeliaMemory|Article|Obtains the reading scenario awareness information.|
     *
     * @permission ohos.permission.GET_SCREEN_CONTENT [since 23 - 24]
     * @permission ohos.permission.GET_SCREEN_CONTENT or ohos.permission.ONSCREEN_AWARENESS [since 26.0.0]
@@ -875,7 +944,8 @@ declare namespace onScreen {
      */
     readingState: int;
     /**
-     * If the screen information cannot be read, the corresponding status code will be returned.
+     * If the screen cannot be read, the corresponding status code is returned. For details, see
+     * CollectStrategy.
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
      * @stagemodelonly

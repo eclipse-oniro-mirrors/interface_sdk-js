@@ -220,10 +220,7 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * Used to obtain the bundle information of the application that has only a home screen icon. It is valid only in
-     * the [getAllBundleInfo]{@link bundleManager.getAllBundleInfo} API.
-     *
-     * **System API**: This flag can be used only in system APIs.
+     * Used to obtain the bundle information of the application that has only a home screen icon.
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]
@@ -3818,6 +3815,53 @@ declare namespace bundleManager {
   function getSharedBundleInfo(bundleName: string, moduleName: string): Promise<Array<SharedBundleInfo>>;
 
   /**
+   * Enables or disables the standby module.
+   *
+   * @permission ohos.permission.INSTALL_BUNDLE
+   * @param { string } bundleName - Bundle name.
+   * @param { string } moduleName - Indicates the module name.
+   * @param { long } versionCode - Version number of a module.
+   * @param { boolean } isEnabled - **true** to enable the standby module; **false** to disable it.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700002 - The specified module is not existed.
+   * @throws { BusinessError } 17700096 - The specified version of the module is not found.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setAlternateModuleEnabled(bundleName: string, moduleName: string, versionCode: long,
+    isEnabled: boolean): Promise<void>;
+
+  /**
+   * Query the enable status of the standby module.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - Bundle name.
+   * @param { string } moduleName - Indicates the module name.
+   * @param { long } versionCode - Version number of a module.
+   * @returns { Promise<boolean> } Promise that resolves to **true** if the standby module is enabled or **false**
+   *     if it is disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700002 - The specified module is not existed.
+   * @throws { BusinessError } 17700096 - The specified version of the module is not found.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function isAlternateModuleEnabled(bundleName: string, moduleName: string, versionCode: long): Promise<boolean>;
+
+  /**
    * Obtains the [provision]{@link bundleManager/AppProvisionInfo} configuration file information of all applications
    * based in the device on the given user ID. This API uses a promise to return the result.
    *
@@ -4758,6 +4802,22 @@ declare namespace bundleManager {
    * @since 23 static
    */
   function getAppCloneIdentityBySandboxDataDir(sandboxDataDir: string): AppCloneIdentity;
+
+   /**
+   * Obtain the refresh timestamp of the current theme.
+   *
+   * @permission ohos.permission.GET_BUNDLE_RESOURCES
+   * @returns { Promise<string> } Promise used to return the refresh timestamp of the current theme.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getThemeRefreshTime(): Promise<string>;
 
   /**
    * Restores the backup data for a specified application or application clone under a specified user. This API uses a

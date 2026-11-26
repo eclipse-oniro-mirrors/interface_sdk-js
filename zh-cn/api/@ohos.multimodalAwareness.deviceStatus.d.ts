@@ -59,6 +59,24 @@ declare namespace deviceStatus {
   }
 
   /**
+   * 定义设备的跌落检测状态。
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DropDetectionStatus {
+    /**
+     * 跌落状态，表示设备检测到跌落事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_DROPPED = 1
+  }
+
+  /**
    * 设备旋转弧度接口。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
@@ -123,6 +141,42 @@ declare namespace deviceStatus {
    * @since 18 dynamic
    */
   function off(type: 'steadyStandingDetect', callback?: Callback<SteadyStandingStatus>): void;
+  
+  /**
+   * 订阅设备跌落检测事件。当应用需要检测设备是否发生跌落时使用。调用onDropDetect订阅后，系统开始监听加速度传感器数据。
+   * 当检测到符合跌落特征的加速度变化时，触发STATUS_DROPPED回调。同一回调实例不可重复订阅，需先调用offDropDetect取消后再订阅。
+   * 建议在不需要监听时调用offDropDetect()取消订阅，释放资源。
+   *
+   * @param { Callback<DropDetectionStatus> } callback - 回调函数，返回设备跌落检测状态信息。
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500002 - Subscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onDropDetect(callback: Callback<DropDetectionStatus>): void;
+
+  /**
+   * 取消订阅设备跌落检测事件。用于应用在退出页面或不再需要监听跌落事件的场景。调用后释放相关资源。
+   * 若未调用onDropDetect()就调用offDropDetect()，该方法会抛出异常。
+   *
+   * @param { Callback<DropDetectionStatus> } [callback] - 回调函数，返回设备跌落检测状态信息。需要取消监听的回调函数，需与订阅时传入的回调函数一致。
+   *     <br> 若不填，则取消当前监听该事件的所有回调函数。
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br> 1. The hardware does not support the capability;
+   *     <br> 2. The chip does not support the capability;
+   *     <br> 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500003 - Unsubscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offDropDetect(callback?: Callback<DropDetectionStatus>): void;
 
   /**
    * 获取设备的姿态数据。
@@ -167,59 +221,5 @@ declare namespace deviceStatus {
    * @since 23 static
    */
   function offSteadyStandingDetect(callback?: Callback<SteadyStandingStatus>): void;
-
-  /**
-   * 定义手机跌落检测状态。
-   *
-   * 表示设备的跌落检测状态，包括正常状态和跌落状态。
-   *
-   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  export enum DropDetectionStatus {
-    /**
-     * 正常状态，表示设备处于正常握持或放置状态。
-     *
-     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    STATUS_NORMAL = 0,
-    /**
-     * 跌落状态，表示设备检测到跌落事件。
-     *
-     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    STATUS_DROPPED = 1
-  }
-
-  /**
-   * 订阅跌落检测事件。
-   *
-   * @param { Callback<DropDetectionStatus> } callback - 用于接收设备跌落事件的回调。同一回调重复订阅时抛出错误32500002。
-  * @throws { BusinessError } 801 - Failed due to limited device capabilities.
-  * @throws { BusinessError } 32500001 - Service exception.
-  * @throws { BusinessError } 32500002 - Subscription failed.
-   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function onDropDetect(callback: Callback<DropDetectionStatus>): void;
-
-  /**
-   * 取消订阅跌落检测事件。
-   *
-   * @param { Callback<DropDetectionStatus> } [callback] - 用于接收设备跌落事件的回调。
-  * @throws { BusinessError } 801 - Failed due to limited device capabilities.
-  * @throws { BusinessError } 32500001 - Service exception.
-  * @throws { BusinessError } 32500003 - Unsubscription failed.
-   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function offDropDetect(callback?: Callback<DropDetectionStatus>): void;
 }
 export default deviceStatus;

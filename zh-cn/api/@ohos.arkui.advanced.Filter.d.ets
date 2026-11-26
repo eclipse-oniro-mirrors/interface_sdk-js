@@ -63,7 +63,7 @@ export declare enum FilterType {
 }
 
 /**
- *  This parameter is used to define the input of each filtering dimension.
+ *  该参数用于定义每个过滤维度的输入。
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -103,8 +103,8 @@ export declare class FilterParams {
 }
 
 /**
- * This parameter specifies the selection result of a filtering dimension.
- * The index starts from 0.
+ * 该参数用于指定某个过滤维度的选择结果。
+ * 索引从0开始。
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

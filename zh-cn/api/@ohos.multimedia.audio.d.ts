@@ -182,14 +182,15 @@ declare namespace audio {
    *     象：<br>返回错误码6800301：表示参数校验异常、权限校验异常或系统处理异常（具体错误查看系统日志）。<br>返回错误码6800101：表示必选参数为空或参数类型错误。
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    */
   function createAudioCapturer(options: AudioCapturerOptions, callback: AsyncCallback<AudioCapturer>): void;
 
   /**
-   * 创建音频采集器。使用callback异步回调。
+   * 创建音频采集器。使用Callback异步回调。
    *
-   * 当设置Mic音频源（即[SourceType]{@link #Sourcetype}为SOURCE_TYPE_MIC、SOURCE_TYPE_VOICE_RECOGNITION、SOURCE_TYPE_VOICE_COMMUNICATION、SOURCE_TYPE_VOICE_MESSAGE、SOURCE_TYPE_CAMCORDER）时需要ohos.permission.MICROPHONE权限。
+   * 当options参数中{@link audio.SourceType}设置为使用麦克风录音的音频源时，需要申请ohos.permission.MICROPHONE权限。
    *
    * @param { AudioCapturerOptions } options - 配置音频采集器。
    * @param { AsyncCallback<AudioCapturer | null> } callback - 回调函数，用于返回音频采集器实例，若发生任何错误则返回 null。
@@ -198,6 +199,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
    * @crossplatform
+   * @atomicservice [since 26.1.0]
    * @since 23 static
    */
   function createAudioCapturer(options: AudioCapturerOptions, callback: AsyncCallback<AudioCapturer | null>): void;
@@ -215,6 +217,7 @@ declare namespace audio {
    *     返回错误码6800101：表示必选参数为空或参数类型错误。
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    */
   function createAudioCapturer(options: AudioCapturerOptions): Promise<AudioCapturer>;
@@ -222,7 +225,7 @@ declare namespace audio {
   /**
    * 创建音频采集器。使用Promise异步回调。
    *
-   * 当设置Mic音频源（即[SourceType]{@link #Sourcetype}为SOURCE_TYPE_MIC、SOURCE_TYPE_VOICE_RECOGNITION、SOURCE_TYPE_VOICE_COMMUNICATION、SOURCE_TYPE_VOICE_MESSAGE、SOURCE_TYPE_CAMCORDER）时需要ohos.permission.MICROPHONE权限。
+   * 当options参数中{@link audio.SourceType}设置为使用麦克风录音的音频源时，需要申请ohos.permission.MICROPHONE权限。
    *
    * @param { AudioCapturerOptions } options - 配置音频采集器。
    * @returns { Promise<AudioCapturer | null> } Promise对象，返回音频捕获器实例，若发生任何错误则返回 null。
@@ -231,6 +234,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
    * @crossplatform
+   * @atomicservice [since 26.1.0]
    * @since 23 static
    */
   function createAudioCapturer(options: AudioCapturerOptions): Promise<AudioCapturer | null>;
@@ -1324,6 +1328,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -1333,6 +1338,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1342,6 +1348,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1351,6 +1358,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1362,6 +1370,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1373,6 +1382,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1384,6 +1394,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -1395,6 +1406,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -1404,6 +1416,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1413,6 +1426,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1422,6 +1436,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1431,6 +1446,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1440,6 +1456,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1449,6 +1466,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1458,6 +1476,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1467,6 +1486,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1476,6 +1496,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1485,6 +1506,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1494,6 +1516,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1503,6 +1526,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1512,6 +1536,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1523,6 +1548,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -1532,6 +1558,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1541,6 +1568,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1550,6 +1578,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1559,6 +1588,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1568,6 +1598,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1577,6 +1608,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1586,6 +1618,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1595,6 +1628,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1604,6 +1638,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1613,6 +1648,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1621,6 +1657,7 @@ declare namespace audio {
      * 采样率为88200。单位为赫兹（Hz）。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -1630,6 +1667,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1638,6 +1676,7 @@ declare namespace audio {
      * 采样率为176400。单位为赫兹（Hz）。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -1646,6 +1685,7 @@ declare namespace audio {
      * 采样率为192000。单位为赫兹（Hz）。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -1654,6 +1694,7 @@ declare namespace audio {
      * 采样率为384000。单位为赫兹（Hz）。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -1761,7 +1802,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，音频流使用类型。
+   * 表示播放音频流类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
@@ -2096,6 +2137,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -2111,6 +2153,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @FaAndStageModel [since 26.0.0]
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2120,6 +2163,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2129,6 +2173,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2138,6 +2183,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2147,6 +2193,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -2327,6 +2374,32 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     originalAppIdInfo?: AppIdInfo;
+
+    /**
+     * 是否允许使用低功耗模式。
+     * 当音频播放使用场景为音乐或听书时，系统会默认使用低功耗模式播放音频，可在后台播放时降低功耗。
+     * 然而低功耗模式下，音频系统内缓存数据量很大，在实时生成音频数据的场景并不适用，此时开发者可设置不使用此模式。
+     * 默认值：true。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offloadAllowed?: boolean;
+
+    /**
+     * 是否在静音播放时保持音频通路运行，默认值为false。
+     * 在默认情况下，播放静音数据，包括音量为0和输入静音数据，系统会在检测到后停止音频通路和硬件，
+     * 以达到节省功耗的效果。当恢复有声数据时，系统会立即恢复。
+     * 但恢复存在短暂耗时，如果应用需要在播放静音数据时保持通路运行，以确保数据输出时间固定，可通过此接口设置关闭。
+     * 关闭效果仅在音频播放流运行阶段有效。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    keepActiveOnSilence?: boolean;
   }
 
   /**
@@ -5179,6 +5252,27 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     isFastRecordingSupported(streamInfo: AudioStreamInfo, source: SourceType): boolean;
+
+    /**
+     * 获取路由到指定设备的播放流实际所选通路中最高规格的流信息。
+     *
+     * > **说明**
+     * > 返回的格式为系统路由后实际所选通路的格式，可能与创建流时请求的格式不同。不指定uid时查询所有应用的流。没有播放流路由到指定设备时返回null，包括应用没有创建AudioRenderer或应用创建的AudioRenderer输出设备不是传入的设备。
+     *
+     * @param { AudioDeviceDescriptor } deviceDescriptor - 音频设备描述符。
+     * @param { int } [uid] - 表示要指定查询的应用ID。该参数为可选参数。
+     *     <br>取值限定为整数。默认值：不指定时查询所有应用的流信息。
+     * @returns { Promise<AudioStreamInfo | null> } Promise用于返回流信息。
+     * @throws { BusinessError } 202 - The caller is not a system application.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. Ensure that the specified
+     *     AudioDeviceDescriptor is valid and the device exists. Ensure that the specified uid is valid.
+     * @throws { BusinessError } 6800301 - System error. An unexpected error occurred in audio system.
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getHighestPipeStreamInfo(deviceDescriptor: AudioDeviceDescriptor, uid?: int): Promise<AudioStreamInfo | null>;
   }
 
   /**
@@ -7215,6 +7309,22 @@ declare namespace audio {
      * @since 26.0.1 dynamic&static
      */
     confirmVolumeLimitExceeded(volumeType: AudioVolumeType, result: boolean): void;
+
+    /**
+     * 将所有音量设置恢复为出厂默认值。使用Promise异步回调。
+     *
+     * @permission ohos.permission.MANAGE_AUDIO_CONFIG
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800301 - Crash or blocking occurs in system process.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    factoryResetVolumeParameters(): Promise<void>;
   }
 
   /**
@@ -9104,7 +9214,7 @@ declare namespace audio {
      * 获取音频分离效果启用状态。
      *
      * @returns { boolean } 返回是否启用音频分离效果。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -9143,7 +9253,7 @@ declare namespace audio {
      * 播控应用可根据此状态决定是否显示音频分离开关按钮。
      *
      * @returns { AudioSeparationEffectAvailableStatus } 返回音频分离效果的可用状态。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -9157,7 +9267,7 @@ declare namespace audio {
      *
      * @param { Callback<AudioSeparationEffectAvailableStatus> } callback - Callback function, which is used to return
      *     the changed availablity status.
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -9171,7 +9281,7 @@ declare namespace audio {
      *
      * @param { Callback<AudioSeparationEffectAvailableStatus> } [callback] - 待取消的回调。
      *     <br>如果不传callback参数，则取消所有订阅的回调。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -10827,7 +10937,7 @@ declare namespace audio {
    */
   enum AudioLatencyType {
     /**
-     * 输入以获取所有音频处理单元（包括软件和硬件）的延迟。
+     * 计算包含软件和硬件在内的整体音频处理链路时延。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
@@ -10836,7 +10946,7 @@ declare namespace audio {
     LATENCY_TYPE_ALL = 0,
 
     /**
-     * 输入以获取软件部分的延迟，包括软件中的音频效果。
+     * 计算软件侧时延，包含软件音效。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
@@ -10845,7 +10955,7 @@ declare namespace audio {
     LATENCY_TYPE_SOFTWARE = 1,
 
     /**
-     * 输入以获取硬件部分的延迟，包括HAL、驱动程序和硬件中的音频效果。
+     * 计算硬件侧时延，包含HAL、驱动和硬件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
@@ -10855,7 +10965,7 @@ declare namespace audio {
   }
 
   /**
-   * 回调函数类型，用于音频渲染器的数据写入，回调函数结束后，音频服务会把data指向的数据放入队列里等待播放，因此请勿在回调外再次更改data指向的数据, 且务必保证往data填满待播放数据, 否则会导致音频服务播放杂音。
+   * 回调函数类型，用于音频渲染器的数据写入，回调函数结束后，音频服务会把data指向的数据放入队列里等待播放，因此请勿在回调外再次更改data指向的数据，且务必保证往data填满待播放数据，否则会导致音频服务播放杂音。
    *
    * @param { ArrayBuffer } data - 待写入缓冲区的数据。
    * @returns { AudioDataCallbackResult | void } 如果返回 void 或 AudioDataCallbackResult.VALID：表示数据有效，将播放音频数据；如果返回
@@ -12235,7 +12345,7 @@ declare namespace audio {
      * 
      * @param { boolean } on - 进入或退出standby状态，true表示进入，false表示退出。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800103 - 当前状态下不允许操作。
+     * @throws { BusinessError } 6800103 - The operation is not allowed in the current state.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -12248,6 +12358,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12258,6 +12369,7 @@ declare namespace audio {
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12269,6 +12381,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12280,6 +12393,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -12330,6 +12444,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12341,6 +12456,7 @@ declare namespace audio {
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -12362,6 +12478,7 @@ declare namespace audio {
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 13 dynamic
      * @since 23 static
      */
@@ -12373,6 +12490,7 @@ declare namespace audio {
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 14 dynamic
      * @since 23 static
      */
@@ -12384,6 +12502,7 @@ declare namespace audio {
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 20 dynamic
      * @since 23 static
      */
@@ -12407,6 +12526,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12416,6 +12536,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12427,6 +12548,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12524,6 +12646,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12535,6 +12658,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12546,6 +12670,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12814,6 +12939,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12928,6 +13054,7 @@ declare namespace audio {
      *     点抢占失败、系统处理异常（具体错误查看系统日志）。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12940,6 +13067,7 @@ declare namespace audio {
      *     错误码6800301：表示包含状态检查异常、焦点抢占失败、系统处理异常（具体错误查看系统日志）。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13049,6 +13177,7 @@ declare namespace audio {
      * @param { AsyncCallback<void> } callback - 回调函数。当停止音频采集成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13059,6 +13188,7 @@ declare namespace audio {
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13070,6 +13200,7 @@ declare namespace audio {
      * @param { AsyncCallback<void> } callback - 回调函数。当释放音频采集器成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13080,6 +13211,7 @@ declare namespace audio {
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13221,7 +13353,7 @@ declare namespace audio {
      * 取消监听标记到达事件。使用callback异步回调。
      *
      * @param { 'markReach' } type - 事件回调类型，支持的事件为'markReach'，当取消监听标记到达事件时，触发该事件。
-     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。
+     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。 [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
      * @since 8 dynamic
@@ -13488,6 +13620,7 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      */
     on(type: 'readData', callback: Callback<ArrayBuffer>): void;
@@ -13500,6 +13633,7 @@ declare namespace audio {
      * @param { Callback<ArrayBuffer> } callback - 回调函数，返回读到的数据缓冲区。
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @atomicservice [since 26.1.0]
      * @since 23 static
      */
     onReadData(callback: Callback<ArrayBuffer>): void;
@@ -13515,6 +13649,7 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      */
     off(type: 'readData', callback?: Callback<ArrayBuffer>): void;
@@ -13525,6 +13660,7 @@ declare namespace audio {
      * @param { Callback<ArrayBuffer> } [callback] - 回调函数，返回读到的数据缓冲区。
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @atomicservice [since 26.1.0]
      * @since 23 static
      */
     offReadData(callback?: Callback<ArrayBuffer>): void;
@@ -14653,6 +14789,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 26.1.0]
    * @since 11 dynamic
    * @since 23 static
    */
@@ -14662,6 +14799,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14671,6 +14809,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14680,6 +14819,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14688,6 +14828,7 @@ declare namespace audio {
      * 声道布局为STEREO-DOWNMIX。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14697,6 +14838,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14706,6 +14848,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14715,6 +14858,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14724,6 +14868,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14733,6 +14878,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14742,6 +14888,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14750,6 +14897,7 @@ declare namespace audio {
      * 声道布局为QUAD-SIDE。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14759,6 +14907,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14767,6 +14916,7 @@ declare namespace audio {
      * 声道排序为ACN_N3D（根据ITU标准）的一阶FOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14775,6 +14925,7 @@ declare namespace audio {
      * 声道排序为ACN_SN3D（根据ITU标准）的一阶FOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14783,6 +14934,7 @@ declare namespace audio {
      * 声道排序为FUMA（根据ITU标准）的一阶FOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14792,6 +14944,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14801,6 +14954,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14809,6 +14963,7 @@ declare namespace audio {
      * 声道布局为5.0-BACK。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14817,6 +14972,7 @@ declare namespace audio {
      * 声道布局为2.1.2。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14825,6 +14981,7 @@ declare namespace audio {
      * 声道布局为3.0.2。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14834,6 +14991,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14842,6 +15000,7 @@ declare namespace audio {
      * 声道布局为5.1-BACK。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14851,6 +15010,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14860,6 +15020,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14868,6 +15029,7 @@ declare namespace audio {
      * 声道布局为3.1.2。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14876,6 +15038,7 @@ declare namespace audio {
      * 声道布局为6.0-FRONT。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14885,6 +15048,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14893,6 +15057,7 @@ declare namespace audio {
      * 声道布局为6.1-BACK。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14901,6 +15066,7 @@ declare namespace audio {
      * 声道布局为6.1-FRONT。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14910,6 +15076,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14919,6 +15086,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14928,6 +15096,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14937,6 +15106,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14946,6 +15116,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14954,6 +15125,7 @@ declare namespace audio {
      * 声道布局为7.1-WIDE。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14962,6 +15134,7 @@ declare namespace audio {
      * 声道布局为7.1-WIDE-BACK。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14970,6 +15143,7 @@ declare namespace audio {
      * 声道排序为ACN_N3D（根据ITU标准）的二阶HOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14978,6 +15152,7 @@ declare namespace audio {
      * 声道排序为ACN_SN3D（根据ITU标准）的二阶HOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14986,6 +15161,7 @@ declare namespace audio {
      * 声道排序为FUMA（根据ITU标准）的二阶HOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -14995,6 +15171,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15004,6 +15181,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15013,6 +15191,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15022,6 +15201,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15030,6 +15210,7 @@ declare namespace audio {
      * 声道布局为9.1.4。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15039,6 +15220,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15048,6 +15230,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15057,6 +15240,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15066,6 +15250,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15074,6 +15259,7 @@ declare namespace audio {
      * 声道排序为FUMA（根据ITU标准）的三阶HOA文件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -15211,7 +15397,7 @@ declare namespace audio {
      *
      * @param { double } volume - 音量值范围为[0.0, 1.0]。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800101 - Parameter verification failed, form 0.0 to 1.0.
+     * @throws { BusinessError } 6800101 - Parameter verification failed, from 0.0 to 1.0.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @since 20 dynamic
      * @since 23 static
@@ -15297,10 +15483,10 @@ declare namespace audio {
     /**
      * 启用或禁用音频返听器。使用Promise异步回调。
      *
-     * @permission ohos.permission.MICROPHONE
+     * @permission ohos.permission.MICROPHONE [since 20 - 26.0.1]
      * @param { boolean } enable - 表示是否启用音频返听器。true表示启用，false表示禁用。
      * @returns { Promise<boolean> } Promise对象。返回true表示功能执行成功；返回false表示功能执行失败。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission denied. [since 20 - 26.0.1]
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @since 20 dynamic
@@ -15361,7 +15547,7 @@ declare namespace audio {
      * 此功能仅适用于播控应用。
      *
      * @returns { AudioLoopbackavailablestatus } 全局环回的可用状态。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
@@ -15374,7 +15560,7 @@ declare namespace audio {
      * 此功能仅适用于播控应用。
      *
      * @param { Callback<AudioLoopbackavailablestatus> } callback - 回调函数，用于返回变化后的音频返听可用状态。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
@@ -15389,7 +15575,7 @@ declare namespace audio {
      *
      * @param { Callback<AudioLoopbackavailablestatus> } [callback] - 待取消的回调。
      *     <br>如果不传callback参数，则取消所有订阅的回调。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly

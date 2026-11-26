@@ -1285,6 +1285,24 @@ declare namespace applicationManager {
    */
   function isAppKioskAllowed(appIdentifier: string): boolean;
 
+/**
+   * 获取应用的图标数据。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { string } bundleName - 应用的Bundle名称。
+   * @returns { string } 应用的Base64编码的图标数据。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201015 - The application is not installed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getApplicationIconData(bundleName: string): string;
+
   /**
    * 设置Kiosk模式的特征。通过本接口可以控制在Kiosk模式下能否进入通知中心、控制中心。
    *
@@ -2029,12 +2047,9 @@ declare namespace applicationManager {
    *     <br>取值应≥0。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200006 - The specified account ID is invalid.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @throws { BusinessError } 9201015 - The application is not installed.
@@ -2053,12 +2068,9 @@ declare namespace applicationManager {
    *     <br>取值应≥0。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200006 - The specified account ID is invalid.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -2078,12 +2090,9 @@ declare namespace applicationManager {
    * @returns { Array<string> } 返回电池优化排除列表中的应用唯一标识符。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200006 - The specified account ID is invalid.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
@@ -2101,6 +2110,7 @@ declare namespace applicationManager {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -2124,6 +2134,71 @@ declare namespace applicationManager {
    * @since 26.1.0
    */
   function getAllMainWindowStates(): Array<MainWindowStates>;
+
+  /**
+   * 将应用加入启用通知的应用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { Array<string> } bundleNames - 待加入的应用包名。
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addEnabledNotificationBundles(bundleNames: Array<string>, accountId: number): void;
+
+  /**
+   * 将应用从启用通知的应用名单中移除。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { Array<string> } bundleNames - 待移除的应用包名。
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeEnabledNotificationBundles(bundleNames: Array<string>, accountId: number): void;
+
+  /**
+   * 获取启用通知的应用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询策略。
+   * 未指定时使用默认值
+   * {@link common.QueryPolicy.SELF}。
+   * @returns { Array<string> } 返回启用通知名单中的应用包名。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnabledNotificationBundles(accountId: number, queryPolicy?: common.QueryPolicy): Array<string>;
 }
 
 export default applicationManager;

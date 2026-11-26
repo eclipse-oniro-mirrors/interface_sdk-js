@@ -366,7 +366,7 @@ declare namespace bundleResourceManager {
    *
    * @permission ohos.permission.GET_BUNDLE_RESOURCES
    * @param { string } filePath - Path where the file  is stored.
-   *     The path must be the relative path of the current bundle's data directory.
+   *     The path can be an absolute path or a sandbox path of the current bundle's data directory.
    * @param { int } [resourceFlags] - Type of the resource information to obtain. For details.  see
    *     [ResourceFlag]{@link bundleResourceManager.ResourceFlag}.
    * @returns { Promise<BundleResourceInfo> } Promise used to return the BundleResourceInfo.

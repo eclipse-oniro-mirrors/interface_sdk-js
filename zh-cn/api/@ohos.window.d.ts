@@ -400,6 +400,15 @@ declare namespace window {
      */
     TYPE_MUTISCREEN_COLLABORATION = 26,
     /**
+     * 无障碍通话窗口
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TYPE_ACCESSIBILITY_CALL_HELPER = 27,
+    /**
      * 表示应用主窗口。
      * 
      * 此窗口类型不支持在创建窗口时使用。
@@ -687,7 +696,7 @@ declare namespace window {
      */
     MINIMIZE = 3,
     /**
-     * 表示APP自由悬浮形式窗口模式。
+     * 表示APP自由悬浮形式窗口模式，窗口可以自由移动和缩放，适用于需要多窗口同时使用的场景。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 20]
@@ -697,7 +706,7 @@ declare namespace window {
      */
     FLOATING = 4,
     /**
-     * 表示APP分屏模式。
+     * 表示APP分屏模式。屏幕同时显示两个应用窗口，每个窗口占据屏幕的一半空间，适用于多任务并行处理的场景。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 20]
@@ -1438,7 +1447,9 @@ declare namespace window {
     parentWindowStatusChangeCallback?: Callback<WindowStatusType>;
 
     /**
-     * 是否使用处于协同关系中两个窗口的宽度限制的交集。
+     * 子窗与绑定主窗的宽度是否相互限制。
+     * - true：表示子窗与绑定主窗的宽度不能超过两个窗口宽度限制的交集；若两者宽度限制无交集，则不互相限制。当多个子窗同时设置此参数为true时，所有参与互限的窗口（包括主窗）的宽度受全部窗口宽度限制的交集约束。
+     * - false：表示子窗与绑定的主窗宽度不会互相限制。
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -1449,7 +1460,9 @@ declare namespace window {
     isIntersectedWidthLimit?: boolean;
 
     /**
-     * 是否使用处于协同关系中两个窗口的高度限制的交集。
+     * 子窗与绑定主窗的高度是否相互限制。
+     * - true：表示子窗与绑定主窗的高度不能超过两个窗口高度限制的交集；若两者高度限制无交集，则不互相限制。当多个子窗同时设置此参数为true时，所有参与互限的窗口（包括主窗）的高度受全部窗口高度限制的交集约束。
+     * - false：表示子窗与绑定的主窗高度不会互相限制。
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -1534,6 +1547,61 @@ declare namespace window {
      * @since 23 static
      */
     bottomRect: Rect;
+  }
+
+   /**
+   * 窗口的避让区边衬。
+   *
+   * 避让区边衬表示由于[避让区]{@link window.AvoidArea}的存在，窗口内容在上下左右四个方向上需要避让的距离。
+   *
+   * > **说明**
+   * >
+   * > 避让区边衬的计算不包括[TYPE_KEYBOARD]{@link window.AvoidAreaType}类型的避让区。
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AvoidAreaInsets {
+    /**
+     * 窗口顶部需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * 窗口左侧需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * 窗口右侧需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    right: int;
+
+    /**
+     * 窗口底部需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bottom: int;
   }
 
   /**
@@ -1933,7 +2001,7 @@ declare namespace window {
     windowType?: WindowType;
 
     /**
-     * 在满足isLayoutFullScreen为true的条件下如果隐藏了状态栏，返回值为true，其他情况下均返回false。
+     * 窗口是否处于[沉浸式布局](docroot://windowmanager/window-terminology.md#immersive-layout沉浸式布局)并设置了状态栏隐藏。
      *
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @atomicservice [since 12]
@@ -2691,7 +2759,7 @@ declare namespace window {
    */
   interface RectChangeOptions {
     /**
-     * New value of the window rectangle.
+     * 窗口矩形变化后的值。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2847,7 +2915,7 @@ declare namespace window {
    */
   enum RectChangeReason {
     /**
-     * 默认值。
+     * 默认值，表示窗口矩形变化的原因未定义。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2858,7 +2926,7 @@ declare namespace window {
     UNDEFINED = 0,
 
     /**
-     * 窗口最大化。
+     * 窗口最大化或全屏模式。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2869,7 +2937,7 @@ declare namespace window {
     MAXIMIZE = 1,
 
     /**
-     * 窗口恢复到上一次的状态。
+     * 窗口从最大化模式、全屏模式或分屏模式恢复到自由悬浮窗模式。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2969,7 +3037,7 @@ declare namespace window {
    */
   interface MainWindowInfo {
     /**
-     * ID of the display to which the main window belongs.
+     * 主窗口所在的屏幕ID。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 21 dynamic
@@ -2977,7 +3045,7 @@ declare namespace window {
      */
     displayId: long,
     /**
-     * ID of the main window.
+     * 主窗口ID。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 21 dynamic
@@ -2985,8 +3053,7 @@ declare namespace window {
      */
     windowId: int,
     /**
-     * Foreground/Background status of the main window. **true** if the main window is in the foreground, **false**
-     * otherwise.
+     * 主窗口的前后台状态。true表示主窗口在前台，false表示主窗口不在前台。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 21 dynamic
@@ -3098,8 +3165,7 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，参数id传入null或undefined时，可能会导致callback无法得到执行，建议使用
-   * > [createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
+   * > 从API version 7开始支持，从API version 9开始废弃，参数id传入null或undefined时，可能会导致callback无法得到执行，建议使用[createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
    *
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
    * @param { WindowType } type - 窗口类型。
@@ -3155,8 +3221,7 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 8开始支持，从API version 9开始废弃，建议使用
-   * > [createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
    *
    * @param { BaseContext } ctx - 当前应用上下文信息。
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
@@ -5250,10 +5315,9 @@ declare namespace window {
   /**
    * 当前支持显示或隐藏的系统栏类型。
    *
-   * @unionmember { 'status' } Status bar.
-   * @unionmember { 'navigation' } <!--RP13--><!--RP13End-->Three-button navigation bar.
-   * @unionmember { 'navigationIndicator' } Bottom navigation bar. <!--RP12-->OpenHarmony devices do not support this
-   *     capability.<!--RP12End-->
+   * @unionmember { 'status' } 状态栏。
+   * @unionmember { 'navigation' } <!--RP13--><!--RP13End-->三键导航栏或工具栏。当前工具栏仅Car设备支持。
+   * @unionmember { 'navigationIndicator' } 底部导航。 <!--RP12-->OpenHarmony各设备不支持此能力。<!--RP12End-->
    * @syscap SystemCapability.Window.SessionManager
    * @crossplatform [since 12]
    * @atomicservice
@@ -5356,9 +5420,9 @@ declare namespace window {
     needAnimation?: boolean;
 
     /**
-     * 是否覆盖系统窗口尺寸限制。
-     * 如果为true，则当前主窗口可以设置超出系统限制的窗口尺寸限制。
-     *
+     * 应用主窗口尺寸限制是否可突破系统默认限制。仅当被启动应用为系统应用时生效，否则不生效也不报错。
+     * - true：运行突破系统默认限制。在窗口尺寸限制计算过程中，将忽略系统默认限制，最终生效结果仍按各来源取交集计算，且优先级保持不变。详细说明可参考[WindowLimits]{@link @ohos.window:window.WindowLimits}
+     * - false：不允许突破系统默认限，。窗口尺寸限制按照默认规则计算（包含系统默认限制）。
      * @default false
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
@@ -5402,6 +5466,18 @@ declare namespace window {
      * @since 26.0.1 dynamic&static
      */
     excludeFromRecent?: boolean;
+
+    /**
+     * 当前窗口启动时的位置。
+     * 如果WindowPosition.TOP，则当前窗口将位于所有应用程序主窗口的顶部。
+     * 如果WindowPosition.BOTTOM，则当前窗口将位于所有应用程序主窗口的底部。
+     *
+     * @default WindowPosition.TOP
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    positionZ?: WindowPosition;
   }
 
   /**
@@ -5496,7 +5572,7 @@ declare namespace window {
    */
   interface KeyFramePolicy {
     /**
-     * 是否开启关键帧。true表示开启，false表示关闭。
+     * 是否开启关键帧。true表示开启关键帧策略，在拖拽窗口时会按照关键帧布局进行切换；false表示关闭关键帧策略，窗口拖拽时平滑过渡。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -5505,7 +5581,7 @@ declare namespace window {
     enable: boolean;
 
     /**
-     * 设置关键帧布局切换的拖拽时间间隔，单位为毫秒，默认值为1000。取值为正整数，浮点数向下取整。与distance判断为或的关系：满足其一即开始布局切换。
+     * 设置关键帧布局切换的拖拽时间间隔，单位为毫秒，默认值为1000。表示拖拽持续该时间后将触发布局切换，值越大需要拖拽越久才会切换。取值为正整数，浮点数向下取整。与distance判断为或的关系：满足其一即开始布局切换。
      *
      * @default 1000
      * @syscap SystemCapability.Window.SessionManager
@@ -5515,7 +5591,7 @@ declare namespace window {
     interval?: long;
 
     /**
-     * 设置关键帧布局切换的拖拽距离间隔，单位为px，默认值为1000。取值为0或正整数，浮点数向下取整。设置为0时，忽略拖拽距离因素。与interval判断为或的关系：满足其一即开始布局切换。
+     * 设置关键帧布局切换的拖拽距离间隔，单位为px，默认值为1000。表示拖拽距离达到该值后将触发布局切换，值越大需要拖拽越远才会切换。取值为0或正整数，浮点数向下取整。设置为0时，忽略拖拽距离因素，仅通过interval判断是否切换。与interval判断为或的关系：满足其一即开始布局切换。
      *
      * @default 1000
      * @syscap SystemCapability.Window.SessionManager
@@ -5666,7 +5742,7 @@ declare namespace window {
      * > [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}方法完成页面加载。如果应用主窗口没有完成页面加载，直接调用该接口，界面会
      * > 一直显示启动界面；如果系统窗口、应用子窗口、模态窗和全局悬浮窗没有完成页面加载，直接调用该接口，窗口会处于前台，但不可见。
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -5704,7 +5780,7 @@ declare namespace window {
      * 
      * > **说明：**
      * >
-     * > 调用该接口前，建议优先通过[loadContent](docroot://reference/apis-arkui/arkts-apis-window-WindowStage.md#loadcontent9)方法或者
+     * > 调用该接口前，建议优先通过[loadContent]{@link window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}方法或者
      * > [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}方法完成页面加载。如果应用主窗口没有完成页面加载，直接调用该接口，界面会
      * > 一直显示启动界面；如果系统窗口、应用子窗口和全局悬浮窗没有完成页面加载，直接调用该接口，窗口会处于前台，但不可见。
      *
@@ -5799,7 +5875,7 @@ declare namespace window {
     /**
      * 销毁当前窗口，使用callback异步回调，支持系统窗口及应用子窗口，全局悬浮窗和模态窗。
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: The window is not created or destroyed.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally. [since 9 - 9]
@@ -6253,7 +6329,7 @@ declare namespace window {
      * 负值为非法参数（抛出错误码401）。
      * @param { int } height - 当前窗口的目标高度，单位为px，该参数仅支持整数输入，浮点数输入将向下取整，
      * 负值为非法参数（抛出错误码401）。
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
@@ -6388,6 +6464,8 @@ declare namespace window {
      * 
      * 该相对位置通过子窗与主窗之间的锚点偏移量表示，子窗和主窗使用的窗口锚点相同。
      * 
+     * 非独立子窗支持单独调用。独立子窗调用此接口时，将返回1300004错误码。
+     * 
      * > **说明：**
      * >
      * > - 只支持一级子窗调用该接口，子窗需处于自由悬浮窗口模式（即窗口模式为window.WindowStatusType.FLOATING）。
@@ -6429,6 +6507,8 @@ declare namespace window {
 
     /**
      * 解除一级子窗与主窗保持相对位置不变的协同关系。使用Promise异步回调。
+     * 
+     * 非独立子窗支持单独调用。独立子窗调用此接口时，将返回1300004错误码。
      * 
      * > **说明：**
      * >
@@ -6702,7 +6782,7 @@ declare namespace window {
      * - 仅在调用[setSystemAvoidAreaEnabled]{@link window.Window.setSystemAvoidAreaEnabled}方法使能后，才能通过此接口获取计算后的避让区域，否则获取的避让区域
      * 为空。
      *
-     * @param { AvoidAreaType } type - Type of the area.
+     * @param { AvoidAreaType } type - 表示避让区域类型。不支持获取软键盘类型的避让区域，传入TYPE_KEYBOARD时，返回1300016错误码。
      * @returns { AvoidArea } 窗口内容避让区域。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
@@ -6739,7 +6819,7 @@ declare namespace window {
      * 调用该接口。
      * - 当应用内子窗需要临时显示，对显示内容做布局避让时可调用该接口。
      *
-     * @param { AvoidAreaType } type - Type of the area
+     * @param { AvoidAreaType } type - 表示避让区域类型。
      * @returns { AvoidArea } 窗口内容避让区域。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
@@ -6761,8 +6841,7 @@ declare namespace window {
      * [on('avoidAreaChange')]{@link window.Window.on(type: 'avoidAreaChange', callback: Callback<AvoidAreaOptions>)}监听窗
      * 口避让区变化。
      *
-     * @param { boolean } enabled - If true, the system window type can obtain avoid area. If false, the avoid area
-     *     obtained by the system window type will always be empty.
+     * @param { boolean } enabled - 是否可以获取到避让区。true表示可以获取避让区；false表示不可以获取避让区。默认值为false。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
@@ -6964,7 +7043,7 @@ declare namespace window {
      * 
      * 非沉浸式布局生效时，布局避让状态栏与<!--RP15-->三键导航栏<!--RP15End-->，组件不会与其重叠。
      *
-     * @param { boolean } isLayoutFullScreen - The window can layout in full screen
+     * @param { boolean } isLayoutFullScreen - 窗口的布局是否为沉浸式布局（该沉浸式布局状态栏、工具栏或导航栏仍然显示）。true表示沉浸式布局；false表示非沉浸式布局。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -7059,7 +7138,7 @@ declare namespace window {
      * 
      * 调用生效后返回并不表示状态栏、<!--RP15-->三键导航栏<!--RP15End-->的显示或隐藏已完成。主窗口在非全屏/最大化模式（悬浮窗、分屏等场景）下配置不生效，进入全屏/最大化模式后配置生效。
      *
-     * @param { Array<'status' | 'navigation'> } names - The set of system bar
+     * @param { Array<'status' | 'navigation'> } names - 设置窗口全屏/最大化模式时状态栏、工具栏或<!--RP15-->三键导航栏<!--RP15End-->是否显示。<br>例如，需全部显示，该参数设置为['status','navigation']；设置为[]，则不显示。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1.Mandatory parameters are left unspecified;
      *     2.Incorrect parameter types.
@@ -7080,10 +7159,9 @@ declare namespace window {
      * 
      * 调用生效后返回并不表示状态栏、<!--RP15-->三键导航栏<!--RP15End-->的显示或隐藏已完成。子窗口调用后不生效。主窗口在非全屏/最大化模式（悬浮窗、分屏等场景）下配置不生效，进入全屏/最大化模式后配置生效。
      *
-     * @param {SpecificSystemBar} name - the set of system bar
-     * @param {boolean} enable - Show specific system bar if true, or hide specific system bar if false.
-     * @param {boolean} enableAnimation - Whether using animation during this setting,
-     *     using animation if true or not using animation if false. [since 12]
+     * @param {SpecificSystemBar} name - 设置窗口全屏模式时，显示或隐藏的系统栏类型。
+     * @param {boolean} enable - 设置窗口全屏模式时状态栏或工具栏或<!--RP15-->三键导航栏<!--RP15End-->是否显示。true表示显示，false表示隐藏。
+     * @param {boolean} enableAnimation - 设置状态栏或工具栏或<!--RP15-->三键导航栏<!--RP15End-->显示状态变化时是否使用动画。true表示使用，false表示不使用，默认值为false [since 12]
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws {BusinessError} 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -7395,13 +7473,12 @@ declare namespace window {
       void;
 
     /**
-     * 开启窗口内uiExtension安全限制变化事件的监听, 建议在窗口创建后立即监听。
+     * 开启窗口内UIExtension安全限制变化事件的监听, 建议在窗口创建后立即监听。
      *
-     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内uiExtension安全限制变
-     *     化事件。
-     * @param { Callback<boolean> } callback - 回调函数。当窗口内uiExtension安全限制变化时触发回调。当返回参数为true表示窗口内uiExtension开启了隐藏不安全窗口；当返回参
-     *     数为false表示窗口内uiExtension关闭了隐藏不安全窗口。若窗口内存在多个uiExtension，当返回参数为true表示窗口内至少一个uiExtension开启了隐藏不安全窗口；当返回参数为false表示窗
-     *     口内所有uiExtension关闭了隐藏不安全窗口。
+     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内UIExtension安全限制
+     *     变化事件。
+     * @param { Callback<boolean> } callback - 回调函数。当窗口内UIExtension安全限制变化时触发回调。当返回参数为true表示窗口内
+     *     至少一个UIExtension开启了隐藏不安全窗口；当返回参数为false表示窗口内所有UIExtension关闭了隐藏不安全窗口。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7414,10 +7491,10 @@ declare namespace window {
     on(eventType: 'uiExtensionSecureLimitChange', callback: Callback<boolean>): void;
 
     /**
-     * UIExtension in window secure limit change callback on.
+     * 开启窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { Callback<boolean> } callback
-          *     Callback used to return the result whether the APP has uiextension secure limit.
+     * @param { Callback<boolean> } callback - 回调函数。返回应用是否已开启UIExtension安全限制的结果。
+     *     当返回参数为true表示窗口内至少一个UIExtension开启了隐藏不安全窗口；当返回参数为false表示窗口内所有UIExtension关闭了隐藏不安全窗口。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7429,9 +7506,9 @@ declare namespace window {
     onUiExtensionSecureLimitChange(callback: Callback<boolean>): void;
 
     /**
-     * 关闭窗口内uiextension安全限制变化事件的监听。
+     * 关闭窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内uiExtension安全限制变
+     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内UIExtension安全限制变
      *     化事件。
      * @param { Callback<boolean> } [callback] - 回调函数。若传入参数，则关闭该监听。若未传入参数，则关闭所有窗口安全限制变化的监听。
      * @throws { BusinessError } 801 - Capability not supported.
@@ -7446,10 +7523,10 @@ declare namespace window {
     off(eventType: 'uiExtensionSecureLimitChange', callback?: Callback<boolean>): void;
 
     /**
-     * UIExtension in window secure limit change callback off.
+     * 关闭窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { Callback<boolean> } [callback] Unregister the callback function.
-     *     If not provided, all callbacks for the given event type will be removed.
+     * @param { Callback<boolean> } [callback] - 回调函数。若传入参数，则关闭该监听。
+     *     若未传入参数，则关闭所有窗口安全限制变化的监听。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function off('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -8097,6 +8174,58 @@ declare namespace window {
      * @since 23 static
      */
     offAvoidAreaChange(callback?: Callback<AvoidAreaOptions>): void;
+
+    /**
+     * 获取当前窗口的避让区边衬。
+     *
+     * @returns { AvoidAreaInsets } 避让区边衬。
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getAvoidAreaInsets(): AvoidAreaInsets;
+
+    /**
+     * 订阅窗口避让区边衬的变化。
+     *
+     * 当窗口的避让区发生变化时，会触发回调。
+     * 在同一次变化中，如果多个避让区发生变化，相关的避让区信息更新后，只会触发一次回调。
+     *
+     * > **说明**
+     * > 可以在回调中使用[getAvoidAreaInsets]{@link window.Window#getAvoidAreaInsets}来获取窗口最新的避让区边衬，或使用
+     * > [getWindowAvoidArea]{@link window.Window#getWindowAvoidArea}获取指定类型的避让区。
+     * >
+     * > [TYPE_KEYBOARD]{@link window.AvoidAreaType}类型的避让区变化不会触发回调。
+     *
+     * @param { Callback<void> } callback - 回调函数。
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onAvoidAreaInsetsChange(callback: Callback<void>): void;
+
+    /**
+     * 取消订阅窗口避让区边衬的变化。
+     *
+     * @param { Callback<void> } [callback] - 回调函数。如果传入参数，则关闭该监听。如果未传入参数，则关闭该窗口所有避让区边衬
+     *     变化的监听。默认值：undefined。
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offAvoidAreaInsetsChange(callback?: Callback<void>): void;
 
     /**
      * 开启固定态软键盘高度变化的监听。当软键盘从本窗口唤出且与窗口有重叠区域时，通知键盘高度变化。从API version 10开始，有关将软键盘设置为固定态或悬浮态的方法，请参见
@@ -10391,11 +10520,11 @@ declare namespace window {
     setTouchable(isTouchable: boolean, callback: AsyncCallback<void>): void;
 
     /**
-     * 设置窗口是否为可点击状态，使用Promise异步回调。
+     * 设置窗口是否为可触摸状态，使用Promise异步回调。
      * 
-     * 当窗口处于可点击状态时，若用户点击命中该窗口，事件将发送给该窗口处理。当窗口处于不可点击状态时，透传点击事件，传递给下层窗口。
+     * 当窗口处于可触摸状态时，若用户触摸命中该窗口，事件将发送给该窗口处理。当窗口处于不可触摸状态时，透传触摸事件，传递给下层窗口。
      *
-     * @param { boolean } isTouchable is touchable if true, or not if false.
+     * @param { boolean } isTouchable - 窗口是否为可触摸状态。true表示可触摸；false表示不可触摸。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -10411,12 +10540,12 @@ declare namespace window {
     setWindowTouchable(isTouchable: boolean): Promise<void>;
 
     /**
-     * 设置窗口是否为可点击状态，使用callback异步回调。
+     * 设置窗口是否为可触摸状态，使用callback异步回调。
      * 
-     * 当窗口处于可点击状态时，若用户点击命中该窗口，事件将发送给该窗口处理。当窗口处于不可点击状态时，透传点击事件，传递给下层窗口。
+     * 当窗口处于可触摸状态时，若用户触摸命中该窗口，事件将发送给该窗口处理。当窗口处于不可触摸状态时，透传触摸事件，传递给下层窗口。
      *
-     * @param { boolean } isTouchable is touchable if true, or not if false.
-     * @param { AsyncCallback<void> } callback Callback used to return the result.
+     * @param { boolean } isTouchable - 窗口是否为可触摸状态。true表示可触摸；false表示不可触摸。
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -11918,7 +12047,7 @@ declare namespace window {
      *
      * @permission ohos.permission.SET_WINDOW_TOUCH_AREAS [since 26.0.0]
      * @param { Array<Rect> } rects - 窗口可触摸区域。可触摸区域最大个数不能超过10个，且范围不能超出窗口区域。
-     * @returns { Promise<void> } Promise that returns no value. [since 26.0.0]
+     * @returns { Promise<void> } 无返回结果的Promise对象。 [since 26.0.0]
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have
      *     the permission required or a non-system application calls the API. [since 26.0.0]
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
@@ -12015,11 +12144,14 @@ declare namespace window {
     enableLandscapeMultiWindow(): Promise<void>;
 
     /**
-     * 开始移动此窗口。
-     * 只有在 `onTouch` 回调函数中调用此 API，且事件类型为 `TouchType.Down` 时，窗口才会随光标移动。
+     * 开始移动此窗口，使用Promise异步回调。
+     * 
+     * 仅在[onTouch]{@link TouchEvent}事件（其中，事件类型必须为TouchType.Down）的回调方法中调用此接口才会有移动效果，成功调用此接口后，窗口将跟随鼠标或触摸点移动。
      *
+     * 在点击拖拽场景下，若不期望在按下时触发拖拽事件，则可以在事件类型为[TouchType.Move]{@link ./@internal/component/ets/enums:TouchType}（需要保证当前行为已经触发TouchType.Down事件）时调用此接口，触发移动效果。
+     * 
      * @param { StartMovingOptions } [startMovingOptions] - 拖拽移动过程中的移动配置。
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
@@ -12994,7 +13126,7 @@ declare namespace window {
     setDragKeyFramePolicy(keyFramePolicy: KeyFramePolicy): Promise<KeyFramePolicy>;
 
     /**
-     * 查询当前窗口是否为[自由窗口](docroot://windowmanager/window-terminology.md#自由窗口)模式。
+     * 查询当前窗口是否为[自由窗口](docroot://windowmanager/window-terminology.md#freeform-window自由窗口)模式。
      *
      * @returns { boolean } 返回true表示在自由窗口模式，false表示非自由窗口模式。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -13600,7 +13732,7 @@ declare namespace window {
      * 自由窗口状态下，子窗口参数[decorEnabled]{@link window.SubWindowOptions}为false时，子窗口创建后为沉浸式布局；子窗口参数decorEnabled为true，子窗口创建后为非沉浸式布局。
      * @param { string } name - 子窗口的名字。
      * @param { SubWindowOptions } options - 子窗口参数。
-     * @returns { Promise<Window> } Promise used to return the subwindow.
+     * @returns { Promise<Window> } Promise对象。返回当前Window下创建的子窗口对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
@@ -13649,9 +13781,9 @@ declare namespace window {
 
     /**
      * 根据当前工程中指定的页面路径为窗口加载具体页面内容，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
-     * 
+     *
      * 建议在UIAbility启动过程中使用该接口，重复调用将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     * 
+     *
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
      *
      * @param { string } path 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。不支持相对路径写法，需与main_pages.json中的src取值保持一致。
@@ -13723,11 +13855,15 @@ declare namespace window {
     loadContent(path: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Loads content by named router
+     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用callback异步回调。
      *
-     * @param { string } name - name of the page to which the content will be loaded.
-     * @param { LocalStorage } storage - The data object shared within the content instance loaded by the window.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
+     *
+     * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
+     *
+     * @param { string } name - 命名路由页面的名称。
+     * @param { LocalStorage } storage - 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -13742,14 +13878,14 @@ declare namespace window {
     loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback<void>): void;
 
     /**
-     * 根据指定路由页面名称为当前窗口加载[命名路由](../../ui/arkts-routing.md#命名路由)页面，使用callback异步回调。
-     * 
+     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，使用callback异步回调。
+     *
      * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     * 
+     *
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
      *
-     * @param { string } name - name of the page to which the content will be loaded.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { string } name - 命名路由页面的名称。
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -13764,11 +13900,11 @@ declare namespace window {
     loadContentByName(name: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Loads content by named router
+     * 根据命名路由加载内容。
      *
-     * @param { string } name - name of the page to which the content will be loaded.
-     * @param { LocalStorage } [storage] - The data object shared within the content instance loaded by the window.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { string } name - 命名路由页面的名称。
+     * @param { LocalStorage } [storage] - 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。
+     * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *                                                                  2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -13783,10 +13919,9 @@ declare namespace window {
     loadContentByName(name: string, storage?: LocalStorage): Promise<void>;
 
     /**
-     * 释放
+     * 销毁WindowStage的主窗口页面内容，使用Promise异步回调。
      *
-     * @returns { Promise<void> } Promise that returns no value, indicating successful completion.
-     *     Throws exception if window state is abnormal.
+     * @returns { Promise<void> } Promise对象，无返回结果，表示成功完成。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -13927,10 +14062,8 @@ declare namespace window {
     /**
      * 开启点击主窗三键区的关闭按钮监听事件。
      *
-     * @param { 'windowStageClose' } eventType The value is fixed at 'windowStageClose', indicating the window stage
-     *     close event.
-     * @param { Callback<void> } callback Callback function requires a boolean return value to determine whether to
-     *     close the current main window.
+     * @param { 'windowStageClose' } eventType - 固定为'windowStageClose'，即主窗口标题栏关闭按钮的点击事件。
+     * @param { Callback<void> } callback - 回调函数。当窗口stage关闭事件发生时触发该回调。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
@@ -14138,10 +14271,10 @@ declare namespace window {
     removeStartingWindow(): Promise<void>;
 
     /**
-     * Set the application modality of the windowStage.
+     * 设置主窗口的模态属性是否启用。
      *
-     * @param { boolean } isModal - Enable the window modal if true, otherwise means the opposite.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { boolean } isModal - 设置主窗口模态属性是否启用，true为启用，false为不启用。
+     * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
@@ -14321,7 +14454,7 @@ declare namespace window {
      *     图片资源需放在resources/base/media目录下，通过$r资源访问方式获取对应图片的资源id，这里以获取startIcon图片的资源id
      *     为例给出示意：$r("app.media.startIcon").id。
      * @param { ImageFit } value - 应用自定义图片的填充方式。
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have
      *     the permission required or a non-system application calls the API. [since 26.0.0]
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system

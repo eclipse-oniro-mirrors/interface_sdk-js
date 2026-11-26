@@ -33,7 +33,7 @@
 import { ResourceStr, Dimension } from '@ohos.arkui.component';
 import { PropRef } from '@ohos.arkui.stateManagement';
 import { Component } from '@ohos.arkui.component';
-import { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
+import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 import { Builder } from '@ohos.arkui.component';
 /**
  * MarginType定义marginType的类型。
@@ -194,7 +194,7 @@ export declare struct ExceptionPrompt {
    */
   onActionTextClick?: () => void;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

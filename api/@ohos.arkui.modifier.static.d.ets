@@ -268,7 +268,7 @@ export { ButtonModifier } from './arkui/ButtonModifier';
  * @stagemodelonly
  * @since 23 static
  */
-export { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
+export { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 
 /**
  * Export LineModifier, which is used to update attributes to native side.

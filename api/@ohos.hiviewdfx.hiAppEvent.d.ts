@@ -1458,9 +1458,10 @@ declare namespace hiAppEvent {
     customConfigs?: Record<string, string>;
 
     /**
-     * Name of the data processor configuration, which can be loaded from the configuration file. By default, this
-     * parameter is left empty. It can contain only letters, digits, underscores (_), and dollar signs ($). It cannot
-     * start with a digit and cannot exceed 256 characters.
+     * <!--RP4-->Configuration name of the data processor. The corresponding configuration can be loaded from the
+     * configuration file. The default value is null. The value can contain only uppercase letters, lowercase letters,
+     * digits, underscores(_), and dollar sign($), and cannot start with a digit. The value cannot be empty and cannot
+     * exceed 256 characters. <!--RP4End-->
      *
      * **Atomic service API**: This parameter can be used in atomic services since API version 20.
      *
@@ -1491,15 +1492,17 @@ declare namespace hiAppEvent {
 
   /**
    *
-   * Adds the configuration information of the data processor. The configuration file contains information such as the
-   * name of the event received by the data processor. This API uses a promise to return the result.
+   * <!--RP1-->Add the configuration information of the data processor and configure the information such as the event
+   * name received by the processor through the configuration file. After the event occurs, the processor can receive
+   * the event and use Promise asynchronous callback. <!--RP1End-->
    *
-   * @param { string } processorName - Name of a data processor. It can contain only letters, digits,
-   *     underscores (_), and dollar signs ($). It cannot start with a digit and cannot exceed 256 characters.
-   * @param { string } [configName] - Name of the data processor configuration. The corresponding
-   *     configuration can be loaded from the configuration file. The default value is **SDK_OCG**. It can contain only
-   *     letters, digits, underscores (_), and dollar signs ($). It cannot start with a digit and cannot exceed 256
-   *     characters.
+   * @param { string } processorName - <!--RP2-->Name of the data processor. The name can contain only uppercase
+   *     letters, lowercase letters, digits, underscores(_), and dollar sign($), and cannot start with a digit. The
+   *     length cannot exceed 256 characters. <!--RP2End-->
+   * @param { string } [configName] - <!--RP3-->Configuration name of the data processor. The corresponding
+   *     configuration can be loaded from the configuration file. The default value is SDK_OCG. The value can contain
+   *     only uppercase letters, lowercase letters, digits, underscores(_), and dollar sign($), and cannot start with a
+   *     digit. The value cannot be empty and cannot exceed 256 characters. <!--RP3End-->
    * @returns { Promise<long> } Promise that returns the unique ID of the added event data processor, which can be used
    *     to remove the data processor. If the adding fails, error code **11105001** is returned.
    * @throws { BusinessError } 11105001 - Invalid parameter value. Possible causes: 1. Incorrect parameter length;
@@ -1633,6 +1636,18 @@ declare namespace hiAppEvent {
      * @since 23 static
      */
     autoStopSampling?: boolean;
+
+    /**
+     * Indicates whether to collect the EventHandler task queue information when the main thread times out. true: The
+     * function of collecting the queue information of the EventHandler task is enabled. false: The function of
+     * collecting queue information about the EventHandler task is disabled. Default value: false.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    enableEventHandlerDump?: boolean;
   }
 
   /**
@@ -1805,10 +1820,12 @@ declare namespace hiAppEvent {
     simplifyVmaPrinting?: boolean;
 
     /**
-     * Policy for the APP_CRASH event
-     * the value true means to the minidump capture capability is enabled.
-     * the value false means to the minidump capture function is disabled.
-     * <br>Default value:false.
+     * Whether to enable [minidump](docroot://dfx/performance-analysis-kit-terminology.md#minidump). The default value
+     * is false. <!--RP5-->true: [params field description] The maximum size of the generated and existing fault log
+     * files determined by the log_over_limit field in the docroot://dfx/hiappevent-watcher-crash-events.md#params field
+     * is changed to 35 MB. <!--RP5End--> false: The maximum size of the generated and existing fault log files is
+     * restored to 5 MB. **Note**: This configuration item is a persistent configuration item. Before the application is
+     * reset, the value remains unchanged.
      *
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
      * @FaAndStageModel

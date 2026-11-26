@@ -129,7 +129,7 @@ export declare interface DistortionComponentOptions {
 }
 
 /**
- * Defines the DistortionComponent attribute functions
+ * 提供DistortionComponent组件的属性设置能力。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -152,9 +152,9 @@ export declare interface DistortionComponentAttribute extends CommonMethod {
 }
 
 /**
- * Defines a DistortionComponent that provides spatial distortion visual effects.
+ * 创建提供空间扭曲形变视效的组件。
  *
- * @param { DistortionComponentOptions } [options] - DistortionComponent Options.
+ * @param { DistortionComponentOptions } [options] - 空间扭曲形变选项。
  * @param { CustomBuilder } [content_] - Subcomponents of DistortionComponent.
  * @returns { DistortionComponentAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

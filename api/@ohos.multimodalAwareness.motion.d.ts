@@ -362,7 +362,8 @@ declare namespace motion {
      */
     physicalOrientation: PhysicalOrientation;
     /**
-     * The logical orientation adjusted by smart algorithms.
+     * Logical orientation adjusted by the smart algorithm. When the smart algorithm cannot determine the
+     * orientation, this field may be empty or not returned.
      *
      * @syscap SystemCapability.MultimodalAwareness.Motion
      * @systemapi
@@ -459,7 +460,8 @@ declare namespace motion {
   function on(type: 'operatingHandChanged', callback: Callback<OperatingHandStatus>): void;
 
   /**
-   * Unsubscribes from operating hand change events.
+   * Unsubscribes from operating hand awareness events. If off() is called without first calling on(), this method
+   * throws an exception. Related method: on('operatingHandChanged'): subscribes to operating hand awareness events.
    *
    * @permission ohos.permission.ACTIVITY_MOTION [since 15 - 19]
    * @permission ohos.permission.ACTIVITY_MOTION or ohos.permission.DETECT_GESTURE [since 20]
@@ -482,7 +484,8 @@ declare namespace motion {
   function off(type: 'operatingHandChanged', callback?: Callback<OperatingHandStatus>): void;
 
   /**
-   * Obtains the latest operating hand status.
+   * Obtains the latest operating hand status. This method directly returns the latest operating hand status and
+   * can be called without subscribing to events.
    *
    * @permission ohos.permission.ACTIVITY_MOTION [since 15 - 19]
    * @permission ohos.permission.ACTIVITY_MOTION or ohos.permission.DETECT_GESTURE [since 20]
@@ -532,7 +535,9 @@ declare namespace motion {
   function on(type: 'holdingHandChanged', callback: Callback<HoldingHandStatus>): void;
 
   /**
-   * Disables listening for holding hand status changes.
+   * Unsubscribes from the holding hand status change awareness event. If off() is called without first calling on(),
+   * this method throws an exception. Related method: on('holdingHandChanged'): subscribes to the holding hand status
+   * change awareness event.
    *
    * @permission ohos.permission.DETECT_GESTURE
    * @param { 'holdingHandChanged' } type - Event type. The value **holdingHandChanged** indicates the holding hand
@@ -632,7 +637,9 @@ declare namespace motion {
   function offHoldingHandChanged(callback?: Callback<HoldingHandStatus>): void;
 
   /**
-   * Subscribe to pick up sensor event.
+   * Subscribes to pickup sensor events. This event is triggered and the callback is invoked when the system detects
+   * that the device is picked up. It can be used to trigger scenarios such as smart wake-up. This API must be used
+   * in pair with offPickupChange. After use, call offPickupChange to unsubscribe and release system resources.
    *
    * @param { Callback<PickupEvent> } callback - The callback to receive pickup status.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -650,7 +657,10 @@ declare namespace motion {
   function onPickupChange(callback: Callback<PickupEvent>): void;
 
   /**
-   * Subscribe to rotate sensor event.
+   * Subscribes to rotation sensor events. This event is triggered and the callback is invoked when the device rotates
+   * and causes an orientation change. It is used when implementing functions such as adaptive screen orientation.
+   * This API must be used in pair with offRotateChange. After use, call offRotateChange to unsubscribe and release
+   * system resources.
    *
    * @param { Callback<RotateEvent> } callback - The callback to receive rotate orientation.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -668,7 +678,13 @@ declare namespace motion {
   function onRotateChange(callback: Callback<RotateEvent>): void;
 
   /**
-   * Subscribe to smart rotate sensor event.
+   * Subscribes to smart rotation sensor events. This event is triggered and the callback is invoked when the
+   * physical orientation of the device changes or the smart algorithm adjusts the logical orientation. It is
+   * used when implementing scenarios such as smart screen rotation. This API must be used in pair with
+   * offSmartRotateChange. After use, call offSmartRotateChange to unsubscribe and release system resources.
+   *
+   * Compared with onRotateChange, onSmartRotateChange not only returns the physical orientation detected by
+   * the gravity sensor, but also provides the logical orientation adjusted by the smart algorithm.
    *
    * @param { Callback<SmartRotateEvent> } callback - The callback to receive smart rotate orientations.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -686,7 +702,14 @@ declare namespace motion {
   function onSmartRotateChange(callback: Callback<SmartRotateEvent>): void;
 
   /**
-   * Subscribes to hover hand events and immediately starts detection for five seconds.
+   * Subscribes to the hover hand event and immediately starts hover hand event detection, with a detection duration
+   * of five seconds. This API must be used in pairs with offHoverHandChange. After use, call offHoverHandChange to
+   * unsubscribe and release system resources.
+   *
+   * > **NOTE**
+   * >
+   * > After the detection duration expires, hover hand event detection automatically stops and no more hover hand
+   * events are reported. The developer must call this API again to restart detection.
    *
    * @param { HoverHandDetectionArea } detectionArea - Rectangular detection area for hover hand.
    *     <br> Repeated calls will override the previously set detection area.
@@ -710,7 +733,14 @@ declare namespace motion {
   function onHoverHandChange(detectionArea: HoverHandDetectionArea, callback: Callback<HoverHandAction>): void;
 
   /**
-   * Subscribes to hover hand events and immediately starts detection.
+   * Subscribes to hover hand events and immediately starts hover hand event detection, with a configurable detection
+   * duration. This API must be used in pair with offHoverHandChange. After use, call offHoverHandChange to unsubscribe
+   * and release system resources.
+   *
+   * > **NOTE**
+   * >
+   * > After the detection duration expires, hover hand event detection stops automatically and no more hover hand
+   * events are reported. The developer must call this API again to restart detection.
    *
    * @param { HoverHandDetectionArea } detectionArea - Rectangular detection area for hover hand.
    *     <br> Repeated calls will override the previously set detection area.
@@ -739,7 +769,8 @@ declare namespace motion {
     detectionArea: HoverHandDetectionArea, duration: int, callback: Callback<HoverHandAction>): void;
 
   /**
-   * Unsubscribe to hover hand event.
+   * Unsubscribes from the hover hand event. When the application no longer needs to monitor the hover hand
+   * event, it should call this API to cancel the subscription to release system resources.
    *
    * @param { Callback<HoverHandAction> } [callback] - Callback used to return hover hand action.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -755,7 +786,10 @@ declare namespace motion {
   function offHoverHandChange(callback?: Callback<HoverHandAction>): void;
 
   /**
-   * Unsubscribe to pick up sensor event.
+   * Unsubscribes from the pickup sensor event. This API takes effect only after onPickupChange is called to subscribe;
+   * if not subscribed, it will not take effect. When the application no longer needs to monitor the pickup event,
+   * such as page destruction, application entering the background, or pausing related functions, call this API to
+   * unsubscribe and release system resources.
    *
    * @param { Callback<PickupEvent> } [callback] - Callback used for pick up event unsubscription.
    *     <br> If this parameter is not specified, all callbacks of the pick up event are unsubscribed from.
@@ -770,7 +804,10 @@ declare namespace motion {
   function offPickupChange(callback?: Callback<PickupEvent>): void;
 
   /**
-   * Unsubscribe to rotate sensor event.
+   * Unsubscribes from the rotation sensor event. This API takes effect only after onRotateChange is called to
+   * subscribe; if not subscribed, it will not take effect. When the application no longer needs to monitor the
+   * rotation event, such as page destruction, application entering the background, or pausing related functions,
+   * call this API to unsubscribe and release system resources.
    *
    * @param { Callback<RotateEvent> } [callback] - Callback used for rotate event unsubscription.
    *     <br> If this parameter is not specified, all callbacks of the rotate event are unsubscribed from.
@@ -785,7 +822,10 @@ declare namespace motion {
   function offRotateChange(callback?: Callback<RotateEvent>): void;
 
   /**
-   * Unsubscribe to smart rotate sensor event.
+   * Unsubscribes from the smart rotation sensor event. This API takes effect only after onSmartRotateChange is
+   * called to subscribe; if not subscribed, it will not take effect. When the application no longer needs to
+   * monitor the smart rotation event, such as page destruction, application entering the background, or pausing
+   * related functions, call this API to unsubscribe and release system resources.
    *
    * @param { Callback<SmartRotateEvent> } [callback] - Callback used for smart rotate event unsubscription.
    *     <br> If this parameter is not specified, all callbacks of the smart rotate event are unsubscribed from.

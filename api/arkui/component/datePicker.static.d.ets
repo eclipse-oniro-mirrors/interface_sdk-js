@@ -1,3 +1,4 @@
+
 'use static';
 /*
  * Copyright (c) 2025 Huawei Device Co., Ltd.
@@ -181,7 +182,6 @@ export declare interface DatePickerOptions {
  * @noninterop
  */
 export declare interface DatePickerAttribute extends CommonMethod {
-
   /**
    * Sets the date picker options.
    *
@@ -723,9 +723,8 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
-   * Sets the distortion animation Mode of the dialog.
+   * Sets the distortion animation mode for the dialog.
    *
    * @default DistortionMode.DISTORTION_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -734,9 +733,8 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
-   * Sets the edgeLight animation Mode of the dialog.
+   * Sets the edge light animation mode for the dialog.
    *
    * @default EdgeLightMode.EDGELIGHT_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -745,22 +743,20 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   edgeLightMode?: EdgeLightMode;
-
-    /**
-     * Whether and how the dialog adapts to the handedness.
-     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
-     * triggers it (the last interacted component); falls back to the current layout
-     * when no trigger component exists.
-     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
-     * the device, distinguished from the operating hand) reported by the awareness
-     * platform; falls back to the current layout when unavailable.
-     *
-     * @default HandednessFollowMode.NONE
-     * @syscap SystemCapability.ArkUI.ArkUI.Full
-     * @stagemodelonly
-     * @since 26.1.0 static
-     */
-    adaptToHandedness?: HandednessFollowMode;
+  /**
+   * Whether and how the dialog adapts to the handedness.
+   * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+   * triggers it (the last interacted component); falls back to the current layout
+   * when no trigger component exists.
+   * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+   * the device, distinguished from the operating hand) reported by the awareness
+   * platform; falls back to the current layout when unavailable.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**
@@ -777,7 +773,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
 export declare function DatePicker(
     options?: DatePickerOptions
 ): DatePickerAttribute;
-
 /**
  * Defines the DatePicker component. It requires call setDatePickerOptions at start of the component attribute set-up.
  * ant it requires call applyAttributeFinish at the end of the component attribute set-up.

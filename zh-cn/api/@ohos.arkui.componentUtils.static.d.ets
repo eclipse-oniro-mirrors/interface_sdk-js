@@ -407,7 +407,7 @@ declare namespace componentUtils {
     ];
 
   /**
-   * Describe a rotate in 2D, which can be defined by rotation angle and rotation center.
+   * 描述二维空间中的旋转，可以通过旋转角度和旋转中心来定义。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -416,7 +416,7 @@ declare namespace componentUtils {
    */
   interface Rotation2D {
     /**
-     * Rotation angle Information.
+     * 旋转角信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -425,7 +425,7 @@ declare namespace componentUtils {
      */
     angle: double;
     /**
-     * Rotation centerX Information.
+     * 旋转中心X信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -434,7 +434,7 @@ declare namespace componentUtils {
      */
     centerX: double;
     /**
-     * Rotation centerY Information.
+     * 旋转中心Y信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -445,7 +445,7 @@ declare namespace componentUtils {
     }
 
   /**
-   * Image object with layout information.
+   * 带有布局信息的图像对象。
    *
    * @interface ImageItem
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -455,7 +455,7 @@ declare namespace componentUtils {
    */
   interface ImageItem {
     /**
-     * Image Decoding Information.
+     * 图像解码信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -464,7 +464,7 @@ declare namespace componentUtils {
      */
     image: image.PixelMap;
     /**
-     * Information about the position and size of the box which displays the image.
+     * 显示图像的框的位置和大小信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -473,7 +473,7 @@ declare namespace componentUtils {
      */
     rect: common2D.Rect;
     /**
-     * Information about the rotation of the box which displays the image.
+     * 显示图像的框的旋转信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -482,8 +482,8 @@ declare namespace componentUtils {
      */
     rotation?: Rotation2D;
     /**
-         * Information about image rendering hierarchy.
-         *
+     * 图像渲染层次结构信息。
+     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -493,7 +493,7 @@ declare namespace componentUtils {
     }
 
   /**
-   * Image options setted when need to get the image objects.
+   * 需要获取图像对象时设置的图像选项。
    *
    * @interface GetItemsInShapePathParams
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -503,7 +503,7 @@ declare namespace componentUtils {
    */
   interface GetItemsInShapePathParams {
     /**
-     * image information.
+     * 图片信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -513,7 +513,7 @@ declare namespace componentUtils {
     images: Array<ImageItem>;
 
     /**
-     * Indicates the path points information.
+     * 表示路径的点信息。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -523,9 +523,8 @@ declare namespace componentUtils {
     shapePath: Array<common2D.Point>;
 
     /**
-         * The proportion of non-transparent blank pixels in the selected area
-         * relative to the total pixels of the image. Default value is 0.15.
-         *
+     * 所选区域中非透明空白像素的比例相对于图像总像素的比例。默认值为0.15。
+     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -535,10 +534,10 @@ declare namespace componentUtils {
     }
 
   /**
-   * Get the image objects located within the selected area.
+   * 获取位于选定区域内的图像对象。
    *
-     * @param { GetItemsInShapePathParams } value - options to get images in shapePath.
-     * @returns { Array<ImageItem> } Returns the image objects located within the selected area.
+   * @param { GetItemsInShapePathParams } value - 获取形状路径中图像的选项。
+   * @returns { Array<ImageItem> } 返回位于选定区域内的图像对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly

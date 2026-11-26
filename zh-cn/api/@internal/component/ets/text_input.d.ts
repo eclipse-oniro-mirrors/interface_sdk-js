@@ -1038,6 +1038,13 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
    *
    * 不同的InputType会拉起对应类型的键盘，同时限制输入。未通过该接口设置时，默认为InputType.Normal。
    *
+   * > **说明：**
+   * >
+   * > 密码填充服务需要密码相关的[输入框类型]{@link InputType}(如InputType.Password、InputType.NUMBER_PASSWORD、InputType.NEW_PASSWORD、InputType.USER_NAME)。<!--RP2--><!--RP2End-->
+   * >
+   * > 设置[密码模式](docroot://ui/arkts-common-components-text-input.md#密码模式)时，[decoration]{@link TextInputAttribute#decoration}、[showUnderline]{@link TextInputAttribute#showUnderline}、
+   * > [lineHeight]{@link TextInputAttribute#lineHeight}、[fontFeature]{@link TextInputAttribute#fontFeature}不生效。
+   *
    * @param { InputType } value - 输入框类型。
    * @returns { TextInputAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2451,7 +2458,7 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
   /**
    * 设置文本描边的宽度。未通过该接口设置时，默认值为0，不做描边处理。
    *
-   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。当LengthMetrics对象的unit属性为LengthUnit.PERCENT时，当前设置不生效，按默认值处理。
+   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。
    *     <br>若设置值小于0，显示实心字；若大于0，显示空心字。
    * @returns { TextInputAttribute } returns the instance of the TextInputAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full

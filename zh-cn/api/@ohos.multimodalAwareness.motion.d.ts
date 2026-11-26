@@ -650,7 +650,10 @@ declare namespace motion {
   function onRotateChange(callback: Callback<RotateEvent>): void;
 
   /**
-   * 订阅智能旋转传感器事件。
+   * 订阅智能旋转传感器事件。当设备物理方向变化或智能算法调整逻辑方向时触发该事件并回调，当需要实现智能屏幕旋转等场景时使用。
+   * 需与offSmartRotateChange配对使用，使用完毕后应调用offSmartRotateChange取消订阅以释放系统资源。
+   * 
+   * 与onRotateChange相比，onSmartRotateChange不仅返回重力传感器检测的物理方向，还提供智能算法调整后的逻辑方向
    *
    * @param { Callback<SmartRotateEvent> } callback - 回调函数，返回智能旋转方向。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -668,7 +671,8 @@ declare namespace motion {
   function onSmartRotateChange(callback: Callback<SmartRotateEvent>): void;
   
   /**
-   * 取消订阅拾起传感器事件。
+   * 取消订阅拾取传感器事件。需先调用onPickupChange订阅后才能取消，若未订阅则不生效。当应用不再需要监听拾取事件时使用
+   * 如页面销毁、应用进入后台或暂停相关功能时，应调用此接口取消订阅以释放系统资源。
    *
    * @param { Callback<PickupEvent> } [callback] - 要注销的回调函数。若不填，则取消该拾起事件的所有回调。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -682,7 +686,8 @@ declare namespace motion {
   function offPickupChange(callback?: Callback<PickupEvent>): void;
 
   /**
-   * 取消订阅旋转传感器事件。
+   * 取消订阅旋转传感器事件。需先调用onRotateChange订阅后才能取消，若未订阅则不生效。当应用不再需要监听旋转事件时使用
+   * 如页面销毁、应用进入后台或暂停相关功能时，应调用此接口取消订阅以释放系统资源。
    *
    * @param { Callback<RotateEvent> } [callback] - 要注销的回调函数。若不填，则取消该旋转事件的所有回调。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -696,7 +701,8 @@ declare namespace motion {
   function offRotateChange(callback?: Callback<RotateEvent>): void;
 
   /**
-   * 取消订阅智能旋转传感器事件。
+   * 取消订阅智能旋转传感器事件。需先调用onSmartRotateChange订阅后才能取消，若未订阅则不生效
+   * 当应用不再需要监听智能旋转事件时使用，如页面销毁、应用进入后台或暂停相关功能时，应调用此接口取消订阅以释放系统资源。
    *
    * @param { Callback<SmartRotateEvent> } [callback] - 要注销的回调函数。若不填，则取消该智能旋转事件的所有回调。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -710,7 +716,12 @@ declare namespace motion {
   function offSmartRotateChange(callback?: Callback<SmartRotateEvent>): void;
 
   /**
-   * 订阅悬停手势事件，并立即开始5秒检测。
+   * 订阅悬浮手事件，并立即开启悬浮手事件检测，检测时长为五秒。需与offHoverHandChange配对使用，使用完毕后应调用
+   * offHoverHandChange取消订阅以释放系统资源。
+   *
+   * > **说明：**
+   * >
+   * > 检测时长到期后，悬浮手事件检测将自动终止，不再上报悬浮手事件，需要开发者再次调用订阅此接口以重新开启检测。
    *
    * @param { HoverHandDetectionArea } detectionArea - 悬停手势矩形检测区域。
    *     <br> 重复调用将覆盖之前设置的检测区域。
@@ -734,7 +745,12 @@ declare namespace motion {
   function onHoverHandChange(detectionArea: HoverHandDetectionArea, callback: Callback<HoverHandAction>): void;
 
   /**
-   * 订阅悬停手势事件，并立即开始检测。
+   * 订阅悬浮手事件，并立即开启悬浮手事件检测，支持指定检测时长。需与offHoverHandChange配对使用，使用完毕后应调用
+   * offHoverHandChange取消订阅以释放系统资源。
+   *
+   * > **说明：**
+   * >
+   * > 检测时长到期后，悬浮手事件检测将自动终止，不再上报悬浮手事件，需要开发者再次调用订阅此接口以重新开启检测。
    *
    * @param { HoverHandDetectionArea } detectionArea - 悬停手势矩形检测区域。
    *     <br> 重复调用将覆盖之前设置的检测区域。
@@ -762,7 +778,7 @@ declare namespace motion {
     detectionArea: HoverHandDetectionArea, duration: int, callback: Callback<HoverHandAction>): void;
 
   /**
-   * 取消订阅悬停手势事件。
+   * 取消订阅悬浮手事件。当应用不再需要监听悬浮手事件时使用，应调用此接口取消订阅以释放系统资源。
    *
    * @param { Callback<HoverHandAction> } [callback] - 要注销的回调函数。若不填，则取消该悬停手势事件的所有回调。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.

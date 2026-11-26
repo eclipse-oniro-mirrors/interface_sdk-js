@@ -239,6 +239,17 @@ declare namespace process {
     }
 
   /**
+   * Application identifier (AppUid) of the process.
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamiconly
+   */
+  const appuid: number;
+
+  /**
    * Returns the numeric valid group ID of the process
    *
    * @syscap SystemCapability.Utils.Lang

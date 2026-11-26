@@ -939,6 +939,71 @@ declare namespace usbManager {
   function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Promise<Array<UsbDevice>>;
 
   /**
+   * Adds USB devices to the burn whitelist for the specified account.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - USB devices to add.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addAllowedOpticalDiscDriveBurnUsbDevicesForAccount(usbDevices: Array<UsbDevice>, accountId: number): void;
+
+  /**
+   * Removes USB devices from the burn whitelist for the specified account.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - USB devices to remove.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeAllowedOpticalDiscDriveBurnUsbDevicesForAccount(usbDevices: Array<UsbDevice>, accountId: number): void;
+
+  /**
+   * Obtains USB devices in the burn whitelist for the specified account.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @param { common.QueryPolicy } [policyType] - Query policy type.
+   * @returns { Array<UsbDevice> } Returns the list of USB devices.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllowedOpticalDiscDriveBurnUsbDevicesForAccount(accountId: number, policyType?: common.QueryPolicy): Array<UsbDevice>;
+
+  /**
    * Set the enabling status of external storage device mounting.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
@@ -1007,6 +1072,77 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function getExternalStorageDeviceInfos(): Array<common.ExternalStorageDeviceInfo>;
+
+  /**
+   * Sets whether to enable the USB interception.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { boolean } enable - Whether to enable the USB interception.
+   *     true: Enable the USB interception.
+   *     false: Disable the USB interception.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setUsbInterceptEnable(enable: boolean): void;
+
+  /**
+   * Checks whether the USB interception is enabled.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @returns { boolean } Returns true if the USB interception is enabled; returns false otherwise.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function isUsbInterceptEnable(): boolean;
+
+  /**
+   * Obtains the information about all currently connected USB devices.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @returns { Array<common.UsbDeviceInfo> } Returns the list of USB device information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getUsbDeviceInfos(): Array<common.UsbDeviceInfo>;
+
+  /**
+   * Sets the state of USB devices.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { common.USBDeviceConfigInfo } usbDeviceConfigInfo - USB device configuration information.
+   * @param { boolean } isEnable - Whether to enable the USB device.
+   *     true: Enable the USB device.
+   *     false: Disable the USB device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201059 - Failed to set the state because dynamic USB control is not enabled.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setUsbDeviceStates(usbDeviceConfigInfo: common.USBDeviceConfigInfo, isEnable: boolean): void;
 }
 
 export default usbManager;

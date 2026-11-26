@@ -1080,6 +1080,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1110,6 +1111,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1149,6 +1151,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1188,6 +1191,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1216,6 +1220,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1242,6 +1247,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 10]
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1276,6 +1282,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1310,6 +1317,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1525,6 +1533,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI. [since 10]
    * @throws { BusinessError } 16000055 - Installation-free timed out. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 9 dynamic
@@ -1565,6 +1574,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI. [since 10]
    * @throws { BusinessError } 16000055 - Installation-free timed out. [since 10]
+   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -2244,6 +2254,26 @@ declare class UIAbilityContext extends Context {
   showAbility(): Promise<void>;
 
   /**
+   * 显示了这种UIAability。该接口使用promise返回结果。它只能在主线程上调用。
+   * 调用该接口前，请确保应用已添加到状态栏中。
+   * 该接口只能在PC二合一设备和平板电脑上正常调用。在其他设备上，它返回错误代码
+   * 801.。
+   * **系统能力**:SystemCapability.Ability.AbilityRuntime.Core
+   *
+   * @param { ShowParams } params - Parameters used for showing the UIAbility.
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 16000067 - The StartOptions check failed.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  showAbility(params: ShowParams): Promise<void>;
+
+  /**
    * 隐藏当前UIAbility。使用Promise异步回调。仅支持在主线程调用。
    * 调用此接口前要求确保应用已添加至状态栏。
    * 该接口仅在PC/2in1设备中、或处于[自由多窗模式](docroot://windowmanager/window-terminology.md#自由多窗模式)的Tablet设备中可正常调用，在其他设备中返回801错误码。
@@ -2300,6 +2330,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2336,6 +2367,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
@@ -2461,7 +2493,8 @@ declare class UIAbilityContext extends Context {
    * 启动
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 实例。使用Promise异步回调。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * > **说明：**
    * >
@@ -2488,6 +2521,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16000200 - The caller is not in the appIdentifierAllowList of the target application.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2500,7 +2534,8 @@ declare class UIAbilityContext extends Context {
    * 停止
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 实例。使用Promise异步回调。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * > **说明：**
    * >
@@ -2523,6 +2558,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16000200 - The caller is not in the appIdentifierAllowList of the target application.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2535,7 +2571,8 @@ declare class UIAbilityContext extends Context {
    * 将当前UIAbility连接到
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 。通过返回的proxy与AppServiceExtensionAbility进行通信，以使用AppServiceExtensionAbility对外提供的能力。仅支持在主线程调用。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * > **说明：**
    * >
@@ -2561,6 +2598,7 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000008 - The crowdtesting application expires.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
+   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16000201 - The target service has not been started yet.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2574,7 +2612,8 @@ declare class UIAbilityContext extends Context {
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 的连接。仅支持在主线程调用。使用Promise异步回调。
    * 断开连接之后，为了防止使用可能失效的remote对象进行通信，建议将连接成功时返回的remote对象设置为null。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * @param { long } connection - 在
    *     [connectAppServiceExtensionAbility]{@link UIAbilityContext.connectAppServiceExtensionAbility}返回的连接id。

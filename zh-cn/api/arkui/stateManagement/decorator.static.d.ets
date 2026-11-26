@@ -35,6 +35,10 @@ import window from '../../@ohos.window';
 export declare interface IVariableOwner {}
 
 /**
+ * \@State用于状态管理V1中，将自定义组件内的普通变量转变为状态变量，管理组件内UI刷新。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@State装饰器：组件内状态（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-state.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -43,6 +47,10 @@ export declare interface IVariableOwner {}
 export declare @interface State {}
 
 /**
+ * \@PropRef用于状态管理V1中，接收外部传入值，并与父组件建立单向同步关系。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@PropRef装饰器：父子单向同步（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-propref.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -51,6 +59,10 @@ export declare @interface State {}
 export declare @interface PropRef {}
 
 /**
+ * \@Link用于状态管理V1中，接收外部传入值，并与父组件中的数据源建立双向数据绑定。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Link装饰器：父子双向同步（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-link.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -59,6 +71,10 @@ export declare @interface PropRef {}
 export declare @interface Link {}
 
 /**
+ * \@Observed是类装饰器，用于状态管理V1中，观察对象类属性变化。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Observed装饰器和\@ObjectLink装饰器：嵌套类对象属性变化（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-observed-and-objectlink.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -67,6 +83,10 @@ export declare @interface Link {}
 export declare @interface Observed {}
 
 /**
+ * \@Track用于状态管理V1中，观测class对象的属性级更新。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Track装饰器：class对象属性级更新（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-track.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -75,6 +95,10 @@ export declare @interface Observed {}
 export declare @interface Track {}
 
 /**
+ * \@ObjectLink用于状态管理V1中，接收@Observed装饰的类的实例，并与父组件中的数据源建立双向数据绑定。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Observed装饰器和\@ObjectLink装饰器：嵌套类对象属性变化（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-observed-and-objectlink.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -83,11 +107,9 @@ export declare @interface Track {}
 export declare @interface ObjectLink {}
 
 /**
- * Defining StoragePropRef annotation
- * StoragePropRef is an annotation which is mutable.
- * Any object property modifications made through StoragePropRef are visible in the
- * AppStorage, which is different from StorageProp.
- * In order to prevent this, need to take a deep copy of AppStorage instance data.
+ * \@StoragePropRef用于状态管理V1中，与AppStorage中对应的属性建立单向数据同步。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [AppStorage：应用全局的UI状态存储（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-appstorage.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -107,9 +129,9 @@ export declare @interface StoragePropRef {
 }
 
 /**
- * Defining StorageLink annotation
- * StorageLink is used to create a two-way data synchronization between the variable
- * it decorates and the attribute with the given key in AppStorage.
+ * \@StorageLink用于状态管理V1中，与AppStorage中对应的属性建立双向数据同步。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [AppStorage：应用全局的UI状态存储（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-appstorage.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -129,11 +151,9 @@ export declare @interface StorageLink {
 }
 
 /**
- * Defining LocalStoragePropRef annotation
- * LocalStoragePropRef is an annotation which is mutable.
- * Any object property modifications made through LocalStoragePropRef are visible in the
- * LocalStorage, which is different from LocalStorageProp.
- * In order to prevent this, need to take a deep copy of LocalStorage data.
+ * \@LocalStoragePropRef用于状态管理V1中，与LocalStorage中给定属性建立单向同步关系。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [LocalStorage：页面级UI状态存储（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-localstorage.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -153,9 +173,9 @@ export declare @interface LocalStoragePropRef {
 }
 
 /**
- * Defining LocalStorageLink annotation
- * LocalStorageLink is used to create a two-way data synchronization with the attribute
- * in LocalStorage.
+ * \@LocalStorageLink用于状态管理V1中，与LocalStorage中给定属性建立双向同步关系。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [LocalStorage：页面级UI状态存储（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-localstorage.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -175,10 +195,9 @@ export declare @interface LocalStorageLink {
 }
 
 /**
- * Defining Provide annotation
- * Provide is used for two-way data synchronization with descendant components when
- * state data needs to be transferred between multiple levels. An @Provide decorated state
- * variable exists in the ancestor component and is said to be "provided" to descendent components.
+ * \@Provide和\@Consume配套使用，用于状态管理V1中，实现跨组件层级的双向同步。@Provide修饰数据源，对其所有后代组件可用。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Provide装饰器和\@Consume装饰器：与后代组件双向同步（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-provide-and-consume.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -207,8 +226,9 @@ export declare @interface Provide {
 }
 
 /**
- * Defining Consume annotation
- * Consume is used to access the provided state variable for a descendent component
+ * [\@Provide]{@link Provide}和\@Consume配套使用，用于状态管理V1中，实现跨组件层级的双向同步。@Consume修饰的变量作为数据消费方，获取数据源的数据。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Provide装饰器和\@Consume装饰器：与后代组件双向同步（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-provide-and-consume.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -228,8 +248,8 @@ export declare @interface Consume {
 }
 
 /**
- * Defining Watch annotation
- * Watch is used to listen for state variables.
+ * \@Watch装饰器用于状态管理V1中，监听状态变量的变化。
+ * 在ArkTS-Sta中使用时，开发指南参考：[@Watch装饰器：状态变量更改通知（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-watch.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -249,6 +269,11 @@ export declare @interface Watch {
 }
 
 /**
+ * \@Require是校验[\@Prop](docroot://ui/state-management/arkts-prop.md)、[\@State](docroot://ui/state-management/arkts-state.md)、
+ * [\@Provide](docroot://ui/state-management/arkts-provide-and-consume.md)、[\@BuilderParam](docroot://ui/state-management/arkts-builderparam.md)、
+ * [\@Param](docroot://ui/state-management/arkts-new-param.md)和普通变量(无状态装饰器修饰的变量)是否需要构造传参的一个装饰器。
+ * 开发指南见[\@Require装饰器：校验构造传参](docroot://ui/state-management/arkts-require.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -257,6 +282,10 @@ export declare @interface Watch {
 export declare @interface Require {}
 
 /**
+ * \@Local用于状态管理V2中，表示组件内部的状态，使得自定义组件内部的变量具有观测能力。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Local装饰器：组件内部状态（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-local.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -265,6 +294,10 @@ export declare @interface Require {}
 export declare @interface Local {}
 
 /**
+ * \@Param用于状态管理V2中，接收外部输入，实现父子组件之前的单向数据同步。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Param：组件外部输入（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-param.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -273,6 +306,10 @@ export declare @interface Local {}
 export declare @interface Param {}
 
 /**
+ * \@Once作为辅助装饰器，用于状态管理V2中，需要搭配@Param一起使用，适用于仅从外部初始化一次且不接受后续同步变化的场景。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Once装饰器：初始化同步一次（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-once.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -281,6 +318,10 @@ export declare @interface Param {}
 export declare @interface Once {}
 
 /**
+ * \@Event装饰回调方法，用于状态管理V2中，作为自定义组件的输出。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Event：规范组件输出（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-event.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -289,10 +330,9 @@ export declare @interface Once {}
 export declare @interface Event {}
 
 /**
- * Defining Provider annotation
- * Provider is used for two-way data synchronization with descendant components when
- * state data needs to be transferred between multiple levels. An @Provider decorated state
- * variable exists in the ancestor component and is said to be "provider" to descendent components.
+ * \@Provider和@Consumer搭配使用，用于状态管理V2中，实现跨组件层级的数据双向同步。@Provider修饰数据提供方，为子组件提供数据。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Provider装饰器和\@Consumer装饰器：跨组件层级双向同步（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-provider-and-consumer.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -302,7 +342,7 @@ export declare @interface Event {}
 export declare @interface Provider {
 
   /**
-     * 用于设置别名，默认值为属性名。 
+     * 用于设置别名，缺省时默认为变量名。 
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -312,8 +352,9 @@ export declare @interface Provider {
 }
 
 /**
- * Defining Consumer annotation
- * Consumer is used to access the provided state variable for a descendent component
+ * \@Provider和@Consumer搭配使用，用于状态管理V2中，实现跨组件层级的数据双向同步。@Consumer修饰数据消费方，获取数据源数据。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@Provider装饰器和\@Consumer装饰器：跨组件层级双向同步（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-provider-and-consumer.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -323,7 +364,7 @@ export declare @interface Provider {
 export declare @interface Consumer {
 
   /**
-     * 用于设置别名，默认值为属性名。 
+     * 用于设置别名，缺省时默认为变量名。 
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -333,6 +374,10 @@ export declare @interface Consumer {
 }
 
 /**
+ * \@ObservedV2是类装饰器，用于状态管理V2中。@ObservedV2与[@Trace]{@link Trace}配套使用，装饰类以及类中的属性，使得被装饰的类和属性具有深度观测的能力。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@ObservedV2装饰器和\@Trace装饰器：类属性变化观测（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-observedV2-and-trace.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -341,6 +386,10 @@ export declare @interface Consumer {
 export declare @interface ObservedV2 {}
 
 /**
+ * \@Trace是属性装饰器，用于状态管理V2中。[@ObservedV2]{@link ObservedV2}与@Trace配套使用，装饰类以及类中的属性，使得被装饰的类和属性具有深度观测的能力。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@ObservedV2装饰器和\@Trace装饰器：类属性变化观测（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-observedV2-and-trace.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -349,6 +398,10 @@ export declare @interface ObservedV2 {}
 export declare @interface Trace {}
 
 /**
+ * \@Computed为方法装饰器，用于状态管理V2中，装饰getter方法。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Computed装饰器：计算属性（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-computed.md)。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -357,8 +410,9 @@ export declare @interface Trace {}
 export declare @interface Computed {}
 
 /**
- * Defining Monitor annotation
- * Monitor provides the capability of listening for state variables of V2.
+ * \@Monitor用于状态管理V2中，监听状态变量修改，使得状态变量具有深度监听的能力。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [@Monitor装饰器：状态变量修改监听（ArkTS-Sta）](docroot://ui/state-management-static/arkts-static-new-monitor.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -378,7 +432,8 @@ export declare @interface Monitor {
 }
 
 /**
- * Defining Env PropertyDecorator.
+ * 环境变量装饰器，用于获取系统环境变量信息。
+ * 开发者指南见：[\@Env开发者指南](docroot://ui/state-management-static/arkts-static-new-env.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -388,6 +443,10 @@ export declare @interface Monitor {
 export declare @interface Env {
 
   /**
+   * \@Env的参数，用于指定环境变量的key值。
+   * API版本26.0.0之前，仅支持[SystemProperties]{@link SystemProperties}的枚举值。
+   * API版本26.0.0及以后，额外支持使用字符串字面量格式`'ReadonlyEnvKey.<keyName>'`或`'WritableEnvKey.<keyName>'`，其中keyName必须为
+   * [ReadonlyEnvKey]{@link ReadonlyEnvKey}或[WritableEnvKey]{@link WritableEnvKey}的成员变量，不支持任意字符串。
    *
    * @type { SystemProperties } key - key value input by the user. [since 22 - 24]
    * @type { string } key - key value input by the user, only support . [since 26.0.0]
@@ -399,12 +458,9 @@ export declare @interface Env {
 }
 
 /**
- * Define SyncMonitor MethodDecorator. Decorator path parameters are the same as defined for Monitor.
- * The function decorator is functionally equivalent to the UIUtils.addMonitor API with isSynchronous enabled.
- * SyncMonitor must contain at least one path item, with multiple path items separated by commas.
- * Path items are either observed attribute names or array item indices.The path in SyncMonitor
- * supports wildcard at the end of a path item, but path items must never appear at the beginning or
- * in the middle of a path. All other paths using one or more wildcard are invalid.
+ * \@SyncMonitor用于状态管理V2中，同步监听状态变量修改，使得状态变量具有深度监听的能力。
+ * 在ArkTS-Sta中使用时，开发指南参考：
+ * [\@SyncMonitor装饰器：状态变量修改同步监听](docroot://ui/state-management-static/arkts-static-new-syncmonitor.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -414,7 +470,7 @@ export declare @interface Env {
 export declare @interface SyncMonitor {
 
   /**
-     * 监听V2状态变量变量名
+     * 字符串类型的对象属性名称。可同时监听多个对象属性，例如：@SyncMonitor(['prop1', 'prop2'])。
      *
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -455,6 +511,8 @@ export declare interface IMonitor {
 }
 
 /**
+ * \@Monitor监听变量变化的具体信息，通过IMonitor的value接口获取。T为变量类型。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1987,7 +2045,8 @@ export declare class ReadonlyEnvKey {
 }
 
 /**
- * Defining CustomEnv PropertyDecorator.
+ * \@CustomEnv装饰器，支持环境变量自定义能力。
+ * 在ArkTS-Sta中使用时，开发者指南见：[\@CustomEnv开发者指南](docroot://ui/state-management-static/arkts-static-custom-env-property.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

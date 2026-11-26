@@ -129,11 +129,12 @@ declare namespace hidebug {
   function getCpuUsage() : double;
 
   /**
+   * 启动虚拟机Profiling方法跟踪，`startProfiling(filename: string)`方法的调用需要与`stopProfiling()`方法的调用一一对应，
+   * 先开启后关闭，请避免重复开启或重复关闭的调用方式，否则会接口调用异常。
+   *
    * > **说明**：
    * >
-   * > 从API version 8支持，从API version 9开始废弃，
-   * > 启动虚拟机Profiling方法跟踪，`startProfiling(filename: string)`方法的调用需要与`stopProfiling()`方法的调用一一对应，先开启后关闭，请避免重复开启或重复关闭的调用方式，
-   * > 否则会接口调用异常。
+   * > 从API version 8支持，从API version 9开始废弃，建议使用[hidebug.startJsCpuProfiling]{@link hidebug.startJsCpuProfiling}替代。
    *
    * @param { string } filename - 用户自定义的采样结果输出的文件名，将在应用的`files`目录下生成以该参数命名的json文件。string长度的最大值为128。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -144,11 +145,12 @@ declare namespace hidebug {
   function startProfiling(filename: string): void;
 
   /**
+   * 停止虚拟机Profiling方法跟踪，`stopProfiling()`方法的调用需要与`startProfiling(filename: string)`方法的调用一一对应，
+   * 先开启后关闭，请避免重复开启或重复关闭的调用方式，否则会接口调用异常。
+   *
    * > **说明**：
    * >
-   * > 从API version 8支持，从API version 9开始废弃，
-   * > 停止虚拟机Profiling方法跟踪，`stopProfiling()`方法的调用需要与`startProfiling(filename: string)`方法的调用一一对应，先开启后关闭，请避免重复开启或重复关闭的调用方式，
-   * > 否则会接口调用异常。
+   * > 从API version 8支持，从API version 9开始废弃，建议使用[hidebug.stopJsCpuProfiling]{@link hidebug.stopJsCpuProfiling}替代。
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
@@ -158,16 +160,17 @@ declare namespace hidebug {
   function stopProfiling(): void;
 
   /**
+   * 虚拟机堆数据转储，生成`filename.heapsnapshot`文件。
+   *
    * > **说明**：
    * >
-   * > 从API version 8支持，从API version 9开始废弃，
-   * > 虚拟机堆数据转储，生成`filename.heapsnapshot`文件。
+   * > 从API version 8支持，从API version 9开始废弃，建议使用[hidebug.dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData}替代。
    *
    * @param { string } filename - 用户自定义的虚拟机堆转储文件名，将在应用的`files`目录下生成以该参数命名的heapsnapshot文件。string长度的最大值为128。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
    * @deprecated since 9
-   * @useinstead hidebug.dumpJsHeapData
+   * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpHeapData(filename: string): void;
 
@@ -430,8 +433,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-   * > 由于读取/proc/{pid}/smaps_rollup耗时较长，推荐使用异步接口
-   * > [hidebug.getAppNativeMemInfoAsync]{@link hidebug.getAppNativeMemInfoAsync}，以避免应用丢帧或卡顿。
+   * > 由于读取/proc/{pid}/smaps_rollup耗时较长，
+   * > 推荐使用异步接口[hidebug.getAppNativeMemInfoAsync]{@link hidebug.getAppNativeMemInfoAsync}，以避免应用丢帧或卡顿。
    * >
    * > 推荐使用[hidebug.getRssInfo]{@link hidebug.getRssInfo}接口获取应用的rss使用信息
    *
@@ -928,8 +931,8 @@ declare namespace hidebug {
    * 调用startAppTraceCapture接口，如果没有合理传入limitSize参数，生成trace的大小大于传入的limitSize大小，系统内部会自动调用stopAppTraceCapture，再次手动调用
    * stopAppTraceCapture就会抛出错误码11400105。
    *
-   * @throws { BusinessError } 11400104 - The status of the trace is abnormal
-   * @throws { BusinessError } 11400105 - No capture trace running
+   * @throws { BusinessError } 11400104 - The status of the trace is abnormal.
+   * @throws { BusinessError } 11400105 - No capture trace running.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
    * @since 23 static
@@ -1065,7 +1068,7 @@ declare namespace hidebug {
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 11400104 - Set limit failed due to remote exception
+   * @throws { BusinessError } 11400104 - Set limit failed due to remote exception.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @atomicservice
    * @since 12 dynamiconly
@@ -1190,8 +1193,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-    * > 默认裁剪级别是TRIM_LEVEL_1。如果设置了TRIM_LEVEL_2裁剪，需使用API version 20之后的
-    * > [rawheap-translator](docroot://tools/rawheap-translator.md)工具才能将.rawheap文件转换为.heapsnapshot文件，否则可能导致转换失败。
+   * > 默认裁剪级别是TRIM_LEVEL_1。如果设置了TRIM_LEVEL_2裁剪，
+   * > 需使用API version 20之后的[rawheap-translator](docroot://tools/rawheap-translator.md)工具才能将.rawheap文件转换为.heapsnapshot文件，否则可能导致转换失败。
    * >
    * > 该接口影响[dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData}的结果。
    *
@@ -1466,8 +1469,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-   * > 读取/proc/{pid}/status耗时很短，与[hidebug.getAppNativeMemInfo]{@link hidebug.getAppNativeMemInfo}接口中获取的`rss`值相比存在一点误差，但该
-   * > 接口更加轻量，为避免应用丢帧或卡顿推荐使用该接口。
+   * > 读取/proc/{pid}/status耗时很短，与[hidebug.getAppNativeMemInfo]{@link hidebug.getAppNativeMemInfo}接口中获取的`rss`值相比存在一点误差，
+   * > 但该接口更加轻量，为避免应用丢帧或卡顿推荐使用该接口。
    *
    * @returns { RssInfo } 应用进程的物理内存信息。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -1487,5 +1490,254 @@ declare namespace hidebug {
  	 * @since 26.0.1 dynamic&static
  	 */
   function getAppRunningUniqueId(): string;
+
+  /**
+   * 枚举Profiler资源类型。
+   *
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  enum ProfilerResourceType {
+    /**
+     * 文件描述符。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    FD = 0,
+
+    /**
+     * 线程。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    THREAD = 1,
+
+    /**
+     * Native内存。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    NATIVE = 2,
+
+    /**
+     * GPU内存。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    GPU = 3,
+
+    /**
+     * 全局句柄。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    GLOBAL_HANDLE = 4,
+
+    /**
+     * DMA内存。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    DMA = 5,
+
+    /**
+     * 匿名共享内存。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    ASHMEM = 6,
+
+    /**
+     * 复合堆栈。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    COMPOSITE_HEAP = 7
+  }
+
+  /**
+   * Profiler配置。
+   *
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ProfilerConfig {
+    /**
+     * 最大持续时间，单位为秒。
+     * 取值应为[1,3600]内的整数。默认值：900。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxDurationSec?: int;
+
+    /**
+     * 过滤器大小，单位为字节。
+     * 取值应为[1,4294967295]内的整数。默认值：1024。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    filterSize?: int;
+
+    /**
+     * 最大堆栈深度。
+     * 取值范围：[1,30]。默认值：30。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxStackDepth?: int;
+
+    /**
+     * 最大异步嵌套深度。
+     * 取值范围：[0,16]。默认值：1。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxAsyncNestingDepth?: int;
+
+    /**
+     * 异步任务最大栈深度。
+     * 取值应为[1,256]内的整数。默认值：16。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxAsyncTaskStackDepth?: int;
+
+    /**
+     * 统计时间间隔（秒）。
+     * 取值应为[1,3600]内的整数。默认值：10。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    statisticsIntervalSec?: int;
+
+    /**
+     * 采样间隔（以字节为单位）。
+     * 取值范围：[384,4294967295]。默认值：384。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    sampleIntervalBytes?: int;
+
+    /**
+     * 丢弃已释放的记录。
+     * 取值约束：true或false。默认值：true。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    discardDestroyed?: boolean;
+  }
+
+  /**
+   * Profiler结果。
+   *
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ProfilerResult {
+    /**
+     * profiler资源类型。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    type: ProfilerResourceType;
+
+    /**
+     * Profiler结果文件路径。如果没有采集到文件，则长度为0的字符串。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    filePath: string;
+  }
+
+  /**
+   * Profiler回调函数类型。
+   *
+   * @param { ProfilerResult } result - Profiler 结果.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  type ProfilerCallback = (result: ProfilerResult) => void;
+
+  /**
+   * 启动Profiler采集数据。启动后，当持续时间达到指定或默认的最大值，或结果文件超过限制时，系统会自动停止采集数据，并通过回调函数通知应用程序。
+   *
+   * @param { ProfilerResourceType } type - 目标资源类型。
+   * @param { ProfilerCallback } callback - 回调函数。
+   * @param { ProfilerConfig } [config] - 资源采集的配置。
+   *     <br>默认值：所有配置参数使用默认值。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 11400416 - Invalid resource type.
+   * @throws { BusinessError } 11400411 - Invalid maximum duration.
+   * @throws { BusinessError } 11400412 - Invalid filter size.
+   * @throws { BusinessError } 11400413 - Invalid stack depth.
+   * @throws { BusinessError } 11400431 - Invalid nesting depth.
+   * @throws { BusinessError } 11400432 - Invalid async-stack depth.
+   * @throws { BusinessError } 11400414 - Invalid statistics interval.
+   * @throws { BusinessError } 11400415 - Invalid sample interval bytes.
+   * @throws { BusinessError } 11400421 - Resource profiler already started.
+   * @throws { BusinessError } 11400423 - The number of resource profiling processes exceeds.
+   * @throws { BusinessError } 11400424 - Resource profiling conflicts with CLI tools or system profiling tasks.
+   * @throws { BusinessError } 11400426 - The daily quota for resource collection has been exhausted.
+   * @throws { BusinessError } 11400427 - The system CPU is overloaded.
+   * @throws { BusinessError } 11400428 - The available memory space is insufficient.
+   * @throws { BusinessError } 11400429 - The available storage space is insufficient.
+   * @throws { BusinessError } 11400430 - Other profiling errors.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  function startProfiler(type: ProfilerResourceType, callback: ProfilerCallback, config?: ProfilerConfig): Promise<void>;
+
+  /**
+   * 停止已经启动的Profiler。
+   *
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 11400422 - Failed to stop resource profiling because it is not started.
+   * @throws { BusinessError } 11400430 - Other profiling errors.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  function stopProfiler(): Promise<void>;
 }
 export default hidebug;

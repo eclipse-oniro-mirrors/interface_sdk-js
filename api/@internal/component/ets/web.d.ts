@@ -10567,19 +10567,34 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.1.0 dynamic
    */
   visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
+
+  /**
+   * Set the grip adaptation mode of the web page pop-up box (time selector/file selector) in the web component.
+   * When this function is enabled, click the date/time/datetime-local/file type on the web page on a wide-screen
+   * device(the width of the application window is greater than 600 vp).
+   * Input element. The system pop-up dialog box is displayed near the clicked element.
+   * After this function is disabled, the current layout(center or bottom of the screen) of the dialog box is retained,
+   * which is the same as that when this attribute is not set.
+   * @param { WebHandednessFollowMode } mode - Grip adaptation mode.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness(mode: WebHandednessFollowMode): WebAttribute;
 }
 
 /**
- * Defines Web Component.
+ * This module provides **Web** components with web page display capabilities. For details about web control
+ * capabilities, see [Module Description]{@link @ohos.web.webview:webview}.
  *
- * <p><strong>API Note</strong>:
+ * <!--RP1--><!--RP1End-->
  *
- * <strong>Performance Note</strong>:
- * <p>For details about how to optimize the compilation, resource loading, and JSBridge performance,
- * see [Optimizing Web Page Loading]{@link https://developer.huawei.com/consumer/en/doc/best-practices/bpta-web-develop-optimization}
- * <p>When the white screen duration is long due to complex web page parsing,
- * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
- * </p>
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this component are supported since API version 8. Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The sample effect is subject to the actual device.
  *
  * ## Required Permissions
  *
@@ -11359,4 +11374,28 @@ declare interface OnZoomChangeEvent {
    * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
+}
+
+/**
+ * Defines the grip adaptation mode of the web page pop-up box.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum WebHandednessFollowMode {
+  /**
+   * No adaptation. The pop-up box keeps the current layout.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  NONE = 0,
+
+  /**
+   * The pop-up box follows the position of the component that triggers it (the most recently interacted component).
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_ANCHOR = 1
 }

@@ -38,7 +38,7 @@
 interface StepperInterface {
 
   /**
-   * Called when the stepper component is used.
+   * 使用步骤导航器组件时调用。
    *
    * @param { object } value - Index of the **StepperItem** that is currently displayed.<br>Default value: **0**<br>
    *     Since API version 10, this parameter supports two-way binding through
@@ -69,10 +69,9 @@ interface StepperInterface {
 declare class StepperAttribute extends CommonMethod<StepperAttribute> {
 
   /**
-   * Callback when the finish label is clicked.
+   * 点击完成标签时的回调。
    *
-   * @param { function } callback - Invoked when the **nextLabel** of the last **StepperItem** in the **Stepper** is
-   *     clicked and the **ItemState** attribute is set to **Normal**.
+   * @param { function } callback - 当**Stepper**中最后一个**StepperItem**的**nextLabel**被点击，并且**ItemState**属性为**Normal**时调用。
    * @returns { StepperAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -84,10 +83,9 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
   onFinish(callback: () => void): StepperAttribute;
 
   /**
-   * Callback when the skip label is clicked.
+   * 点击跳过标签时的回调。
    *
-   * @param { function } callback - Invoked when the current **StepperItem** is **ItemState.Skip** and the **nextLabel**
-   *     is clicked.
+   * @param { function } callback - 当前显示的**StepperItem**状态为**ItemState.Skip**时，**nextLabel**被点击时调用。
    * @returns { StepperAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -99,12 +97,11 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
   onSkip(callback: () => void): StepperAttribute;
 
   /**
-   * Callback when the change label is clicked.
+   * 点击切换标签时的回调。
    *
-   * @param { function } callback - Callback triggered when the page is switched.<br/>prevIndex: Index of the step page
-   *     before the switching.<br>Value range:
-   *     [0, +∞).<br/>index: Index of the step page after the switching, that is, index of the previous or next page.
-   *     <br>Value range: [0, +∞).
+   * @param { function } callback - 页面切换时触发的回调。<br/>prevIndex: 切换前的步骤页索引值。<br>取值范围：
+   *     [0, +∞)。<br/>index: 切换后的步骤页（前一页或者下一页）索引值。
+   *     <br>取值范围：[0, +∞)。
    * @returns { StepperAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -116,10 +113,9 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
   onChange(callback: (prevIndex: number, index: number) => void): StepperAttribute;
 
   /**
-   * Callback when the next label is clicked.
+   * 点击下一步标签时的回调。
    *
-   * @param { function } callback - Callback triggered when the page is switched.<br/>index: Index of the current step
-   *     page.<br/>pendingIndex: Index of the next step page.
+   * @param { function } callback - 页面切换时触发的回调。<br/>index: 当前步骤页索引值。<br/>pendingIndex: 下一步骤页索引值。
    * @returns { StepperAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -131,10 +127,9 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
   onNext(callback: (index: number, pendingIndex: number) => void): StepperAttribute;
 
   /**
-   * Callback when the previous label is clicked.
+   * 点击上一步标签时的回调。
    *
-   * @param { function } callback - Callback triggered when the page is switched.<br/>index: Index of the current step
-   *     page.<br/>pendingIndex: Index of the next step page.
+   * @param { function } callback - 页面切换时触发的回调。<br/>index: 当前步骤页索引值。<br/>pendingIndex: 上一步骤页索引值。
    * @returns { StepperAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]

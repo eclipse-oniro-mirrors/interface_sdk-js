@@ -58,6 +58,7 @@ declare interface TextOverflowOptions {
  * > - 如需设置触摸文本组件外部时是否清除文本选中和手柄，可使用
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy}接口。
  * >
+ * > <!--RP3--><!--RP3End-->
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

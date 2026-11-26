@@ -259,7 +259,7 @@ declare namespace workScheduler {
    * @param { WorkInfo } work - 指定延迟任务具体信息，比如延迟任务ID、触发条件等。
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -283,7 +283,7 @@ declare namespace workScheduler {
    * true表示停止并移除，false表示只停止不移除。默认为false。如果任务后续不再需要，建议设置为true以释放系统资源；如果任务可能需要重新触发，建议设置为false。
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -304,7 +304,7 @@ declare namespace workScheduler {
    * @param { AsyncCallback<WorkInfo> } callback - 回调函数。如果workId有效，则返回从WorkSchedulerService获取的任务，否则抛出异常。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -325,7 +325,7 @@ declare namespace workScheduler {
    * @returns { Promise<WorkInfo> } Promise对象，如果workId有效，则返回从WorkSchedulerService获取的任务，否则抛出异常。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -346,7 +346,7 @@ declare namespace workScheduler {
    * @returns { Array<WorkInfo> } 延迟任务列表，如果已添加延迟任务到执行队列，则返回当前应用所有的延迟任务列表；否则返回空列表。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -366,7 +366,7 @@ declare namespace workScheduler {
    * @param { AsyncCallback<Array<WorkInfo>> } callback - 回调函数，获取成功时，error为undefined，res为当前应用所有的延迟任务列表；否则为错误对象。。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -385,7 +385,7 @@ declare namespace workScheduler {
    * @returns { Promise<Array<WorkInfo>> } Promise对象，返回当前应用所有的延迟任务。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -403,7 +403,7 @@ declare namespace workScheduler {
    *
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -425,7 +425,7 @@ declare namespace workScheduler {
    *     true，对应workId延迟任务最后一次执行超时，false，对应workId延迟任务最后一次执行未超时。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -447,7 +447,7 @@ declare namespace workScheduler {
    * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示指定任务的最后一次执行超时，false表示未超时。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -468,7 +468,7 @@ declare namespace workScheduler {
    * @returns { Promise<boolean> } Promise对象。返回true表示指定任务的最后一次执行超时，false表示未超时。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameters types;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9700001 - Memory operation failed.
    * @throws { BusinessError } 9700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
@@ -680,7 +680,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export interface FrequencyInfo {
     /**
@@ -689,7 +689,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     uid: int;
     /**
@@ -698,7 +698,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     workId: int;
     /**
@@ -707,7 +707,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     interval: int;
   }
@@ -724,7 +724,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function setExecFrequency(info: FrequencyInfo): void;
 
@@ -740,7 +740,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function resetExecFrequency(uid: int): void;
 }

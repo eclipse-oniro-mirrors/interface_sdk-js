@@ -204,7 +204,43 @@ declare namespace deviceSettings {
      * @stagemodelonly
      * @since 24
      */
-    FLOATING_NAVIGATION = 1
+    FLOATING_NAVIGATION = 1,
+
+    /**
+     * Screen off policy for battery power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_OFF_DC = 2,
+
+    /**
+     * Screen off policy for AC power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_OFF_AC = 3,
+
+    /**
+     * Power policy for battery power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_POLICY_DC = 4,
+
+    /**
+     * Power policy for AC power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_POLICY_AC = 5
   }
 
   /**
@@ -682,6 +718,25 @@ declare namespace deviceSettings {
      * @since 26.0.0
      */
     FORCE_ON = 2
+  }
+
+  /**
+   * Enterprise display information. This interface is used to set or query the enterprise customized copywriting(
+   * enterprise name) displayed on the lock screen and home page.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface DisPlayInfo {
+    /**
+     * Enterprise display information. The inner layer is the JSON text of the enterprise name configured by language.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
   }
 
   /**
@@ -1176,6 +1231,39 @@ declare namespace deviceSettings {
   function setValueForAccount(admin: Want, item: SettingsItem, accountId: number, value: string): void;
 
   /**
+   * Sets the device policy for a specified user without passing in the administrator **Want**.
+   *
+   * The caller must have been enabled as an enterprise administrator in advance, for example, by calling
+   * [enableAdmin]{@link @ohos.enterprise.adminManager:adminManager.enableAdmin}. This API uses the caller's own
+   * administrator information automatically. Only the policy items that support cross-account settings
+   * (**SCREEN_OFF_DC**, **SCREEN_OFF_AC**, **POWER_POLICY_DC**, and **POWER_POLICY_AC**) can be set through
+   * this overload.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { SettingsItem } item - Type of the policy to set. Only **SCREEN_OFF_DC**, **SCREEN_OFF_AC**,
+   *     **POWER_POLICY_DC**, and **POWER_POLICY_AC** are supported.
+   * @param { number } accountId - User ID, which must be greater than or equal to 100.
+   *     <br>If **accountId** is less than 100, error code 9200006 is returned.
+   * @param { string } value - device settings policy.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setValueForAccount(item: SettingsItem, accountId: number, value: string): void;
+
+  /**
    * Obtains the device policy of a specified user. This API allows you to obtain a specific parameter of a given user,
    * such as obtaining the device name of user 100.
    *
@@ -1206,6 +1294,34 @@ declare namespace deviceSettings {
    * @since 24
    */
   function getValueForAccount(admin: Want, item: SettingsItem, accountId: number): string;
+
+  /**
+   * Obtains the device policy of a specified user without passing in the administrator **Want**.
+   *
+   * The caller must have been enabled as an enterprise administrator in advance. This API uses the caller's own
+   * administrator information automatically. Only the policy items that support cross-account settings
+   * (**SCREEN_OFF_DC**, **SCREEN_OFF_AC**, **POWER_POLICY_DC**, and **POWER_POLICY_AC**) can be queried through
+   * this overload.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { SettingsItem } item - Type of the policy to obtain. Only **SCREEN_OFF_DC**, **SCREEN_OFF_AC**,
+   *     **POWER_POLICY_DC**, and **POWER_POLICY_AC** are supported.
+   * @param { number } accountId - User ID, which must be greater than or equal to 100.
+   *     <br>If **accountId** is less than 100, error code 9200006 is returned.
+   * @returns { string } device settings policy.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getValueForAccount(item: SettingsItem, accountId: number): string;
 
   /**
    * Sets the state of a switch. This API can enable or disable NearLink, Bluetooth, Wi-Fi, and NFC. After the setting
@@ -1247,6 +1363,39 @@ declare namespace deviceSettings {
    * @since 26.0.0
    */
   function setSwitchStatus(admin: Want, key: SwitchKey, status: SwitchStatus): void;
+
+  /**
+   * Obtains enterprise display information.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @returns { DisPlayInfo }This interface is used to obtain enterprise display information in JSON format.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseDisplayInfo(): DisPlayInfo;
+
+  /**
+   * Set enterprise display information.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { DisPlayInfo } displayInfo - Specifies the enterprise information to be displayed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setEnterpriseDisplayInfo(displayInfo: DisPlayInfo): void;
 }
 
 export default deviceSettings;

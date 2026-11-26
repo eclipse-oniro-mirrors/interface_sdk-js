@@ -23,7 +23,7 @@ import { Dimension, Length, VoidCallback, Resource, LengthMetrics } from './unit
 import { ScrollSnapAlign, ScrollState } from "./list";
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, UIScrollableCommonEvent, SizeResult, Bindable } from "./common";
-import { FrameNode } from 'arkui.FrameNode';
+import { FrameNode } from '../FrameNode';
 /**
  * 滚动方向枚举。
  *
@@ -34,7 +34,7 @@ import { FrameNode } from 'arkui.FrameNode';
 export declare enum ScrollDirection {
 
   /**
-   * Only vertical scrolling is supported.
+   * 仅支持竖直方向滚动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -43,7 +43,7 @@ export declare enum ScrollDirection {
   Vertical,
 
   /**
-   * Only horizontal scrolling is supported.
+   * 仅支持水平方向滚动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -52,7 +52,7 @@ export declare enum ScrollDirection {
   Horizontal,
 
   /**
-   * Scrolling is disabled.
+   * 不可滚动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -80,7 +80,7 @@ export declare enum ScrollDirection {
 export declare enum ScrollAlign {
 
   /**
-   * The start edge of the list item is flush with the start edge of the list.
+   * 首部对齐。指定item首部与滚动容器组件首部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -89,7 +89,7 @@ export declare enum ScrollAlign {
   START,
 
   /**
-   * The list item is centered along the main axis of the list.
+   * 居中对齐。指定item主轴方向居中对齐于滚动容器组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -98,7 +98,7 @@ export declare enum ScrollAlign {
   CENTER,
 
   /**
-   * The end edge of the list item is flush with the end edge of the list.
+   * 尾部对齐。指定item尾部与滚动容器组件尾部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -107,7 +107,7 @@ export declare enum ScrollAlign {
   END,
 
   /**
-   * The list item is automatically aligned.
+   * 自动对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -117,7 +117,14 @@ export declare enum ScrollAlign {
 }
 
 /**
- * 枚举滚动到指定索引的快速滚动模式。
+ * 枚举滚动到指定索引的快速滚动模式，配合ScrollToIndexOptions的fastScroll字段使用。
+ *
+ * > **说明：**
+ * >
+ * > - 当滚动距离较大且触发跳跃时，通常先从起始位置连续滚动约2屏，再跳到距离最终停靠位置约2屏的位置，继续滚动至最终位置。一屏指滚动组件可视区域在滚动方向上的长度。
+ * > - 跳过创建或测量只针对上述被跳过的滚动路径；前后两段连续滚动中需要显示的子组件仍会按需创建和测量。实际创建和测量的范围还受对齐方式、额外偏移量和子组件大小等因素影响，并非固定为4屏。
+ * > - 快速滚动不保证遍历并显示滚动路径上的每一个子组件。
+ * > - fastScroll传入本枚举未定义的值时，按FastScrollMode.NONE处理，不启用快速滚动优化，其余滚动参数仍按原有规则生效。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -125,7 +132,7 @@ export declare enum ScrollAlign {
  */
 export enum FastScrollMode {
   /**
-   * 不启用快速滚动优化。在动画开始前创建并测量所有中间子组件。
+   * 不启用快速滚动优化，使用组件原有的 `scrollToIndex` 行为。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -134,9 +141,9 @@ export enum FastScrollMode {
   NONE = 0,
 
   /**
-   * 快速滚动优化，跳过中间子组件的测量。中间子组件会被创建但不会被测量。
-   * 该模式适用于List多列且ListItem和ListItemGroup同时存在的场景。
-   * 此时ListItem只占一行中的一列，但ListItemGroup会占满一整行，因此List需要创建所有中间子组件来获取这些子组件类型从而计算出目标索引的行位置。
+   * 跳过实际显示及确定目标实际布局不需要的中间子项测量。组件可创建中间子项，以取得其占用的行列信息。
+   * 对于多列且 `ListItem` 和 `ListItemGroup` 同时存在的 `List`，需要取得子组件类型以确定行位置。
+   * 对于 `Grid`，可按需创建中间 `GridItem` 以确认其跨行或跨列信息。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -145,9 +152,11 @@ export enum FastScrollMode {
   SKIP_MEASURE = 1,
 
   /**
-   * 快速滚动优化，跳过中间子组件的创建和测量。中间子组件既不会被创建，也不会被测量。
-   * 该模式提供最大限度的优化性能。但该模式不适用于List多列且ListItem和ListItemGroup同时存在的场景。
-   * 在此场景下，请使用SKIP_MEASURE。
+   * 跳过实际显示及确定目标实际布局不需要的中间子组件创建和测量。
+   * 对于多列且 `ListItem` 和 `ListItemGroup` 同时存在的 `List`，请使用 `SKIP_MEASURE`。
+   * 对于 `WaterFlow`，建议使用此模式。在 `SLIDING_WINDOW` 布局模式下，WaterFlow 定位目标 `FlowItem` 不依赖中间子组件，
+   * 而 `SKIP_MEASURE` 仍会创建沿途的中间子组件，带来多余的创建开销。
+   * 对于 `Grid`，如果目标项或中间项的跨行、跨列信息尚未确定，需通过 `GridLayoutOptions` 提前提供完整、准确的跨度信息。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -224,9 +233,30 @@ export declare interface ScrollToIndexOptions {
 
   /**
    * 快速滚动模式，用于滚动到指定索引。
-   * 当设置为NONE以外的值时，滚动动画将估算目标位置并在动画过程中跳过一些中间子组件。
-   * 当scrollToIndex接口的smooth属性为true时，该参数才生效。
-   * 默认值：FastScrollMode.NONE。
+   * 取值为 `SKIP_MEASURE` 时不测量中间子组件；取值为 `SKIP_CREATE_AND_MEASURE` 时既不创建也不测量中间子组件。
+   * 该参数支持 `List`、`Grid` 以及采用 `SLIDING_WINDOW` 布局模式的 `WaterFlow`，且仅当 `scrollToIndex` 的 `smooth`
+   * 参数为 `true` 时生效。
+   * 默认值：`FastScrollMode.NONE`，与不设置该参数时的行为相同。
+   * 取值范围：本枚举定义的 `0`、`1`、`2`。传入其他值时，按 `FastScrollMode.NONE` 处理，不启用快速滚动优化，
+   * 其余滚动参数仍按原有规则生效。
+   * 此设置只对本次调用生效。下一次调用省略 `fastScroll` 时使用 `NONE`。
+   *
+   * 对于 `Grid`，特殊行列位置通过 `GridLayoutOptions` 表达。`SKIP_CREATE_AND_MEASURE` 无法发现仅在创建冷
+   * `GridItem` 时才设置的显式位置；该限制不影响 `SKIP_MEASURE` 和 `NONE`。
+   *
+   * 对于 `Grid`，保留的子项包括动画开始和结束时视口内的子项、确定目标实际布局所需的子项，以及与目标视口相交的跨行跨列项。
+   *
+   * 使用 `SKIP_CREATE_AND_MEASURE` 时，若尚未创建的子项跨度未知，须在请求滚动前通过 {@link GridLayoutOptions}
+   * 配置完整行列跨度，确保相应 `GridItem` 创建前可获取这些信息。`GridLayoutOptions.regularSize` 描述规则子项的跨度，
+   * `irregularIndexes` 指定不规则子项的索引，`onGetIrregularSizeByIndex` 提供对应子项的跨度。
+   * 这些字段须遵循 `GridLayoutOptions` 文档中的使用要求。自定义定位须遵循 `GridLayoutOptions.onGetRectByIndex`
+   * 文档规定的行列位置和跨度要求。
+   * 跨度信息须覆盖所有占用行列会影响目标位置的跨行跨列项，包括目标视口外的中间项。调用者不能只提供目标项的跨度。
+   * 每个跨度须与实际内容一致。此要求针对占用的行列，不要求预先知道测量后的像素尺寸。
+   *
+   * 此模式仅支持满足上述跨度前提的输入。所需跨度缺失或与实际内容不一致时，不保证滚动结果。
+   * 此模式不自动降级到其他模式。滚动请求不提供同步到达结果或跨度缺失错误。
+   * `SKIP_MEASURE` 和 `NONE` 不增加上述跨度要求。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -48,8 +48,8 @@ declare namespace dataTransfer {
    * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
-   * @param { string } uuid - 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128
-   *     位标识符。 不允许使用星闪标准UUID。
+   * @param { string } uuid - 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如：FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128
+   *     位标识符。不允许使用星闪标准UUID。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
@@ -76,8 +76,8 @@ declare namespace dataTransfer {
    * [isNearLinkSupported]{@link @ohos.nearlink.manager:manager.isNearLinkSupported}查询设备是否支持星闪。
    *
    * @permission ohos.permission.ACCESS_NEARLINK
-   * @param { string } uuid - 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128
-   *     位标识符。 不允许使用星闪标准UUID。
+   * @param { string } uuid - 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如：FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128
+   *     位标识符。不允许使用星闪标准UUID。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
@@ -172,7 +172,8 @@ declare namespace dataTransfer {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offConnectionStateChanged]{@link dataTransfer.offConnectionStateChanged(callback?:
-   *     Callback<ConnectionResult>): void} Unsubscribes from the connection state change event of the port channel.
+   *     Callback<ConnectionResult>): void}
+   *     取消订阅端口通道连接状态变更事件。
    */
   function onConnectionStateChanged(callback: Callback<ConnectionResult>): void;
 
@@ -194,7 +195,8 @@ declare namespace dataTransfer {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [onConnectionStateChanged]{@link dataTransfer.onConnectionStateChanged(callback: Callback<ConnectionResult>):
-   *     void} Subscribes to the connection state change event of the port channel.
+   *     void}
+   *     订阅端口通道连接状态变更事件。
    */
   function offConnectionStateChanged(callback?: Callback<ConnectionResult>): void;
 
@@ -317,7 +319,7 @@ declare namespace dataTransfer {
      */
     address: string;
     /**
-     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如：FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -368,7 +370,7 @@ declare namespace dataTransfer {
      */
     address: string;
     /**
-     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如：FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -391,7 +393,7 @@ declare namespace dataTransfer {
   }
 
   /**
-   * 与远端设备端口连接参数的协商结果
+   * 与远端设备端口连接参数的协商结果。
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
@@ -411,7 +413,7 @@ declare namespace dataTransfer {
      */
     address: string;
     /**
-     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如：FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -463,7 +465,7 @@ declare namespace dataTransfer {
      */
     address: string;
     /**
-     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，长度必须为36个字符，由32个十六进制数字和4个连字符（-）组成，例如：FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly

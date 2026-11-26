@@ -1092,6 +1092,13 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
    * Different InputType values bring up the corresponding keyboard type and restrict input. When not set through this
    * interface, the default value is InputType.Normal.
    *
+   * > **NOTE**
+   * >
+   * > The password autofill service requires password-related [text box types]{@link InputType} (such as **InputType.Password**, **InputType.NUMBER_PASSWORD**, **InputType.NEW_PASSWORD**, and **InputType.USER_NAME**).<!--RP2--><!--RP2End-->
+   * >
+   * > When a [password mode](docroot://ui/arkts-common-components-text-input.md#password-mode) is set, [decoration]{@link TextInputAttribute#decoration}, [showUnderline]{@link TextInputAttribute#showUnderline},
+   * > [lineHeight]{@link TextInputAttribute#lineHeight}, and [fontFeature]{@link TextInputAttribute#fontFeature} do not take effect.
+   *
    * @param { InputType } value - Input box type.
    * @returns { TextInputAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2695,8 +2702,7 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
    * Sets the width of the text stroke. When not set through this interface, the default value is 0, and no stroke is
    * applied.
    *
-   * @param { Optional<LengthMetrics> } width - Width of the text stroke. When the unit attribute of the LengthMetrics
-   *     object is LengthUnit.PERCENT, this setting does not take effect and the default value is used.
+   * @param { Optional<LengthMetrics> } width - Width of the text stroke.
    *     <br>If the value is less than 0, solid characters are displayed; if the value is greater than 0, hollow
    *     characters are displayed.
    * @returns { TextInputAttribute } returns the instance of the TextInputAttribute.

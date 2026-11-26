@@ -486,11 +486,11 @@ export declare interface DepthComponentAttribute extends CommonMethod {
   default onError(callback: DepthComponentErrorCallback): this;
 
   /**
-   * Set DepthComponent options.
+   * 设置深度组件选项。
    *
-   * @param { ResourceStr | PixelMap } background - Background resource (required).
-   * @param { DepthComponentOptions } [options] - DepthComponent options.
-   * @returns { this } Returns instance of  DepthComponentAttribute.
+   * @param { ResourceStr | PixelMap } background - 后台资源（必需）。
+   * @param { DepthComponentOptions } [options] - 深度组件选项。
+   * @returns { this } 返回深度组件属性的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @unpublished

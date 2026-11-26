@@ -397,7 +397,31 @@ declare namespace cloudSyncManager {
      * @since 20 dynamic
      * @since 23 static
      */
-    OTHER_REASON = 6
+    OTHER_REASON = 6,
+    /**
+     * During the download, the download stops due to missing content.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CONTENT_NOT_FOUND = 7,
+    /**
+     * During the download process, the download is stopped due to frequent user requests.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    FREQUENT_USER_REQUESTS = 8,
+    /**
+     * Download stopped due to low battery during download.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    LOW_BATTERY = 9
   }
 
   /**
@@ -927,6 +951,132 @@ declare namespace cloudSyncManager {
    * @since 23 dynamic&static
    */
   function getBundlesLocalFilePresentStatus(bundleNames: Array<string>): Promise<Array<LocalFilePresentStatus>>;
+
+  /**
+   * 云盘校验触发原因的枚举值。
+   *
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum CheckTriggerReason {
+    /**
+     * 由周期性校验任务触发云盘校验。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PERIODIC = 0,
+    /**
+     * 由云盘应用手动触发云盘校验。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    MANUAL = 1
+  }
+
+  /**
+   * 表示已完成的云盘校验的触发者及触发原因。
+   *
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface CheckTriggerInfo {
+    /**
+     * 被校验云文件的应用包名。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bundleName: string;
+    /**
+     * 触发云盘校验的应用包名。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    triggerBundleName: string;
+    /**
+     * 触发云盘校验的原因。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    reason: CheckTriggerReason;
+  }
+
+  /**
+   * 订阅校验完成事件，使用callback异步回调。
+   *
+   * @permission ohos.permission.CLOUDFILE_SYNC_MANAGER
+   * @param { Callback<CheckTriggerInfo> } callback - 回调函数，返回校验触发信息。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 13600001 - IPC error. Possible cause:
+   *     <br>1.IPC failed or timed out. 2.Failed to load the service.
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onCheckTrigger(callback: Callback<CheckTriggerInfo>): void;
+
+  /**
+   * 取消订阅云盘校验完成事件。
+   *
+   * @permission ohos.permission.CLOUDFILE_SYNC_MANAGER
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 13600001 - IPC error. Possible cause:
+   *     <br>1.IPC failed or timed out. 2.Failed to load the service.
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offCheckTrigger(): void;
+
+  /**
+   * 触发指定应用的云文件校验。使用Promise异步回调。
+   *
+   * @permission ohos.permission.CLOUDFILE_SYNC_MANAGER
+   * @param { int } userId - 用户ID。
+   *     <br>取值限定为整数。
+   * @param { string } bundleName - 应用包名
+   * @returns { Promise<int> } Promise对象，返回API调用状态。值为**0**表示请求已接受；其他值为错误码，错误码对应信息见下方。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 13600001 - IPC error. Possible cause:
+   *     <br>1.The cloud sync service is not loaded.
+   *     <br>2.The IPC connection is broken.
+   * @throws { BusinessError } 22400001 - Cloud is not ready.
+   * @throws { BusinessError } 22400002 - Network is not available.
+   * @throws { BusinessError } 22400003 - Battery is too low to perform sync.
+   * @throws { BusinessError } 22400005 - Inner service error.
+   * @throws { BusinessError } 22400006 - Another sync task is running.
+   * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function triggerCloudCheck(userId: int, bundleName: string): Promise<int>;
 }
 
 export default cloudSyncManager;

@@ -72,19 +72,20 @@ export declare interface TimePickerResult {
  */
 export declare enum TimePickerFormat {
   /**
-   * Hour and minute.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 23 static
-   */
-  HOUR_MINUTE = 0,
-  /**
    * Hour and minute and second
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
-  HOUR_MINUTE_SECOND = 1
+  HOUR_MINUTE_SECOND = 1,
+
+  /**
+   * Hour and minute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 23 static
+   */
+  HOUR_MINUTE = 0
 }
 /**
  * Defines the options of TimePicker.
@@ -154,7 +155,6 @@ export type OnTimePickerChangeCallback = (result: TimePickerResult) => void;
  * @noninterop
  */
 export declare interface TimePickerAttribute extends CommonMethod {
-
   /**
    * Sets the time picker options.
    *
@@ -554,9 +554,8 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
-   * Sets the distortion animation Mode of the dialog.
+   * Sets the distortion animation mode for the dialog.
    *
    * @default DistortionMode.DISTORTION_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -565,9 +564,8 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
-   * Sets the edgeLight animation Mode of the dialog.
+   * Sets the edge light animation mode for the dialog.
    *
    * @default EdgeLightMode.EDGELIGHT_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -577,21 +575,20 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    */
   edgeLightMode?: EdgeLightMode;
 
-    /**
-     * Whether and how the dialog adapts to the handedness.
-     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
-     * triggers it (the last interacted component); falls back to the current layout
-     * when no trigger component exists.
-     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
-     * the device, distinguished from the operating hand) reported by the awareness
-     * platform; falls back to the current layout when unavailable.
-     *
-     * @default HandednessFollowMode.NONE
-     * @syscap SystemCapability.ArkUI.ArkUI.Full
-     * @stagemodelonly
-     * @since 26.1.0 static
-     */
-    adaptToHandedness?: HandednessFollowMode;
+  /**
+   * Whether and how the dialog adapts to the handedness.
+   * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+   * triggers it (the last interacted component); falls back to the current layout
+   * when no trigger component exists.
+   * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+   * the device, distinguished from the operating hand) reported by the awareness
+   * platform; falls back to the current layout when unavailable.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**
@@ -608,7 +605,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
 export declare function TimePicker(
     options?: TimePickerOptions
 ): TimePickerAttribute;
-
 /**
  * Defines the TimePicker component. It requires call setTimePickerOptions at start of the component attribute set-up.
  * ant it requires call applyAttributeFinish at the end of the component attribute set-up.

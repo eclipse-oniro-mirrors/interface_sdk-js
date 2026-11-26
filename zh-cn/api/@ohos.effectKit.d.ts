@@ -26,6 +26,7 @@ import image from './@ohos.multimedia.image';
 import { AsyncCallback } from './@ohos.base';
 import image from './@ohos.multimedia.image';
 import { FractionStop } from './arkui/component/common';
+import type common2D from './@ohos.graphics.common2D';
 /*** endif */
 
 /**
@@ -177,6 +178,48 @@ declare namespace effectKit {
     setColorMatrix(colorMatrix: Array<double>): Filter;
 
     /**
+     * 将描边和阴影效果添加到效果链表中，并返回链表的头节点。该效果提取图像中非透明区域的轮廓生成描边，并根据阴影配置生成投影。
+     *
+     * > **说明：**
+     * >
+     * > 输入图像应为仅包含单个主体、轮廓清晰的抠图图像，主体部分完全不透明，背景区域完全透明，不符合该标准的输入图像可能产生异常效果。
+     * >
+     * > 输入PixelMap的像素格式应为RGBA_8888、BGRA_8888、RGBA_F16或RGBA_1010102，不符合该标准的像素格式会导致输出异常。
+     *
+     * @param { double } outlineWidth - 描边宽度，单位为px。主体向外扩展出宽度为outlineWidth的白色边缘，
+     *     超过作用的图像范围时自动截断。取值范围为[0, +∞)，超出取值范围时按边界值截断。
+     * @param { ShadowOptions } [shadowOptions] - 可选参数，阴影的配置参数，不传时使用默认阴影配置。
+     * @returns { Filter } 返回已添加效果的Filter实例，用于继续添加效果或获取处理后的图像。
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    outline(outlineWidth: double, shadowOptions?: ShadowOptions): Filter;
+
+    /**
+     * 将网点效果、描边和阴影效果添加到效果链表中，并返回链表头节点。该效果将原图划分为规则网格，
+     * 根据各网格中心的采样颜色及其亮度生成网点。每个网格以白色为背景，网点由黑色内圈和彩色圆环组成。
+     *
+     * > **说明：**
+     * >
+     * > 输入图像应为仅包含单个主体、轮廓清晰的抠图图像，主体部分完全不透明，背景区域完全透明，不符合该标准的输入图像可能产生异常效果。
+     * >
+     * > 输入PixelMap的像素格式应为RGBA_8888、BGRA_8888、RGBA_F16或RGBA_1010102，不符合该标准的像素格式会导致输出异常。
+     *
+     * @param { HalftoneParam } halftoneParam - 网点的配置参数。
+     * @param { double } [outlineWidth] - 可选参数，描边宽度，单位为px。主体向外扩展出宽度为outlineWidth的白色边缘，
+     *     超过作用的图像范围时自动截断。取值范围为[0, +∞)，超出取值范围时按边界值截断。默认值为0.0。
+     * @param { ShadowOptions } [shadowOptions] - 可选参数，阴影的配置参数，不传时使用默认阴影配置。
+     * @returns { Filter } 返回已添加效果的Filter实例，用于继续添加效果或获取处理后的图像。
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    halftone(halftoneParam: HalftoneParam, outlineWidth?: double, shadowOptions?: ShadowOptions): Filter;
+
+    /**
      * 获取已添加链表效果的源图像的image.PixelMap。常用于图片处理后需要保存或显示结果的场景。
      *
      * > **说明：**
@@ -226,6 +269,141 @@ declare namespace effectKit {
      * @since 23 static
      */
     getEffectPixelMap(useCpuRender : boolean): Promise<image.PixelMap>;
+  }
+
+  /**
+   * 阴影的配置参数。
+   *
+   * > **说明：**
+   * >
+   * > 超出图像范围的阴影会被截断。
+   *
+   * @syscap SystemCapability.Multimedia.Image.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface ShadowOptions {
+    /**
+     * 可选参数，阴影模糊半径，单位为px，取值范围为[0, +∞)，默认值为0，超出取值范围时按边界值截断。值为0时无阴影效果，值越大阴影边缘越柔和。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    radius?: double;
+    /**
+     * 可选参数，光照方向向量，默认值为(0, 0)，取值范围为(-∞, +∞)。X轴向右为正，Y轴向下为正。光照方向向量表示阴影偏移的方向。当向量为(0, 0)时，shadowDistance取任何值，阴影均不发生偏移。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    lightDirection?: common2D.Point;
+    /**
+     * 可选参数，阴影偏移距离，单位为px，取值范围为[0, +∞)，默认值为0，超出取值范围时按边界值截断。
+     * 该参数决定阴影偏移距离，与lightDirection共同确定阴影覆盖区域，当值为0时，lightDirection为任意方向时，阴影均不发生偏移。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    shadowDistance?: double;
+    /**
+     * 可选参数，阴影颜色，默认值为黑色{red:0, green:0, blue:0, alpha:26}。可通过Alpha通道设置阴影透明度。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    color?: common2D.Color;
+  }
+
+  /**
+   * 网点的配置参数。
+   *
+   * @syscap SystemCapability.Multimedia.Image.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HalftoneParam {
+    /**
+     * 网格单元边长，即相邻网点的中心间距，单位为px。取值范围为[3, +∞)，超出取值范围时按边界值截断。值越大，网点整体尺寸越大，排列越稀疏。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    gridSize: double;
+    /**
+     * 可选参数，外圆直径上限与网格边长的比值。取值范围为[0, 1]，默认值为1，超出取值范围时按边界值截断。外圆直径会被maxRadiusRatio * gridSize截断。值为1时，允许的外圆最大直径等于网格边长。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    maxRadiusRatio?: double;
+    /**
+     * 可选参数，亮度对外圆半径的影响系数，取值范围为[0, +∞)，默认值为0，超出取值范围时按边界值截断。
+     * 实际外圆半径为clamp(1 - lum * lumCoeff, 0, maxRadiusRatio) * gridSize / 2，
+     * 其中lum为网格中心采样颜色的亮度，该值为采样所得，不需要设置。其他参数不变时，lumCoeff越大，亮度对外圆半径的缩小作用越强。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    lumCoeff?: double;
+    /**
+     * 可选参数，彩色圆环宽度系数，取值范围为[0, 1]，默认值为0.5，超出取值范围时按边界值截断。设定宽度为colorWidthRatio * gridSize / 2。
+     * 黑色内圆半径为实际外圆半径减去该宽度，结果小于0时按0处理。值为0时无彩色圆环；
+     * 设定宽度大于或等于外圆半径时，效果等同于外圆半径内全部为彩色区域。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    colorWidthRatio?: double;
+    /**
+     * 可选参数，彩色区域的饱和度插值系数，用于在采样颜色对应的灰度颜色与采样颜色之间进行插值。
+     * 取值范围为[0, 1]，默认值为1，超出取值范围时按边界值截断。值为0时使用灰度颜色，值为1时保留采样颜色。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    saturation?: double;
+    /**
+     * 可选参数，边缘过渡带半宽与gridSize的比值，取值范围为[0, +∞)，默认值为0，超出取值范围时按边界值截断。
+     * 分别以内圆和外圆的边界为中心，向两侧各延伸smoothness * gridSize，
+     * 形成总宽度为2 * smoothness * gridSize的过渡带，先处理内圆边缘，再处理外圆边缘。
+     * 值为0时无过渡带，边缘无平滑过渡，值越大，过渡带越宽，边缘越柔和。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    smoothness?: double;
+    /**
+     * 可选参数，网格坐标的旋转角度，以逆时针为正方向，单位为rad（弧度），用于调整网点排列方向。
+     * 取值范围为(-∞, +∞)，默认值为0。值为0时网格不旋转，网点排列方向为水平向右。
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    angle?: double;
   }
 
   /**
@@ -291,8 +469,8 @@ declare namespace effectKit {
      * 读取图像占比靠前的颜色值，个数由`colorCount`指定，结果写入[Color]{@link effectKit.Color}的数组里，使用同步方式返回。
      * 常用于提取图片中占比最高的多个颜色，如多色调配色方案生成、图片色彩分布分析等场景。
      *
-     * @param { int } colorCount - 需要获取的颜色个数，向下取整。在OpenHarmony 6.1之前，取值范围为[1, 10]，
-     *     取色个数大于10视为取前10个；从OpenHarmony 6.1开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
+     * @param { int } colorCount - 需要获取的颜色个数，向下取整。在<!--RP1-->OpenHarmony 6.1<!--RP1End-->之前，取值范围为[1, 10]，
+     *     取色个数大于10视为取前10个；从<!--RP1-->OpenHarmony 6.1<!--RP1End-->开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
      * @returns { Array<Color | null> } Color数组，即图像占比前`colorCount`的颜色值数组，按占比排序。
      *     - 当实际读取的特征色个数小于`colorCount`时，数组大小为实际特征色个数。
      *     - 取色失败或取色个数小于1返回`[null]`。
@@ -308,8 +486,8 @@ declare namespace effectKit {
     /**
      * 同步返回图像占比靠前的颜色值及其对应比例，个数由`colorCount`指定。
      *
-     * @param { int } colorCount - 颜色值及对应比例的个数，向下取整。在OpenHarmony 6.1之前，取值范围为[1, 10]，
-     *     取色个数大于10视为取前10个；从OpenHarmony 6.1开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
+     * @param { int } colorCount - 颜色值及对应比例的个数，向下取整。在<!--RP1-->OpenHarmony 6.1<!--RP1End-->之前，取值范围为[1, 10]，
+     *     取色个数大于10视为取前10个；从<!--RP1-->OpenHarmony 6.1<!--RP1End-->开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
      * @returns { Map<Color | null, double | null> } 图像占比前`colorCount`的颜色值与对应比例的字典，比例的取值范围为[0,1]。
      *     - 当实际读取的特征色个数小于`colorCount`时，字典大小为实际特征色个数。
      *     - 取色失败或取色个数小于1返回`Map()`。

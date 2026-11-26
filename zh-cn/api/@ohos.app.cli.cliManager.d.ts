@@ -269,6 +269,16 @@ declare namespace cliManager {
      * @since 26.1.0 dynamiconly
      */
     taskId?: string;
+
+    /**
+     * 代理所代表的实体的唯一标识符。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    subjectId?: string;
   }
 
   /**
@@ -451,7 +461,7 @@ declare namespace cliManager {
    * 查询所有CLI工具的摘要信息。摘要信息仅包含名称、版本和描述字段，使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.1.0]
    * @returns { Promise<Array<ToolSummary>> } Promise对象，返回工具摘要信息列表。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -461,7 +471,7 @@ declare namespace cliManager {
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi [since 26.0.0 - 26.0.0]
-   * @publicapi [since 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -471,7 +481,7 @@ declare namespace cliManager {
    * 查询所有CLI工具的详细信息，使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.1.0]
    * @returns { Promise<Array<ToolInfo>> } Promise对象，返回工具详细信息列表。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -481,7 +491,7 @@ declare namespace cliManager {
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi [since 26.0.0 - 26.0.0]
-   * @publicapi [since 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -491,7 +501,7 @@ declare namespace cliManager {
    * 根据工具名称获取单个工具的详细信息，使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.1.0]
    * @param { string } toolName - 目标工具的名称。
    * @returns { Promise<ToolInfo> } Promise对象，返回工具的详细信息。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -503,7 +513,7 @@ declare namespace cliManager {
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi [since 26.0.0 - 26.0.0]
-   * @publicapi [since 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */

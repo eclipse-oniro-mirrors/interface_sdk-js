@@ -3034,7 +3034,115 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 23 static
    */
-  DPAD_RIGHT = 17
+  DPAD_RIGHT = 17,
+
+  /**
+   * CapsLock key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * ScrollLock key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SCROLL_LOCK = 19,
+
+  /**
+   * Pause/Break key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAUSE_BREAK = 20,
+
+  /**
+   * NumLock key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  NUM_LOCK = 21,
+
+  /**
+   * Insert key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  INSERT = 22,
+
+  /**
+   * Delete key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  DELETE = 23,
+
+  /**
+   * Home key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  HOME = 24,
+
+  /**
+   * End key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  END = 25,
+
+  /**
+   * Page Up key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_UP = 26,
+
+  /**
+   * Page Down key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_DOWN = 27,
+
+  /**
+   * Enter key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  ENTER = 28,
+
+  /**
+   * Backspace key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  BACKSPACE = 29
 }
 
 /**
@@ -5418,7 +5526,7 @@ export declare enum ImmersiveStrategy {
    */
   AVOID_CUTOUT = 0,
   /**
-   * Avoid the three-button navigation bar area on the phone.
+   * Avoid the three-button navigation bar area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5491,7 +5599,15 @@ export declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  NAVIGATION_EXPAND_SAFE_AREA = 8
+  NAVIGATION_EXPAND_SAFE_AREA = 8,
+  /**
+   * Expands the TabBar of Tabs as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TABS_EXPAND_SAFE_AREA = 9
 }
 
 /**
@@ -5519,4 +5635,55 @@ export declare enum ShadowClipMode {
      * @since 26.1.0 static
      */
     BOUNDS_SHAPE = 1,
+}
+
+/**
+ * Defines the vibrancy modes, which specify whether to apply a brighten or darken effect to the content to improve
+ * readability against translucent material backgrounds.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum VibrancyMode {
+    /**
+     * Vibrancy effect is disabled, the content has no vibrancy effect.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    DISABLED = 0,
+    /**
+     * Auto mode. When the system material of the component itself or an ancestor component can auto color-invert,
+     * the vibrancy effect follows the material's color-invert result (brighten when the material samples a dark color,
+     * darken when it samples a light color);
+     * otherwise follows the control's dark/light color mode (brighten in dark mode, darken in light mode).
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    AUTO = 1,
+    /**
+     * Brighten mode. Fixedly brightens the content to improve readability against dark backgrounds.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    BRIGHTEN = 2,
+    /**
+     * Darken mode. Fixedly darkens the content to improve readability against light backgrounds.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    DARKEN = 3
 }

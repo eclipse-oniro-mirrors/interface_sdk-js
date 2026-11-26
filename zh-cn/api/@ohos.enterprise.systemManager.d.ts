@@ -577,7 +577,196 @@ declare namespace systemManager {
      * @stagemodelonly
      * @since 23
      */
-    RECENT = 5
+    RECENT = 5,
+
+    /**
+     * 功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FN = 6,
+
+    /**
+     * 方向键-上。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_UP = 7,
+
+    /**
+     * 方向键-下。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_DOWN = 8,
+
+    /**
+     * 方向键-左。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_LEFT = 9,
+
+    /**
+     * 方向键-右。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_RIGHT = 10,
+
+    /**
+     * 方向键-确认。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_CENTER = 11,
+
+    /**
+     * 亮度上键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS_UP = 12,
+
+    /**
+     * 亮度下键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS_DOWN = 13,
+
+    /**
+     * ESC键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ESCAPE = 14,
+
+    /**
+     * F1功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F1 = 15,
+
+    /**
+     * F2功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F2 = 16,
+
+    /**
+     * F3功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F3 = 17,
+
+    /**
+     * F4功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F4 = 18,
+
+    /**
+     * F5功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F5 = 19,
+
+    /**
+     * F6功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F6 = 20,
+
+    /**
+     * F7功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F7 = 21,
+
+    /**
+     * F8功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F8 = 22,
+
+    /**
+     * F9功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F9 = 23,
+
+    /**
+     * F10功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F10 = 24,
+
+    /**
+     * F11功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F11 = 25,
+
+    /**
+     * F12功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F12 = 26
   }
 
   /**
@@ -1657,6 +1846,55 @@ declare namespace systemManager {
    * @since 26.1.0
    */
   function getVolumeDegree(volumeType: AudioVolumeType): number;
+
+  /**
+   * 从指定路径将字体文件安装到系统字体库中。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } path - 要安装的字体文件的路径。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201060 - Font file does not exist.
+   * @throws { BusinessError } 9201061 - Font not supported.
+   * @throws { BusinessError } 9201062 - Font already installed.
+   * @throws { BusinessError } 9201063 - Number of installed fonts exceeds the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function installFont(path: string): Promise<void>;
+ 
+  /**
+   * 按字体名称从系统字体库中卸载已安装的字体文件。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } fullName - 要卸载的字体名称。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201064 - Font to uninstall does not exist.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function uninstallFont(fullName: string): Promise<void>;
 }
 
 export default systemManager;

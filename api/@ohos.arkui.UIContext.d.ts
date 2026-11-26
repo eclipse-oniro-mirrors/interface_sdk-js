@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIContext instance
  * @kit ArkUI
  */
 
@@ -4423,7 +4423,7 @@ export declare class ContextMenuController {
  * > [onIdle]{@link FrameCallback#onIdle} method to implement specific service logic.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @FaAndStageModel
+ * @stagemodelonly
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
@@ -7008,6 +7008,19 @@ export class UIContext {
   static setResourceManagerCacheMaxCountForHSP(count: number): void;
 
   /**
+   * Sets whether raw touchpad events are reported for the application.
+   *
+   * @param { boolean } enabled - Whether to enable application-level raw touchpad event reporting. The value **true**
+   *     enables reporting, and **false** disables reporting.
+   *     <br>Default value: **false**.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static enableTouchPadEvent(enabled: boolean): void;
+
+  /**
    * Obtains the unique ID of a UI instance object. In multi-instance scenarios, you can use this unique ID to
    * distinguish between different UI instance objects for easier management.
    *
@@ -7060,9 +7073,9 @@ export class UIContext {
   getPageRootNode(): FrameNode | null;
 
   /**
-   * Checks whether the current UI instance is in easy split mode.
+   * <!--RP1-->Obtains the split view state in compatibility mode of the current UI instance.<!--RP1End-->
    *
-   * @returns { boolean } Returns true if the current UI instance is in easy split mode; returns false otherwise.
+   * @returns { boolean } <!--RP2-->Split view state in compatibility mode of the current UI instance. The value **true** indicates that the split view mode is active, and the value **false** indicates that the split view mode is inactive.<!--RP2End-->
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -7148,8 +7161,8 @@ export class UIContext {
    * > starts on the current page. If it is called after the page enters the first layout process, the applied
    * > strategies remain unchanged and this API does not take effect.
    *
-   * @param { ImmersiveStrategy[] } types - Immersive strategies to apply. An empty array clears all applied
-   *     immersive strategies.
+   * @param { ImmersiveStrategy[] } types - Immersive policy to apply. An empty array clears all applied immersive policies.
+   * <br/>Abnormal values such as **undefined**, **null**, **NaN**, and **Infinity** are treated as an empty array.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

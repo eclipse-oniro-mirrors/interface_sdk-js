@@ -4,6 +4,32 @@
 
 ---
 
+## 0. Mandatory pre-study
+
+Before reading this repository-specific guide, load the external `arkts-static-spec` skill.
+
+Order:
+
+1. `arkts-static-spec`
+2. this document
+
+If the skill is not installed, install it with:
+
+```bash
+npx @openharmonyinsight/skills@latest add \
+  https://gitcode.com/openharmonyinsight/openharmony-skills \
+  --skill arkts-static-spec \
+  --agent codex \
+  --global
+```
+
+Replace `codex` with the current agent name, such as `claude-code`, `opencode`,
+`cursor`, or `cline`. If the agent only discovers newly installed skills in a new
+session, restart it after installation and rerun the original task. Do not start
+ArkTS static-type API design until this prerequisite is loaded.
+
+---
+
 ## 1. 什么是 ArkTS 静态类型
 
 ArkTS 使用**强静态类型**原则：

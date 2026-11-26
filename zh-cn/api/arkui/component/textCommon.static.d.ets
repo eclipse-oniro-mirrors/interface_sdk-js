@@ -2157,7 +2157,7 @@ export declare enum TextDirection {
    */
   LTR = 0,
   /**
-   * Right to left.
+   * 文本排版方向从右到左。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -395,7 +395,7 @@ declare namespace sendableImage {
      * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。使用Promise异步回调。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充
-     *     字节。缓冲区的大小由[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     *     字节。缓冲区的大小由[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -408,7 +408,7 @@ declare namespace sendableImage {
      * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。同步返回结果。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充
-     *     字节。缓冲区的大小由[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     *     字节。缓冲区的大小由[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
@@ -420,18 +420,32 @@ declare namespace sendableImage {
     readPixelsToBufferSync(dst: ArrayBuffer): void;
 
     /**
-     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
-     * 否则按照BGRA_8888格式存入缓冲区。使用Promise异步回调。
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。
+     * 如果PixelMap的像素格式为[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式，
+     * 则按照PixelMap的像素格式存入缓冲区，否则按照BGRA_8888格式存入缓冲区。使用Promise异步回调。
      *
-     * > **说明：**
-     * >
-     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
-     * >
-     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
-     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
+     *  
+     * - [RGB](docroot://media/image/image-glossary.md#rgb-pixel-formatrgb像素格式)格式：
+     * `offset + (height - 1) × stride + width × 每像素字节数`
+     * （其中`stride ≥ width × 每像素字节数`且`stride`为每像素字节数的整数倍，当`stride`等于`width × 每像素字节数`（无行末填充）时，
+     * 该公式可化简为`offset + width × height × 每像素字节数`）
+     * - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式：
+     * `offset + width × height × 每像素字节数`（此类格式不使用`stride`）
+     *  
+     * 公式中各符号的含义如下：
+     *  
+     * | 符号 | 含义 | 对应字段 |
+     * | --- | --- | --- |
+     * | `offset` | 缓冲区内第一个像素的字节偏移量。 | `PositionArea.offset` |
+     * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
+     * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
+     * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
-     * @param { image.PositionArea } area - 读取的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
-     *     获取的像素数据会被拷贝至[PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     * @param { image.PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     获取的像素数据会被拷贝至[PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV格式，
      *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -442,18 +456,32 @@ declare namespace sendableImage {
     readPixels(area: image.PositionArea): Promise<void>;
 
     /**
-     * 读取PixelMap指定区域内的像素数据并存入缓冲区。如果PixelMap的像素格式为YUV类型，则按照PixelMap的像素格式存入缓冲区，
-     * 否则按照BGRA_8888格式存入缓冲区。同步返回结果。
+     * 读取PixelMap指定区域内的像素数据并存入缓冲区。
+     * 如果PixelMap的像素格式为[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式，
+     * 则按照PixelMap的像素格式存入缓冲区，否则按照BGRA_8888格式存入缓冲区。同步返回结果。
      *
-     * > **说明：**
-     * >
-     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
-     * >
-     * > - RGBA的区域计算公式：读取区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
-     * > - YUV的区域计算公式：读取区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
+     *  
+     * - [RGB](docroot://media/image/image-glossary.md#rgb-pixel-formatrgb像素格式)格式：
+     * `offset + (height - 1) × stride + width × 每像素字节数`
+     * （其中`stride ≥ width × 每像素字节数`且`stride`为每像素字节数的整数倍，当`stride`等于`width × 每像素字节数`（无行末填充）时，
+     * 该公式可化简为`offset + width × height × 每像素字节数`）
+     * - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式：
+     * `offset + width × height × 每像素字节数`（此类格式不使用`stride`）
+     *  
+     * 公式中各符号的含义如下：
+     *  
+     * | 符号 | 含义 | 对应字段 |
+     * | --- | --- | --- |
+     * | `offset` | 缓冲区内第一个像素的字节偏移量。 | `PositionArea.offset` |
+     * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
+     * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
+     * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
-     * @param { image.PositionArea } area - 读取的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
-     *     获取的像素数据会被拷贝至[PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV类型，
+     * @param { image.PositionArea } area - 读取的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     *     获取的像素数据会被拷贝至[PositionArea]{@link image.PositionArea}.pixels缓冲区。如果PixelMap的像素格式为YUV格式，
      *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
@@ -466,19 +494,33 @@ declare namespace sendableImage {
     readPixelsSync(area: image.PositionArea): void;
 
     /**
-     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，
-     * 否则按照BGRA_8888格式解析。使用Promise异步回调。
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。
+     * 如果PixelMap的像素格式为[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式，
+     * 则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。使用Promise异步回调。
      *
-     * > **说明：**
-     * >
-     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
-     * >
-     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
-     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
+     *  
+     * - [RGB](docroot://media/image/image-glossary.md#rgb-pixel-formatrgb像素格式)格式：
+     * `offset + (height - 1) × stride + width × 每像素字节数`
+     * （其中`stride ≥ width × 每像素字节数`且`stride`为每像素字节数的整数倍，当`stride`等于`width × 每像素字节数`（无行末填充）时，
+     * 该公式可化简为`offset + width × height × 每像素字节数`）
+     * - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式：
+     * `offset + width × height × 每像素字节数`（此类格式不使用`stride`）
+     *  
+     * 公式中各符号的含义如下：
+     *  
+     * | 符号 | 含义 | 对应字段 |
+     * | --- | --- | --- |
+     * | `offset` | 缓冲区内第一个像素的字节偏移量。 | `PositionArea.offset` |
+     * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
+     * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
+     * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
-     * @param { image.PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     * @param { image.PositionArea } area - 写入的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
      *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
-     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
+     *     如果PixelMap的像素格式为YUV格式，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -488,19 +530,33 @@ declare namespace sendableImage {
     writePixels(area: image.PositionArea): Promise<void>;
 
     /**
-     * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，
-     * 否则按照BGRA_8888格式解析。同步返回结果。
+     * 将缓冲区内的像素数据写入PixelMap的指定区域。
+     * 如果PixelMap的像素格式为[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式，
+     * 则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。同步返回结果。
      *
-     * > **说明：**
-     * >
-     * > 可使用公式计算PositionArea需要申请的缓冲区大小。
-     * >
-     * > - RGBA的区域计算公式：写入区域像素数量（Region.size {width * height}）* 4（1倍R分量 + 1倍G分量 + 1倍B分量 + 1倍A分量）
-     * > - YUV的区域计算公式：写入区域像素数量（Region.size {width * height}）* 1.5（1倍Y分量 + 0.25倍U分量 + 0.25倍V分量）
+     * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
+     *  
+     * - [RGB](docroot://media/image/image-glossary.md#rgb-pixel-formatrgb像素格式)格式：
+     * `offset + (height - 1) × stride + width × 每像素字节数`
+     * （其中`stride ≥ width × 每像素字节数`且`stride`为每像素字节数的整数倍，当`stride`等于`width × 每像素字节数`（无行末填充）时，
+     * 该公式可化简为`offset + width × height × 每像素字节数`）
+     * - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式：
+     * `offset + width × height × 每像素字节数`（此类格式不使用`stride`）
+     *  
+     * 公式中各符号的含义如下：
+     *  
+     * | 符号 | 含义 | 对应字段 |
+     * | --- | --- | --- |
+     * | `offset` | 缓冲区内第一个像素的字节偏移量。 | `PositionArea.offset` |
+     * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
+     * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
+     * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
-     * @param { image.PositionArea } area - 写入的区域数据。<br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
+     * @param { image.PositionArea } area - 写入的区域数据。
+     *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
      *     [PositionArea]{@link image.PositionArea}.pixels缓冲区内的像素数据会被写入PixelMap的该区域。
-     *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
+     *     如果PixelMap的像素格式为YUV格式，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
@@ -514,9 +570,13 @@ declare namespace sendableImage {
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个
-     *     PixelMap的像素数据，且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过
-     *     [getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     * > **说明：**
+     * >
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixels()]{@link sendableImage.PixelMap.writePixels}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -528,9 +588,13 @@ declare namespace sendableImage {
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。同步返回结果。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个
-     *     PixelMap的像素数据，且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过
-     *     [getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     * > **说明：**
+     * >
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsSync()]{@link sendableImage.PixelMap.writePixelsSync}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
@@ -602,7 +666,7 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > YUV格式的图像不支持设置不透明度。
+     * > [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的图像不支持设置不透明度。
      *
      * @param { number } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -618,7 +682,7 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > YUV格式的图像不支持设置不透明度。
+     * > [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的图像不支持设置不透明度。
      *
      * @param { number } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
@@ -636,7 +700,7 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > - YUV格式不支持此接口。
+     * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式不支持此接口。
      * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
      * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link sendableImage.PixelMap.release}
      * 方法及时释放内存。释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
@@ -654,7 +718,7 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > - YUV格式不支持此接口。
+     * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式不支持此接口。
      * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
      * > - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release]{@link sendableImage.PixelMap.release}
      * 方法及时释放内存。释放时应确保该对象的所有异步方法均执行完成，且后续不再使用该对象。
@@ -710,7 +774,9 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 如果平移造成图像尺寸扩大，新增的区域（原图范围之外）以空白填充：
+     * 非[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式填充为透明黑色（所有分量为0），YUV格式填充为白色（Y分量为255、UV分量为128）。
      *
      * @param { number } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。<br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
      * @param { number } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。<br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
@@ -727,7 +793,9 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
+     * > - 如果平移造成图像尺寸扩大，新增的区域（原图范围之外）以空白填充：
+     * 非[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式填充为透明黑色（所有分量为0），YUV格式填充为白色（Y分量为255、UV分量为128）。
      *
      * @param { number } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。<br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
      * @param { number } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。<br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
@@ -746,8 +814,8 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > - YUV格式仅支持90°倍数的旋转角。
-     * > - 图像旋转的角度取值范围：[0, 360]。超出取值范围时，根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 旋转角度入参无限制，超出[0, 360]时将根据圆周360°自动矫正（例如，-100°与260°效果相同）；
+     * [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式仅支持90°倍数的旋转角。
      * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
      *
      * @param { number } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
@@ -764,8 +832,8 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > - YUV格式仅支持90°倍数的旋转角。
-     * > - 图像旋转的角度取值范围：[0, 360]。超出取值范围时，根据圆周360°自动矫正。例如，-100°与260°效果相同。
+     * > - 旋转角度入参无限制，超出[0, 360]时将根据圆周360°自动矫正（例如，-100°与260°效果相同）；
+     * [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式仅支持90°倍数的旋转角。
      * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
      *
      * @param { number } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。

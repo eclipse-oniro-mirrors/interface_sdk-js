@@ -1,4 +1,3 @@
-
 'use static';
 /*
  * Copyright (c) 2025 Huawei Device Co., Ltd.
@@ -16,8 +15,8 @@
  */
 
 /**
- * @file
- * @kit ArkUI
+  * @file
+  * @kit ArkUI
  */
 
 import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
@@ -41,7 +40,6 @@ import { AttributeModifier } from "./common";
  * @since 23 static
  */
 export declare enum CalendarAlign {
-
   /**
      * 设置选择器与入口组件的对齐方式为左对齐。
      *
@@ -50,7 +48,6 @@ export declare enum CalendarAlign {
    * @since 23 static
    */
   START = 0,
-
   /**
      * 设置选择器与入口组件的对齐方式为居中对齐。
      *
@@ -59,7 +56,6 @@ export declare enum CalendarAlign {
    * @since 23 static
    */
   CENTER = 1,
-
   /**
      * 设置选择器与入口组件的对齐方式为右对齐。
      *
@@ -72,7 +68,7 @@ export declare enum CalendarAlign {
 
 /**
  * 日历选择器每周起始日的枚举类型。
- * @enum { int }
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.1.0 static
@@ -80,6 +76,7 @@ export declare enum CalendarAlign {
 export declare enum CalendarFirstDayOfWeek {
   /**
    * 跟随系统区域变化。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -87,6 +84,7 @@ export declare enum CalendarFirstDayOfWeek {
   LOCAL = 0,
   /**
    * 周一。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -94,6 +92,7 @@ export declare enum CalendarFirstDayOfWeek {
   MON = 1,
   /**
    * 周二。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -101,6 +100,7 @@ export declare enum CalendarFirstDayOfWeek {
   TUE = 2,
   /**
    * 周三。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -108,6 +108,7 @@ export declare enum CalendarFirstDayOfWeek {
   WED = 3,
   /**
    * 周四。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -115,13 +116,15 @@ export declare enum CalendarFirstDayOfWeek {
   THU = 4,
   /**
    * 周五。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
    */
   FRI = 5,
   /**
-   * 周六。
+   *    The first day of the week is Saturday.The value of calendar first day of week saturday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -129,6 +132,7 @@ export declare enum CalendarFirstDayOfWeek {
   SAT = 6,
   /**
    * 周日。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -145,7 +149,6 @@ export declare enum CalendarFirstDayOfWeek {
  * @since 23 static
  */
 export declare interface CalendarOptions {
-
   /**
      * 描述日期选中态底板样式。
      * 
@@ -157,7 +160,8 @@ export declare interface CalendarOptions {
      * 
      * **说明：**
      * 
-     * 当hintRadius为0.0时表示底板样式为直角矩形；当hintRadius为(0.0, 16.0)时，底板样式为圆角矩形；当hintRadius为负数或大于16.0时，恢复为默认值16.0。
+     * 当hintRadius为0.0时表示底板样式为直角矩形；当hintRadius为(0.0, 16.0)时，底板样式为圆角矩形；
+     * 当hintRadius为负数或大于16.0时，恢复为默认值16.0。
      *
    * @type { ?(double | Resource) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -165,7 +169,6 @@ export declare interface CalendarOptions {
    * @since 23 static
    */
   hintRadius?: double | Resource;
-
   /**
      * 设置选中项的日期。选中的日期未设置或日期格式不符合规范则为默认值。
      * 
@@ -179,7 +182,6 @@ export declare interface CalendarOptions {
    * @since 23 static
    */
   selected?: Date;
-
   /**
      * 设置开始日期。
      * 
@@ -193,7 +195,6 @@ export declare interface CalendarOptions {
    * @since 23 static
    */
   start?: Date;
-
   /**
      * 设置结束日期。
      * 
@@ -207,7 +208,6 @@ export declare interface CalendarOptions {
    * @since 23 static
    */
   end?: Date;
-
   /**
      * 设置禁用日期区间。
      * 
@@ -224,7 +224,6 @@ export declare interface CalendarOptions {
    */
   disabledDateRange?: DateRange[];
 }
-
 /**
  * 除支持[通用属性]{@link ./common}外，还支持以下属性：
  * 
@@ -239,79 +238,84 @@ export declare interface CalendarOptions {
  */
 export declare interface CalendarPickerAttribute extends CommonMethod {
   /**
+   * 设置日历选取器选项。
+   *
+   * @param { CalendarOptions } [options] - 日历选项。
+   * @returns { CalendarPickerAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.0.1 staticonly
+   */
+  default setCalendarPickerOptions(options?: CalendarOptions): this;
+  /**
      * 设置选择器与入口组件的对齐方式。
      *
    * @param { CalendarAlign | undefined } alignType - 对齐方式的类型。<br/>默认值：CalendarAlign.END
      *     <br/>当alignType的值为undefined时，使用默认值。
    * @param { Offset } [offset] - 按照对齐方式的类型对齐后，选择器相对入口组件的偏移量。<br/>默认值：{dx: 0, dy: 0}
-   * @returns { CalendarPickerAttribute } the attribute of the CalendarPicker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default edgeAlign(alignType: CalendarAlign | undefined, offset?: Offset): this;
-
   /**
      * 入口区的文本颜色、字号、字体粗细。
      *
    * @param { PickerTextStyle | undefined } value - 设置入口区的文本颜色、字号、字体粗细。<br/>默认值：<br/>{<br/>color:
      *     '#ff182431',<br/>font: {<br/>size: '16fp', <br/>weight: FontWeight.Regular<br/>}<br/>}
      *     <br/>当value的值为undefined时，使用默认值。
-   * @returns { CalendarPickerAttribute } the attribute of the CalendarPicker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default textStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 选择日期时触发该事件。不能通过双向绑定的状态变量触发。
      *
    * @param { Callback<Date> | undefined } callback - 选中的日期值。<br>当callback的值为undefined时，不使用回调函数。
-   * @returns { CalendarPickerAttribute } the attribute of the CalendarPicker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onChange(callback: Callback<Date> | undefined): this;
-
   /**
      * 设置日历选择器中系统当前日期是否保持高亮显示。
      *
    * @param { boolean | undefined } enabled - 设置日历选择器中系统当前日期是否保持高亮显示。<br/>- true：系统当前日期在日历
      *     选择器内保持高亮显示。<br/>- false：系统当前日期在日历选择器内不保持高亮显示。
      *     <br/>默认值：false<br/>当enabled的值为undefined时，使用默认值。
-   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default markToday(enabled: boolean | undefined): this;
+  /**
+     * 设置属性修改器。
+   *
+   * @param { AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+   * @returns { CalendarPickerAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 23 static
+   */
+  default attributeModifier(modifier: AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined): this;
 
   /**
    * 设置日历选择器每周的起始日。
    *
    * @param { CalendarFirstDayOfWeek | undefined } value - 设置日历选择器每周的起始日。
-   *     <br/>默认值：CalendarFirstDayOfWeek.LOCAL（跟随系统区域变化）<br/>当value的值为undefined时，使用默认值。
-   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @returns { CalendarPickerAttribute } 日历选择器的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
    */
   default firstDayOfWeek(value: CalendarFirstDayOfWeek | undefined): this;
-
-  /**
-      * 设置属性修改器。
-     *
-   * @param { AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
-   * @returns { CalendarPickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 23 static
-   */
-  default attributeModifier(modifier: AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined): this;
 }
-
 /**
  * 日历选择器弹窗选项。
  * 
@@ -329,7 +333,6 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
  * @since 23 static
  */
 export declare interface CalendarDialogOptions extends CalendarOptions {
-
   /**
      * 点击弹窗中的“确定”按钮时触发该回调。
      * 
@@ -341,7 +344,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onAccept?: Callback<Date>;
-
   /**
      * 点击弹窗中的“取消”按钮时触发该回调。
      *
@@ -351,7 +353,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onCancel?: VoidCallback;
-
   /**
      * 选择弹窗中日期使当前选中项改变时触发该回调。
      * 
@@ -363,7 +364,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onChange?: Callback<Date>;
-
   /**
      * 弹窗背板颜色。
      * 
@@ -380,7 +380,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   backgroundColor?: ResourceColor;
-
   /**
      * 弹窗背板模糊材质。
      * 
@@ -398,7 +397,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   backgroundBlurStyle?: BlurStyle;
-
   /**
      * 背景模糊效果。
      *
@@ -408,7 +406,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
-
   /**
      * 背景效果参数。
      *
@@ -418,7 +415,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   backgroundEffect?: BackgroundEffectOptions;
-
   /**
      * 设置确认按钮显示样式、样式和重要程度、角色、背景色、圆角、文本颜色、字号、字体粗细、字体样式、字体列表、
      * 按钮是否默认响应Enter键。
@@ -433,7 +429,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   acceptButtonStyle?: PickerDialogButtonStyle;
-
   /**
      * 设置取消按钮显示样式、样式和重要程度、角色、背景色、圆角、文本颜色、字号、字体粗细、字体样式、字体列表、
      * 按钮是否默认响应Enter键。
@@ -448,7 +443,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   cancelButtonStyle?: PickerDialogButtonStyle;
-
   /**
      * 弹窗弹出后的事件回调。
      * 
@@ -465,7 +459,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onDidAppear?: VoidCallback;
-
   /**
      * 弹窗消失后的事件回调。
      * 
@@ -479,7 +472,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onDidDisappear?: VoidCallback;
-
   /**
      * 弹窗显示动效前的事件回调。
      * 
@@ -494,7 +486,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onWillAppear?: VoidCallback;
-
   /**
      * 弹窗退出动效前的事件回调。
      * 
@@ -509,7 +500,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   onWillDisappear?: VoidCallback;
-
   /**
      * 设置弹窗背板的阴影。
      * 
@@ -521,7 +511,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   shadow?: ShadowOptions | ShadowStyle;
-
   /**
      * 是否响应悬停态。
      * 
@@ -537,7 +526,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   enableHoverMode?: boolean;
-
   /**
      * 悬停态下弹窗默认展示区域。
      * 
@@ -550,7 +538,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   hoverModeArea?: HoverModeAreaType;
-
   /**
      * 设置日历选择器弹窗中系统当前日期是否保持高亮显示。
      * 
@@ -566,7 +553,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 23 static
    */
   markToday?: boolean;
-
   /**
      * 为对话框设置系统风格的材质。不同的材质具有不同的效果，可以影响对话框的背景颜色、边框、阴影等视觉属性。
      *
@@ -575,7 +561,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
      * 设置对话框的形变动画模式。
      *
@@ -586,7 +571,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
      * 设置对话框的边缘光动画模式。
      *
@@ -599,7 +583,7 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
   edgeLightMode?: EdgeLightMode;
 
   /**
-   * 设置日历选择器弹窗每周的起始日。
+   * 设置日历选择器每周的起始日。
    *
    * @default CalendarFirstDayOfWeek.LOCAL
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -609,26 +593,23 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
   firstDayOfWeek?: CalendarFirstDayOfWeek;
 
   /**
-   * 是否以及如何使对话框适配惯用手。
-   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
-   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
-   *
-   * @default HandednessFollowMode.NONE
+     * 弹窗是否以及如何跟手的属性设置。
+     * FOLLOW_ANCHOR：弹窗向触发组件的位置偏移。
+     * FOLLOW_GRIP_Hand：弹窗向握持手（握持的手，区别于操作手)。相关底层判定不可用时回退为当前显示下效果。
+     *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
    */
   adaptToHandedness?: HandednessFollowMode;
 }
-
 /**
- * Defines CalendarPickerDialog which uses show method to show CalendarPicker dialog.
+ * 点击日期弹出日历选择器弹窗，可在弹窗内选择日期。适用于需要在应用中进行日期选择的场景，如日程管理、预订系统、表单填写等。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class CalendarPickerDialog {
-
   /**
      * 定义日历选择器弹窗。
      *
@@ -640,11 +621,10 @@ export declare class CalendarPickerDialog {
    */
   static show(options?: CalendarDialogOptions): void;
 }
-
 /**
  * 定义日历选择器组件。
  *
- * @param { CalendarOptions } [options] - calendar options.
+ * @param { CalendarOptions } [options] - 配置日历选择器组件的参数。未设置该参数时使用默认配置。
  * @returns { CalendarPickerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -655,3 +635,16 @@ export declare class CalendarPickerDialog {
 export declare function CalendarPicker(
     options?: CalendarOptions
 ): CalendarPickerAttribute;
+/**
+ * 定义日历选择器组件。它要求在组件属性设置开始时调用setCalendarPickerOptions。
+ *
+ * @param { CustomBuilderT<CalendarPickerAttribute> } style - 设置组件属性的回调.
+ * @returns { CalendarPickerAttribute } 日历选择器的属性.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
+ * @stagemodelonly
+ * @since 26.0.1 staticonly
+ * @noninterop
+ */
+@Builder
+export declare function CalendarPicker(style: CustomBuilderT<CalendarPickerAttribute>): CalendarPickerAttribute;

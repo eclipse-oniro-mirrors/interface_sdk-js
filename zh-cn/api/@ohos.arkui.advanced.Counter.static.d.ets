@@ -94,7 +94,7 @@ declare enum CounterType {
 export type OnCounterHoverCallback = (isHover: boolean) => void;
 
 /**
- * Defines the common options.
+ * CommonOptions定义了Counter的通用属性和事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -310,7 +310,7 @@ declare class NumberStyleOptions extends InlineStyleOptions {
 export type OnInlineCounterChange = (value: int) => void;
 
 /**
- * Defines the date data.
+ * DateData定义了日期通用属性和方法，包括年、月、日。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -353,11 +353,11 @@ declare class DateData {
   day: int;
 
   /**
-   * Constructor of the DateData.
+   * DateData的构造函数用于初始化日期对象。
    *
-   * @param { int } year - set the year of the DateData.
-   * @param { int } month - set the month of the DateData.
-   * @param { int } day - set the day of the DateData.
+   * @param { int } year - 日期内联型的年份。取值范围：[1, 5000]。
+   * @param { int } month - 日期内联型的月份。取值范围：[1, 12]。
+   * @param { int } day - 日期内联型的日。取值范围：[1, 31]，具体取值由月份的实际天数决定。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -366,9 +366,9 @@ declare class DateData {
   constructor(year: int, month: int, day: int);
 
   /**
-   * Convert the date data to string.
+   * 以字符串格式返回当前日期值。格式为"YYYY-MM-DD"。
    *
-   * @returns { string } date data in string form.
+   * @returns { string } 当前日期值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -453,7 +453,9 @@ declare class DateStyleOptions extends CommonOptions {
 }
 
 /**
- * Defines the counter options.
+ * CounterOptions定义了Counter类型及样式。
+ *
+ * 选择不同的Counter类型时，需选择对应的Counter样式。若样式参数与类型不匹配，将使用该类型对应的默认样式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

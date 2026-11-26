@@ -3366,13 +3366,13 @@ declare namespace wifiManager {
     /**
      * Status indicating whether the current network can be selected.
      * 
-     * **1**: network selection allowed
+     * **0**: network selection allowed
      * 
-     * **2**: network selection forbidden
+     * **1**: network selection forbidden
      * 
-     * **3**: network selection permanently forbidden
+     * **2**: network selection permanently forbidden
      * 
-     * 4: unknown
+     * **3**: unknown
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
@@ -4744,7 +4744,7 @@ declare namespace wifiManager {
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     reasonCode?: int;
 
@@ -4755,7 +4755,7 @@ declare namespace wifiManager {
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     locallyGenerated?: boolean;
 
@@ -4766,7 +4766,7 @@ declare namespace wifiManager {
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     rssi?: int;
   }
@@ -5510,7 +5510,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   enum P2pServiceProtocolType {
     /**
@@ -5518,7 +5518,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SERVICE_TYPE_ALL = 0,
 
@@ -5527,7 +5527,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SERVICE_TYPE_BONJOUR = 1,
 
@@ -5536,7 +5536,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SERVICE_TYPE_UP_NP = 2,
 
@@ -5545,7 +5545,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SERVICE_TYPE_WS_DISCOVERY = 3,
 
@@ -5554,7 +5554,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SERVICE_TYPE_VENDOR_SPECIFIC = 255
   }
@@ -5564,7 +5564,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface WifiP2pServiceInfo {
     /**
@@ -5572,7 +5572,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     serviceName: string;
 
@@ -5581,7 +5581,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     protocolType: P2pServiceProtocolType;
 
@@ -5590,7 +5590,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     queryList: Array<string>;
   }
@@ -5600,7 +5600,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface WifiP2pServiceRequest {  
     /**
@@ -5608,7 +5608,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     protocolType: P2pServiceProtocolType;
 
@@ -5618,7 +5618,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     query: Uint8Array;
   }
@@ -5628,7 +5628,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface P2pDnsSdInfo {  
     /**
@@ -5636,7 +5636,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     instanceName: string;
 
@@ -5646,7 +5646,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     registrationType: string;
 
@@ -5655,7 +5655,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     device: WifiP2pDevice;
   }
@@ -5665,7 +5665,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface P2pDnsSdTxtInfo {  
     /**
@@ -5673,7 +5673,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     wholeDomainName: string;
 
@@ -5682,7 +5682,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     txtRecord: Map<string, string>;
 
@@ -5691,7 +5691,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     device: WifiP2pDevice;
   }
@@ -5701,7 +5701,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface P2pUpnpInfo {  
     /**
@@ -5710,7 +5710,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     uniqueServiceNames: Array<string>;
 
@@ -5719,7 +5719,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     device: WifiP2pDevice;
   }
@@ -5729,7 +5729,7 @@ declare namespace wifiManager {
    *
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface P2pGenericInfo {  
     /**
@@ -5737,7 +5737,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     protocolType: P2pServiceProtocolType;
 
@@ -5747,7 +5747,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     responseData: Uint8Array;
 
@@ -5756,7 +5756,7 @@ declare namespace wifiManager {
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     device: WifiP2pDevice;
   }
@@ -5771,7 +5771,7 @@ declare namespace wifiManager {
    * @unionmember { P2pGenericInfo } Generic service response information received from a peer device.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   type P2pServiceDiscoveryInfo = P2pDnsSdInfo | P2pDnsSdTxtInfo | P2pUpnpInfo | P2pGenericInfo;
 
@@ -5799,7 +5799,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function addDnsSdLocalP2pService(instanceName: string, serviceType: string,
     txtRecord: Map<string, string>, serviceName: string): void;
@@ -5830,7 +5830,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function addUpnpLocalP2pService(uuid: string, device: string,
     services: Array<string>, serviceName: string): void;
@@ -5848,7 +5848,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function removeLocalP2pService(srvInfo: WifiP2pServiceInfo): void;
 
@@ -5862,7 +5862,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
   
@@ -5883,7 +5883,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function addDnsSdServiceRequest(serviceType?: string, instanceName?: string): void;
 
@@ -5909,7 +5909,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function addUpnpServiceRequest(searchTarget?: string): void;
 
@@ -5925,7 +5925,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getP2pServiceRequest(): Promise<Array<WifiP2pServiceRequest>>;
 
@@ -5941,7 +5941,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function removeP2pServiceRequest(request: WifiP2pServiceRequest): void;
 
@@ -5955,7 +5955,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function removeAllP2pServiceRequests(): void;
 
@@ -5972,7 +5972,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function discoverServices(): void;
 
@@ -5987,7 +5987,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function onP2pServiceDiscovery(callback: Callback<P2pServiceDiscoveryInfo>): void;
 
@@ -6002,7 +6002,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function offP2pServiceDiscovery(callback?: Callback<P2pServiceDiscoveryInfo>): void;
 }

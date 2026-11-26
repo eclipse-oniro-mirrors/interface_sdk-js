@@ -177,6 +177,7 @@ declare namespace power {
 
   /**
    * Sets the power mode of a device. This API uses an asynchronous callback to return the result.
+   * To set both the power mode and the sub-mode, use [setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}.
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - Power mode. The value must be an enum.
@@ -237,6 +238,8 @@ declare namespace power {
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - Power mode. The value must be an enum.
    * @param { DevicePowerSubMode } subMode - Power sub-mode. The value must be an enum.
+   *     Only MODE_EXTREME_POWER_SAVE (603) supports power sub-mode, and the default value is SUB_MODE_EMERGENCY (603002).
+   *     <br>Default value: SUB_MODE_EMERGENCY.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -357,6 +360,74 @@ declare namespace power {
    * @since 23 dynamic&static
    */
   function unregisterShutdownCallback(callback?: Callback<void>): void;
+
+  /**
+   * Defines the hibernation event callback interface.
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HibernateCallback {
+    /**
+     * Called when the device is entering hibernation.
+     *
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onHibernate(): Promise<void>;
+
+    /**
+     * Called when the device is exiting hibernation.
+     *
+     * @param { boolean } hibernateResult - Indicates whether the hibernation succeeded.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onWakeup(hibernateResult: boolean): Promise<void>;
+  }
+
+  /**
+   * Registers a callback to be invoked when the device enters or exits hibernation.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { HibernateCallback } callback - Callback object containing onHibernate and onWakeup methods.
+   *     onHibernate is called when entering hibernation (no parameters).
+   *     onWakeup is called when exiting hibernation, with hibernateResult indicating whether
+   *     the hibernation succeeded.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function registerHibernateCallback(callback: HibernateCallback): void;
+
+  /**
+   * Unregisters the callback invoked when the device enters or exits hibernation.
+   * All registered hibernation callbacks are removed.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unregisterHibernateCallback(): void;
 
   /**
    * Query the power configuration value for a given scene name.
@@ -582,7 +653,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -609,7 +680,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
@@ -633,7 +704,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -655,7 +726,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.

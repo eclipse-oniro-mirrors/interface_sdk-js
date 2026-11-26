@@ -38,14 +38,14 @@ import type { AsyncCallback } from './@ohos.base';
  */
 declare namespace uiAppearance {
   /**
-   * Enumerates dark-mode.
+   * 深浅色模式枚举，用于配置系统的深色或浅色模式。
    *
    * @syscap SystemCapability.ArkUI.UiAppearance
    * @since 23 static
    */
   enum DarkMode {
     /**
-     * Always display with dark mode.
+     * 表示系统始终为深色模式。
      *
      * @syscap SystemCapability.ArkUI.UiAppearance
      * @since 23 static
@@ -53,7 +53,7 @@ declare namespace uiAppearance {
     ALWAYS_DARK = 0,
 
     /**
-     * Always display with light mode.
+     * 表示系统始终为浅色模式。
      *
      * @syscap SystemCapability.ArkUI.UiAppearance
      * @since 23 static
@@ -98,9 +98,9 @@ declare namespace uiAppearance {
   function setDarkMode(mode: DarkMode): Promise<void>;
 
   /**
-   * Acquire the current dark-mode.
+   * 获取系统当前的深浅色模式配置。
    *
-   * @returns { DarkMode } current dark-mode.
+   * @returns { DarkMode } 系统当前的深浅色模式配置。
    * @throws { BusinessError } 500001 - Internal error.
    * @syscap SystemCapability.ArkUI.UiAppearance
    * @since 23 static
@@ -123,9 +123,9 @@ declare namespace uiAppearance {
   function setFontScale(fontScale: double): Promise<void>;
 
   /**
-   * Acquire the current font-scale.
+   * 获取系统当前的字体大小缩放比例。
    *
-   * @returns { double } current font-scale.
+   * @returns { double } 系统当前的字体大小缩放比例。
    * @throws { BusinessError } 500001 - Internal error.
    * @syscap SystemCapability.ArkUI.UiAppearance
    * @since 23 static
@@ -148,9 +148,9 @@ declare namespace uiAppearance {
   function setFontWeightScale(fontWeightScale: double): Promise<void>;
 
   /**
-   * Acquire the current font-weight-scale.
+   * 获取系统当前的字体粗细缩放比例。
    *
-   * @returns { double } current font-weight-scale.
+   * @returns { double } 系统当前的字体粗细缩放比例。
    * @throws { BusinessError } 500001 - Internal error.
    * @syscap SystemCapability.ArkUI.UiAppearance
    * @since 23 static

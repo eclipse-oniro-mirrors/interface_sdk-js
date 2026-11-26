@@ -90,8 +90,7 @@ export declare interface DismissDialogAction {
      */
     dismiss(): void;
     /**
-     * Reason why the dialog box cannot be dismissed. You must specify whether to close the dialog box for each of the
-     * listed actions.
+     * 弹窗无法关闭原因。根据开发者需要选择不同操作下，弹窗是否需要关闭。
      *
      * @type { DismissReason }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -948,7 +947,7 @@ export interface ActionSheetOptions {
      */
     systemMaterial?: SystemUiMaterial;
     /**
-     * Sets the distortion animation Mode of the dialog.
+     * 设置系统材质下弹窗的非线性动画模式。
      *
      * @default DistortionMode.DISTORTION_AUTO
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -958,7 +957,7 @@ export interface ActionSheetOptions {
      */
     distortionMode?: DistortionMode;
     /**
-     * Sets the edgeLight animation Mode of the dialog.
+     * 设置系统材质下弹窗的流光动画模式。
      *
      * @default EdgeLightMode.EDGELIGHT_AUTO
      * @syscap SystemCapability.ArkUI.ArkUI.Full

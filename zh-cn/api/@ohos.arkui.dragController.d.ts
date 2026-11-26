@@ -394,13 +394,12 @@ declare namespace dragController {
   }
 
   /**
-   * Execute a drag event.
-   * @param { CustomBuilder | DragItemInfo } custom - Object used for prompts displayed when the object is dragged.
-   * @param { DragInfo } dragInfo - Information about the drag event.
-   * @param { AsyncCallback<{ event: DragEvent, extraParams: string }> } callback - Callback function. If the operation
-   *     is successful, **err** is **undefined** and **data** is the **DragEventParam** object obtained. Otherwise,
-   *     **err** is an error object. [since 10 - 11]
-   * @param { AsyncCallback<DragEventParam> } callback - Callback that contains the drag event information.
+   * 主动发起拖拽能力，传入拖拽发起后跟手效果所拖拽的对象以及携带拖拽信息。通过回调返回拖拽事件结果。
+   *
+   * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。 <br/> **说明：** <br/>不支持全局builder。如果builder中使用了[Image]{@link Image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link syncLoad}为true。该builder只用于生成当次拖拽中显示的图片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
+   * @param { DragInfo } dragInfo - 拖拽信息。
+   * @param { AsyncCallback<{ event: DragEvent, extraParams: string }> } callback - 拖拽结束返回结果的回调<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。 [since 10 - 11]
+   * @param { AsyncCallback<DragEventParam> } callback - 拖拽结束返回结果的回调<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -428,8 +427,8 @@ declare namespace dragController {
    *
    * @param { CustomBuilder | DragItemInfo } custom - 拖拽发起后跟手效果所拖拽的对象。
    * @param { DragInfo } dragInfo - 拖拽信息。
-   * @returns { Promise<{ event: DragEvent, extraParams: string }> } Promise used to return the result. [since 10 - 11]
-   * @returns { Promise<DragEventParam> } A Promise with the drag event information. [since 12]
+   * @returns { Promise<{ event: DragEvent, extraParams: string }> } 拖拽结束返回的结果<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。 [since 10 - 11]
+   * @returns { Promise<DragEventParam> } 拖拽结束返回的结果<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。 [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -550,9 +549,7 @@ declare namespace dragController {
     BEGIN,
 
     /**
-     * Already in the spring loading state. The system periodically checks the user's hover status.
- 	   * If the user remains stationary, it triggers an UPDATE state notification at regular intervals.
- 	   * This state allows for UI effect refreshes to emphasize the hover state.
+     * 拖拽已处于悬停状态，如果继续静止会定期触发UPDATE通知，以检查悬停状态。此时允许UI效果刷新以突出悬停状态。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -563,8 +560,7 @@ declare namespace dragController {
     UPDATE,
 
     /**
-     * The entire spring loading state ends. The application can perform cleanup operations
- 	   * and execute navigation or view switching actions when this state occurs.
+     * 如果最后一次UPDATE通知后拖拽继续静止会进入END，整个悬停检测结束。进入END后拖拽需要移出组件范围后再次进入组件或移入组件内子组件才会重新开始悬停检测。此时应用程序可进行清理、导航或视图切换操作。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -575,9 +571,7 @@ declare namespace dragController {
     END,
 
     /**
-     * After entering the BEGIN state, if the user moves out of the component range, exceeds the displacement
- 	   * threshold, lifts the finger, or switches windows (pull out), the CANCEL state is triggered.
- 	   * The application should restore the UI style and cancel any pending navigation or view switching actions.
+     * 拖拽进入BEGIN后，在手指/鼠标抬起、切换窗口、息屏、移出组件范围、移入组件内子组件或组件内移动超过检测阈值等场景会触发CANCEL通知，悬停检测中断。应用程序将恢复UI样式，并取消待定的导航及视图切换操作。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

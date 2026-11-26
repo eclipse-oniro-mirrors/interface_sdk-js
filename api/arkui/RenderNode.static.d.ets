@@ -19,7 +19,7 @@
  * @kit ArkUI
  */
 
-import { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, NodeBorderRadiuses, ShapeMask, ShapeClip, NodeEdges, LengthMetricsUnit, BackgroundBlur, ContentBlur, ForegroundBlur } from 'arkui.Graphics';
+import { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, NodeBorderRadiuses, ShapeMask, ShapeClip, NodeEdges, LengthMetricsUnit, BackgroundBlur, ContentBlur, ForegroundBlur } from './Graphics';
 
 import { BorderStyle } from '@ohos.arkui.component';
 

@@ -1018,7 +1018,7 @@ export declare class GestureStyle {
   constructor(value?: GestureStyleInterface);
 }
 /**
- * Defines the Gesture Events.
+ * 定义事件手势接口。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1987,7 +1987,7 @@ export declare interface ResourceImageAttachmentOptions {
   imageTag?: string;
 }
 /**
- * Defines the ImageAttachmentInterface.
+ * 定义图片设置项接口。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

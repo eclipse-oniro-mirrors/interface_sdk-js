@@ -5190,7 +5190,7 @@ declare interface ScaleOptions {
 }
 
 /**
- * Defines the vertical align rule of relative container.
+ * Defines the alignment rule for child components in a relative layout component in the vertical direction.
  *
  * @interface VerticalAlignParam
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5202,90 +5202,36 @@ declare interface ScaleOptions {
  */
 declare interface VerticalAlignParam {
   /**
-   * Specifies the anchor component.
-   *
-   * @type { ?string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Specifies the anchor component
+   * ID of the component that serves as the anchor.
    *
    * Anonymous Object Rectification
    *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   anchor: string;
   
   /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
+   * Vertical alignment mode relative to the anchor component.
    *
    * Anonymous Object Rectification
    *
    * @type { VerticalAlign }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   align: VerticalAlign;
 }
 
 /**
- * Defines the horizontal align rule of relative container.
+ * Defines the alignment rule for child components in a relative layout component in the horizontal direction.
  *
  * @interface HorizontalAlignParam
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5297,83 +5243,30 @@ declare interface VerticalAlignParam {
  */
 declare interface HorizontalAlignParam {
   /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Specifies the anchor component
+   * ID of the component that serves as the anchor.
    *
    * Anonymous Object Rectification
+   *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   anchor: string;
 
   /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-   /**
-    * Sets the horizontal alignment relative to the anchor component.
+   * Horizontal alignment mode relative to the anchor component.
    *
    * Anonymous Object Rectification
    *
    * @type { HorizontalAlign } align
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   align: HorizontalAlign;
 }
@@ -7521,7 +7414,17 @@ declare enum SourceType {
    * @atomicservice
    * @since 22 dynamic
    */
-  JOYSTICK = 5
+  JOYSTICK = 5,
+ 
+  /**
+   * Raw contact input from a touchpad.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCHPAD_TOUCH = 6
 }
 
 /**
@@ -11309,6 +11212,286 @@ declare interface TouchEvent extends BaseEvent {
 }
 
 /**
+ * Describes a contact in a raw touchpad event.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface TouchPadEventContact {
+  /**
+   * Unique identifier of the contact. The identifier remains unchanged from the beginning until the end or
+   * cancellation of the contact.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  id: int;
+ 
+  /**
+   * Phase of the contact.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  phase: TouchPadEventPhase;
+ 
+  /**
+   * X coordinate of the contact normalized to the logical coordinate range of the touchpad.
+   * Value range: [0,1].
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  positionX: double;
+ 
+  /**
+   * Y coordinate of the contact normalized to the logical coordinate range of the touchpad.
+   * Value range: [0,1].
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  positionY: double;
+}
+/**
+ * Describes a raw touchpad event. The event is independent of touch, mouse, axis, and system gesture events.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare abstract class TouchPadEvent {
+  /**
+   * Timestamp of the event, representing the interval from system startup to event occurrence.
+   * Unit: ns.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  timestamp: long;
+ 
+  /**
+   * Input source of the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  source: SourceType;
+ 
+  /**
+   * Input tool of the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sourceTool: SourceTool;
+ 
+  /**
+   * ID of the touchpad that triggers the event.
+   * The value must be greater than or equal to 0.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceId: int;
+ 
+  /**
+   * X coordinate of the cursor in the coordinate system of the current application screen.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayX: double;
+ 
+  /**
+   * Y coordinate of the cursor in the coordinate system of the current application screen.
+   * Unit: vp.
+   * .
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayY: double;
+ 
+  /**
+   * X coordinate of the cursor in the coordinate system of the current application window.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  windowX: double;
+ 
+  /**
+   * Y coordinate of the cursor in the coordinate system of the current application window.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  windowY: double;
+ 
+  /**
+   * X coordinate of the cursor in the coordinate system of the event-responsive component.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  x: double;
+ 
+  /**
+   * Y coordinate of the cursor in the coordinate system of the event-responsive component.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  y: double;
+ 
+  /**
+   * X coordinate of the cursor in the global coordinate system.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  globalDisplayX: double;
+ 
+  /**
+   * Y coordinate of the cursor in the global coordinate system.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  globalDisplayY: double;
+
+  /**
+   * Width of the touchpad. The unit is mm.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceWidth: double;
+ 
+  /**
+   * Height of the touchpad. The unit is mm.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceHeight: double;
+ 
+  /**
+   * All contacts reported for the event. The number of contacts depends on the hardware capability and has no fixed
+   * public upper limit.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  contacts: TouchPadEventContact[];
+ 
+  /**
+   * Contact that changed and triggered the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  changedContact: TouchPadEventContact;
+
+  /**
+   * Object that triggers the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  target: EventTarget;
+ 
+  /**
+   * ID of the screen where the event occurs.
+   * The value must be greater than or equal to 0. Default value: **0**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  targetDisplayId?: int;
+ 
+  /**
+   * Obtains the pressed status of modifier keys. The Ctrl, Alt, and Shift keys are supported.
+   *
+   * @param { Array<string> } keys - Modifier key list.
+   * @returns { boolean } Pressed status of modifier keys. Returns **true** if all specified modifier keys are pressed;
+   *     returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getModifierKeyState(keys: Array<string>): boolean;
+ 
+  /**
+   * Stops propagation of the current touchpad event in the ArkUI node event chain. This operation does not
+   * affect touch, mouse, axis, or system gesture events.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  stopPropagation(): void;
+}
+
+/**
  * Describes the axis event object. Inherits from [BaseEvent]{@link BaseEvent}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -12887,6 +13070,22 @@ declare interface DragEvent {
    * @since 20 dynamic
    */
   enableInternalDropAnimation(configuration: string): void;
+
+  /**
+   * Sets whether the drag backplane is visible. Invoked in the [onDragStart]{@link CommonMethod#onDragStart},
+   * [onDragEnter]{@link CommonMethod#onDragEnter}, and [onDragMove]{@link CommonMethod#onDragMove} callbacks. If this
+   * parameter is set to false, the backplane is hidden immediately after being dragged. Event distribution and data
+   * transmission are not affected. When you leave the target component area or drag the backplane, the backplane is
+   * automatically displayed. If you do not call this API to set whether to be visible, the system displays the drag
+   * backplane by default.
+   * @param { boolean } visible - Sets whether the drag backplane is visible. true: The drag backplane is
+   *     displayed. false: The drag backplane is hidden.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  setDragWindowVisible(visible: boolean): void;
 }
 
 /**
@@ -14695,6 +14894,38 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.1.0 dynamic
    */
   adaptToHandedness?: HandednessFollowMode;
+
+  /**
+   * Vibrancy mode of the title bar.
+   * After this attribute is set, the title bar content (main title, subtitle, and close button) is brightened or
+   * darkened, improving readability against translucent material backgrounds.
+   * The main title and subtitle take effect only for system titles in the
+   * [SheetTitleOptions]{@link SheetTitleOptions} form; they do not take effect for custom titles built with
+   * [CustomBuilder]{@link CustomBuilder}.
+   * This attribute takes effect only on high-compute and medium-compute devices. The device compute level can be
+   * obtained through
+   * [uiMaterial.getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel}.
+   * Default value: **undefined**, indicating that the vibrancy effect is not used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  titleBarVibrancyMode?: VibrancyMode;
+
+  /**
+   * Applies a color filter effect to the component. The color filter effect applies a 4 x 5 color matrix to transform
+   * the component's pixel colors. This can be used to implement eye-care mode, color temperature adjustment, and other
+   * visual effects.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect?: ColorFilter;
 }
 
 /**
@@ -18511,6 +18742,18 @@ declare interface ContextMenuOptions {
    * @since 26.0.0 dynamic
    */
   gridStyle?: MenuGridStyleOptions;
+  /**
+   * Applies a color filter effect to the component. The color filter effect applies a 4 x 5 color matrix to transform
+   * the component's pixel colors. This can be used to implement eye-care mode, color temperature adjustment, and other
+   * visual effects.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect?: ColorFilter;
 }
 
 /**
@@ -22018,7 +22261,9 @@ declare class CommonMethod<T> {
    * a finger touches the component area, and neither the component nor any of its child components is identified as
    * focusable by the accessibility hover event. The callback parameter returns the **TouchEvent** corresponding to
    * the touch event. Only single-finger touch is supported. Scenarios where the touch position is within the area of
-   * the following components are not supported, including UIExtension, Web, XComponent, and scenarios integrated with
+   * the following components are not supported, including [UIExtension]{@link @global:UIExtension},
+   * [Web]{@link @global:Web}<!--Del-->, [FormComponent]{@link @global:FormComponent}<!--DelEnd-->,
+   * [XComponent]{@link @global:XComponent}, and scenarios integrated with
    * third-party UI frameworks. In the preceding scenarios, this callback API does not take effect.
    * <br>This API is complementary to **onAccessibilityHover**. Only one of the two callbacks is triggered for the same
    * component at a time. This API cannot be called in **attributeModifier**.
@@ -22082,6 +22327,34 @@ declare class CommonMethod<T> {
    * @since 7 dynamic
    */
   onTouch(event: (event: TouchEvent) => void): T;
+
+   /**
+   * Invoked when a raw touchpad event is reported.
+   *
+   * @param { Callback<TouchPadEvent> | undefined } event - Callback used to return ${TouchPadEvent}. Passing
+   *     **undefined** unregisters the callback.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onTouchPadEvent(event: Callback<TouchPadEvent> | undefined): T;
+
+  /**
+   * Binds an interception callback for touchpad event hit testing. The returned [HitTestMode]{@link HitTestMode}
+   * determines the hit test behavior of the component for the current touchpad event chain and does not affect
+   * touch, mouse, axis, or system gesture event chains.
+   *
+   * @param { Callback<TouchPadEvent, HitTestMode> | undefined } callback - Callback used to return ${TouchPadEvent}.
+   *     Passing **undefined** unregisters the callback.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onTouchPadEventIntercept(callback: Callback<TouchPadEvent, HitTestMode> | undefined): T;
 
   /**
    * After the component bound to this API obtains focus, a key action triggers this callback. The **onKeyEvent** event
@@ -23487,15 +23760,13 @@ declare class CommonMethod<T> {
    *     <br>z: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)  
    *     <br>**NOTE**
    *     <br>When the component is translated along the z-axis, the position of the observation point remains
    *     unchanged. As such, the component appears larger when the value of **z** places it closer to the observation
    *     point and smaller when the
    *     value of **z** places it further away from the observation point.
-   *     <br>!
-   *     [coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
+   *     <br>![coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23522,15 +23793,13 @@ declare class CommonMethod<T> {
    *     <br>z: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>**NOTE**
    *     <br>When the component is translated along the z-axis, the position of the observation point remains
    *     unchanged. As such, the component appears larger when the value of **z** places it closer to the observation
    *     point and smaller when the
    *     value of **z** places it further away from the observation point.
-   *     <br>!
-   *     [coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
+   *     <br>![coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
    *     <br>If **translate** is
    *     **undefined**, the component reverts to its original state with no translation.
    * @returns { T } Current component.
@@ -23659,8 +23928,7 @@ declare class CommonMethod<T> {
    *     <br>perspective: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23690,8 +23958,7 @@ declare class CommonMethod<T> {
    *     <br>perspective: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>If **options** is
    *     **undefined**, the component reverts to its original state with no rotation.
    * @returns { T } Current component.
@@ -23737,8 +24004,7 @@ declare class CommonMethod<T> {
    *     <br>centerZ: 0,
    *     <br>perspective: 0
    *     <br>}
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>If **options** is
    *     **undefined**, the component reverts to its original state with no rotation.
    * @returns { T } Current component.
@@ -25876,7 +26142,7 @@ declare class CommonMethod<T> {
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *     <br>Since API version 18, this attribute supports two-way binding through
    *     [!!](docroot://ui/state-management/arkts-new-binding.md#two-way-binding-between-built-in-component-parameters).
-   * @param { CustomBuilder } builder - Content of the modal. The root node in **builder** must be unique.
+   * @param { CustomBuilder } builder - Content of the modal. <!--RP1--><!--RP1End-->
    * @param { ModalTransition } [type] - System transition mode of the modal.
    *     <br> Default value:
    *     **ModalTransition.DEFAULT**.
@@ -25903,7 +26169,7 @@ declare class CommonMethod<T> {
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *     <br>Since API version 18, this attribute supports two-way binding through
    *     [!!](docroot://ui/state-management/arkts-new-binding.md#two-way-binding-between-built-in-component-parameters).
-   * @param { CustomBuilder } builder - Content of the modal.
+   * @param { CustomBuilder } builder - Content of the modal. <!--RP1--><!--RP1End-->
    * @param { ContentCoverOptions } [options] - Optional attributes of the modal.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27400,6 +27666,34 @@ declare class CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   doubleSided(value: Optional<boolean>): T;
+
+  /**
+   * Adds a color filter effect to the component. The color filter transforms the component's pixels through
+   * a 4 x 5 color matrix. This can be used to implement eye-care mode, color temperature adjustment, and other
+   * visual effects.
+   *
+   * @param { ColorFilter | undefined } filter - Color filter applied to the component. The value is a
+   *     [ColorFilter]{@link ColorFilter} object constructed with a 4 x 5 color matrix (20 numbers).
+   *     <br>**NOTE**
+   *     <br>When **filter** is a valid **ColorFilter** (not **undefined**), the color filter takes priority,
+   *     and the following properties do not take effect:
+   *     [grayscale]{@link CommonMethod#grayscale(value: number)},
+   *     [brightness]{@link CommonMethod#brightness(value: number)},
+   *     [contrast]{@link CommonMethod#contrast(value: number)},
+   *     [saturate]{@link CommonMethod#saturate(value: number)},
+   *     [sepia]{@link CommonMethod#sepia(value: number)},
+   *     [invert]{@link CommonMethod#invert(value: number | InvertOptions)},
+   *     [hueRotate]{@link CommonMethod#hueRotate(value: number | string)},
+   *     and [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}.
+   *     <br>When **filter** is **undefined**, the color filter is cleared and the above properties resume effect.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect(filter: ColorFilter | undefined): T;
 }
 
 /**
@@ -30479,11 +30773,13 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarHeight(height: LengthMetrics | undefined): T;
 
   /**
-   * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
-   * in response to arrow key presses when focused but not in active focus state.
+   * Sets whether the scrolling component supports scrolling by arrow keys. After this function is enabled, the
+   * scrolling component responds to the arrow keys on the keyboard when the focus is obtained and the focus is not
+   * activated. If this parameter is not set, scrolling by arrow keys is not supported by default.
    *
-   * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
-   *     <br>Default value: true.
+   * @param { boolean | undefined } enabled - Indicates whether to support scrolling by arrow keys on the keyboard.
+   *     <br/>true: scrolling is supported. <br/>false: scrolling is not supported. <br/>undefined: scrolling is not
+   *     supported.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -30804,6 +31100,7 @@ declare class DynamicNode<T> {
    * @since 20 dynamic
    */
   onMove(handler: Optional<OnMoveHandler>, eventHandler: ItemDragEventHandler): T;
+}
   
 /**
  * Implements an object used to configure the
@@ -31027,6 +31324,7 @@ declare interface EditModeOptions {
   /**
    * Define whether to gather selected items in grid or list when item is long pressed for context menu.
    *
+   * @type { ?boolean }
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31043,6 +31341,7 @@ declare interface EditModeOptions {
    * Returning true means using the number of selected items within the display range.
    * Returning a number to include selected items outside the display range.
    *
+   * @type { ?OnGetPreviewBadgeCallback } onGetPreviewBadge
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -31057,6 +31356,7 @@ declare interface EditModeOptions {
    * multi-select state.
    * {@code false} indicates that there is no default style after entering the multi-select state.
    *
+   * @type { ?boolean }
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31071,6 +31371,7 @@ declare interface EditModeOptions {
    * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
    * {@code false} indicates that two-finger swiping cannot perform multi-selection.
    *
+   * @type { ?boolean }
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31109,7 +31410,7 @@ declare interface BackgroundBrightnessOptions {
    * 
    * Default value: **0.0**
    * 
-   * Value range: (0.0, +∞)
+   * Value range: [0.0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -32665,4 +32966,73 @@ declare interface SmartGestureShortcutOptions {
    * @since 26.0.0 dynamic
    */
   selectable?: boolean;
+}
+
+/**
+ * Defines the text style shared by DatePickerComponent and UIPickerComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface PickerComponentTextStyle {
+  /**
+   * Font color.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  color?: ResourceColor;
+
+  /**
+   * Text style. Only size and weight are supported.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  font?: Font;
+
+  /**
+   * Minimum font size for the text. Used with maxFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see minFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minFontSize?: number | ResourceStr;
+
+  /**
+   * Maximum font size for the text. Used with minFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see maxFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxFontSize?: number | ResourceStr;
+
+  /**
+   * Text overflow behavior. This property has no effect when set to MARQUEE. For details, see textOverflow of
+   * TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  overflow?: TextOverflow;
 }

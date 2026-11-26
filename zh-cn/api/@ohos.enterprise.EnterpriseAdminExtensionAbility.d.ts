@@ -403,11 +403,21 @@ export default class EnterpriseAdminExtensionAbility {
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * 注册**MANAGED_EVENT_PASSWORD_FAILED**事件。
    *
-   * @param { number } cumulativeFailedCount - 密码认证失败的累计次数。
+   * @param { number } cumulativeFailedCount - 密码失败的累计尝试次数。
    * @param { number } accountId - 发生密码认证失败的用户ID。
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
+
+  /**
+   * USB设备插入事件回调。当USB设备插入且系统已识别时触发此回调。
+   *
+   * @param { common.UsbDeviceInfo } usbDeviceInfo - USB设备信息，包括总线编号、设备地址、序列号、厂商ID、产品ID及其他设备属性。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onUsbDeviceAdded(usbDeviceInfo: common.UsbDeviceInfo): void;
 }

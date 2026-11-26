@@ -39,16 +39,16 @@ import { ComponentContent } from '../../arkui/ComponentContent';
 import { ResizableOptions } from "./image";
 import intl from '../../@ohos.intl';
 import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
-import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
+import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, ColorFilter, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, TextOverflow, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
-import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode, VibrancyMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -6501,6 +6501,21 @@ export declare interface DragEvent {
      * @since 26.0.0 static
      */
     getGlobalDisplayY(): double;
+
+    /**
+     * Sets whether the drag backplane is visible. Invoked in the [onDragStart]{@link CommonMethod#onDragStart},
+     * [onDragEnter]{@link CommonMethod#onDragEnter}, and [onDragMove]{@link CommonMethod#onDragMove} callbacks. If this
+     * parameter is set to false, the backplane is hidden immediately after being dragged. Event distribution and data
+     * transmission are not affected. When you leave the target component area or drag the backplane, the backplane is
+     * automatically displayed. If you do not call this API to set whether to be visible, the system displays the drag
+     * backplane by default.
+     * @param { boolean } visible - Sets whether the drag backplane is visible. true: The drag backplane is
+     *     displayed. false: The drag backplane is hidden.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    setDragWindowVisible(visible: boolean): void;
 }
 /**
  * The event callback function for drag and drop common interfaces.
@@ -7614,6 +7629,36 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.1.0 static
      */
     adaptToHandedness?: HandednessFollowMode;
+
+    /**
+     * Applies a color filter effect to the component. The color filter effect applies a 4 x 5 color matrix to transform
+     * the component's pixel colors. This can be used to implement eye-care mode, color temperature adjustment, and other
+     * visual effects.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    colorFilterEffect?: ColorFilter;
+
+    /**
+     * Vibrancy mode of the title bar.
+     * After this attribute is set, the title bar content (main title, subtitle, and close button) is brightened or
+     * darkened, improving readability against translucent material backgrounds.
+     * The main title and subtitle take effect only for system titles in the
+     * [SheetTitleOptions]{@link SheetTitleOptions} form; they do not take effect for custom titles built with
+     * [CustomBuilder]{@link CustomBuilder}.
+     * This attribute takes effect only on high-compute and medium-compute devices. The device compute level can be
+     * obtained through
+     * [uiMaterial.getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel}.
+     * Default value: **undefined**, indicating that the vibrancy effect is not used.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarVibrancyMode?: VibrancyMode;
 }
 /**
  * Enum of title bar hover modes.
@@ -9789,6 +9834,16 @@ export declare interface ContextMenuOptions {
      * @since 26.0.0 static
      */
     gridStyle?: MenuGridStyleOptions;
+    /**
+     * Applies a color filter effect to the component. The color filter effect applies a 4 x 5 color matrix to transform
+     * the component's pixel colors. This can be used to implement eye-care mode, color temperature adjustment, and other
+     * visual effects.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    colorFilterEffect?: ColorFilter;
 }
 /**
  * Defines the menu options.
@@ -13015,6 +13070,21 @@ export declare interface CommonMethod {
      */
     default advancedBlendMode(effect: BlendMode | Blender | undefined, type?: BlendApplyType): this;
     /**
+     * Add a blender effect to the current component using a BlenderBase instance.
+     * Cannot be used together with the blendMode interface.
+     *
+     * @param { BlenderBase | undefined } effect - Blender base type, which is the entry point for creating various Blender effects.
+     *     A BlenderBase instance must be created through member methods of the BlenderBase class.
+     * @param { BlendApplyType } [type] - Whether the blend effect is implemented offscreen.
+     *     Default value: BlendApplyType.FAST.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default advancedBlendMode(effect: BlenderBase | undefined, type?: BlendApplyType): this;
+    /**
      * Sets whether to clip the areas of child components that extend beyond this component's boundaries,
      * That is, whether to perform clipping based on the edge contour of the parent container.
      *
@@ -13244,7 +13314,7 @@ export declare interface CommonMethod {
      * Binds a modal page to the component, whose visibility is subject to the isShow settings.
      *
      * @param { boolean | Bindable<boolean> | undefined } isShow - true means display content, false means hide content.
-     * @param { CustomBuilder | undefined } builder - the content to be displayed.
+     * @param { CustomBuilder | undefined } builder - the content to be displayed. <!--RP1--><!--RP1End-->
      * @param { ModalTransition } [type] - transition type.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -13256,7 +13326,7 @@ export declare interface CommonMethod {
      * Bind content cover
      *
      * @param { boolean | Bindable<boolean> | undefined } isShow - true means display content, false means hide content.
-     * @param { CustomBuilder | undefined } builder - the content to be displayed.
+     * @param { CustomBuilder | undefined } builder - the content to be displayed. <!--RP1--><!--RP1End-->
      * @param { ContentCoverOptions } [options] - options of content cover.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14601,6 +14671,15 @@ export type SystemUiMaterial = uiMaterial.Material;
  */
 export type Blender = uiEffect.Blender;
 /**
+ * Blender base type, which is the entry point for creating various Blender effects.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export type BlenderBase = uiEffect.BlenderBase;
+/**
  * Import the DialogController type from promptAction.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15237,11 +15316,13 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     default scrollBarHeight(height: LengthMetrics | undefined): this;
 
     /**
-     * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
-     * in response to arrow key presses when focused but not in active focus state.
+     * Sets whether the scrolling component supports scrolling by arrow keys. After this function is enabled, the
+     * scrolling component responds to the arrow keys on the keyboard when the focus is obtained and the focus is not
+     * activated. If this parameter is not set, scrolling by arrow keys is not supported by default.
      *
-     * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
-     *     <br>Default value: true.
+     * @param { boolean | undefined } enabled - Indicates whether to support scrolling by arrow keys on the
+     *     keyboard. <br/>true: scrolling is supported. <br/>false: scrolling is not supported. <br/>undefined:
+     *     scrolling is not supported.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15569,6 +15650,7 @@ export declare interface EditModeOptions {
     /**
      * Define whether to gather selected items in grid or list when item is long pressed for context menu.
      *
+     * @type { ?boolean }
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15583,6 +15665,7 @@ export declare interface EditModeOptions {
      * Returning true means using the number of selected items within the display range.
      * Returning a number to include selected items outside the display range.
      *
+     * @type { ?OnGetPreviewBadgeCallback } onGetPreviewBadge
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -15595,6 +15678,7 @@ export declare interface EditModeOptions {
      * multi-select state.
      * {@code false} indicates that there is no default style after entering the multi-select state.
      *
+     * @type { ?boolean }
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15607,6 +15691,7 @@ export declare interface EditModeOptions {
      * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
      * {@code false} indicates that two-finger swiping cannot perform multi-selection.
      *
+     * @type { ?boolean }
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16760,4 +16845,61 @@ export declare interface GravityCenterOptions {
    * @since 26.0.0 static
    */
   gravityIntensity?: double;
+}
+
+/**
+ * Defines the text style shared by DatePickerComponent and UIPickerComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface PickerComponentTextStyle {
+  /**
+   * Font color.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  color?: ResourceColor;
+
+  /**
+   * Text style. Only size and weight are supported.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  font?: Font;
+
+  /**
+   * Minimum font size for the text. Used with maxFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see minFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  minFontSize?: double | ResourceStr;
+
+  /**
+   * Maximum font size for the text. Used with minFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see maxFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxFontSize?: double | ResourceStr;
+
+  /**
+   * Text overflow behavior. This property has no effect when set to MARQUEE. For details, see textOverflow of
+   * TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  overflow?: TextOverflow;
 }

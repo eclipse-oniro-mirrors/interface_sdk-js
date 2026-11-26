@@ -1626,6 +1626,21 @@ declare namespace connection {
   function queryProbeResult(destination: string, duration: int): Promise<ProbeResultInfo>;
 
   /**
+   * Renew ip address.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @param { NetHandle } netHandle - Network handle.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function renewDhcp(netHandle: NetHandle): void;
+
+  /**
    * Describes the information about the TCP and UDP ports that are currently listened for by the system.
    *
    * @syscap SystemCapability.Communication.NetManager.Core

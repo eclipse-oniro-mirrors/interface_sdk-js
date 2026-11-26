@@ -1618,7 +1618,7 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
    * 设置文本描边的宽度。当同时设置strokeWidth属性和[shaderStyle]{@link TextAreaAttribute#shaderStyle}时，shaderStyle不生效。未通过该接口设置时，默认值为0，不做描
    * 边处理。
    *
-   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。当LengthMetrics对象的unit属性为LengthUnit.PERCENT时，当前设置不生效，按默认值处理。
+   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。
    *     <br>若设置值小于0，显示实心字；若大于0，显示空心字。
    * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full

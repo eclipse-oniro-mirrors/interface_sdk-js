@@ -275,7 +275,7 @@ declare namespace backgroundTaskManager {
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @returns { boolean } Whether **BackgroundTaskMode** is supported. The value **true** means it is supported, and
      *     the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @atomicservice [since 26.0.0]
@@ -298,7 +298,7 @@ declare namespace backgroundTaskManager {
      *     see [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
      *     UIAbility in the stage model and the ServiceAbility in the FA model.
      * @param { Callback<UserAuthResult> } callback - Callback used to return the user authorization result.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 9800004 - System service operation failed.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -322,7 +322,7 @@ declare namespace backgroundTaskManager {
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - App running context.
      * @param { Callback<UserAuthResult> } callback - Callback used to return the user authorization result.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 9800004 - System service operation failed.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -343,7 +343,7 @@ declare namespace backgroundTaskManager {
      *     see [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
      *     UIAbility in the stage model and the ServiceAbility in the FA model.
      * @returns { Promise<UserAuthResult> } Promise used to return the user authorization result.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 9800004 - System service operation failed.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -368,7 +368,7 @@ declare namespace backgroundTaskManager {
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - App running context.
      * @returns { Promise<UserAuthResult> } The promise returns the result of user authorization.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 9800004 - System service operation failed.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1036,11 +1036,14 @@ declare namespace backgroundTaskManager {
    *
    * @param { int } requestId - Request ID of the transient task. It is obtained by calling the
    *     [requestSuspendDelay]{@link backgroundTaskManager.requestSuspendDelay} API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1058,11 +1061,14 @@ declare namespace backgroundTaskManager {
    *     [requestSuspendDelay]{@link backgroundTaskManager.requestSuspendDelay} API.
    * @param { AsyncCallback<int> } callback - Callback used to return the remaining time of the transient task, in
    *     milliseconds.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1079,11 +1085,14 @@ declare namespace backgroundTaskManager {
    * @param { int } requestId - Request ID of the transient task. It is obtained by calling the
    *     [requestSuspendDelay]{@link backgroundTaskManager.requestSuspendDelay} API.
    * @returns { Promise<int> } Promise that returns the remaining time of the transient task, in milliseconds.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1106,11 +1115,14 @@ declare namespace backgroundTaskManager {
    * @param { Callback<void> } callback - Callback used to notify the application that the transient task is about to
    *     time out. Generally, the callback is invoked 6 seconds before the timeout.
    * @returns { DelaySuspendInfo } Information about the transient task.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1127,8 +1139,9 @@ declare namespace backgroundTaskManager {
    *
    * @returns { Promise<TransientTaskInfo> } Promise that returns all transient task information.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
-   * @throws { BusinessError } 9900003 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9900003 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters.
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9900004 - System service operation failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.TransientTask
    * @since 20 dynamic
@@ -1155,13 +1168,16 @@ declare namespace backgroundTaskManager {
    *     redirected to when a continuous task notification is clicked.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the continuous task is requested,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1192,13 +1208,16 @@ declare namespace backgroundTaskManager {
    * @param { WantAgent } wantAgent - Notification parameters, which are used to specify the target page that is
    *     redirected to when a continuous task notification is clicked.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1232,12 +1251,15 @@ declare namespace backgroundTaskManager {
    *     redirected to when a continuous task notification is clicked.
    * @returns { Promise<ContinuousTaskNotification> } Promise that returns an object of the
    *     [ContinuousTaskNotification]{@link backgroundTaskManager.ContinuousTaskNotification} type.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1275,7 +1297,7 @@ declare namespace backgroundTaskManager {
    *     subtype.
    * @returns { Promise<ContinuousTaskNotification> } Promise used to return the continuous task notification
    *     information, including the continuous task ID.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1313,8 +1335,7 @@ declare namespace backgroundTaskManager {
    * @param { ContinuousTaskRequest } request - Request information of a continuous task, including the main type and
    *     subtype.
    * @returns { Promise<int> } Promise used to return the continuous task ID.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1355,12 +1376,15 @@ declare namespace backgroundTaskManager {
    *     see [Item](docroot://task-management/continuous-task.md#use-cases).<br> Note: One or more types can be passed.
    * @returns { Promise<ContinuousTaskNotification> } Promise that returns an object of the
    *     [ContinuousTaskNotification]{@link backgroundTaskManager.ContinuousTaskNotification} type.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1397,7 +1421,7 @@ declare namespace backgroundTaskManager {
    *     task to be updated.
    * @returns { Promise<ContinuousTaskNotification> } Promise used to return the updated continuous task notification
    *     information, including the continuous task ID.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1417,7 +1441,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    * @param { DataTransferProgress } progressInfo - Notify progress data.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
@@ -1441,11 +1465,15 @@ declare namespace backgroundTaskManager {
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the continuous task is canceled,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission denied. [since 9 - 18]
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 18]
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1470,11 +1498,15 @@ declare namespace backgroundTaskManager {
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied. [since 9 - 18]
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 18]
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1530,9 +1562,10 @@ declare namespace backgroundTaskManager {
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @returns { Promise<ContinuousTaskInfo[]> } Promise that returns all continuous task information.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1554,9 +1587,10 @@ declare namespace backgroundTaskManager {
    * @param { boolean } includeSuspended - Whether to obtain the information about the suspended continuous task. The
    *     value **true** means to obtain the information, and the value **false** means the opposite.
    * @returns { Promise<ContinuousTaskInfo[]> } Promise that returns all continuous task information.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1571,8 +1605,8 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.GET_BACKGROUND_TASK_INFO
    * @returns { Promise<ContinuousTaskInfo[]> } Promise that returns all continuous task information.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @systemapi
@@ -1588,8 +1622,8 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.SET_BACKGROUND_TASK_STATE
    * @param { BackgroundTaskStateInfo } stateInfo - Required authorization information, including the user ID,
    *     application bundle name, and application clone ID.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1607,8 +1641,8 @@ declare namespace backgroundTaskManager {
    * @param { BackgroundTaskStateInfo } stateInfo - Required authorization information, including the user ID,
    *     application bundle name, and application clone ID.
    * @returns { UserAuthResult } Authorization result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1625,8 +1659,8 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.GET_BACKGROUND_TASK_INFO
    * @param { BackgroundTaskSubscriber } subscriber - Background task listener that listens for continuous task state
    *     changes, including start, update and stop events.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1642,8 +1676,8 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.GET_BACKGROUND_TASK_INFO
    * @param { BackgroundTaskSubscriber } subscriber - Background task listener that listens for continuous task state
    *     changes, including start, update and stop events.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1658,13 +1692,16 @@ declare namespace backgroundTaskManager {
    *
    * @param { EfficiencyResourcesRequest } request - Necessary information carried in the request, including the
    *     resource type and timeout interval.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br> 2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 18700001 - Caller information verification failed for an energy resource request.
@@ -1678,12 +1715,16 @@ declare namespace backgroundTaskManager {
   /**
    * Releases all efficiency resources.
    *
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 18700001 - Caller information verification failed for an energy resource request.
@@ -1699,10 +1740,11 @@ declare namespace backgroundTaskManager {
    * promise to return the result.
    *
    * @returns { Promise<EfficiencyResourcesInfo[]> } Promise used to return all information about efficiency resources.
-   * @throws { BusinessError } 202 - Not System App.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 18700001 - Caller information verification failed for an energy resource request.
-   * @throws { BusinessError } 18700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 18700002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 18700004 - System service operation failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.EfficiencyResourcesApply
    * @systemapi
@@ -1719,9 +1761,11 @@ declare namespace backgroundTaskManager {
    *     that a continuous task is canceled.
    * @param { Callback<ContinuousTaskCancelInfo> } callback - Callback used to return information such as the reason for
    *     canceling a continuous task.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     <br> 2. Register an existing callback type; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Register an existing callback type;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1732,9 +1776,11 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskCancelInfo> } callback - the callback of continuous task cancel.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Register a exist callback type; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Register a exist callback type;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
    */
@@ -1749,9 +1795,11 @@ declare namespace backgroundTaskManager {
     *     **'continuousTaskCancel'**.
     * @param { Callback<ContinuousTaskCancelInfo> } [callback] - Callback for which listening is cancelled. If this
     *     parameter is left unspecified, all registered callbacks are cancelled.
-    * @throws { BusinessError } 201 - Permission denied.
-    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-    *     <br> 2. Unregister type has not been registered; 3. Parameter verification failed.
+    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+    * @throws { BusinessError } 401 - Parameter error. Possible cause:
+    *     <br>1. Callback parameter error;
+    *     <br>2. Unregister type has not been registered;
+    *     <br>3. Parameter verification failed.
     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
     * @since 15 dynamic
     */
@@ -1762,9 +1810,11 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskCancelInfo> } [callback] - the callback of continuous task cancel.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Unregister type has not register; 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Unregister type has not register;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
    */
@@ -1784,7 +1834,7 @@ declare namespace backgroundTaskManager {
    *     that the continuous task is suspended.
    * @param { Callback<ContinuousTaskSuspendInfo> } callback - Callback used to return information such as the reason
    *     for suspending a continuous task.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 20 dynamic
@@ -1796,7 +1846,7 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskSuspendInfo> } callback - the callback of continuous task suspend.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
@@ -1812,7 +1862,7 @@ declare namespace backgroundTaskManager {
    *     that the continuous task is suspended.
    * @param { Callback<ContinuousTaskSuspendInfo> } [callback] - Callback used to unregister from the listener for
    *     continuous task suspension. If this parameter is not passed, all listeners are unsubscribed from.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 20 dynamic
@@ -1824,7 +1874,7 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskSuspendInfo> } [callback] - the callback of continuous task suspend.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
@@ -1840,7 +1890,7 @@ declare namespace backgroundTaskManager {
    *     that the continuous task is activated.
    * @param { Callback<ContinuousTaskActiveInfo> } callback - Callback used to return the activation information about a
    *     continuous task.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 20 dynamic
@@ -1852,7 +1902,7 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskActiveInfo> } callback - the callback of continuous task active.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
@@ -1868,7 +1918,7 @@ declare namespace backgroundTaskManager {
    *     that the continuous task is activated.
    * @param { Callback<ContinuousTaskActiveInfo> } [callback] - Callback used to unregister from the listener for
    *     continuous task activation. If this parameter is not passed, all listeners are unsubscribed from.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 20 dynamic
@@ -1880,7 +1930,7 @@ declare namespace backgroundTaskManager {
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskActiveInfo> } [callback] - the callback of continuous task active.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static

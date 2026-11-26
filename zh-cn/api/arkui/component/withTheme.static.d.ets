@@ -84,7 +84,8 @@ export declare interface WithThemeAttribute {
    * @returns { WithThemeAttribute } 返回WithThemeAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setWithThemeOptions(options: WithThemeOptions | undefined): this;
 
@@ -93,7 +94,8 @@ export declare interface WithThemeAttribute {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default applyAttributesFinish(): void;
 }
@@ -123,7 +125,8 @@ export declare function WithTheme(
  * @returns { WithTheme属性 } WithTheme属性
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  * @noninterop
  */
 @Builder

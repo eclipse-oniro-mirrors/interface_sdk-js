@@ -1364,7 +1364,7 @@ declare namespace hiAppEvent {
     customConfigs?: Record<string, string>;
 
     /**
-     * 数据处理者的配置名称，支持从配置文件中加载对应配置，默认为空。只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不超过256个字符。
+     * <!--RP4-->数据处理者的配置名称，支持从配置文件中加载对应配置，默认为空。只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不超过256个字符。<!--RP4End-->
      * 
      * **原子化服务API：** 从API version 20开始，该参数支持在原子化服务中使用。
      *
@@ -1391,12 +1391,12 @@ declare namespace hiAppEvent {
   function addProcessor(processor: Processor): long;
 
   /**
-   * 
-   * 添加数据处理者配置信息，通过配置文件配置处理者接收的事件名等信息，事件发生后处理者可以接收事件，使用Promise异步回调。
    *
-   * @param { string } processorName - 数据处理者的名称。名称只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不超过256个字符。
-   * @param { string } [configName] - 数据处理者的配置名称，支持从配置文件中加载对应配置，默认为“SDK_OCG”。只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不
-   *     超过256个字符。
+   * <!--RP1-->添加数据处理者配置信息，通过配置文件配置处理者接收的事件名等信息，事件发生后处理者可以接收事件，使用Promise异步回调。<!--RP1End-->
+   *
+   * @param { string } processorName - <!--RP2-->数据处理者的名称。名称只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不超过256个字符。<!--RP2End-->
+   * @param { string } [configName] - <!--RP3-->数据处理者的配置名称，支持从配置文件中加载对应配置，默认为“SDK_OCG”。只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不
+   *     超过256个字符。<!--RP3End-->
    * @returns { Promise<long> } Promise对象。返回添加的事件数据处理者的唯一ID，可用于移除该数据处理者。 添加失败返回11105001错误码。
    * @throws { BusinessError } 11105001 - Invalid parameter value. Possible causes: 1. Incorrect parameter length;
    *     2. Incorrect parameter format.
@@ -1516,6 +1516,22 @@ declare namespace hiAppEvent {
      * @since 23 static
      */
     autoStopSampling?: boolean;
+
+    /**
+     * 主线程超时发生时，是否采集EventHandler任务队列信息。
+     *
+     * true：使能采集EventHandler任务队列信息。
+     *
+     * false：不使能采集EventHandler任务队列信息。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    enableEventHandlerDump?: boolean;
   }
 
   /**
@@ -1686,8 +1702,8 @@ declare namespace hiAppEvent {
     /**
      * 是否使能[minidump](docroot://dfx/performance-analysis-kit-terminology.md#minidump)，默认值为false。
      *
-     * true：[params字段说明](docroot://dfx/hiappevent-watcher-crash-events.md#params字段说明)中log_over_limit字段判断生成的与已存在的故障日志文件的大
-     * 小总和上限调整为35MB。
+     * <!--RP5-->true：[params字段说明](docroot://dfx/hiappevent-watcher-crash-events.md#params字段说明)中log_over_limit字段判断生成的与已存在的故障日志文件的大
+     * 小总和上限调整为35MB。<!--RP5End-->
      *
      * false：log_over_limit字段判断生成的与已存在的故障日志文件的大小总和上限恢复为5MB。
      *

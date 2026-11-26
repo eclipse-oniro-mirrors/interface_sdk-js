@@ -3261,9 +3261,9 @@ declare class NodeAdapter {
    */
   set totalNodeCount(count: number);
   /**
-   * Get the total number of node count.
+   * 获取数据节点总数。
    *
-   * @returns { number } - Return the total number of node count.
+   * @returns { number } - 返回数据节点总数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

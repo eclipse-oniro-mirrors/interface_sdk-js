@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from '@ohos.base';
 import type Want from '@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * 本模块提供设置通用限制类策略能力。可以全局禁用和解除禁用蓝牙、HDC、USB、Wi-Fi、蜂窝数据、相机、麦克风等特性。
@@ -582,6 +583,45 @@ declare namespace restrictions {
     SUPER_PRIVACY = 53,
 
     /**
+     * 切换上网卡。
+     *
+     * 禁用后，默认上网卡不可切换，且仅允许当前默认上网卡承载上网业务。
+     * 语音、短信业务不受影响。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SWITCH_DATACARD = 54,
+
+    /**
+     * 增强信息。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ADVANCED_MESSAGE = 55,
+
+    /**
+     * 省电模式，包含省电模式、超级省电模式和户外探索。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_SAVING_MODE = 57,
+
+    /**
+     * 最近任务。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    RECENT_TASKS = 58,
+
+    /**
      * 控制中心。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -597,7 +637,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.1.0
      */
-    NOTIFICATION_CENTER = 60
+    NOTIFICATION_CENTER = 60,
+
+    /**
+     * 智慧多窗应用栏。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MULTI_WINDOW_DOCK = 62
   }
 
   /**
@@ -726,13 +775,49 @@ declare namespace restrictions {
     OPEN_FILE_BOOST = 10,
 
     /**
+     * 系统分享面板。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SYSTEM_SHARING_PANEL = 11,
+
+    /**
+     * 远程分享。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COLLABORATION_REMOTE_SHARE = 12,
+
+    /**
      * 自由多窗模式是一种支持用户在移动设备上进行多任务处理的交互方式。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
      * @since 26.1.0
      */
-    FREE_WINDOW = 14
+    FREE_WINDOW = 14,
+
+    /**
+     * 设备级证书。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    INSTALL_DEVICE_CERTIFICATE = 15,
+
+    /**
+     * 应用锁。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    APP_LOCK = 16
   }
 
   /**
@@ -1215,6 +1300,70 @@ declare namespace restrictions {
   function getDisallowedPolicyForAccount(admin: Want | null, feature: string, accountId: number): boolean;
 
   /**
+   * 设置禁用/启用指定用户的某特性。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
+   * @param { FeatureForAccount } feature - 要禁用或允许的用户特性。
+   *     <br>当feature值为SUPER_HUB时，如果已经通过
+   *     [addUserNonStopApps]{@link @ohos.enterprise.applicationManager:applicationManager.addUserNonStopApps}接口将中转站添加到当
+   *     前用户下不可关停的应用列表中，再调用本接口禁用中转站，会发生策略冲突，抛出9200010错误码。可以通过
+   *     [removeUserNonStopApps]{@link @ohos.enterprise.applicationManager:applicationManager.removeUserNonStopApps}接口将中
+   *     转站从当前用户下不可关停的应用列表中移除来解决冲突。
+   *     <br>当feature值为DISTRIBUTED_TRANSMISSION时，如果已经通过
+   *     [setDisallowedPolicyForAccount]{@link restrictions.setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number)}
+   *     接口禁用设备间分布式单向传输数据的能力，再调用本接口禁用分布式管理服务，会发生策略冲突，抛出9200010错误码。可以通过
+   *     [setDisallowedPolicyForAccount]{@link restrictions.setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number)}
+   *     接口取消禁用设备间分布式单向传输数据来解决冲突。
+   * @param { boolean } disallow - true表示禁用，false表示启用。
+   * @param { number } accountId - 用户ID，取值范围：大于等于0。
+   *     <br>accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}等接口来获取。
+   *     <br>当feature值为SUPER_HUB时，accountId仅支持传入当前用户的用户ID，不支持跨用户设置。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *         <br>1. The hardware does not support the capability.
+   *         <br>2. The chip does not support the capability.
+   *         <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *         but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number): void;
+
+  /**
+   * 获取指定用户的某特性状态。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
+   * @param { FeatureForAccount } feature - 指定要查询的用户特性。
+   * @param { number } accountId - 用户ID，取值范围：大于等于0。
+   *     <br>accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}等接口来获取。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询的策略。
+   *     <br>默认值：common.QueryPolicy.SELF。
+   * @returns { boolean } 返回true表示参数feature对应的特性被禁用，false表示参数feature对应的特性未被禁用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicyForAccount(feature: FeatureForAccount, accountId: number, queryPolicy?: common.QueryPolicy): boolean;
+
+  /**
    * 为指定用户添加禁止使用某特性的应用名单。指定用户下，添加到名单中的应用不允许使用指定的特性能力。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
@@ -1561,6 +1710,59 @@ declare namespace restrictions {
    * @since 26.0.0
    */
   function getUserRestrictedForAccount(admin: Want | null, settingsItem: SettingsForAccount, accountId: int): boolean;
+
+  /**
+   * 设置禁用/启用指定设备特性，禁用后相关设备特性无法被使用。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - 指定要禁用或允许的设备特性。<br/> **说明：** 应用申请权限
+   *     ohos.permission.PERSONAL_MANAGE_RESTRICTIONS并通过
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}激活为
+   *     [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod设备管理员)，可以使用此接口设置以下特性：
+   *     [FeatureForDevice]{@link restrictions.FeatureForDevice}中“BYOD”列标记为“√”的特性状态。
+   * @param { boolean } disallow - true表示禁止使用，false表示允许使用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *     but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicy(feature: FeatureForDevice, disallow: boolean): void;
+
+  /**
+   * 查询指定设备特性是否被禁用。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - 指定要查询的设备特性。<br/> **说明：** 应用申请权限
+   *     ohos.permission.PERSONAL_MANAGE_RESTRICTIONS并通过
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}激活为
+   *     [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod设备管理员)，可以使用此接口获取以下特性状态：
+   *     [FeatureForDevice]{@link restrictions.FeatureForDevice}中“BYOD”列标记为“√”的特性状态。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询的策略。
+   *     <br>默认值：common.QueryPolicy.SELF。
+   * @returns { boolean } 返回true表示feature对应的设备特性被禁用，false表示feature对应的设备特性未被禁用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicy(feature: FeatureForDevice, queryPolicy?: common.QueryPolicy): boolean;
 }
 
 export default restrictions;

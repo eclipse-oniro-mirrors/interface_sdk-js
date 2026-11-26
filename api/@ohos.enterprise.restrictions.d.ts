@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from '@ohos.base';
 import type Want from '@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * This **restrictions** module provides APIs for disallowing general features of devices. You can globally disable and
@@ -632,6 +633,46 @@ declare namespace restrictions {
     SUPER_PRIVACY = 53,
 
     /**
+     * Switch data card.
+     *
+     * Once this feature is disabled, the default data card cannot be switched,
+     * and only the current default data card can be used to access the internet.
+     * Voice and SMS services are not affected.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SWITCH_DATACARD = 54,
+
+    /**
+     * Enhanced information.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ADVANCED_MESSAGE = 55,
+
+    /**
+     * Power saving mode, including battery saver, ultra battery saver and expedition.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_SAVING_MODE = 57,
+
+    /**
+     * Recent Tasks.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    RECENT_TASKS = 58,
+
+    /**
      * Control Center.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -656,7 +697,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.1.0
      */
-     PARENT_CONTROL = 61
+    PARENT_CONTROL = 61,
+
+    /**
+     * Multi Window Dock.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MULTI_WINDOW_DOCK = 62
   }
 
   /**
@@ -803,13 +853,49 @@ declare namespace restrictions {
     OPEN_FILE_BOOST = 10,
 
     /**
+     * System sharing panel.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SYSTEM_SHARING_PANEL = 11,
+
+    /**
+     * Remote sharing.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COLLABORATION_REMOTE_SHARE = 12,
+
+    /**
      * Free window mode is an interaction method that supports users in performing multitasking on mobile devices.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
      * @since 26.1.0
      */
-    FREE_WINDOW = 14
+    FREE_WINDOW = 14,
+
+    /**
+     * Device-level certificate.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    INSTALL_DEVICE_CERTIFICATE = 15,
+
+    /**
+     * App lock.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    APP_LOCK = 16
   }
 
   /**
@@ -1380,6 +1466,73 @@ declare namespace restrictions {
   function getDisallowedPolicyForAccount(admin: Want | null, feature: string, accountId: number): boolean;
 
   /**
+   * Enable or disable a feature for a specified user.
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
+   * @param { FeatureForAccount } feature - The user attribute to disable or allow. <br>When feature is set to
+   *     SUPER_HUB, if the transit station has been added to the list of applications that cannot be stopped under the
+   *     current user through the
+   *     [addUserNonStopApps]{@link @ohos.enterprise.applicationManager:applicationManager.addUserNonStopApps} interface
+   *     and then this interface is invoked to disable the transit station, a policy conflict occurs and the error code
+   *     9200010 is reported. You can use the
+   *     [removeUserNonStopApps]{@link @ohos.enterprise.applicationManager:applicationManager.removeUserNonStopApps}
+   *     interface to remove the transit station from the list of applications that cannot be stopped under the current
+   *     user to resolve the conflict. <br>When feature is set to DISTRIBUTED_TRANSITIC, if the distributed
+   *     unidirectional data transmission capability between devices has been disabled by calling
+   *     [setDisallowedPolicyForAccount]{@link restrictions.setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number)},
+   *     a policy conflict occurs and the 9200010 error code is reported. You can use the
+   *     [setDisallowedPolicyForAccount]{@link restrictions.setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number)}
+   *     interface to undisable distributed unidirectional data transmission between devices to resolve conflicts.
+   * @param { boolean } disallow - The value true indicates that the function is disabled, and the value false
+   *     indicates that the function is enabled.
+   * @param { number } accountId - User ID. The value is greater than or equal to 0. <br>The account ID can be
+   *     obtained through interfaces such as
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}. <br>When
+   *     feature is set to SUPER_HUB, accountId can only be set to the ID of the current user.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *         <br>1. The hardware does not support the capability.
+   *         <br>2. The chip does not support the capability.
+   *         <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *         but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number): void;
+
+  /**
+   * Obtain the status of a feature of a specified subscriber.
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
+   * @param { FeatureForAccount } feature - Specifies the user attribute to be queried.
+   * @param { number } accountId - User ID. The value is greater than or equal to 0. <br>The account ID can be
+   *     obtained through interfaces such as
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}.
+   * @param { common.QueryPolicy } [queryPolicy] - Indicates the policy to be queried. <br>Default value:
+   *     common.QueryPolicy.SELF.
+   * @returns { boolean }If true is returned, the feature corresponding to the feature parameter is disabled. If
+   *     false is returned, the feature corresponding to the feature parameter is not disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicyForAccount(feature: FeatureForAccount, accountId: number, queryPolicy?: common.QueryPolicy): boolean;
+
+  /**
    * Adds a list of applications that are not allowed to use a feature for a specified user.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
@@ -1782,6 +1935,63 @@ declare namespace restrictions {
    * @since 26.0.0
    */
   function getUserRestrictedForAccount(admin: Want | null, settingsItem: SettingsForAccount, accountId: int): boolean;
+
+  /**
+   * Enable or disable the feature of a specified device. After the feature is disabled, the feature cannot be used.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - Specifies the device characteristics to disable or allow. <br/> **Note: *
+   *     * The application applies for the permission ohos.permission.PERSONAL_MANAGE_RESTRICTIONS and activates it as
+   *     the [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod device administrator) through the
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}. You can use this
+   *     interface to set the following features: the status of the features marked with "√" in the BYOD
+   *     column in [FeatureForDevice]{@link restrictions.FeatureForDevice}.
+   * @param { boolean } disallow - The value true indicates that the function is forbidden, and the value false
+   *     indicates that the function is allowed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *     but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicy(feature: FeatureForDevice, disallow: boolean): void;
+
+  /**
+   * Query whether the feature of a specified device is disabled.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - Specifies the device feature to be queried. <br/> **Note: * * An
+   *     application applies for the permission ohos.permission.PERSONAL_MANAGE_RESTRICTIONS and activates it as the
+   *     [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod device administrator) through
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}. This interface can
+   *     be used to obtain the status of the following features: the status of the features marked with "√" in the BYOD
+   *     column in [FeatureForDevice]{@link restrictions.FeatureForDevice}.
+   * @param { common.QueryPolicy } [queryPolicy] - Indicates the policy to be queried.
+   * <br>Default value: common.QueryPolicy.SELF.
+   * @returns { boolean }If true is returned, the device feature corresponding to the feature is disabled. If false
+   *     is returned, the device feature corresponding to the feature is not disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicy(feature: FeatureForDevice, queryPolicy?: common.QueryPolicy): boolean;
 }
 
 export default restrictions;

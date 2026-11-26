@@ -40,7 +40,7 @@ import { AttributeModifier, CommonMethod } from "./common";
 export declare enum IndexerAlign {
 
   /**
-     * A dialog box is displayed on the right of the index bar.
+     * 提示弹窗显示在索引条右侧。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -49,7 +49,7 @@ export declare enum IndexerAlign {
   Left,
 
   /**
-     * A dialog box is displayed on the left of the index bar.
+     * 提示弹窗显示在索引条左侧。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -58,7 +58,7 @@ export declare enum IndexerAlign {
   Right,
 
   /**
-     * A dialog box is displayed on the start of the index bar.
+     * 在从左到右（LTR）场景下，提示弹窗显示在索引条右侧的位置。在RTL场景下，提示弹窗显示在索引条左侧的位置。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -67,7 +67,7 @@ export declare enum IndexerAlign {
   START,
 
   /**
-     * A dialog box is displayed on the end of the index bar.
+     * 在从左到右（LTR）场景下，提示弹窗显示在索引条左侧的位置。在RTL场景下，提示弹窗显示在索引条右侧的位置。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -497,7 +497,8 @@ export declare interface AlphabetIndexerAttribute extends CommonMethod {
    * @returns { AlphabetIndexerAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setAlphabetIndexerOptions(info: AlphabetIndexerOptions): this;
 }
@@ -523,7 +524,8 @@ export declare function AlphabetIndexer(
  * @returns { AlphabetIndexerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 @Builder
 export declare function AlphabetIndexer(

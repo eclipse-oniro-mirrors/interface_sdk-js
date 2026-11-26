@@ -678,6 +678,40 @@ declare namespace distributedKVStore {
      * @since 24 dynamic&static
      */
     rootDir?: string;
+
+    /**
+     * KV存储是否开启dump-stack on文件删除开关，用于定位问题数据库文件被意外删除。
+     *
+     * **true**：启用文件删除时转储堆栈功能。打开KV存储后，文件系统输出调用通过文件接口直接删除数据库文件（**db**、**wal**、**shm**）时删除操作堆栈。
+     *
+     * **false**（默认）：删除文件时禁用dump-stack。
+     *
+     * 该参数只对主备数据库的**db**、**wal**、**shm**文件生效。
+     *
+     * 该参数依赖于设备文件系统的dump-stack能力。如果文件系统没有支持该能力，则该参数不生效，不影响打开KV存储。
+     *
+     * 此参数不持久化到元数据库，每次KV存储时都需要配置已打开。KV存储的删除、恢复、重建等常规操作，不触发调用栈输出。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.DistributedDataManager.KVStore.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    dumpStackOnFileDeletion?: boolean;
+
+    /**
+     * 启动checkpoint的大小阈值。当WAL文件大小达到这个值时，会触发将WAL内容合并回主数据库文件。
+     * 单位：KB。取值范围：[16, 524288]。默认值：204800。
+     * 注意：
+     * - 较大的值会降低检查点频率，但会增加WAL文件大小和内存使用峰值。
+     *
+     * @syscap SystemCapability.DistributedDataManager.KVStore.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    walStartCheckpointSize?: int;
   }
 
   /**

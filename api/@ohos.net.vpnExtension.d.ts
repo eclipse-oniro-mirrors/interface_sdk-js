@@ -333,6 +333,24 @@ declare namespace vpnExtension {
     protect(socketFd: int): Promise<void>;
 
     /**
+     * Protects sockets against a VPN connection. The data sent through sockets is directly transmitted over the
+     * physical network and therefore the traffic does not traverse through the VPN. This API returns the result
+     * synchronously.
+     *
+     * @param { int } socketFd - Socket file descriptor. It can be obtained through
+     *     [getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd()}.
+     *     <br>The value should be an integer.
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @throws { BusinessError } 2203004 - Invalid socket file descriptor.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    protectSync(socketFd: int): void;
+
+    /**
      * Destroys a VPN. This API uses a promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value.
@@ -508,6 +526,18 @@ declare namespace vpnExtension {
      */
     blockedApplications?: Array<string>;
 
+    /**
+     * Whether local network (LAN) traffic is routed through the VPN.
+     * When set to false, traffic to local network addresses (for example, 10.0.0.0/8,
+     * 172.16.0.0/12 and 192.168.0.0/16) bypasses the VPN and is sent directly over the
+     * physical network interface. The default value is false.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    isLocalNetworkRouted?: boolean;
   }
 }
 export default vpnExtension;

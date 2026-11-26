@@ -616,7 +616,11 @@ declare namespace commonEventManager {
      *
      * > **说明：**
      * >
-     * > 三方应用只能监听自身应用的安装事件。
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的安装事件。<!--DelEnd-->
+     * >
+     * > 三方应用默认只能监听自身应用的安装事件。若三方应用需要监听InHouse应用的安装事件，需要被监听的InHouse应用在app.json5的
+     * > [allowListenBundleChangedEvent](docroot://quick-start/app-configuration-file.md)中配置本应用的
+     * > [appIdentifier](docroot://quick-start/common-problem-of-application.md#什么是appidentifier)。
      *
      * @syscap SystemCapability.Notification.CommonEvent
      * @since 9 dynamic
@@ -643,7 +647,17 @@ declare namespace commonEventManager {
     COMMON_EVENT_MY_PACKAGE_REPLACED = 'usual.event.MY_PACKAGE_REPLACED',
 
     /**
-     * 表示现有的应用程序包从设备中移除的事件。
+     * 表示已从设备卸载已安装的应用程序，但应用程序数据保留的公共事件的操作。
+     *
+     * 在设备指定用户下卸载指定的应用程序包，将会触发事件通知服务发布该系统公共事件。
+     *
+     * > **说明：**
+     * >
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的卸载事件。<!--DelEnd-->
+     * >
+     * > 三方应用默认只能监听自身应用的卸载事件。若三方应用需要监听InHouse应用的卸载事件，需要被监听的InHouse应用在app.json5的
+     * > [allowListenBundleChangedEvent](docroot://quick-start/app-configuration-file.md)中配置本应用的
+     * > [appIdentifier](docroot://quick-start/common-problem-of-application.md#什么是appidentifier)。
      *
      * @syscap SystemCapability.Notification.CommonEvent
      * @since 9 dynamic
@@ -676,7 +690,11 @@ declare namespace commonEventManager {
      *
      * > **说明：**
      * >
-     * > 三方应用只能监听自身应用的更改事件。
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的更改事件。<!--DelEnd-->
+     * >
+     * > 三方应用默认只能监听自身应用的更改事件。若三方应用需要监听InHouse应用的更新事件，需要被监听的InHouse应用在app.json5的
+     * > [allowListenBundleChangedEvent](docroot://quick-start/app-configuration-file.md)中配置本应用的
+     * > [appIdentifier](docroot://quick-start/common-problem-of-application.md#什么是appidentifier)。
      *
      * @syscap SystemCapability.Notification.CommonEvent
      * @since 9 dynamic
@@ -690,6 +708,8 @@ declare namespace commonEventManager {
      * 在设备上指定用户重启应用包并终止其所有进程，将会触发事件通知服务发布该系统公共事件。
      *
      * > **说明：**
+     * >
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的重启事件。<!--DelEnd-->
      * >
      * > 三方应用只能监听自身应用的重启事件。
      *
@@ -706,6 +726,8 @@ declare namespace commonEventManager {
      *
      * > **说明：**
      * >
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的数据清理事件。<!--DelEnd-->
+     * >
      * > 三方应用只能监听自身应用的数据清理事件。
      *
      * @syscap SystemCapability.Notification.CommonEvent
@@ -721,7 +743,11 @@ declare namespace commonEventManager {
      *
      * > **说明：**
      * >
-     * > 三方应用只能监听自身应用的缓存清理事件。
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的缓存清理事件。<!--DelEnd-->
+     * >
+     * > 三方应用默认只能监听自身应用的缓存清理事件。若三方应用需要监听InHouse应用的缓存清理事件，需要被监听的InHouse应用在app.json5的
+     * > [allowListenBundleChangedEvent](docroot://quick-start/app-configuration-file.md)中配置本应用的
+     * > [appIdentifier](docroot://quick-start/common-problem-of-application.md#什么是appidentifier)。
      *
      * @syscap SystemCapability.Notification.CommonEvent
      * @since 9 dynamic
@@ -2329,6 +2355,8 @@ declare namespace commonEventManager {
      *
      * > **说明：**
      * >
+     * > <!--Del-->系统应用可以监听自身应用和其他应用的快速修复事件。<!--DelEnd-->
+     * >
      * > 三方应用只能监听自身应用的快速修复事件。
      *
      * @syscap SystemCapability.Notification.CommonEvent
@@ -3161,9 +3189,17 @@ declare namespace commonEventManager {
     COMMON_EVENT_SANDBOX_BUNDLE_ADDED = 'usual.event.SANDBOX_BUNDLE_ADDED',
 
     /**
-     * 表示应用的技能信息已经发生变更的公共事件.
+     * 表示设备上应用的skill发生变化的公共事件。
      *
-     * 要订阅此事件，您的应用必须具备ohos.permission.MANAGE_SKILL权限.
+     * 在设备上指定用户下安装、更新、卸载了包含skill的应用程序，将会触发事件通知服务发布该系统公共事件。
+     *
+     * > **说明：**
+     * >
+     * > - 应用默认只能接收自身的Skill变化事件。
+     * >
+     * > - 应用申请ohos.permission.MANAGE_SKILL权限后，可接收自身及其他应用的Skill变化事件。<!--Del-->
+     * >
+     * > - 对于系统应用，建议优先申请ohos.permission.MANAGE_SKILL_PRIVILEGE权限，接收自身及其他应用的Skill变化事件。<!--DelEnd-->
      *
      * @syscap SystemCapability.Notification.CommonEvent
      * @stagemodelonly

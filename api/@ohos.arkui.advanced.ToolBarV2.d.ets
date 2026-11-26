@@ -134,7 +134,7 @@ export class ToolBarV2SymbolGlyph {
  */
 export interface ToolBarV2SymbolGlyphOptions {
   /**
-   * Modifier of toolbarV2's normal symbol.
+   * Modifier of ToolBarV2's normal symbol.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -144,7 +144,7 @@ export interface ToolBarV2SymbolGlyphOptions {
    */
   normal: SymbolGlyphModifier;
   /**
-   * Modifier of toolbarV2's activated symbol.
+   * Modifier of ToolBarV2's activated symbol.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -702,7 +702,7 @@ export declare class ToolBarV2Modifier {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export declare enum ToolbarV2ItemPlacement {
+export declare enum ToolBarV2ItemPlacement {
   /**
    * Center area (default). Suitable for primary toolbar actions displayed in the main content region.
    *
@@ -754,7 +754,7 @@ export declare enum ToolbarV2ItemPlacement {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
+export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   /**
    * Custom content builder for the toolbar item. When set, content and icon are ignored.
    * Default value: undefined.
@@ -768,7 +768,7 @@ export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
   @Trace
   builder?: CustomBuilder;
   /**
-   * Define advanced toolbarV2 title settings. When not provided, no title is rendered.
+   * Define advanced ToolBarV2 title settings. When not provided, no title is rendered.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -777,10 +777,10 @@ export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
    * @since 26.1.0 dynamic
    */
   @Trace
-  titleConfigs?: ToolbarV2TitleConfigs;
+  titleConfigs?: ToolBarV2TitleConfigs;
   /**
    * Placement position of the toolbar item.
-   * Default value: ToolbarV2ItemPlacement.MAIN.
+   * Default value: ToolBarV2ItemPlacement.MAIN.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -789,7 +789,7 @@ export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
    * @since 26.1.0 dynamic
    */
   @Trace
-  placement?: ToolbarV2ItemPlacement;
+  placement?: ToolBarV2ItemPlacement;
   /**
    * Display priority of the toolbar item in the layout container.
    * Higher values indicate higher display priority.
@@ -910,22 +910,22 @@ export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
    * @since 26.1.0 dynamic
    */
   @Trace
-  groupStyle?: ToolbarV2ItemGroupStyle;
+  groupStyle?: ToolBarV2ItemGroupStyle;
   /**
-   * The constructor used to create a AdvancedToolbarV2Item object.
+   * The constructor used to create a AdvancedToolBarV2Item object.
    *
-   * @param { AdvancedToolbarV2ItemOptions } [options] - item info.
+   * @param { AdvancedToolBarV2ItemParams } params - item info.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: AdvancedToolbarV2ItemOptions);
+  constructor(params: AdvancedToolBarV2ItemParams);
 }
 
 /**
- * Declare the options of AdvancedToolbarV2Item.
+ * Declare the options of AdvancedToolBarV2Item.
  *
  * Extends {@link ToolBarV2ItemOptions} with advanced fields. `content` is
  * inherited as a required field; use `isShowText` on the item to control
@@ -937,7 +937,7 @@ export declare class AdvancedToolbarV2Item extends ToolBarV2Item {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface AdvancedToolbarV2ItemOptions extends ToolBarV2ItemOptions {
+export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
   /**
    * Custom content builder for the toolbar item. When set, content and icon are ignored.
    * Default value: undefined.
@@ -950,7 +950,7 @@ export interface AdvancedToolbarV2ItemOptions extends ToolBarV2ItemOptions {
    */
   builder?: CustomBuilder;
   /**
-   * Define advanced toolbarV2 title settings. When not provided, no title is rendered.
+   * Define advanced ToolBarV2 title settings. When not provided, no title is rendered.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -958,10 +958,10 @@ export interface AdvancedToolbarV2ItemOptions extends ToolBarV2ItemOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  titleConfigs?: ToolbarV2TitleConfigs;
+  titleConfigs?: ToolBarV2TitleConfigs;
   /**
    * Placement position of the toolbar item.
-   * Default value: ToolbarV2ItemPlacement.MAIN.
+   * Default value: ToolBarV2ItemPlacement.MAIN.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -969,7 +969,7 @@ export interface AdvancedToolbarV2ItemOptions extends ToolBarV2ItemOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  placement?: ToolbarV2ItemPlacement;
+  placement?: ToolBarV2ItemPlacement;
   /**
    * Display priority of the toolbar item in the layout container.
    * Higher values indicate higher display priority.
@@ -1081,39 +1081,7 @@ export interface AdvancedToolbarV2ItemOptions extends ToolBarV2ItemOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  groupStyle?: ToolbarV2ItemGroupStyle;
-}
-
-/**
- * Defines the toolbar background visibility.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamic
- */
-export declare enum BarBackgroundVisibility {
-  /**
-   * Visible (default): the toolbar background is shown normally.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  VISIBLE = 0,
-  /**
-   * Hidden: the toolbar background is transparent.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  HIDDEN = 1
+  groupStyle?: ToolBarV2ItemGroupStyle;
 }
 
 /**
@@ -1125,7 +1093,7 @@ export declare enum BarBackgroundVisibility {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2PaddingOptions {
+export interface ToolBarV2PaddingOptions {
   /**
    * Padding at the start of the main axis.
    * When horizontal: left padding. When vertical: top padding.
@@ -1159,7 +1127,7 @@ export interface ToolbarV2PaddingOptions {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2OverflowMenuStyle {
+export interface ToolBarV2OverflowMenuStyle {
   /**
    * Font configuration for overflow menu items.
    * Default value: undefined.
@@ -1218,7 +1186,7 @@ export interface ToolbarV2OverflowMenuStyle {
 }
 
 /**
- * Defines the constructor options for ToolbarV2TitleStyle.
+ * Defines the constructor options for ToolBarV2TitleStyle.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1226,7 +1194,7 @@ export interface ToolbarV2OverflowMenuStyle {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2TitleStyleOptions {
+export interface ToolBarV2TitleStyleOptions {
   /**
    * Font size of the title text.
    * Default value: 20fp.
@@ -1283,7 +1251,7 @@ export interface ToolbarV2TitleStyleOptions {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class ToolbarV2TitleStyle {
+export declare class ToolBarV2TitleStyle {
   /**
    * Font size of the title text.
    * Default value: 20fp.
@@ -1333,20 +1301,20 @@ export declare class ToolbarV2TitleStyle {
   @Trace
   minLength?: LengthMetrics;
   /**
-   * Constructs a ToolbarV2TitleStyle instance.
+   * Constructs a ToolBarV2TitleStyle instance.
    *
-   * @param { ToolbarV2TitleStyleOptions } [options] - Constructor options.
+   * @param { ToolBarV2TitleStyleOptions } [options] - Constructor options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: ToolbarV2TitleStyleOptions);
+  constructor(options?: ToolBarV2TitleStyleOptions);
 }
 
 /**
- * Defines the constructor options for ToolbarV2TitleConfigs.
+ * Defines the constructor options for ToolBarV2TitleConfigs.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1354,9 +1322,9 @@ export declare class ToolbarV2TitleStyle {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2TitleOptions {
+export interface ToolBarV2TitleOptions {
   /**
-   * Title text content. Required when constructing ToolbarV2TitleConfigs.
+   * Title text content. Required when constructing ToolBarV2TitleConfigs.
    * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1367,9 +1335,7 @@ export interface ToolbarV2TitleOptions {
    */
   content?: ResourceStr;
   /**
-   * Placement position of the title within the toolbar.
-   * Reuses `ToolbarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
-   * Default value: ToolbarV2ItemPlacement.LEADING.
+   * Subtitle text content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1377,7 +1343,19 @@ export interface ToolbarV2TitleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  placement?: ToolbarV2ItemPlacement;
+  subTitleContent?: ResourceStr;
+  /**
+   * Placement position of the title within the toolbar.
+   * Reuses `ToolBarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
+   * Default value: ToolBarV2ItemPlacement.LEADING.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  placement?: ToolBarV2ItemPlacement;
   /**
    * Whether the title is visible.
    * Default value: true.
@@ -1398,14 +1376,24 @@ export interface ToolbarV2TitleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  style?: ToolbarV2TitleStyle;
+  style?: ToolBarV2TitleStyle;
+  /**
+   * Subtitle text style.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  subTitleStyle?: ToolBarV2TitleStyle;
 }
 
 /**
  * Title configuration. When not provided, no title is rendered.
  *
  * The title participates in layout at the same level as toolbar items.
- * The title reuses `ToolbarV2ItemPlacement` (`LEADING` / `MAIN` / `TRAILING`)
+ * The title reuses `ToolBarV2ItemPlacement` (`LEADING` / `MAIN` / `TRAILING`)
  * to determine the rendering area, and is arranged in the same area as items with the same placement.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1415,9 +1403,9 @@ export interface ToolbarV2TitleOptions {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class ToolbarV2TitleConfigs {
+export declare class ToolBarV2TitleConfigs {
   /**
-   * Title text content. Required when constructing ToolbarV2TitleConfigs.
+   * Title text content. Required when constructing ToolBarV2TitleConfigs.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1428,9 +1416,20 @@ export declare class ToolbarV2TitleConfigs {
   @Trace
   content: ResourceStr;
   /**
+   * Subtitle text content.
+   * Default value: undefined. No content is available when this parameter is not set.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  subTitleContent?: ResourceStr;
+  /**
    * Placement position of the title within the toolbar.
-   * Reuses `ToolbarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
-   * Default value: ToolbarV2ItemPlacement.LEADING.
+   * Reuses `ToolBarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
+   * Default value: ToolBarV2ItemPlacement.LEADING.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1439,7 +1438,7 @@ export declare class ToolbarV2TitleConfigs {
    * @since 26.1.0 dynamic
    */
   @Trace
-  placement?: ToolbarV2ItemPlacement;
+  placement?: ToolBarV2ItemPlacement;
   /**
    * Whether the title is visible.
    * Default value: true.
@@ -1462,22 +1461,33 @@ export declare class ToolbarV2TitleConfigs {
    * @since 26.1.0 dynamic
    */
   @Trace
-  style?: ToolbarV2TitleStyle;
+  style?: ToolBarV2TitleStyle;
   /**
-   * Constructs a ToolbarV2TitleConfigs instance.
+   * Subtitle text style.
    *
-   * @param { ToolbarV2TitleOptions } [options] - Constructor options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: ToolbarV2TitleOptions);
+  @Trace
+  subTitleStyle?: ToolBarV2TitleStyle;
+  /**
+   * Constructs a ToolBarV2TitleConfigs instance.
+   *
+   * @param { ToolBarV2TitleOptions } [options] - Constructor options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: ToolBarV2TitleOptions);
 }
 
 /**
- * Defines the constructor options for ToolbarV2ItemGroupStyle.
+ * Defines the constructor options for ToolBarV2ItemGroupStyle.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1485,11 +1495,11 @@ export declare class ToolbarV2TitleConfigs {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2ItemGroupStyleOptions {
+export interface ToolBarV2ItemGroupStyleOptions {
   /**
    * Placement position of the group within the toolbar.
    * The group placement takes precedence over the placement of individual items within the group.
-   * Default value: ToolbarV2ItemPlacement.MAIN.
+   * Default value: ToolBarV2ItemPlacement.MAIN.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1497,7 +1507,7 @@ export interface ToolbarV2ItemGroupStyleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  placement?: ToolbarV2ItemPlacement;
+  placement?: ToolBarV2ItemPlacement;
   /**
    * Spacing between items within the group.
    * Default value: 0vp.
@@ -1530,7 +1540,7 @@ export interface ToolbarV2ItemGroupStyleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  padding?: ToolbarV2PaddingOptions;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * Border radius of the group container.
    * Default value: undefined.
@@ -1587,11 +1597,11 @@ export interface ToolbarV2ItemGroupStyleOptions {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class ToolbarV2ItemGroupStyle {
+export declare class ToolBarV2ItemGroupStyle {
   /**
    * Placement position of the group within the toolbar.
    * The group placement takes precedence over the placement of individual items within the group.
-   * Default value: ToolbarV2ItemPlacement.MAIN.
+   * Default value: ToolBarV2ItemPlacement.MAIN.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1600,7 +1610,7 @@ export declare class ToolbarV2ItemGroupStyle {
    * @since 26.1.0 dynamic
    */
   @Trace
-  placement?: ToolbarV2ItemPlacement;
+  placement?: ToolBarV2ItemPlacement;
   /**
    * Spacing between items within the group.
    * Default value: 0vp.
@@ -1636,7 +1646,7 @@ export declare class ToolbarV2ItemGroupStyle {
    * @since 26.1.0 dynamic
    */
   @Trace
-  padding?: ToolbarV2PaddingOptions;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * Border radius of the group container.
    * Default value: undefined.
@@ -1686,20 +1696,52 @@ export declare class ToolbarV2ItemGroupStyle {
   @Trace
   stateEffect?: boolean;
   /**
-   * Constructs a ToolbarV2ItemGroupStyle instance.
+   * Constructs a ToolBarV2ItemGroupStyle instance.
    *
-   * @param { ToolbarV2ItemGroupStyleOptions } [options] - Constructor options.
+   * @param { ToolBarV2ItemGroupStyleOptions } [options] - Constructor options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: ToolbarV2ItemGroupStyleOptions);
+  constructor(options?: ToolBarV2ItemGroupStyleOptions);
 }
 
 /**
- * Defines the constructor options for ToolbarV2StyleConfigs.
+ * System material styles of the toolbar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @crossplatform
+ * @since 26.1.0 dynamic
+ */
+export declare enum ToolBarV2MaterialStyle {
+  /**
+   * No system material effect.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic
+   */
+  NONE = 0,
+  /**
+   * Default material style.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic
+   */
+  DEFAULT = 1
+}
+
+/**
+ * Defines the constructor options for ToolBarV2StyleConfigs.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1707,7 +1749,7 @@ export declare class ToolbarV2ItemGroupStyle {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2StyleOptions {
+export interface ToolBarV2StyleOptions {
   /**
    * Toolbar padding. Each edge can be set independently.
    * Default value: undefined.
@@ -1718,18 +1760,7 @@ export interface ToolbarV2StyleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  padding?: ToolbarV2PaddingOptions;
-  /**
-   * Whether the toolbar background is visible.
-   * Default value: BarBackgroundVisibility.VISIBLE.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  backgroundVisibility?: BarBackgroundVisibility;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * Background color of the toolbar.
    * Default value: $r('sys.color.comp_background_primary').
@@ -1763,6 +1794,19 @@ export interface ToolbarV2StyleOptions {
    * @since 26.1.0 dynamic
    */
   systemBackgroundMaterial?: uiMaterial.Material;
+  /**
+   * Simplified system material style of the toolbar.
+   * If both systemBackgroundMaterial and systemMaterialStyle are set, systemBackgroundMaterial takes precedence.
+   * Default value: undefined. If the value is undefined or this parameter is not set,
+   * ToolBarV2MaterialStyle.NONE is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic
+   */
+  systemMaterialStyle?: ToolBarV2MaterialStyle;
   /**
    * Spacing between item groups.
    * Default value: 12vp, value range [8vp, 20vp], clamped to the boundary when out of range.
@@ -1854,7 +1898,7 @@ export interface ToolbarV2StyleOptions {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class ToolbarV2StyleConfigs {
+export declare class ToolBarV2StyleConfigs {
   /**
    * Toolbar padding. Each edge can be set independently.
    * Default value: undefined.
@@ -1866,19 +1910,7 @@ export declare class ToolbarV2StyleConfigs {
    * @since 26.1.0 dynamic
    */
   @Trace
-  padding?: ToolbarV2PaddingOptions;
-  /**
-   * Whether the toolbar background is visible.
-   * Default value: BarBackgroundVisibility.VISIBLE.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  @Trace
-  backgroundVisibility?: BarBackgroundVisibility;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * Background color of the toolbar.
    * Default value: $r('sys.color.comp_background_primary').
@@ -1916,6 +1948,19 @@ export declare class ToolbarV2StyleConfigs {
    */
   @Trace
   systemBackgroundMaterial?: uiMaterial.Material;
+  /**
+   * Simplified material style of the toolbar.
+   * If both systemBackgroundMaterial and systemMaterialStyle are set, systemBackgroundMaterial takes precedence.
+   * Default value: undefined. If this parameter is not set, ToolBarV2MaterialStyle.NONE is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic
+   */
+  @Trace
+  systemMaterialStyle?: ToolBarV2MaterialStyle;
   /**
    * Spacing between item groups.
    * Default value: 12vp, value range [8vp, 20vp], clamped to the boundary when out of range.
@@ -1991,16 +2036,28 @@ export declare class ToolbarV2StyleConfigs {
   @Trace
   borderRadius?: LengthMetrics;
   /**
-   * Constructs a ToolbarV2StyleConfigs instance.
+   * Whether to enable the pressed-state effect.
+   * Default value: true.
    *
-   * @param { ToolbarV2StyleOptions } [options] - Constructor options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: ToolbarV2StyleOptions);
+  @Trace
+  stateEffect?: boolean;
+  /**
+   * Constructs a ToolBarV2StyleConfigs instance.
+   *
+   * @param { ToolBarV2StyleOptions } [options] - Constructor options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor(options?: ToolBarV2StyleOptions);
 }
 
 /**
@@ -2066,7 +2123,7 @@ export declare class AdvancedToolBarV2Modifier {
    *
    * Controls background, padding, groupSpace, border, and item active/disabled colors.
    *
-   * @param { ToolbarV2StyleConfigs } styleConfigs - The style configuration object.
+   * @param { ToolBarV2StyleConfigs } styleConfigs - The style configuration object.
    * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2074,11 +2131,11 @@ export declare class AdvancedToolBarV2Modifier {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  style(styleConfigs: ToolbarV2StyleConfigs): AdvancedToolBarV2Modifier;
+  style(styleConfigs: ToolBarV2StyleConfigs): AdvancedToolBarV2Modifier;
   /**
    * Sets the style configuration for the overflow menu popup.
    *
-   * @param { ToolbarV2OverflowMenuStyle } menuStyle - The overflow menu style configuration object.
+   * @param { ToolBarV2OverflowMenuStyle } menuStyle - The overflow menu style configuration object.
    * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2086,7 +2143,7 @@ export declare class AdvancedToolBarV2Modifier {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  overflowMenuStyle(menuStyle: ToolbarV2OverflowMenuStyle): AdvancedToolBarV2Modifier;
+  overflowMenuStyle(menuStyle: ToolBarV2OverflowMenuStyle): AdvancedToolBarV2Modifier;
 }
 
 /**
@@ -2095,7 +2152,7 @@ export declare class AdvancedToolBarV2Modifier {
  * entries can be displayed at the bottom. Any excess entries are collapsed into a "More" item, which is displayed on
  * the far right. It is suitable for scenarios where quick operations on the current page content are needed, helping
  * users quickly access common functions and improving operation efficiency.<br />
- * ToolbarV2 supports configuring advanced toolbar items via `AdvancedToolbarV2Item` (which extends `ToolBarV2Item`).
+ * ToolBarV2 supports configuring advanced toolbar items via `AdvancedToolBarV2Item` (which extends `ToolBarV2Item`).
  * A toolbar with configured advanced items is more flexible, allowing you to customize titles, overflow
  * menus, item grouping, and more.
  * This component is implemented based on
@@ -2130,8 +2187,8 @@ export declare class AdvancedToolBarV2Modifier {
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
-   * Define toolbarV2 item list. Using ToolBarV2Item[] constitutes a simple toolbar.
-   * `AdvancedToolbarV2Item` (which extends `ToolBarV2Item`) can be used for advanced
+   * Define ToolBarV2 item list. Using ToolBarV2Item[] constitutes a simple toolbar.
+   * `AdvancedToolBarV2Item` (which extends `ToolBarV2Item`) can be used for advanced
    * layout scenarios such as titles, overflow menus, and item grouping.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2144,7 +2201,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarList: ToolBarV2Item[];
   /**
-   * Define toolbarV2 activate item index, default is -1. Which is only used for ToolBarV2Item.
+   * Define ToolBarV2 activate item index, default is -1. Which is only used for ToolBarV2Item.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2155,7 +2212,7 @@ export declare struct ToolBarV2 {
   @Param
   activatedIndex?: number;
   /**
-   * Define toolbarV2 divider Modifier.
+   * Define ToolBarV2 divider Modifier.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2166,7 +2223,7 @@ export declare struct ToolBarV2 {
   @Param
   dividerModifier?: DividerModifier;
   /**
-   * Define toolbarV2 modifier.
+   * Define ToolBarV2 modifier.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2177,7 +2234,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarModifier?: ToolBarV2Modifier;
   /**
-   * Define advanced toolbarV2 modifier. Merges layout attributes, style configs,
+   * Define advanced ToolBarV2 modifier. Merges layout attributes, style configs,
    * and overflow menu style into a single modifier.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

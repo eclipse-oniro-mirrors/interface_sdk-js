@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 备份恢复扩展能力
  * @kit CoreFileKit
  */
 

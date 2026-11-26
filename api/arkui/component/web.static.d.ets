@@ -2252,7 +2252,7 @@ export declare class WebContextMenuParam {
     /**
      * Returns a Text Fragment link URL that points to the currently highlighted text.
      *
-     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @returns { string } Return the Text Fragment link URL, or return an empty string if not available.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.1.0 static
@@ -7196,6 +7196,23 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.1.0 static
      */
     default visitedLinkPersistEnabled(enabled: boolean | undefined): this;
+
+    /**
+     * Set the grip adaptation mode of the web page pop-up box (time selector/file selector) in the web component.
+     *
+     * When this function is enabled, click the date/time/datetime-local/file type on the web page on a wide-screen
+     * device(the width of the application window is greater than 600 vp).
+     * Input element. The system pop-up dialog box is displayed near the clicked element.
+     * After this function is disabled, the current layout(center or bottom of the screen) of the dialog box is
+     * retained, which is the same as that when this attribute is not set.
+     *
+     * @param { WebHandednessFollowMode } mode - Grip adaptation mode.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default adaptToHandedness(mode: WebHandednessFollowMode): this;
 }
 
 /**
@@ -7418,7 +7435,16 @@ export declare interface AcceptableFileType {
     acceptableType: Array<string>;
 }
 /**
- * Defines Web Component.
+ * This module provides **Web** components with web page display capabilities. For details about web control
+ * capabilities, see [Module Description]{@link @ohos.web.webview:webview}.
+ *
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this component are supported since API version 8. Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The sample effect is subject to the actual device.
  *
  * @param { WebOptions } value.
  * @param { CustomBuilder } [content_] - container
@@ -7883,4 +7909,27 @@ export declare interface OnZoomChangeEvent {
    * @since 26.1.0 static
    */
   newZoomFactor: double;
+}
+
+/**
+ * Defines the grip adaptation mode of the web page pop-up box.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum WebHandednessFollowMode {
+    /**
+     * No adaptation. The pop-up box keeps the current layout.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    NONE = 0,
+    /**
+     * The pop-up box follows the position of the component that triggers it (the most recently interacted component).
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    FOLLOW_ANCHOR = 1
 }

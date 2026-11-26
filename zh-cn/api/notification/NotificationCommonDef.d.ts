@@ -36,7 +36,7 @@ export interface BundleOption {
   bundle: string;
 
   /**
-   * 应用的UID。从ApplicationInfo获取，默认为0。 应用分身场景下，此参数为必填项。
+   * 应用的UID。从ApplicationInfo获取，默认为0。 应用分身<!--Del-->或车机<!--DelEnd-->场景下，此参数为必填项。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
@@ -65,6 +65,7 @@ export interface GrantedBundleInfo {
   /**
    * 应用的分身索引标识，仅在分身应用中生效。从ApplicationInfo中appIndex获取。
    *
+   * @readonly [since 22 - 26.0.1]
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
    * @since 23 static

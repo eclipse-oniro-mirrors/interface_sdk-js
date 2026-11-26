@@ -81,7 +81,7 @@ declare namespace hiTraceChain {
      * 无开始结束信息标志。
      * 
      * 调试场景下设置该标志，调用开始跟踪接口[begin()]{@link hiTraceChain.begin}和结束跟踪接口[end()]{@link hiTraceChain.end}时，
-     * 分别会打印开始、结束跟踪信息hilo日志；默认不打印开始、结束跟踪信息hilog日志。
+     * 分别会打印开始、结束跟踪信息hilog日志；默认不打印开始、结束跟踪信息hilog日志。
      *
      * @syscap SystemCapability.HiviewDFX.HiTrace
      * @since 8 dynamic
@@ -275,6 +275,8 @@ declare namespace hiTraceChain {
    * 当前线程TLS（Thread Local Storage，线程本地存储）中不存在有效的HiTraceId时，生成有效的HiTraceId并设置到当前线程TLS中，返回该
    * HiTraceId。当前线程TLS中已存在有效的HiTraceId时，不会开始新的跟踪，返回各属性值均为0的无效HiTraceId。
    *
+   * 该接口需与结束跟踪接口[end()]{@link hiTraceChain.end}配套使用。
+   *
    * @param { string } name - 跟踪业务名。该参数的长度不超过63Byte，超出部分将被截断。
    * @param { int } [flags] - 跟踪标志组合，具体可参考[HiTraceFlag]{@link hiTraceChain.HiTraceFlag}。当需要跟踪异步调用时设置
    * INCLUDE_ASYNC，不创建分支信息时设置DONOT_CREATE_SPAN，调试场景下设置TP_INFO可打印埋点信息。默认值为0，表示只跟踪同步调用、创建分支信
@@ -358,7 +360,7 @@ declare namespace hiTraceChain {
    * 接收到SR时，进行同步HiTraceMeter开始打点；当type为服务端发送SS且客户端接收到CR时，进行同步HiTraceMeter结束打点；CS和CR以及SR和SS的
    * 信息埋点需配套使用。否则，HiTraceMeter开始与结束打点无法正常匹配；当type为通用类型GENERAL时，不会进行HiTraceMeter打点。
    *
-   * @param { HiTraceCommunicationMode } mode - Communication mode for the trace point.
+   * @param { HiTraceCommunicationMode } mode - 埋点的通信类型。
    * @param { HiTraceTracepointType } type - 信息埋点需要指定的跟踪埋点类型。
    * @param { HiTraceId } id - 实施信息埋点操作的HiTraceId实例。
    * @param { string } [msg] - HiTraceMeter打点操作传入的trace说明信息，用于在性能分析时标识打点位置。当需要在HiTraceMeter报告中区分不同

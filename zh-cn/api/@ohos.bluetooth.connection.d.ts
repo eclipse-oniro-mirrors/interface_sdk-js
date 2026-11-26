@@ -20,7 +20,9 @@
 
 import type { AsyncCallback, Callback } from './@ohos.base';
 import type constant from './@ohos.bluetooth.constant';
+/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
+/*** endif */
 
 /**
  * connection模块提供了蓝牙设备的配对、连接、状态查询、设备扫描发现、扫描模式设置、电量信息获取及事件订阅等能力，适用于需要在应用中实现蓝牙设备发现、配对、连接和信息查询的场景。
@@ -97,7 +99,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 21 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BluetoothAddress = common.BluetoothAddress;
 
@@ -112,9 +114,12 @@ declare namespace connection {
    *     存在正在断连的Profile协议，则返回[STATE_DISCONNECTING]{@link @ohos.bluetooth.constant:constant.ProfileConnectionState}。
    *     以上条件均不满足，则返回[STATE_DISCONNECTED]{@link @ohos.bluetooth.constant:constant.ProfileConnectionState}。
    * @returns { ProfileConnectionState } Profile协议的连接状态。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900004 - Profile not supported.
@@ -129,7 +134,7 @@ declare namespace connection {
 
   /**
    * 主动发起与对端蓝牙设备的配对流程。使用Callback异步回调。
-   * 
+   *
    * 若开发者不知道目标设备的[地址类型]{@link @ohos.bluetooth.common:common.BluetoothAddressType}，建议调用此接口发起配对。
    * 蓝牙配对状态通过[on('bondStateChange')]{@link connection.on(type: 'bondStateChange', callback: Callback<BondStateParam>)}
    * 的回调结果获取。
@@ -137,10 +142,16 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 需要配对的对端蓝牙设备地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { AsyncCallback<void> } callback - 回调函数。当配对成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -155,7 +166,7 @@ declare namespace connection {
 
   /**
    * 主动发起与对端蓝牙设备的配对流程。使用Promise异步回调。
-   * 
+   *
    * 若开发者不知道目标设备的[地址类型]{@link @ohos.bluetooth.common:common.BluetoothAddressType}，建议调用此接口发起配对。
    * 蓝牙配对状态通过[on('bondStateChange')]{@link connection.on(type: 'bondStateChange', callback: Callback<BondStateParam>)}
    * 的回调结果获取。
@@ -163,10 +174,16 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 需要配对的对端蓝牙设备地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -181,7 +198,7 @@ declare namespace connection {
 
   /**
    * 主动发起与对端蓝牙设备的配对流程。使用Promise异步回调。
-   * 
+   *
    * 若开发者已知目标设备的MAC地址及[地址类型]{@link @ohos.bluetooth.common:common.BluetoothAddressType}，建议调用此接口发起配对。
    * 蓝牙配对状态通过[on('bondStateChange')]{@link connection.on(type: 'bondStateChange', callback: Callback<BondStateParam>)}
    * 的回调结果获取。
@@ -189,8 +206,12 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { BluetoothAddress } deviceId - 需要配对的对端蓝牙设备地址信息，包括地址与地址类型。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -198,7 +219,7 @@ declare namespace connection {
    * @stagemodelonly
    * @crossplatform
    * @since 21 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function pairDevice(deviceId: BluetoothAddress): Promise<void>;
 
@@ -211,11 +232,17 @@ declare namespace connection {
    *     若明确使用传统蓝牙（BR/EDR）或者低功耗蓝牙（BLE）方式，则传入TRANSPORT_BR_EDR或TRANSPORT_LE。
    *     若不确定使用哪种传输方式，则传入TRANSPORT_DUAL<sup>20+</sup>或TRANSPORT_UNKNOWN<sup>20+</sup>，蓝牙子系统会决策传输方式。
    * @param { AsyncCallback<void> } callback - 回调函数。当发起配对成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -236,11 +263,17 @@ declare namespace connection {
    *     若明确使用传统蓝牙（BR/EDR）或者低功耗蓝牙（BLE）方式，则传入TRANSPORT_BR_EDR或TRANSPORT_LE。
    *     若不确定使用哪种传输方式，则传入TRANSPORT_DUAL<sup>20+</sup>或TRANSPORT_UNKNOWN<sup>20+</sup>，蓝牙子系统会决策传输方式。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -255,32 +288,36 @@ declare namespace connection {
   /**
    * 通过带外（Out of Band, OOB）通信机制发起与对端蓝牙设备的配对流程。本接口所需的OobData可通过
    * [generateLocalOobData]{@link connection.generateLocalOobData}生成本机OOB数据并经带外通道传输至本端后使用。使用Promise异步回调。
-   * 
+   *
    * 蓝牙配对状态通过[on('bondStateChange')]{@link connection.on(type: 'bondStateChange', callback: Callback<BondStateParam>)}
    * 的回调结果获取。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { BluetoothTransport } transport  - 表示在配对对端设备时使用的传输方式。
+   * @param { BluetoothTransport } transport - 表示在配对对端设备时使用的传输方式。
    *     若使用传统蓝牙（BR/EDR），则传入TRANSPORT_BR_EDR。若使用低功耗蓝牙（BLE），则传入TRANSPORT_LE。不支持其他
    *     [BluetoothTransport]{@link connection.BluetoothTransport}类型。
-   * @param { OobData | null } p192Data  - 配对过程中使用的OOB数据。P-192指一种椭圆曲线算法，其密钥长度为192位，在蓝牙4.1及以前的传统配对方案中广泛使用。
+   * @param { OobData | null } p192Data - 配对过程中使用的OOB数据。P-192指一种椭圆曲线算法，其密钥长度为192位，在蓝牙4.1及以前的传统配对方案中广泛使用。
    *     若不使用该值，需传入null。
    *     p192Data与p256Data需至少传入一个有效值，若两者同时传入，则p256Data生效，p192Data不生效。
-   * @param { OobData | null } p256Data  - 配对过程中使用的OOB数据。P-256指一种椭圆曲线算法，其密钥长度为256位，自蓝牙4.2开始成为安全连接的核心基础。基于P-256的OOB数据相比基于P
+   * @param { OobData | null } p256Data - 配对过程中使用的OOB数据。P-256指一种椭圆曲线算法，其密钥长度为256位，自蓝牙4.2开始成为安全连接的核心基础。基于P-256的OOB数据相比基于P
    *     -192的OOB数据具有更强的抗攻击能力与保密性。若非必须兼容蓝牙4.1或更早版本的旧设备，推荐使用p256Data。
    *     若不使用该值，需传入null。
    *     p192Data与p256Data需至少传入一个有效值，若两者同时传入，则p256Data生效，p192Data不生效。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function pairDeviceOutOfBand(transport: BluetoothTransport, p192Data: OobData | null,
     p256Data: OobData | null): Promise<void>;
@@ -297,61 +334,85 @@ declare namespace connection {
    * @param { OobData } [p192Data] - 带外数据(P192)。
    * @param { OobData } [p256Data] - 带外数据(P256)。
    * @returns { Promise<void> } 不会返回任何值的Promise。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function startPairOutOfBand(deviceId: string, transport: BluetoothTransport, p192Data?: OobData,
     p256Data?: OobData): Promise<void>;
 
   /**
-   * 删除配对的远程设备。使用Callback异步回调。
+   * 删除已配对的对端设备。使用Callback异步回调。
+   *
+   * API版本26.1.0及以上，第三方应用调用本接口时，删除配对前会弹出系统确认对话框，只有在用户确认对话框后，
+   * 配对才会被移除。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 表示要删除的远程设备的地址，例如："XX:XX:XX:XX:XX:XX"。
-   * @param { AsyncCallback<void> } callback - 回调函数。当删除远程配对设备成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { string } deviceId - 表示要删除配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @param { AsyncCallback<void> } callback - 回调函数。当删除已配对设备成功，err为undefined，否则为错误对象。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900013 - The user did not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - The user refused the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
    */
   function cancelPairedDevice(deviceId: string, callback: AsyncCallback<void>): void;
 
-/**
-   * 删除已配对的远端设备。
+  /**
+   * 删除已配对的对端设备。使用Promise异步回调。
    *
-   * 删除行为因调用方的身份而异：
-   * 对于第三方应用，删除配对前会弹出系统确认对话框。
-   * 只有在用户确认对话框后，配对才会被移除。
+   * API版本26.1.0及以上，第三方应用调用本接口时，删除配对前会弹出系统确认对话框，只有在用户确认对话框后，
+   * 配对才会被移除。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 设备ID。例如，“11:22:33:AA:BB:FF”。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { string } deviceId - 表示要删除配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
-   * @throws { BusinessError } 2900013 - The user does not respond. [since 26.1.0]
-   * @throws { BusinessError } 2900014 - User refuse the action. [since 26.1.0]
+   * @throws { BusinessError } 2900013 - The user did not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - The user refused the action. [since 26.1.0]
    * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -364,21 +425,34 @@ declare namespace connection {
   function cancelPairedDevice(deviceId: string): Promise<void>;
 
   /**
-   * 删除正在配对中的远程设备。与cancelPairedDevice（用于删除已配对的设备）不同，本接口用于取消正在进行中的配对流程。使用Callback异步回调。
+   * 取消当前应用发起的与对端设备的配对。使用Callback异步回调。
+   *
+   * 本接口用于取消正在进行的配对流程，对端设备未处于配对中时调用本接口会失败。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 表示要删除的远程设备的地址，例如："XX:XX:XX:XX:XX:XX"。
-   * @param { AsyncCallback<void> } callback - 回调函数。当删除远程配对设备成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { string } deviceId - 表示要取消配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @param { AsyncCallback<void> } callback - 回调函数。当取消配对成功，err为undefined，否则为错误对象。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be
+   *     cancelled. [since 26.1.0]
+   * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -386,24 +460,34 @@ declare namespace connection {
   function cancelPairingDevice(deviceId: string, callback: AsyncCallback<void>): void;
 
   /**
-   * 取消当前应用发起的配对远端设备。
+   * 取消当前应用发起的与对端设备的配对。使用Promise异步回调。
+   *
+   * 本接口用于取消正在进行的配对流程，对端设备未处于配对中时调用本接口会失败。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 设备ID。例如，“11:22:33:AA:BB:FF”。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { string } deviceId - 表示要取消配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
-   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be cancelled.
-   *     [since 26.2.0]
-   * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.2.0]
+   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be
+   *     cancelled. [since 26.1.0]
+   * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi [since 10 - 26.1.0]
-   * @publicapi [since 26.2.0]
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -412,16 +496,22 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的名称。
-   * 
+   *
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取设备名称。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 表示对端设备的地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { string } 以字符串格式返回设备名称。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -435,7 +525,7 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的名称，其中alias为可选参数。
-   * 
+   *
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取设备名称。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
@@ -444,10 +534,16 @@ declare namespace connection {
    *     如果携带alias，则根据alias判断是否获取对端蓝牙设备别名：true表示获取对端蓝牙设备别名，false表示获取对端蓝牙设备原始名称。
    *     如果未携带alias，则默认值为true，返回对端蓝牙设备别名。
    * @returns { string } 以字符串格式返回设备名称。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Failed to obtain the name or alias of the peer Bluetooth device.
@@ -461,17 +557,23 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的类别。
-   * 
+   *
    * 从API version 18开始，此接口不再校验ohos.permission.ACCESS_BLUETOOTH权限。
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取设备类别信息。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 17]
    * @param { string } deviceId - 表示对端设备的地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { DeviceClass } 对端设备的类别。
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 17]
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API. [since 10 - 17]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -485,19 +587,22 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的传输类型。
-   * 
+   *
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取设备的传输类型。
    *
    * @param { string } deviceId - 表示对端设备的地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { BluetoothTransport } 对端设备的传输类型。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Get transport failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 20 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getRemoteDeviceTransport(deviceId: string): BluetoothTransport;
 
@@ -506,8 +611,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { string } 本机蓝牙设备名称。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -521,9 +630,7 @@ declare namespace connection {
   /**
    * 获取已配对蓝牙设备的地址集合。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Array<string> } 已配对蓝牙设备的地址集合。
    *     基于信息安全考虑，此处获取的设备地址为虚拟MAC地址。
    *     已配对的地址不会变更。
@@ -531,8 +638,12 @@ declare namespace connection {
    *     若取消配对，蓝牙子系统会根据该地址的实际使用情况，决策后续变更时机；若其他应用正在使用该地址，则不会立刻变更。
    *     若要持久化保存该地址，可使用[access.addPersistentDeviceId]{@link @ohos.bluetooth.access:access.addPersistentDeviceId}方
    *     法。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -547,16 +658,18 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的配对状态信息。
-   * 
+   *
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取配对状态信息。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 表示对端设备的地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { BondState } 表示设备的蓝牙配对状态。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -571,17 +684,23 @@ declare namespace connection {
 
   /**
    * 收到对端蓝牙设备的配对请求事件后，确认请求结果。
-   * 
+   *
    * 对端蓝牙的配对请求通过[on('pinRequired')]{@link connection.on(type: 'pinRequired', callback: Callback<PinRequiredParam>)}的回调
    * 结果获取。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @param { string } deviceId - 表示对端设备地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { boolean } accept - 是否接受对端设备的配对请求。true表示接受，false表示不接受。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -599,10 +718,16 @@ declare namespace connection {
    * @param { string } deviceId - 表示对端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { string } code - 用户输入的PIN码，该字符串的字符个数范围为(0, 16]，例如："12345"。
    * @param { AsyncCallback<void> } callback - 回调函数，当设置PinCode成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -620,10 +745,16 @@ declare namespace connection {
    * @param { string } deviceId - 表示对端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { string } code - 用户输入的PIN码，该字符串的字符个数范围为(0, 16]，例如："12345"。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -636,14 +767,14 @@ declare namespace connection {
 
   /**
    * 设置本机蓝牙设备名称，不能设置为空字符串。如果设为空字符串会失败。
-   * 
+   *
    * 从API version 10开始支持，从API version 12开始废弃，不再提供替代接口。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } name - 需要设置的蓝牙名称，名称长度范围：(0, 248]，单位：Byte。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
+   *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
@@ -664,10 +795,12 @@ declare namespace connection {
    * @param { ScanMode } mode - 蓝牙扫描模式。当扫描模式为SCAN_MODE_GENERAL_DISCOVERABLE时，超出duration持续时间（不为0），扫描模式会重新设置为
    *     SCAN_MODE_CONNECTABLE。
    * @param { int } duration - 设备可被发现的持续时间，取值范围：[0, +∞)，单位：ms。设置为0则表示持续可发现。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -683,8 +816,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { ScanMode } 蓝牙扫描模式。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -698,7 +835,7 @@ declare namespace connection {
 
   /**
    * 开启蓝牙扫描，发现对端蓝牙设备。
-   * 
+   *
    * 该接口支持发现传统蓝牙设备和低功耗蓝牙设备，整个蓝牙扫描过程大约持续12s。
    * 扫描结果可通过API version 10开始支持的
    * [connection.on('bluetoothDeviceFind')]{@link connection.on(type: 'bluetoothDeviceFind', callback: Callback<Array<string>>)}
@@ -712,8 +849,12 @@ declare namespace connection {
    * 调用[connection.stopBluetoothDiscovery]{@link connection.stopBluetoothDiscovery}可以停止该方法开启的扫描流程，扫描停止后，才能开启下一次蓝牙扫描。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -728,15 +869,19 @@ declare namespace connection {
 
   /**
    * 关闭蓝牙扫描。
-   * 
+   *
    * 关闭的扫描是由[connection.startBluetoothDiscovery]{@link connection.startBluetoothDiscovery}触发的。
    * 当应用不再需要扫描设备时，需主动调用该方法关闭扫描。
    * 若不在扫描过程中，请勿重复调用该方法（可使用[connection.isBluetoothDiscovering]{@link connection.isBluetoothDiscovering}判断蓝牙当前是否处于扫描过程中
    * ）。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -754,8 +899,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { boolean } 是否开启蓝牙发现。true表示正在发起设备扫描，false表示未发起设备扫描。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -772,11 +921,13 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { AsyncCallback<Array<ProfileUuids>> } callback - 回调函数。当获取UUID成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -793,11 +944,13 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Promise<Array<ProfileUuids>> } Promise对象，返回本地设备的ProfileUuids数组。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -811,17 +964,25 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的Profile协议能力，通过UUID区分。使用Callback异步回调。
-   * 
+   *
    * 建议仅对已配对的设备调用该方法。
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取Profile协议能力。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 表示对端设备地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { AsyncCallback<Array<ProfileUuids>> } callback - 回调函数。当获取UUID成功，err为undefined，获取到的是Profile协议能力集合；否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. [since 10 - 11]
-   * @throws { BusinessError } 401 - Invalid parameter.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 11]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -837,17 +998,25 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的Profile协议能力，通过UUID区分。使用Promise异步回调。
-   * 
+   *
    * 建议仅对已配对的设备调用该方法。
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取Profile协议能力。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 表示对端设备地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<Array<ProfileUuids>> } Promise对象，返回支持的Profile协议能力集合。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. [since 10 - 11]
-   * @throws { BusinessError } 401 - Invalid parameter.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 11]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -863,7 +1032,7 @@ declare namespace connection {
 
   /**
    * 连接对端设备支持的Profile（只包括A2DP、HFP和HID）。使用Callback异步回调。
-   * 
+   *
    * API版本26.0.0之前，需先调用[connection.pairDevice]{@link connection.pairDevice}发起配对，且仅允许在每次发起配对后30秒内调用此接口一次。
    * 从API版本26.0.0开始，针对A2DP和HFP，调用接口无时间限制，可以在调用[connection.pairDevice]{@link connection.pairDevice}发起配对后任意时间内进行调用。针对
    * HID，仍需在每次发起配对后30秒内调用此接口。
@@ -876,11 +1045,18 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 16]
    * @param { string } deviceId - 表示需要连接的对端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { AsyncCallback<void> } callback - 回调函数。当发起连接成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. [since 11 - 15]
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 11 - 15]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -895,7 +1071,7 @@ declare namespace connection {
 
   /**
    * 连接对端设备支持的Profile（只包括A2DP、HFP和HID）。使用Promise异步回调。
-   * 
+   *
    * API版本26.0.0之前，需先调用[connection.pairDevice]{@link connection.pairDevice}发起配对，且仅允许在每次发起配对后30秒内调用此接口一次。
    * 从API版本26.0.0开始，针对A2DP和HFP，调用接口无时间限制，可以在调用[connection.pairDevice]{@link connection.pairDevice}发起配对后任意时间内进行调用。针对
    * HID，仍需在每次发起配对后30秒内调用此接口。
@@ -908,11 +1084,18 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 16]
    * @param { string } deviceId - 表示需要连接的对端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<void> } Promise对象。无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. [since 11 - 15]
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 11 - 15]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -931,11 +1114,17 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @param { string } deviceId - 表示断开的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { AsyncCallback<void> } callback - 回调函数。当发起断开成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -949,7 +1138,7 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备的电量信息。使用Promise异步回调。
-   * 
+   *
    * 对端蓝牙设备的电量信息变更通过[on('batteryChange')]{@link connection.on(type: 'batteryChange', callback: Callback<BatteryInfo>)}
    * 的回调结果获取。
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取电量信息。
@@ -957,9 +1146,12 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - 表示对端蓝牙设备的MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<BatteryInfo> } Promise对象，返回电量信息对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -975,11 +1167,17 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 11 - 15]
    * @param { string } deviceId - 表示远程设备的地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { string } 以字符串格式返回设备Product ID。
-   * @throws { BusinessError } 201 - Permission denied. [since 11 - 15]
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API. [since 11 - 15]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -993,19 +1191,25 @@ declare namespace connection {
 
   /**
    * 断开对端设备支持的Profile（只包括A2DP和HFP）。
-   * 
+   *
    * 需要与接口[connection.connectAllowedProfiles]{@link connection.connectAllowedProfiles}配合使用。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 11 - 24]
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 26.0.0]
    * @param { string } deviceId - 表示需要断开连接的对端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<void> } Promise对象。无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. [since 11 - 24]
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed. [since 11 - 24]
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 11 - 24]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed. [since 11 - 24]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -1020,7 +1224,7 @@ declare namespace connection {
 
   /**
    * 设置对端蓝牙设备的名称，不能设置为空字符串。如果设为空字符串会失败。使用Promise异步回调。
-   * 
+   *
    * 建议仅对已配对的设备调用该方法。
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址进行名称设置。
    *
@@ -1028,9 +1232,12 @@ declare namespace connection {
    * @param { string } deviceId - 表示对端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { string } name - 修改对端设备名称，名称长度范围：(0, 64]，单位：Byte。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1048,9 +1255,12 @@ declare namespace connection {
    * @param { string } deviceId - 表示远端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { DeviceType } type - 表示设备类型。
    * @returns { Promise<void> } 以Promise形式返回设置蓝牙远端设备类型的结果，设置失败时返回错误码信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1067,10 +1277,14 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 12 - 17]
    * @param { string } deviceId - 表示远端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<DeviceType> } 以Promise形式返回获取蓝牙远端设备类型的结果，返回值为设备类型。
-   * @throws { BusinessError } 201 - Permission denied. [since 12 - 17]
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs. [since 18]
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API. [since 12 - 17]
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 18]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1087,11 +1301,17 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @param { ControlDeviceActionParams } controlDeviceActionParams - 控制蓝牙外设的相关信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -1105,14 +1325,19 @@ declare namespace connection {
 
   /**
    * 获取对端蓝牙设备最近一次连接的时间点。使用Promise异步回调。
-   * 
+   *
    * 从API version 21开始，此接口支持使用对端设备的实际MAC地址获取最近一次连接时间。
    *
    * @param { string } deviceId - 表示对端设备MAC地址。例如："XX:XX:XX:XX:XX:XX"。
    * @returns { Promise<long> } Promise对象，返回对端蓝牙设备最近一次连接的时间点，格式为秒级的UNIX时间戳。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -1129,11 +1354,17 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @param { TrustedPairedDevices } trustedPairedDevices - 表示云设备列表。
    * @returns { Promise<void> } 以Promise形式返回设置云设备的结果。设置失败时返回错误码信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -1154,22 +1385,26 @@ declare namespace connection {
    *     若使用传统蓝牙（BR/EDR），则传入TRANSPORT_BR_EDR。若使用低功耗蓝牙（BLE），则传入TRANSPORT_LE。不支持其他
    *     [BluetoothTransport]{@link connection.BluetoothTransport}类型。
    * @returns { Promise<OobData> } Promise对象，返回本机的OOB数据。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function generateLocalOobData(transport: BluetoothTransport): Promise<OobData>;
 
   /**
    * 根据已配对设备实际MAC地址的哈希值获取对应的虚拟MAC地址。
-   * 
+   *
    * 当[HashAlgorithmType]{@link connection.HashAlgorithmType}为HASH_ALGORITHM_SHA256时，应使用大写实际MAC地址通过SHA256算法生成对应的哈希值（十六进制
    * 64位），取后32位作为输入，哈希值字母不区分大小写。
    *
@@ -1177,9 +1412,12 @@ declare namespace connection {
    * @param { HashAlgorithmType } algorithmType - 哈希算法类型。
    * @param { string } hashValue - 哈希值，例如："c10b57deb2e1aafd255596e0d4fd6789"。
    * @returns { string } 返回与哈希值相对应的设备虚拟MAC地址，例如："XX:XX:XX:XX:XX:XX"，返回地址为大写。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900015 - Parameter format mismatch with specification.
    * @throws { BusinessError } 2900016 - Device unpaired.
@@ -1188,7 +1426,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 24 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getVirtualAddressByHash(algorithmType: HashAlgorithmType, hashValue: string): string;
 
@@ -1197,16 +1435,18 @@ declare namespace connection {
    *
    * @param { string } deviceId - 表示远端设备MAC地址，例如："XX:XX:XX:XX:XX:XX"。
    * @param { CarKeyActionType } action - 表示车钥匙执行的操作，例如开卡、删卡。
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function setCarKeyDfxData(deviceId: string, action: CarKeyActionType): void;
 
@@ -1214,16 +1454,18 @@ declare namespace connection {
    * 获取车钥匙维测数据，例如蓝牙车钥匙连接、配对等维测数据。
    *
    * @returns { string } 以字符串格式返回车钥匙维测数据。
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API when the short-range chip is not inserted on the 2in1 device.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getCarKeyDfxData(): string;
 
@@ -1238,9 +1480,13 @@ declare namespace connection {
    * @param { string } brMac - 配对的远端设备的真实BR地址。例如：
    *     “11:22:33:AA:BB:FF”。
    * @returns { string } 返回远端设备的真实BLE地址。例如，“11:22:33:AA:BB:FF”。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900016 - Device unpaired.
    * @throws { BusinessError } 2900017 - No BLE address is associated with the input BR address.
@@ -1255,16 +1501,14 @@ declare namespace connection {
 
   /**
    * 订阅蓝牙设备扫描结果上报事件。使用Callback异步回调。
-   * 
+   *
    * 可扫描到的设备类型包括传统蓝牙设备和低功耗蓝牙设备。
    * 该上报方式只支持获取设备地址信息。
    * 推荐使用API version 18开始支持的
    * [connection.on('discoveryResult')]{@link connection.on(type: 'discoveryResult', callback: Callback<Array<DiscoveryResult>>)}
    * 扫描上报方式，可获取到更多设备信息，包括设备地址、设备信号强度、设备名称和设备类型。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bluetoothDeviceFind' } type - 事件回调类型，支持的事件为'bluetoothDeviceFind'，表示蓝牙设备扫描结果上报事件。当调用
    *     [connection.startBluetoothDiscovery]{@link connection.startBluetoothDiscovery}后，开始设备扫描，若扫描到设备，触发该事件。
    * @param { Callback<Array<string>> } callback - 指定订阅的回调函数，会携带扫描到的设备地址集合。
@@ -1274,10 +1518,12 @@ declare namespace connection {
    *     若取消配对，蓝牙子系统会根据该地址的实际使用情况，决策后续变更时机；若其他应用正在使用该地址，则不会立刻变更。
    *     若要持久化保存该地址，可使用[access.addPersistentDeviceId]{@link @ohos.bluetooth.access:access.addPersistentDeviceId}方
    *     法。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1292,12 +1538,14 @@ declare namespace connection {
    * 如果应用有ohos.permission.GET_BLUETOOTH_PEERS_MAC，则对端设备地址类型为真实地址。
    * 否则，对端设备地址类型为virtual。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<string>> } callback - 用于监听发现事件的回调
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1311,12 +1559,16 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bluetoothDeviceFind' } type - 事件回调类型，支持的事件为'bluetoothDeviceFind'，表示蓝牙设备扫描结果上报事件。
-   * @param { Callback<Array<string>> } callback - 指定取消订阅的回调函数通知。
+   * @param { Callback<Array<string>> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与
    *     [connection.on('bluetoothDeviceFind')]{@link connection.on(type: 'bluetoothDeviceFind', callback: Callback<Array<string>>)}
    *     中的回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1331,8 +1583,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<string>> } [callback] - Callback used to listen for the discovering event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @crossplatform
@@ -1342,21 +1598,21 @@ declare namespace connection {
 
   /**
    * 订阅蓝牙设备扫描结果上报事件。使用Callback异步回调。
-   * 
+   *
    * 可扫描到的设备类型包括传统蓝牙设备和低功耗蓝牙设备。
    * 该上报方式支持获取设备地址、设备信号强度、设备名称和设备类型。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.GET_BLUETOOTH_PEERS_MAC [since 12 - 17]
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 18 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH [since 18]
    * @param { 'discoveryResult' } type - 事件回调类型，支持的事件为'discoveryResult'，表示蓝牙设备扫描结果上报事件。当调用
    *     [connection.startBluetoothDiscovery]{@link connection.startBluetoothDiscovery}后，开始设备扫描，若扫描到设备，触发该事件。
    * @param { Callback<Array<DiscoveryResult>> } callback - 指定订阅的回调函数，会携带扫描结果的集合。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed. [since 12 - 24]
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi [since 12 - 17]
@@ -1369,12 +1625,14 @@ declare namespace connection {
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<DiscoveryResult>> } callback - Callback used to listen for the discovering event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1388,12 +1646,16 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.GET_BLUETOOTH_PEERS_MAC [since 12 - 17]
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 18]
    * @param { 'discoveryResult' } type - 事件回调类型，支持的事件为'discoveryResult'，表示蓝牙设备扫描结果上报事件。
-   * @param { Callback<Array<DiscoveryResult>> } callback - 指定取消订阅的回调函数通知。
+   * @param { Callback<Array<DiscoveryResult>> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与
    *     [connection.on('discoveryResult')]{@link connection.on(type: 'discoveryResult', callback: Callback<Array<DiscoveryResult>>)}
    *     中的回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi [since 12 - 17]
@@ -1408,8 +1670,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<DiscoveryResult>> } [callback] - Callback used to listen for the discovering event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1420,16 +1686,16 @@ declare namespace connection {
   /**
    * 订阅蓝牙配对状态变化事件。使用Callback异步回调。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bondStateChange' } type - 事件回调类型，支持的事件为'bondStateChange'，表示蓝牙配对状态变化事件。
    *     当调用[connection.pairDevice]{@link connection.pairDevice}发起主动配对，或者本机设备收到其他设备的配对请求时，触发该事件。
    * @param { Callback<BondStateParam> } callback - 指定订阅的回调函数，会携带配对状态结果。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1443,12 +1709,14 @@ declare namespace connection {
    * 如果应用有ohos.permission.GET_BLUETOOTH_PEERS_MAC，则对端设备地址类型为真实地址。
    * 否则，对端设备地址类型为virtual。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BondStateParam> } callback - 用于监听绑定状态事件的回调
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1462,14 +1730,16 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bondStateChange' } type - 事件回调类型，支持的事件为'bondStateChange'，表示蓝牙配对状态变化事件。
-   * @param { Callback<BondStateParam> } callback - 指定取消订阅的回调函数通知。
+   * @param { Callback<BondStateParam> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与
    *     [connection.on('bondStateChange')]{@link connection.on(type: 'bondStateChange', callback: Callback<BondStateParam>)}
    *     中的回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1483,8 +1753,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BondStateParam> } [callback] - Callback used to listen for the bond state event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1496,17 +1770,17 @@ declare namespace connection {
   /**
    * 订阅配对请求事件。使用Callback异步回调。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'pinRequired' } type - 事件回调类型，支持的事件为'pinRequired'，表示配对请求事件。当调用
    *     [connection.pairDevice]{@link connection.pairDevice}发起主动配对，或者本机设备收到其他设备的配对请求时，触发该事件。收到配对请求后，可调用
    *     [connection.setDevicePairingConfirmation]{@link connection.setDevicePairingConfirmation}确认或拒绝配对请求。
    * @param { Callback<PinRequiredParam> } callback - 指定订阅的回调函数，会携带配对请求。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1517,12 +1791,14 @@ declare namespace connection {
   /**
    * Subscribe the event of a pairing request from a remote Bluetooth device.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<PinRequiredParam> } callback - Callback used to listen for the pairing request event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1535,14 +1811,16 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'pinRequired' } type - 事件回调类型，支持的事件为'pinRequired'，表示配对请求事件。
-   * @param { Callback<PinRequiredParam> } callback - 指定取消订阅的回调函数通知。
+   * @param { Callback<PinRequiredParam> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与
    *     [connection.on('pinRequired')]{@link connection.on(type: 'pinRequired', callback: Callback<PinRequiredParam>)}中
    *     的回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1555,8 +1833,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<PinRequiredParam> } [callback] - Callback used to listen for the pairing request event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1570,7 +1852,8 @@ declare namespace connection {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'batteryChange' } type - 事件回调类型，支持的事件为'batteryChange'，表示对端设备的电量信息变化事件。当该设备通知电量变化时，会触发该事件。
    * @param { Callback<BatteryInfo> } callback - 指定订阅的回调函数，返回电量信息。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1583,7 +1866,8 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BatteryInfo> } callback - Callback used to listen.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1596,11 +1880,12 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'batteryChange' } type - 事件回调类型，支持的事件为'batteryChange'，表示对端设备的电量信息变化事件。
-   * @param { Callback<BatteryInfo> } callback - 指定取消订阅的回调函数通知。
+   * @param { Callback<BatteryInfo> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与
    *     [connection.on('batteryChange')]{@link connection.on(type: 'batteryChange', callback: Callback<BatteryInfo>)}中的
    *     回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1613,7 +1898,8 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BatteryInfo> } [callback] - Callback used to listen.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1627,13 +1913,17 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<ScanMode> } callback - 指定订阅的回调函数，会携带变更后最新的蓝牙扫描模式。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function onScanModeChange(callback: Callback<ScanMode>): void;
 
@@ -1644,51 +1934,59 @@ declare namespace connection {
    * @param { Callback<ScanMode> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与[connection.onScanModeChange]{@link connection.onScanModeChange(callback: Callback<ScanMode>)}中的回调函数
    *     一致；若无传参，则取消订阅所有蓝牙扫描模式变更的回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function offScanModeChange(callback?: Callback<ScanMode>): void;
 
   /**
    * 订阅蓝牙ACL链路连接状态变化事件。当触发蓝牙ACL链路连接或断开时，如订阅此事件，则会收到携带对应设备的地址与连接状态的回调函数。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AclStateResult> } callback - 回调函数，返回蓝牙ACL链路连接状态
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
    *     Detailed error messages can be used to assist in locating the problem.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function onAclStateChange(callback: Callback<AclStateResult>): void;
 
   /**
    * 取消订阅蓝牙ACL链路连接状态变化事件。
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AclStateResult> } [callback] - 指定取消订阅的回调函数通知。
    *     若传参，则需与[connection.onAclStateChange]{@link connection.onAclStateChange(callback: Callback<AclStateResult>)}
    *     中的回调函数一致；若无传参，则取消订阅所有蓝牙ACL连接状态变更的回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
    *     Detailed error messages can be used to assist in locating the problem.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function offAclStateChange(callback?: Callback<AclStateResult>): void;
 
@@ -1734,13 +2032,13 @@ declare namespace connection {
     cause: UnbondCause;
     /**
      * 配对失败的具体原因，例如：本端业务主动删除配对时，返回：USER_REMOVED。
-     * 
+     *
      * **起始版本**：26.0.0
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     causeMessage?: string;
   }
@@ -1860,7 +2158,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 20 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     TRANSPORT_DUAL = 2,
     /**
@@ -1869,7 +2167,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 20 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     TRANSPORT_UNKNOWN = 3
   }
@@ -2094,9 +2392,7 @@ declare namespace connection {
   interface DiscoveryResult {
     /**
      * 扫描到的设备地址。
-     * 
      * 基于信息安全考虑，此处获取的设备地址为虚拟MAC地址。
-     * 
      * 已配对的地址不会变更。
      * 若该设备重启蓝牙开关，重新获取到的虚拟地址会立即变更。
      * 若取消配对，蓝牙子系统会根据该地址的实际使用情况，决策后续变更时机；若其他应用正在使用该地址，则不会立刻变更。
@@ -2143,11 +2439,19 @@ declare namespace connection {
      * @since 23 static
      */
     deviceClass: DeviceClass;
+    /**
+     * 发现设备的传输方式。
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    transport?: BluetoothTransport;
   }
 
   /**
    * 描述设备的电量信息。
-   * 
+   *
    * 只有支持特定电量信息AT（Attention）命令（包括：+XEVENT和IPHONEACCEV）的设备才支持上报有效的电量信息。
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -2157,7 +2461,7 @@ declare namespace connection {
    */
   interface BatteryInfo {
     /**
-     * 表示远端设备的MAC地址。<br/
+     * 表示远端设备的MAC地址。
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
@@ -2638,6 +2942,7 @@ declare namespace connection {
     /**
      * 表示云设备列表。
      *
+     * @type { Array<TrustedPairedDevice> }
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
@@ -2826,12 +3131,12 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface OobData {
     /**
      * 蓝牙设备的地址信息。
-     * 
+     *
      * 在使用OobData时，[BluetoothAddress]{@link @ohos.bluetooth.common:common.BluetoothAddress}中的address、addressType和
      * rawAddressType均为必选参数，且addressType必须设置为REAL。
      *
@@ -2839,7 +3144,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     deviceId: BluetoothAddress;
     /**
@@ -2849,7 +3154,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     confirmationHash: Uint8Array;
     /**
@@ -2859,7 +3164,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     randomizerHash?: Uint8Array;
     /**
@@ -2869,7 +3174,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     deviceName?: string;
     /**
@@ -2879,7 +3184,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     deviceRole?: DeviceRole;
   }
@@ -2890,7 +3195,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum DeviceRole {
     /**
@@ -2900,7 +3205,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     DEVICE_ROLE_PERIPHERAL_ONLY = 0,
     /**
@@ -2910,7 +3215,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     DEVICE_ROLE_CENTRAL_ONLY = 1,
     /**
@@ -2920,7 +3225,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     DEVICE_ROLE_BOTH_PREFER_PERIPHERAL = 2,
     /**
@@ -2930,7 +3235,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     DEVICE_ROLE_BOTH_PREFER_CENTRAL = 3
   }
@@ -2942,7 +3247,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum CarKeyActionType {
     /**
@@ -2952,7 +3257,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CAR_KEY_ACTION_ADD = 0,
     /**
@@ -2962,20 +3267,20 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CAR_KEY_ACTION_DELETE = 1
   }
 
   /**
    * 枚举，表示哈希算法类型。
-   * 
+   *
    * 哈希算法是一种数学函数，通过对输入数据进行复杂计算，生成一个唯一且固定长度的字符串（即哈希值）。常用于数据完整性校验、数字签名等场景。
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 24 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum HashAlgorithmType {
     /**
@@ -2984,7 +3289,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 24 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     HASH_ALGORITHM_SHA256 = 0
   }
@@ -2995,7 +3300,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface AclStateResult {
     /**
@@ -3004,7 +3309,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     deviceId: string;
     /**
@@ -3013,7 +3318,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     state: AclState;
   }
@@ -3024,7 +3329,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   export enum AclState {
     /**
@@ -3033,7 +3338,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     STATE_CONNECTED = 0,
     /**
@@ -3042,7 +3347,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     STATE_DISCONNECTED = 1
   }

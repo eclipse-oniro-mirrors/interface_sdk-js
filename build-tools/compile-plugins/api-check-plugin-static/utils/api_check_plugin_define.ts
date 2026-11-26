@@ -64,7 +64,7 @@ export const APIAVAILABLE_CHECK_ERROR: string = 'Invalid parameters for apiAvail
 export const APIAVAILABLE_OPENHARMONY_CONTENT_ERROR: string = `The api version must be a decimal integer between 1 and 25.
  The M.S.F format must meet the following requirements: The value must be in the three decimal format, M must be greater than or equal to 26, and S and F must be decimal integers between 0 and 99.`;
 export const APIAVAILABLE_DISTRIBUTIONOS_CONTENT_ERROR: string = `The api version must be a decimal integer between 1 and 25.
- The M.S.F format must meet the following requirements: The value must be in the three decimal format, M must be decimal intergers between 1 and 99, and S and F must be decimal integers between 0 and 99.`;
+ The M.S.F format must meet the following requirements: The value must be in the three decimal format, M must be decimal integers between 1 and 99, and S and F must be decimal integers between 0 and 99.`;
 export const APIAVAILABLE_DISTRIBUTIONOS_CONTENT_CHECK_ERROR: string = 'Invalid $RUNTIMEOS version.';
 export const APIAVAILABLE_TS_FILE_ERROR: string = 'apiAvailable cannot be used in .ts files. Please use .ets files instead.';
 export const APIAVAILABLE_NUMBER_FORMAT_ERROR: string = 'Only decimal digits are allowed.';

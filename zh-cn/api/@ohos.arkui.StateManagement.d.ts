@@ -31,6 +31,8 @@ import contextConstant from '@ohos.app.ability.contextConstant';
 
 import collections from '@arkts.collections';
 
+import { PlaceholderOptions } from '@ohos.arkui.placeholderRegister';
+
 /**
  * 返回默认构造器的函数。
  *
@@ -1351,6 +1353,81 @@ export declare interface CustomComponentContext {
    * @since 26.1.0 dynamic
    */
   getDefaultReusePool(): IDefaultReusePool | undefined;
+
+  /**
+   * 将当前自定义组件置为异步加载。组件实际内容由框架在异步任务中加载，不再阻塞页面转场主线程。
+   *
+   * 当开发者需要在页面转场等对帧率敏感的场景下，避免自定义组件同步加载导致丢帧卡顿时，使用本方法。调用成功后，
+   * 该自定义组件进入由组件上下文管理的异步加载状态。加载未完成期间，显示已注册的占位组件（已配置且可找到时）或
+   * 不显示；加载完成后，占位组件自动替换为实际内容，并由框架自动触发渲染更新。
+   *
+   * 与[IReusePool.preRender()]{@link IReusePool#preRender}（预渲染可复用组件实例）不同，本方法延后的是组件实例的
+   * 加载时机；本方法为配置型接口，返回**void**。
+   *
+   * > **说明：**
+   * >
+   * > 1、本方法仅对当前自定义组件实例生效；未调用本方法的组件保持既有同步加载行为。
+   * > 2、占位模板须先通过
+   * > [getPlaceholderRegister()]{@link @ohos.arkui.UIContext:UIContext#getPlaceholderRegister}注册，且builder须为全局
+   * > 无参**\@Builder({ isPlaceholder: true })** 函数。
+   * > 3、**timeout**取值（正数、**0**、负数）的语义请参考
+   * > [CustomComponentAsyncLoadOptions.timeout]{@link CustomComponentAsyncLoadOptions#timeout}。
+   * > 4、本期不处理异步加载失败场景，由超时强制加载机制兜底。
+   *
+   * @param { CustomComponentAsyncLoadOptions } [options] - 异步加载配置。默认值**undefined**表示加载完成前不显示
+   *     占位组件，并使用缺省超时阈值（**1000** ms）。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  enableAsyncLoad(options?: CustomComponentAsyncLoadOptions): void;
+}
+
+/**
+ * 描述自定义组件异步加载的配置选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface CustomComponentAsyncLoadOptions {
+  /**
+   * 异步加载期间显示的占位组件。取值为
+   * [PlaceholderOptions]{@link @ohos.arkui.placeholderRegister:PlaceholderOptions}对象：**id**指向经
+   * [getPlaceholderRegister()]{@link @ohos.arkui.UIContext:UIContext#getPlaceholderRegister}注册的模板，**size**为
+   * **SizeOptions**类型的布局建议。若配置，该尺寸作为占位根节点的理想尺寸参与测量：数字单位为vp，带单位
+   * 字符串保留其单位，Resource类型视为未设置。**size**未配置，或其中某一维未设置或非法时，占位组件按占位
+   * 模板自身的设置布局。
+   *
+   * 未配置**placeholder**，或其**id**为空或未注册时，异步加载完成前不显示占位组件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  placeholder?: PlaceholderOptions;
+
+  /**
+   * 异步加载的超时阈值，单位ms，默认值为**1000**。
+   *
+   * 取值可为任意数值。**NaN**按默认值（**1000**）处理，**正/负无穷大**按负值处理。正小数值向上取整到整毫秒。
+   * 若组件在**timeout**毫秒内未完成加载，框架会在后续帧中强制加载该组件，且单帧强制加载的组件数量不超过
+   * 系统定义的上限。取值**0**表示不等待：组件在后续帧中被强制加载。取值为负数（含**正/负无穷大**）表示
+   * 永不超时：组件持续等待直至异步加载完成。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  timeout?: number;
 }
 
 /**

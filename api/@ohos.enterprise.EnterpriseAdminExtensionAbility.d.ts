@@ -501,11 +501,24 @@ export default class EnterpriseAdminExtensionAbility {
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * API.
    *
-   * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
-   * @param { number } accountId - ID of the user whose password authentication failed.
+   * @param { number } cumulativeFailedCount - Total number of failed password attempts.
+   * @param { number } accountId - ID of the account whose password authentication failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
+
+  /**
+   * Callback for USB device added events.
+   * Called when a USB device is added to the device. This callback is triggered when a USB device is plugged in
+   * and the system has recognized it.
+   *
+   * @param { common.UsbDeviceInfo } usbDeviceInfo - USB device information, including bus number, device address,
+   *     serial number, vendor ID, product ID, and other device attributes.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onUsbDeviceAdded(usbDeviceInfo: common.UsbDeviceInfo): void;
 }

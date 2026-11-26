@@ -1470,6 +1470,21 @@ declare namespace connection {
   function queryProbeResult(destination: string, duration: int): Promise<ProbeResultInfo>;
 
   /**
+   * 更新ip地址。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @param { NetHandle } netHandle - Network handle.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2100002 - Failed to connect to the service.
+   * @throws { BusinessError } 2100003 - System internal error.
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function renewDhcp(netHandle: NetHandle): void;
+
+  /**
    * 系统当前监听的TCP、UDP端口信息。
    *
    * @syscap SystemCapability.Communication.NetManager.Core

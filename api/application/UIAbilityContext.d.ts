@@ -32,6 +32,7 @@ import dialogRequest from '../@ohos.app.ability.dialogRequest';
 import { HapModuleInfo } from '../bundleManager/HapModuleInfo';
 import OpenLinkOptions from '../@ohos.app.ability.OpenLinkOptions';
 import Want from '../@ohos.app.ability.Want';
+import ShowParams from '../@ohos.app.ability.ShowParams';
 import StartOptions from '../@ohos.app.ability.StartOptions';
 import { Configuration } from '../@ohos.app.ability.Configuration';
 import window from '../@ohos.window';
@@ -2439,6 +2440,26 @@ declare class UIAbilityContext extends Context {
   showAbility(): Promise<void>;
 
   /**
+   * Shows this UIAbility. This API uses a promise to return the result. It can be called only on the main thread.
+   * Before calling this API, ensure that the application has been added to the status bar.
+   * This API can be properly called only on PC/2-in-1 devices and tablets. On other devices, it returns the error code
+   * 801.
+   * **System capability**: SystemCapability.Ability.AbilityRuntime.Core
+   *
+   * @param { ShowParams } params - Parameters used for showing the UIAbility.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 16000067 - The StartOptions check failed.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  showAbility(params: ShowParams): Promise<void>;
+
+  /**
    * Hides this UIAbility. This API uses a promise to return the result. It can be called only on the main thread.
    * Before calling this API, ensure that the application has been added to the status bar.
    * This API can be properly called only on PC/2-in-1 devices and tablets. On other devices, it returns the error code 
@@ -2681,8 +2702,8 @@ declare class UIAbilityContext extends Context {
    * Starts an 
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    *  instance. This API uses a promise to return the result.
-   * This API can be properly called only on PCs/2-in-1 devices. If it is called on other device types, error code 801 
-   * is returned.
+   * This API is supported on PC/2-in-1 devices. Since API version 26.1.0, it is also supported on phones and
+   * tablets, subject to product configuration. On unsupported devices, error code 801 is returned.
    * 
    * > **NOTE**
    * >
@@ -2721,8 +2742,8 @@ declare class UIAbilityContext extends Context {
    * Stops an 
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    *  instance. This API uses a promise to return the result.
-   * This API can be properly called only on PCs/2-in-1 devices. If it is called on other device types, error code 801 
-   * is returned.
+   * This API is supported on PC/2-in-1 devices. Since API version 26.1.0, it is also supported on phones and
+   * tablets, subject to product configuration. On unsupported devices, error code 801 is returned.
    * 
    * > **NOTE**
    * >
@@ -2758,8 +2779,8 @@ declare class UIAbilityContext extends Context {
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * . It enables communication with the AppServiceExtensionAbility via a proxy, allowing access to the capabilities 
    * exposed by the AppServiceExtensionAbility. It can be called only on the main thread.
-   * This API can be properly called only on PCs/2-in-1 devices. If it is called on other device types, error code 801 
-   * is returned.
+   * This API is supported on PC/2-in-1 devices. Since API version 26.1.0, it is also supported on phones and
+   * tablets, subject to product configuration. On unsupported devices, error code 801 is returned.
    * 
    * > **NOTE**
    * >
@@ -2803,8 +2824,8 @@ declare class UIAbilityContext extends Context {
    * . It can be called only on the main thread. This API uses a promise to return the result.
    * Once the connection is terminated, you are advised to set the remote object returned when the connection is 
    * established to null, so as to prevent communication using the remote object that may become invalid.
-   * This API can be properly called only on PCs/2-in-1 devices. If it is called on other device types, error code 801 
-   * is returned.
+   * This API is supported on PC/2-in-1 devices. Since API version 26.1.0, it is also supported on phones and
+   * tablets, subject to product configuration. On unsupported devices, error code 801 is returned.
    * **System capability**: SystemCapability.Ability.AbilityRuntime.Core
    *
    * @param { long } connection - Connection ID returned by 

@@ -613,7 +613,7 @@ export declare interface ButtonAttribute extends CommonMethod {
      */
     default attributeModifier(modifier: AttributeModifier<ButtonAttribute> | AttributeModifier<CommonMethod> | undefined): this;
     /**
-     * Set button options.
+     * 设置按钮选项。
      *
      * @param { ResourceStr } label - the label of button
      * @param { ButtonOptions } [options] - button constructor options
@@ -625,7 +625,7 @@ export declare interface ButtonAttribute extends CommonMethod {
      */
     default setButtonOptions(label: ResourceStr, options?: ButtonOptions): this;
     /**
-     * Set button options.
+     * 设置按钮选项。
      *
      * @param { ButtonOptions } [options] - button constructor options
      * @returns { ButtonAttribute } Returns the instance of the ButtonAttribute.
@@ -673,7 +673,7 @@ export declare function Button(
 ): ButtonAttribute
 
 /**
- * Defines the Extendable Button.
+ * 定义可扩展Button。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -736,7 +736,7 @@ export declare abstract class ExtendableButton implements ButtonAttribute {
     ): void;
 
     /**
-     * Set the Button Options.
+     * 设置按钮选项。
      *
      * @param { ResourceStr } label
      * @param { ButtonOptions } [options]
@@ -751,7 +751,7 @@ export declare abstract class ExtendableButton implements ButtonAttribute {
     ): this;
 
     /**
-     * Set the Button Options.
+     * 设置按钮选项。
      *
      * @param { ButtonOptions } [options]
      * @returns { ExtendableButton }

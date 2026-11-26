@@ -1541,12 +1541,13 @@ declare namespace uiEffect {
    * @unionmember { HdrBrightnessBlender } HDR-enabled brightness blender [since 20]
    * @unionmember { HdrDarkenBlender } HDR-adaptive darken blender [since 26.0.0]
    * @unionmember { ColorfulBrightnessBlender } Hue-preserving brightening and darkening blender [since 26.1.0]
+   * @unionmember { BlenderBase } Blender base type [since 26.1.0]
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @since 13 dynamic
    */
-  type Blender = BrightnessBlender | HdrBrightnessBlender | HdrDarkenBlender | ColorfulBrightnessBlender;
+  type Blender = BrightnessBlender | HdrBrightnessBlender | HdrDarkenBlender | ColorfulBrightnessBlender | BlenderBase;
 
   /**
    * Brightness blender, used to add a brightness effect to a specified component.
@@ -1684,10 +1685,10 @@ declare namespace uiEffect {
   interface HdrDarkenBlender {
 
     /**
-     * HDR brightness ratio. The value range is [1.0, the maximum brightness ratio supported by the current device].
-     * Values less than 1.0 are treated as 1.0; when the value is equal to 1.0, it represents the original brightness
-     * of the component; values exceeding the maximum supported brightness ratio are treated as the maximum ratio.
-     * The maximum supported brightness ratio = device maximum brightness / device default brightness.
+     * HDR brightness ratio. Value range [1.0, the maximum brightness ratio supported by the current device], and
+     * values outside the range will be automatically clamped. When the value is equal to 1.0, it represents the
+     * original brightness of the component.
+     * The maximum brightness ratio supported by the current device = device maximum brightness / device default brightness.
      * Device maximum brightness can be obtained via hdc command: hdc shell param get const.display.brightness.max
      * Device default brightness can be obtained via hdc command: hdc shell param get const.display.brightness.default
      *
@@ -1727,22 +1728,22 @@ declare namespace uiEffect {
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.1.0 dynamic&static
    */
   interface ColorfulBrightnessBlenderOptions {
     /**
      * Foreground darken weight, which controls the direction and strength of brightening/darkening. When set to 0,
      * the foreground is brightened, the foreground tends to be brighter than the background to ensure readability;
      * when set to 1, the foreground is darkened, the foreground tends to be darker than the background; values
-     * between 0 and 1 are a transition between brightening and darkening. The default value is 1. The value range is
-     * [0, 1], and values outside the range will be clamped during implementation.
+     * between 0 and 1 are a transition between brightening and darkening. The default value is 1. Value range
+     * [0, 1], and values outside the range will be clamped.
      *
      * @default 1
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     darkenWeight?: double;
 
@@ -1750,15 +1751,15 @@ declare namespace uiEffect {
      * Color enhancement strength, which controls the degree of saturation enhancement for the foreground. When set
      * to 0, no additional saturation is enhanced and the foreground retains its original saturation; the larger the
      * value, the more obvious the saturation enhancement. When set to 1, the enhancement reaches its maximum and the
-     * colors are most vivid. The default value is 0. The value range is [0, 1], and values outside the range will be
-     * clamped during implementation.
+     * colors are most vivid. The default value is 0. Value range [0, 1], and values outside the range will be
+     * clamped.
      *
      * @default 0
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     vibrancyStrength?: double;
 
@@ -1766,15 +1767,15 @@ declare namespace uiEffect {
      * Luma difference threshold to ensure readability, used to constrain the luma difference between the foreground
      * and background to maintain sufficient contrast. When set to 0, no additional luma difference is enforced, the
      * weakest readability constraint; the larger the value, the larger the enforced luma difference and the stronger
-     * the contrast; when set to 1, the maximum luma difference is enforced. The default value is 0. The value range
-     * is [0, 1], and values outside the range will be clamped during implementation.
+     * the contrast; when set to 1, the maximum luma difference is enforced. The default value is 0. Value range
+     * [0, 1], and values outside the range will be clamped.
      *
      * @default 0
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     lumaDiff?: double;
 
@@ -1789,7 +1790,7 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     hdrEnabled?: boolean;
 
@@ -1799,15 +1800,15 @@ declare namespace uiEffect {
      * the output result retains the color tendency of the input color; when set to 0, the input color does not
      * participate in the calculation and the output result is not affected by the input color, performing
      * brightening/darkening directly based on the background color; values between 0 and 1 are an interpolation
-     * transition between the two. The default value is 1. The value range is [0, 1], and values outside the range
-     * will be clamped during implementation.
+     * transition between the two. The default value is 1. Value range [0, 1], and values outside the range
+     * will be clamped.
      *
      * @default 1
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     tintedColorPercent?: double;
   }
@@ -1841,7 +1842,8 @@ declare namespace uiEffect {
 
     /**
      * Enhanced parameters for brightening and darkening, used to control the brightening/darkening direction, color
-     * enhancement strength, readability threshold, and HDR switch.
+     * enhancement strength, readability threshold, and HDR switch. If this parameter is not specified, the default
+     * values of the fields in ColorfulBrightnessBlenderOptions are used.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -2401,11 +2403,10 @@ declare namespace uiEffect {
   /**
    * Creates an HdrDarkenBlender instance for HDR layer darken blending effect.
    *
-   * @param { double } hdrBrightnessRatio - HDR brightness ratio. The value range is [1.0, the maximum brightness ratio
-   *     supported by the current device]. Values less than 1.0 are treated as 1.0; when the value is equal to 1.0,
-   *     it represents the original brightness of the component; values exceeding the maximum supported brightness ratio
-   *     are treated as the maximum ratio.
-   *     The maximum supported brightness ratio = device maximum brightness / device default brightness.
+   * @param { double } hdrBrightnessRatio - HDR brightness ratio. Value range [1.0, the maximum brightness ratio
+   *     supported by the current device], and values outside the range will be automatically clamped. When the value
+   *     is equal to 1.0, it represents the original brightness of the component.
+   *     The maximum brightness ratio supported by the current device = device maximum brightness / device default brightness.
     *     Device maximum brightness can be obtained via hdc command: hdc shell param get const.display.brightness.max
      *     Device default brightness can be obtained via hdc command:
      *     hdc shell param get const.display.brightness.default
@@ -2434,7 +2435,8 @@ declare namespace uiEffect {
    *     used to configure basic properties such as brightness mapping and saturation curves.
    * @param { ColorfulBrightnessBlenderOptions } [options] - Enhanced parameters for brightening and darkening,
    *     used to control the brightening/darkening direction, color enhancement strength, readability threshold,
-   *     and HDR switch.
+   *     and HDR switch. If this parameter is not specified, the default values of the fields in
+   *     ColorfulBrightnessBlenderOptions are used.
    * @returns { ColorfulBrightnessBlender } Returns the hue-preserving brightening and darkening blender.
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -2444,6 +2446,87 @@ declare namespace uiEffect {
    */
   function createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
     options?: ColorfulBrightnessBlenderOptions): ColorfulBrightnessBlender;
+
+  /**
+   * Blender base type, providing the unified creation entry for various blending effects. It is recommended to
+   * use the methods of this type to create blenders.
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @form [since 26.1.0]
+   * @since 26.1.0 dynamic&static
+   */
+  class BlenderBase {
+
+    /**
+     * Creates a brightness blend BlenderBase instance by inputting the brightness blender parameters. When the
+     * optional parameter hdrEnabled is set to false, the effect is the same as calling
+     * uiEffect.createBrightnessBlender(); when it is set to true, the effect is the same as calling
+     * uiEffect.createHdrBrightnessBlender().
+     *
+     * @param { BrightnessBlenderParam } param - The brightness blender parameters, including grayscale adjustment
+     *     coefficients, saturation, blending ratio, and other configuration items, used to configure the
+     *     brightness blend effect.
+     * @param { boolean } [hdrEnabled] - Whether to enable HDR for the brightness blend effect. When set to true,
+     *     HDR is enabled for the brightness blend effect; when set to false, HDR is not enabled for the brightness
+     *     blend effect. The default value is false.
+     * @returns { BlenderBase } - Returns a BlenderBase with the brightness blend effect.
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form [since 26.1.0]
+     * @since 26.1.0 dynamic&static
+     */
+    static createBrightnessBlender(param: BrightnessBlenderParam, hdrEnabled?: boolean): BlenderBase;
+
+    /**
+     * Creates an HDR darken blend BlenderBase instance for HDR layer darken blending effect. The effect is the
+     * same as calling uiEffect.createHdrDarkenBlender().
+     *
+     * @param { double } hdrBrightnessRatio - HDR brightness ratio. Value range [1.0, the maximum brightness ratio
+     *     supported by the current device], and values outside the range will be automatically clamped. When the
+     *     value is equal to 1.0, it represents the original brightness of the component.
+     *     The maximum brightness ratio supported by the current device = device maximum brightness / device default brightness.
+     *     Device maximum brightness can be obtained via hdc command: hdc shell param get const.display.brightness.max
+     *     Device default brightness can be obtained via hdc command:
+     *     hdc shell param get const.display.brightness.default
+     * @param { [double, double, double] } [grayscaleFactor] - Converts RGB colors to grayscale values.
+     *     The weights of the grayscale conversion formula can be automatically adjusted according to the current
+     *     color gamut, using different weight calculation methods under different color gamuts;
+     *     suitable for sRGB and other standard color gamut scenarios. Pass this parameter when you need to customize
+     *     grayscale conversion weights based on a specific color gamut or visual effect.
+     *     All three components have no boundary limits. The default value is the standard grayscale weights
+     *     [0.299, 0.587, 0.114].
+     * @returns { BlenderBase } - Returns a BlenderBase with the HDR darken blend effect, used to add a darken effect
+     *     to a specified component.
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static createHdrDarkenBlender(hdrBrightnessRatio: double, grayscaleFactor?: [double, double, double]): BlenderBase;
+
+    /**
+     * Creates a BlenderBase instance to add a hue-preserving brightening and darkening effect to a component.
+     * The effect is the same as calling uiEffect.createColorfulBrightnessBlender().
+     *
+     * @param { BrightnessBlenderParam } brightnessBlenderParam - Regular parameters for brightening and darkening,
+     *     used to configure basic properties such as brightness mapping and saturation curves.
+     * @param { ColorfulBrightnessBlenderOptions } [options] - Enhanced parameters for brightening and darkening,
+     *     used to control the brightening/darkening direction, color enhancement strength, readability threshold,
+     *     and HDR switch. If this parameter is not specified, the default values of the fields in
+     *     ColorfulBrightnessBlenderOptions are used.
+     * @returns { BlenderBase } - Returns a BlenderBase with the hue-preserving brightening and darkening blend effect.
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form [since 26.1.0]
+     * @since 26.1.0 dynamic&static
+     */
+    static createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
+      options?: ColorfulBrightnessBlenderOptions): BlenderBase;
+  }
 }
 
 /**

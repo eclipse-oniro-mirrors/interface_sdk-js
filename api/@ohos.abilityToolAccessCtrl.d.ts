@@ -12,9 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
- * @file This module provides the capabilities of tools access control
+ * @file Tool Access Control Management
  * @kit AbilityKit
  */
 
@@ -1304,6 +1303,106 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.1.0 dynamiconly
    */
   export function generateTaskChallenge(taskIdentityInfo: TaskIdentityInfo): Promise<Uint8Array>;
+
+  /**
+   * Callback of the simulated click result of the deregistration control component. Releases callback resources when a
+   * service ends.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function unregisterControlComponentResultCallback(): void;
+
+  /**
+   * Registers the control component to simulate the click result callback. After registration, the result of each
+   * simulated click of the control component is returned through this callback. Only one callback can be registered in
+   * a process. Repeated registration overwrites the previously registered callback.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { ResultCallback } callback - Callback function for receiving the simulated click operation result.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. callback is invalid.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function registerControlComponentResultCallback(callback: ResultCallback): void;
+
+  /**
+   * Callback function type used to receive the result of each simulated click operation.
+   *
+   * @param { ControlComponentClickResult } result - This interface is used to call back the service party to
+   *     simulate the click result.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  type ResultCallback = (result: ControlComponentClickResult) => void;
+
+  /**
+   * Simulates the operation result.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ControlComponentClickResult {
+    /**
+     * Result code of the simulated click operation. The value 0 indicates success, and other values indicate failure.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    code: number;
+
+    /**
+     * Information about the target application that is simulated.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    appInfo: AppInfo;
+
+    /**
+     * ID of the component that is simulated to be clicked.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    componentId: string;
+
+    /**
+     * Indicates whether the simulated click is allowed. true: yes; false: no.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    isAllowed: boolean;
+
+    /**
+     * Reason description of the simulated operation result.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    reason: string;
+  }
 }
 
 export default abilityToolAccessCtrl;

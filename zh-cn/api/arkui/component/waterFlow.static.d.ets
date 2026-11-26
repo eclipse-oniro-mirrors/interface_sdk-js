@@ -21,7 +21,7 @@ import { AttributeModifier, UIScrollableCommonEvent, ScrollableCommonMethod, Nes
 import { Builder, CustomBuilder, ComponentBuilder, CustomBuilderT } from './builder';
 import { Length, Dimension, Margin, ConstraintSizeOptions, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from "./scroll";
-import { ScrollSnapAlign, ScrollState } from "./list";
+import { ScrollSnapAlign, ScrollState, StickyStyle } from "./list";
 import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { FlexDirection } from './enums';
 import { ComponentContentBase } from '../../arkui/ComponentContent';
@@ -376,7 +376,6 @@ export declare type OnWaterFlowScrollIndexCallback = (first: int, last: int) => 
  * @noninterop
  */
 export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
-
   /**
    * 设置当前瀑布流组件布局列的数量，不设置时默认1列。
    *
@@ -629,6 +628,45 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @since 26.0.1 staticonly
    */
   default setWaterFlowOptions(options?: WaterFlowOptions): this;
+
+  /**
+   * 设置瀑布流的头部。头部显示在主轴起始位置，参与瀑布流的总大小、可滚动边界和基于索引的滚动。
+   *
+   * @param { CustomBuilder | ComponentContentBase | undefined } builder - 瀑布流的头部。
+   *     <br>默认值：<em>undefined</em>（不显示头部）。设置undefined将删除头部。
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default header(builder: CustomBuilder | ComponentContentBase | undefined): this;
+
+  /**
+   * 设置瀑布流的尾部。尾部显示在主轴末尾位置，参与瀑布流的总大小、可滚动边界和基于索引的滚动。
+   * 本属性与<em>WaterFlowOptions</em>中的<em>footer</em>和<em>footerContent</em>相互独立：
+   * 现有<em>footer</em>、<em>footerContent</em>和<em>sections</em>能力及其优先级不受本属性影响。
+   *
+   * @param { CustomBuilder | ComponentContentBase | undefined } builder - 瀑布流的尾部。
+   *     <br>默认值：<em>undefined</em>（不显示尾部）。设置undefined将删除尾部。
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default footer(builder: CustomBuilder | ComponentContentBase | undefined): this;
+
+  /**
+   * 为通过<em>header</em>设置的头部和通过<em>footer</em>设置的尾部设置吸顶吸底样式。
+   * 仅在已设置头部或尾部时，本属性才生效。
+   *
+   * @param { StickyStyle | undefined } style - 头部和尾部组件的吸顶吸底样式。
+   *     <br>默认值：<em>StickyStyle.None</em>。设置undefined将恢复默认值。
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default sticky(style: StickyStyle | undefined): this;
 
   /**
    * 动态设置WaterFlow组件的属性方法。

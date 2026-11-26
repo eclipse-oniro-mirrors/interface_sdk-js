@@ -82,7 +82,7 @@ declare class IndicatorComponentController {
 }
 
 /**
- * Provides an interface for indicator.
+ * 提供指示器的接口。
  *
  * @interface IndicatorComponentInterface
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -95,7 +95,7 @@ declare class IndicatorComponentController {
 interface IndicatorComponentInterface {
    
   /**
-   * Called when a indicator is set.
+   * 设置指示器时调用。
    *
    * @param { IndicatorComponentController } controller - indicator component controller.
    * @returns { IndicatorComponentAttribute }
@@ -201,7 +201,7 @@ declare class IndicatorComponentAttribute extends CommonMethod<IndicatorComponen
   vertical(isVertical: boolean): IndicatorComponentAttribute;
 
   /**
-   * Called when the index value changes.
+   * 当索引值变化时调用。
    *
    * @param { Callback<number> } event
    * @returns { IndicatorComponentAttribute }

@@ -1885,7 +1885,9 @@ declare namespace photoAccessHelper {
      *     [PhotoKeys]{@link @ohos.file.photoAccessHelper:photoAccessHelper.PhotoKeys}.TITLE的值。title的参数规格为：
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
-     *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>- 不允许出现的非法英文字符。
+     *     <br>- API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>- API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2615,7 +2617,9 @@ declare namespace photoAccessHelper {
      * @param { string } title - 克隆后资产的标题。参数规格为：
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
-     *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>- 不允许出现的非法英文字符。
+     *     <br>- API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>- API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * @returns { Promise<PhotoAsset> } Promise对象，返回
      *     [PhotoAsset]{@link @ohos.file.photoAccessHelper:photoAccessHelper}。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -3781,6 +3785,15 @@ declare namespace photoAccessHelper {
      * @since 19 dynamic
      */
     SUM_SIZE = 'sum(size)',
+    /**
+     * 相机个性色卡拍照类型。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamic&static
+     */
+    PHOTO_XT_STYLE_TEMPLATE_NUMBER = 'xt_style_template_number',
   }
 
   /**
@@ -4186,7 +4199,9 @@ declare namespace photoAccessHelper {
      * 
      * - 不应包含扩展名。
      * - 文件名字符串长度为1~255（资产文件名为标题+扩展名）。
-     * - 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     * - 不允许出现的非法英文字符。
+     * - API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     * - API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
@@ -4242,7 +4257,9 @@ declare namespace photoAccessHelper {
      * 不传入时由系统生成，参数规格如下：
      * 
      * - 不应包含扩展名。
-     * - 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     * - 不允许出现的非法英文字符。
+     * - API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     * - API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * - 由于文件名由标题 + 扩展名组成，文件名字符串长度范围为[1, 255]，因此请注意标题长度不宜过长。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -4930,6 +4947,33 @@ declare namespace photoAccessHelper {
      * @since 23 static
      */
     HIGHLIGHT_SUGGESTIONS = 4105,
+    /**
+     * 宠物相册。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PET = 4106,
+    /**
+     * 人和宠物合影相册。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    HUMAN_PET_GROUP_PHOTO = 4112,
+    /**
+     * 宠物和宠物合影相册。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PET_GROUP_PHOTO = 4113,
     /**
      * 共享相册。
      *
@@ -5717,10 +5761,11 @@ declare namespace photoAccessHelper {
      */
     setCoverUri(uri: string): Promise<void>;
     /**
-     * 获取人像相册或合影相册的封面人脸标识。
+     * 获取人像相册或合影相册的封面人脸标识。API版本26.1.0开始，也支持宠物相册及人和宠物合影相册、宠物和宠物合影相册，返回脸部标识。
      *
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @returns { Promise<string> } Promise对象，人像相册返回tag_id，合影相册返回group_tag，未找到返回空字符串。
+     *     <br>API版本26.1.0开始，宠物相册返回tag_id，人和宠物合影相册、宠物和宠物合影相册返回group_tag。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -6048,7 +6093,9 @@ declare namespace photoAccessHelper {
      * @param { CreateOptions } options - 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。
      *     <br>**注意：**
      *     <br>传入'subtype'选项，配置不生效，仅支持保存DEFAULT类型图片。
-     *     <br>文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>文件名中不允许出现非法英文字符。
+     *     <br>API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>API版本26.1.0之前，非法字符包括： . .. \ / : * ? " ' ` < > | { } [ ]
      * @param { AsyncCallback<string> } callback - callback返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
@@ -12629,7 +12676,9 @@ declare namespace photoAccessHelper {
      * @param { PhotoType } photoType - 待创建的文件类型，IMAGE或者VIDEO类型。
      * @param { string } extension - 文件扩展名，例如：'jpg'。
      * @param { CreateOptions } [options] - 创建选项，例如：{title: 'testPhoto'}。
-     *     <br>文件名中不允许出现非法英文字符，包括：. .. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>文件名中不允许出现非法英文字符。
+     *     <br>API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>API版本26.1.0之前，非法字符包括：. .. \ / : * ? " ' ` < > | { } [ ]
      * @returns { MediaAssetChangeRequest }      **MediaAssetChangeRequest** created.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -13527,8 +13576,8 @@ declare namespace photoAccessHelper {
      *     <br>不应包含扩展名。
      *     文件名字符串长度为1~255。
      *     不允许出现的非法英文字符，包括：
-     *     . \ / : * ? " ' ` < > | { } [ ]
-     *     不允许仅命名.或者..
+     *     \ / : * ? " ' ` < > | { } [ ]
+     *     允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
      *     文管目录下不允许重名
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
@@ -14107,13 +14156,13 @@ declare namespace photoAccessHelper {
     setIsMe(): void;
 
     /**
-     * 设置人像相册的显示级别。
+     * 设置人像相册的显示级别。API版本26.1.0开始，也支持设置宠物相册的显示级别。
      *
-     * @param { int } displayLevel - 设置人像相册的显示级别，
-     *     <br>0：取消该人像相册收藏；
-     *     <br>1：设置人像相册为首届面；
-     *     <br>2：设置人像相册为更多界面；
-     *     <br>3：设置人像相册为收藏界面。
+     * @param { int } displayLevel - 设置人像相册或宠物相册的显示级别，
+     *     <br>0：取消该相册收藏；
+     *     <br>1：设置该相册为首届面；
+     *     <br>2：设置该相册为更多界面；
+     *     <br>3：设置该相册为收藏界面。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -14128,7 +14177,7 @@ declare namespace photoAccessHelper {
     setDisplayLevel(displayLevel: int): void;
 
     /**
-     * 从该人像相册或合影相册中移除指定图片。
+     * 从该人像相册或合影相册中移除指定图片。API版本26.1.0开始，也支持从宠物相册及人和宠物合影相册、宠物和宠物合影相册中移除指定图片。
      *
      * @param { Array<PhotoAsset> } assets - 需要移除的文件列表。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -14146,7 +14195,7 @@ declare namespace photoAccessHelper {
     dismissAssets(assets: Array<PhotoAsset>): void;
 
     /**
-     * 将两个人像相册合并。
+     * 将两个人像相册合并。API版本26.1.0开始，也支持将两个宠物相册合并。
      *
      * @param { Album } target - 需要合并的目标相册，合并相册必须重命名。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.

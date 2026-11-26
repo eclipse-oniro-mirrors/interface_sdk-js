@@ -25,6 +25,8 @@ import { CustomComponentLifecycle } from '../component/customComponent';
 
 import { WrappedBuilder, CustomBuilder } from '../component/builder';
 
+import { PlaceholderOptions } from '../../@ohos.arkui.placeholderRegister';
+
 /**
  * UIUtils是状态管理提供的工具，用于处理可观察数据。
  *
@@ -651,6 +653,65 @@ export declare interface CustomComponentContext {
    */
   registerActiveAndInactiveCallback(active?: ActiveAndInactiveCallbackType,
     inactive?: ActiveAndInactiveCallbackType): void;
+
+  /**
+   * 将当前自定义组件置为异步加载。
+   *
+   * 当开发者需要在页面转场等对帧率敏感的场景下，避免自定义组件同步加载导致丢帧卡顿，希望以异步加载替代默认的
+   * 同步加载时，使用本方法。组件实际内容由框架在异步任务中加载，页面转场期间不阻塞主线程。加载未完成期间，
+   * 已配置的占位组件会被显示，否则该组件不显示；加载完成后，占位组件自动替换为实际内容，并由框架自动触发渲染更新。
+   *
+   * **timeout**为正值时，框架在超时后的后续帧中强制加载该组件，且单帧强制加载的组件数量不超过系统定义的上限。
+   * 取值**0**表示不等待：组件在后续帧中被强制加载。取值为负数表示永不超时。本期不处理异步加载失败场景，
+   * 由超时触发的强制加载机制兜底。
+   *
+   * 与[IReusePool.preRender()]{@link IReusePool#preRender}（预渲染可复用组件实例）不同，本方法延后的是组件实例的
+   * 加载时机；本方法为配置型接口，返回**void**。
+   *
+   * @param { CustomComponentAsyncLoadOptions } [options] - 异步加载配置。默认值**undefined**表示加载完成前不显示
+   *     占位组件，并使用缺省超时阈值（**1000** ms）。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  enableAsyncLoad(options?: CustomComponentAsyncLoadOptions): void;
+}
+
+/**
+ * CustomComponentAsyncLoadOptions为自定义组件异步加载的配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface CustomComponentAsyncLoadOptions {
+  /**
+   * 异步加载期间显示的占位组件。取值为
+   * [PlaceholderOptions]{@link @ohos.arkui.placeholderRegister:PlaceholderOptions}对象：**id**指向经
+   * [getPlaceholderRegister()]{@link @ohos.arkui.UIContext:UIContext#getPlaceholderRegister}注册的模板，**size**为
+   * **SizeOptions**类型的布局建议。若配置，该尺寸作为占位根节点的理想尺寸参与测量：数字单位为vp，带单位
+   * 字符串保留其单位，Resource类型视为未设置。**size**未配置，或其中某一维未设置或非法时，占位组件按占位
+   * 模板自身的设置布局。
+   *
+   * 未配置**placeholder**，或其**id**为空或未注册时，异步加载完成前不显示占位组件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  placeholder?: PlaceholderOptions;
+
+  /**
+   * 异步加载的超时阈值，单位ms，默认值为**1000**。
+   *
+   * 取值为整数。取值**0**表示不等待：组件在后续帧中被强制加载。取值为负数表示永不超时：组件持续等待直至
+   * 异步加载完成。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  timeout?: int;
 }
 
 /**

@@ -693,13 +693,14 @@ declare interface CustomDialogControllerOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
    * @since 26.0.0 dynamic
    */
   systemMaterial?: SystemUiMaterial;
 
   /**
-   * Sets the distortion animation Mode of the dialog.
+   * 设置系统材质下弹窗的非线性动画模式。
    *
    * @default DistortionMode.DISTORTION_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -710,7 +711,7 @@ declare interface CustomDialogControllerOptions {
   distortionMode?: DistortionMode;
 
   /**
-   * Sets the edgeLight animation Mode of the dialog.
+   * 设置系统材质下弹窗的流光动画模式。
    *
    * @default EdgeLightMode.EDGELIGHT_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full

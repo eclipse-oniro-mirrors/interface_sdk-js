@@ -67,7 +67,7 @@ export declare struct SwipeRefresherV2 {
   @Param
   isLoading: boolean;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

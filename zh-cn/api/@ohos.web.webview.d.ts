@@ -26,7 +26,27 @@ import type print from './@ohos.print';
 import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
- * 本模块提供管理Web模块的能力。
+ * WebView模块是HarmonyOS ArkWeb框架提供的Web控制能力模块，用于在应用侧对Web组件的行为进行编程式控制。
+ * 该模块不涉及网页的显示渲染（显示能力由Web组件提供），而是聚焦于Web组件运行
+ * 过程中的控制逻辑，包括页面加载与导航、JavaScript脚本执行与双向消息通信、Cookie管理、数据库管理、
+ * Web组件存储操作、下载任务管理、网络请求拦截与自定义响应、代理配置、地理位置权限管理、广告过滤、
+ * 前进后退缓存、媒体播放托管、PDF生成等能力。
+ *
+ * 开发者在使用Web组件展示网页内容时，如需在应用侧对网页行为进行干预、监听或扩展（例如：向网页发送
+ * 消息、拦截特定Scheme请求并返回本地资源、管理下载流程、配置代理、控制缓存策略等），应通过本模块
+ * 提供的Controller和各类Manager/Delegate来实现。
+ *
+ * 网页显示的能力请参考[组件描述]{@link @global:Web}。
+ * 
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **说明：**
+ * >
+ * > - 本模块首批接口从API version 9开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+ * >
+ * > - 示例效果请以真机运行为准。
+ * >
+ * > - 本模块中的静态方法必须在用户界面（UI）线程上调用，否则可能导致异常。
  *
  * ## 需要权限
  *
@@ -6500,6 +6520,47 @@ declare namespace webview {
     getZoomFactor(): number;
 
     /**
+     * 注册实例级网站配置查询回调。主要用于正常网页导航场景。当 ArkWeb 执行此类导航时，
+     * 会同步调用此回调以获取网站配置。回调接收一个{@link webview.WebSiteConfigParams}对象，必须返回
+     * {@link webview.WebSiteConfigResult}对象。
+     *
+     * > **说明**
+     * >
+     * > - 此回调在 UI 线程同步调用，回调中不要执行耗时操作。
+     * > - 回调返回的 userAgent 为空时，使用 ArkWeb 默认 User-Agent。
+     * > - 回调返回的 viewportWidth 为 0 时，使用默认视口宽度。
+     * > - 仅保留一个回调，重复调用会覆盖之前注册的回调。传入**null**可清除当前回调。
+     *
+     * @param { OnQueryWebSiteConfigCallback } callback - 网站配置查询回调。
+     *     传入**null**清除当前已注册的回调。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setWebSiteConfigCallback(callback: OnQueryWebSiteConfigCallback): void
+    /**
+     * 注册静态全局网站配置查询回调。主要用于无法确定特定 Web 组件的场景，如 ServiceWorker
+     * 请求或独立下载等。当 ArkWeb 执行此类导航时，会同步调用该回调以获取网站配置。回调接收一个
+     * {@link webview.WebSiteConfigParams}对象，必须返回{@link webview.WebSiteConfigResult}对象。
+     *
+     * > **说明**
+     * >
+     * > - 回调在 UI 线程上同步调用，不要在回调中执行耗时操作。
+     * > - 若回调返回空的 userAgent，则使用 ArkWeb 默认的 User-Agent。
+     * > - 若回调返回的 viewportWidth 为 0，则使用默认视口宽度。
+     * > - 仅保留一个回调。再次调用本 API 会替换之前注册的回调。传入**null**清除当前回调。
+     *
+     * @param { OnQueryWebSiteConfigCallback } callback - 全局网站配置查询回调。
+     *     传入**null**清除当前已注册的回调。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static setGlobalWebSiteConfigCallback(callback: OnQueryWebSiteConfigCallback): void
+
+    /**
      * 在当前导航条目上设置用户数据的键值对。
      *
      * 用户数据与导航入口生命周期相关联。当前导航条目
@@ -6594,6 +6655,26 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     setNavigationThrottle(throttle: NavigationThrottle): void;
+
+    /**
+     * 获取上次向应用程序发送postMessage的帧的URL。
+     * 
+     * 此接口返回通过接收到的最近一次postMessage的发送者的帧的URL。
+     * [onMessageEvent]{@link webview.WebMessagePort.onMessageEvent}
+     * 或
+     * [onMessageEventExt]{@link webview.WebMessagePort.onMessageEventExt}.
+     * 如果没有收到postMessage，则返回空字符串。
+     * 
+     * @returns { string } 上次发送postMessage的帧的URL。如果没有收到postMessage,
+     *     返回空字符串。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this method.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getLastPostMessageUrl(): string;
   }
 
   /**
@@ -9663,6 +9744,368 @@ declare namespace webview {
      */
     willFailRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
   }
+
+  /**
+   * 网站配置查询触发来源枚举。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum WebSiteSource {
+    /**
+     * 由网页导航触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    WEB_PAGE = 1,
+
+    /**
+     * 由 ServiceWorker 请求触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    SERVICE_WORKER = 2,
+
+    /**
+     * 由下载请求触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    DOWNLOAD = 3,
+
+    /**
+     * 由扩展触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    EXTENSIONS = 4,
+
+    /**
+     * 由其他来源触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    OTHER = 5
+  }
+
+  /**
+   * 传递给[setWebSiteConfigCallback]{@link webview.WebviewController#setWebSiteConfigCallback}或
+   * [setGlobalWebSiteConfigCallback]{@link webview.WebviewController#setGlobalWebSiteConfigCallback}回调的参数。
+   *
+   * `url`和`source`字段始终存在。可选字段仅在实例级回调触发时填充；静态全局回调触发时不带这些可选字段。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface WebSiteConfigParams {
+    /**
+     * 完整的请求 URL。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    url: string;
+
+    /**
+     * 网站配置查询的触发来源。参见[WebSiteSource]{@link webview.WebSiteSource}。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    source: WebSiteSource;
+
+    /**
+     * 是否为主帧导航。值为`true`表示主帧导航，值为`false`表示子帧导航。
+     * 此字段为可选字段，仅在实例级回调触发时设置。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isMainFrame?: boolean;
+
+    /**
+     * 顶层帧 URL。主帧导航时与`url`相同；子帧导航时为包含该子帧的顶层页面 URL。
+     * 此字段为可选字段，仅在实例级回调触发时设置。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    topFrameUrl?: string;
+
+    /**
+     * 重定向链。每个元素为一个 URL 字符串。此字段为可选字段，仅在实例级回调触发时设置。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    redirectChain?: Array<string>;
+
+    /**
+     * 来源页面 URL（referrer）。此字段为可选字段，仅在实例级回调触发时设置。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    referrer?: string;
+
+    /**
+     * 页面跳转值，由[PageTransition]{@link webview.PageTransition}中定义的核心类型与修饰标志按位或得到。
+     * 可使用掩码常量（`CORE_MASK`、`QUALIFIER_MASK`、`IS_REDIRECT_MASK`）进行拆解。
+     * 此字段为可选字段，仅在实例级回调触发时设置。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    pageTransition?: number;
+  }
+
+  /**
+   * [setWebSiteConfigCallback]{@link webview.WebviewController#setWebSiteConfigCallback}回调返回的结果。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface WebSiteConfigResult {
+    /**
+     * 完整的 User-Agent 字符串。空字符串表示使用 ArkWeb 默认 User-Agent。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    userAgent: string;
+
+    /**
+     * 视口宽度，单位 px。值为 0 表示使用默认视口宽度。
+     * 单位：px。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    viewportWidth: number;
+  }
+
+  /**
+   * 页面跳转类型枚举。`PageTransition`值由两部分组成：
+   *
+   * **核心类型**（低字节，取值 0–10）：表示主要的导航原因，如
+   * {@link LINK}、{@link TYPED}、{@link FORM_SUBMIT}、{@link RELOAD}、{@link AUTO_SUBFRAME}等。
+   * 每次导航有且仅有一个核心类型。
+   *
+   * **修饰标志**（高位）：表示额外的导航特征，如
+   * {@link FORWARD_BACK}（前进/后退导航）、{@link FROM_API}（API 触发）、
+   * {@link CLIENT_REDIRECT}（JavaScript/meta 重定向）、{@link SERVER_REDIRECT}（HTTP 重定向）等。
+   * 一次导航可包含零个或多个修饰标志。
+   *
+   * 组合跳转值由核心类型与修饰标志按位或得到。可使用掩码常量进行拆解：
+   * `CORE_MASK`提取核心类型，`QUALIFIER_MASK`提取修饰标志，`IS_REDIRECT_MASK`判断是否包含重定向。
+   *
+   * 例如，`TYPED | FROM_ADDRESS_BAR`得到的组合值为`0x02000001`。
+   * 使用`combined & CORE_MASK`（结果`0x01`）提取核心类型`TYPED`；
+   * 使用`combined & QUALIFIER_MASK`（结果`0x02000000`）提取修饰标志`FROM_ADDRESS_BAR`；
+   * 使用`(combined & FROM_ADDRESS_BAR) !== 0`判断是否由地址栏触发；
+   * 使用`(combined & IS_REDIRECT_MASK) !== 0`判断是否包含重定向。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum PageTransition {
+    /**
+     * 用户通过点击其他页面上的链接跳转到本页面。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    LINK = 0,
+
+    /**
+     * 用户在地址栏输入地址跳转到本页面。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    TYPED = 1,
+
+    /**
+     * 子帧导航。指在非顶层帧中自动加载的内容。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    AUTO_SUBFRAME = 3,
+
+    /**
+     * 用户显式请求的子帧导航，会在前进/后退列表中生成新的导航条目。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    MANUAL_SUBFRAME = 4,
+
+    /**
+     * 顶层导航。指在顶层帧中自动加载的内容。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    AUTO_TOPLEVEL = 6,
+
+    /**
+     * 用户填写表单并提交。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FORM_SUBMIT = 7,
+
+    /**
+     * 用户重新加载页面，可通过点击刷新按钮或在地址栏按回车触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    RELOAD = 8,
+
+    /**
+     * 掩码，用于从组合跳转值中提取核心跳转类型。与组合跳转值按位与，
+     * 结果为`PageTransition`核心类型枚举值。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CORE_MASK = 0xFF,
+
+    /**
+     * 用户通过前进或后退按钮在浏览历史中导航。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FORWARD_BACK = 0x01000000,
+
+    /**
+     * 用户通过地址栏触发本次导航。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FROM_ADDRESS_BAR = 0x02000000,
+
+    /**
+     * 跳转由 API 调用或外部应用发起。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FROM_API = 0x08000000,
+
+    /**
+     * 导航链的起始。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CHAIN_START = 0x10000000,
+
+    /**
+     * 重定向链中的最后一次跳转。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CHAIN_END = 0x20000000,
+
+    /**
+     * 由 JavaScript 或页面 meta refresh 标签触发的重定向。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CLIENT_REDIRECT = 0x40000000,
+
+    /**
+     * 由服务器通过 HTTP 头发送的重定向。
+     * 十六进制表示为 0x80000000。因超出 int32 最大值，使用带符号十进制表示。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    SERVER_REDIRECT = -2147483648,
+
+    /**
+     * 掩码，用于判断跳转是否为重定向（客户端或服务端）。与组合跳转值按位与，结果非 0 表示导航包含重定向。
+     * 该掩码由 {@link CLIENT_REDIRECT} | {@link SERVER_REDIRECT} 按位或得到。
+     * 十六进制表示为 0xC0000000。因超出 int32 最大值，使用带符号十进制表示。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    IS_REDIRECT_MASK = -1073741824,
+
+    /**
+     * 掩码，用于从组合跳转值中提取修饰标志位。
+     * 十六进制表示为 0xFFFFFF00。因超出 int32 最大值，使用带符号十进制表示。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    QUALIFIER_MASK = -256
+  }
+
+  /**
+   * 由[setWebSiteConfigCallback]{@link webview.WebviewController#setWebSiteConfigCallback}或
+   * [setGlobalWebSiteConfigCallback]{@link webview.WebviewController#setGlobalWebSiteConfigCallback}触发、
+   * 用于获取网站配置的回调。实例级回调触发时，{@link WebSiteConfigParams}的所有可选字段均会填充；
+   * 静态全局回调触发时，仅填充`url`和`source`。
+   *
+   * @param { WebSiteConfigParams } params - 网站配置参数，包含请求 URL 和触发来源。可选字段仅在实例级回调触发时填充。
+   * @returns { WebSiteConfigResult } 网站配置结果。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  type OnQueryWebSiteConfigCallback =
+      (params: WebSiteConfigParams) => WebSiteConfigResult;
+
 }
 
 export default webview;

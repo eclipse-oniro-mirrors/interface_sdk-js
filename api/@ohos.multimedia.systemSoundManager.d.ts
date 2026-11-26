@@ -126,7 +126,17 @@ declare namespace systemSoundManager {
      * @since 20 dynamic
      * @since 23 static
      */
-    ERROR_INVALID_PARAM = 20700007
+    ERROR_INVALID_PARAM = 20700007,
+
+    /**
+     * I/O error.
+     *
+     * @syscap SystemCapability.Multimedia.SystemSound.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ERROR_IO_ERROR = 20700008,
   }
 
   /**
@@ -1593,6 +1603,34 @@ declare namespace systemSoundManager {
      * @since 23 static
      */
     openToneHaptics(context: BaseContext, hapticsUri: string): Promise<int>;
+
+    /**
+     * Restores all ringtones and vibration settings to their factory defaults with one click, and deletes custom audio
+     * ringtones(video ringtones are retained).
+     *
+     * The restoration scope includes the incoming call ringtone, SMS/notification ringtone, selected URI of the alarm
+     * tone, and vibration settings. After the restoration, all items are restored to their factory defaults. In
+     * addition, custom audio ringtones added
+     * using {@link SystemSoundManager#addCustomizedTone} in the ringtone library are deleted, but video ringtones are
+     * retained.
+     *
+     * > **NOTE**
+     * >  The restoration process is executed atomically on the server. If any step fails, the modified items will be
+     * >  rolled back and an error code will be returned. 
+     *
+     * @permission ohos.permission.WRITE_RINGTONE
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permisson verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permisson verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 20700003 - Unsupported operation.
+     * @throws { BusinessError } 20700008 - I/O error.
+     * @syscap SystemCapability.Multimedia.SystemSound.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    factoryReset(): Promise<void>;
   }
 
   /**

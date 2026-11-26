@@ -9577,19 +9577,38 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.1.0 dynamic
    */
   visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
+
+  /**
+   * 设置Web组件内网页弹框（时间选择器/文件选择器等）握姿适配模式。
+   * 启用时，宽屏设备（应用窗口宽度大于600vp）上点击网页内date/time/datetime-local/file类型的
+   * input元素，系统弹框在被点击元素附近弹出。
+   * 禁用后，弹框保持当前布局（屏幕中央或底部），与未设置该属性时一致。
+   * @param { WebHandednessFollowMode } mode - 握姿适配模式。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness(mode: WebHandednessFollowMode): WebAttribute;
 }
 
 /**
- * 定义 Web 组件。
+ * Web组件是ArkWeb Kit提供的具有网页显示能力的UI组件，用于在应用内嵌入和展示网页内容。开发者可通过
+ * Web组件加载在线网页和本地网页，支持隐私模式浏览、同步渲染模式、共享渲染进程等特性，满足混合开发、
+ * 内容嵌入、浏览器类应用等多种场景下的网页展示需求。Web组件的控制器（WebviewController）及相关控制
+ * 能力由[模块描述]{@link @ohos.web.webview:webview}提供。在使用Web组件时需注意：同一页面内的多个Web
+ * 组件应分别绑定不同的WebviewController实例以保证独立性和性能隔离；移动设备上当Web实例超过10个时
+ * 系统会主动回收后台页面数据。
  *
- * <p><strong>接口说明</strong>:
+ * <!--RP1--><!--RP1End-->
  *
- * <strong>性能说明</strong>:
- * <p>有关如何优化编译、资源加载和JSBridge性能的详细信息，
- * 请参见[Web加载性能优化]{@link https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-web-develop-optimization}
- * <p>当由于复杂的网页解析导致白屏时间较长时，
- * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
- * </p>
+ * > **说明：**
+ * >
+ * > - 该组件从API version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+ * >
+ * > - 示例效果请以真机运行为准。
+ * >
+ * > - 在移动设备上，当应用的Web实例数量超过10个时，系统会主动回收后台页面数据。
  *
  * ## 需要权限
  *
@@ -10341,4 +10360,28 @@ declare interface OnZoomChangeEvent {
    * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
+}
+
+/**
+ * 定义网页弹框的握姿适配模式。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum WebHandednessFollowMode {
+  /**
+   * 不适配。弹出框保持当前布局。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  NONE = 0,
+
+  /**
+   * 弹出框跟随触发它的组件（最近交互的组件）的位置。
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_ANCHOR = 1
 }

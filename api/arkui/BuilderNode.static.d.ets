@@ -21,9 +21,9 @@
 
 import { UIContext } from '@ohos.arkui.UIContext';
 
-import { FrameNode } from 'arkui.FrameNode';
+import { FrameNode } from './FrameNode';
 
-import { Size } from 'arkui.Graphics';
+import { Size } from './Graphics';
 
 import { TouchEvent, MouseEvent, AxisEvent } from '@ohos.arkui.component';
 

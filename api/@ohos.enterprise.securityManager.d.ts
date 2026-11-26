@@ -1205,6 +1205,62 @@ declare namespace securityManager {
   function uninstallEnterpriseReSignatureCertificate(admin: Want, certificateAlias: string, accountId: int): void;
 
   /**
+   * Indicates the enterprise re-signature certificate information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface ReSignatureCertificateInfo {
+    /**
+     * Certificate alias.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    certificateAlias: string;
+
+    /**
+     * Enterprise name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
+
+    /**
+     * Expiration time, in milliseconds.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    expirationTime: number;
+  }
+
+  /**
+   * Obtains enterprise re-signature certificate information based on the account ID. This API returns the information
+   * synchronously. Enterprises can use this API to query enterprise re-signature certificate details for certificate
+   * management and validity monitoring.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @returns { Array<ReSignatureCertificateInfo> } Enterprise re-signature certificate information obtained.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseReSignatureCertificates(accountId: number): Array<ReSignatureCertificateInfo>;
+
+  /**
    * Sets a screen watermark policy, which takes effect for all users.
    *
    * > **NOTE**
@@ -1691,7 +1747,16 @@ declare namespace securityManager {
      * @stagemodelonly
      * @since 26.0.1
      */
-    EXTENDED_AUTH_REQUIRED = 2
+    EXTENDED_AUTH_REQUIRED = 2,
+
+    /**
+     * Device-associated authentication and other authentication modes are optional.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXTENDED_AUTH_OPTIONAL = 3
   }
 
   /**
@@ -1790,10 +1855,11 @@ declare namespace securityManager {
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
    * @returns { EnterpriseResetPolicy } Enterprise reset policy.
-   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
-   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -1801,16 +1867,46 @@ declare namespace securityManager {
   function getEnterpriseResetPolicy(): EnterpriseResetPolicy;
 
   /**
+   * Obtains the credential ID based on the authentication token. This API uses a promise to return the result.
+   * Enterprises can use this API to parse and query user credential IDs (such as facial or fingerprint IDs) for
+   * scenarios such as enterprise device security audit and identity verification.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { Uint8Array } authToken - Authentication token, which is issued after successful authentication. The
+   *         maximum
+   *         length is 1024 bytes.
+   * @param { number } allowableDuration - Allowable duration for parsing the authentication token, in milliseconds.
+   *          and less than or equal to 86400000.
+   *         <br>The value must be greater than 0.
+   * @returns { Promise<bigint> } Promise used to return the credential ID.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *         required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201057 - Invalid authentication token.
+   * @throws { BusinessError } 9201058 - The authentication token parsing duration is out of the allowed range.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCredentialId(authToken: Uint8Array, allowableDuration: number): Promise<bigint>;
+
+  /**
    * Sets the enterprise reset policy.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
    * @param { EnterpriseResetPolicy } policy - Enterprise reset policy to set.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
-   * @throws { BusinessError } 801 - The device does not support this API.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0

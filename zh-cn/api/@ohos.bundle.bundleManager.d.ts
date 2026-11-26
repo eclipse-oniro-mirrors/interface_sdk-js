@@ -213,9 +213,7 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * 用于获取仅包含有桌面图标的应用的bundleInfo。它仅在[getAllBundleInfo]{@link bundleManager.getAllBundleInfo}接口中生效。 
-     *
-     * **系统API：** 该标记仅支持在系统API中使用。
+     * 用于获取仅包含有桌面图标的应用的bundleInfo。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]
@@ -3636,6 +3634,52 @@ declare namespace bundleManager {
    * @since 23 static
    */
   function getSharedBundleInfo(bundleName: string, moduleName: string): Promise<Array<SharedBundleInfo>>;
+
+  /**
+   * 启用或禁用备用模块。
+   *
+   * @permission ohos.permission.INSTALL_BUNDLE
+   * @param { string } bundleName - Bundle name.
+   * @param { string } moduleName - 模块名称。
+   * @param { long } versionCode - 模块的版本号。
+   * @param { boolean } isEnabled - **true**表示使能备用模块，**false**表示禁用备用模块。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700002 - The specified module is not existed.
+   * @throws { BusinessError } 17700096 - The specified version of the module is not found.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setAlternateModuleEnabled(bundleName: string, moduleName: string, versionCode: long,
+    isEnabled: boolean): Promise<void>;
+
+  /**
+   * 查询备用模块使能状态。
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - Bundle name.
+   * @param { string } moduleName - 模块名称。
+   * @param { long } versionCode - 模块的版本号。
+   * @returns { Promise<boolean> } Promise对象。返回**true**表示备用模块已使能，返回**false**表示备用模块已禁用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700002 - The specified module is not existed.
+   * @throws { BusinessError } 17700096 - The specified version of the module is not found.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function isAlternateModuleEnabled(bundleName: string, moduleName: string, versionCode: long): Promise<boolean>;
 
   /**
    * 根据userId获取指定用户下所有应用的[Provision]{@link ./bundleManager/AppProvisionInfo}配置文件信息。使用Promise异步回调。

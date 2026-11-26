@@ -28,9 +28,13 @@ import type { Callback } from './@ohos.base';
  * 形式显示在其他应用之上，即时呈现应用的关键信息。
  *
  * > **说明：**
- * >
+ * > - 在OpenHarmony 7.0.0之前，支持在 Tablet 设备的非电脑模式、Phone 设备使用闪控球功能，其他设备不可用；从 OpenHarmony 7.0.0开始，支持在 Phone、PC/2in1、Tablet设备使用闪控球功能，其他设备不可用。
  * > - 针对系统能力SystemCapability.Window.SessionManager，请先使用
  * > [canIUse()]{@link canIUse}接口判断当前设备是否支持此syscap及对应接口。
+ * 
+ * **与闪控窗联动：**
+ * 本模块可与[@ohos.window.floatView]{@link @ohos.window.floatView:floatView}（闪控窗）联合使用。通过
+ * [floatView.bind]{@link @ohos.window.floatView:floatView.bind}接口将闪控窗与闪控球控制器绑定后，用户点击闪控球可展开为闪控窗，点击闪控窗左上角的缩小按钮可收起为闪控球，实现两种窗口形态的相互切换。
  *
  * @syscap SystemCapability.Window.SessionManager
  * @since 20 dynamic
@@ -75,7 +79,7 @@ declare namespace floatingBall {
    */
   interface FloatingBallConfiguration {
     /**
-     * 表示上下文环境。
+     * 表示上下文环境，用于创建闪控球控制器时关联的应用主窗口。该参数不能为空，通常传入UIAbilityContext对象。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -435,7 +439,7 @@ declare namespace floatingBall {
    */
   interface FloatingBallParams {
     /**
-     * 闪控球模板。
+     * 闪控球模板。不同模板对其他参数有不同要求，详见FloatingBallTemplate枚举说明。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -444,7 +448,7 @@ declare namespace floatingBall {
     template: FloatingBallTemplate;
 
     /**
-     * 闪控球标题，不可为空字符串，大小不超过64字节。
+     * 闪控球标题，不可为空字符串，大小不超过64字节。传入空字符串或超过64字节时返回错误码1300019。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -463,7 +467,7 @@ declare namespace floatingBall {
     titleColor?: string;
 
     /**
-     * 闪控球内容，大小不超过64字节。不传入时默认为空字符串，不显示闪控球内容。
+     * 闪控球内容，大小不超过64字节。不传入时默认为空字符串，不显示闪控球内容。超过64字节时返回错误码1300019。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -492,7 +496,7 @@ declare namespace floatingBall {
 
     /**
      * 闪控球图标，图标像素的总字节数不超过192KB（图标像素的总字节数通过
-     * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取）。
+     * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），超过192KB时返回错误码1300019。
      * 建议图标像素宽高为128px*128px。实际显示效果依赖于设备能力和闪控球UI样式。
      *
      * @syscap SystemCapability.Window.SessionManager

@@ -1539,7 +1539,8 @@ declare namespace settings {
   /**
    * Open the input method detail page.
    *
-   * @param { Context } context - Application context. Only UIAbilityContext and UIExtensionContext are supported.
+   * @param { Context } context - Application context. Only UIAbilityContext, UIExtensionContext, and
+   *    InputMethodExtensionContext are supported.
    * @param { string } bundleName - bundle name of the input method.
    * @param { string } inputMethodId - id of the input method.
    * @throws { BusinessError } 16900010 - Parameter error.

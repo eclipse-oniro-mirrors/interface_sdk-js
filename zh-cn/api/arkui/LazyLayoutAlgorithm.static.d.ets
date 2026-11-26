@@ -19,8 +19,8 @@
  * @kit ArkUI
  */
 
-import { FrameNode, LayoutConstraint } from 'arkui.FrameNode';
-import { NodePosition } from 'arkui.Graphics';
+import { FrameNode, LayoutConstraint } from './FrameNode';
+import { NodePosition } from './Graphics';
 import { Axis } from './component/enums';
 
 

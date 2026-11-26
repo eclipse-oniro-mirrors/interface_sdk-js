@@ -588,7 +588,196 @@ declare namespace systemManager {
      * @stagemodelonly
      * @since 23
      */
-    RECENT = 5
+    RECENT = 5,
+
+    /**
+     * Function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FN = 6,
+
+    /**
+     * Direction key up
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_UP = 7,
+
+    /**
+     * Direction key down
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_DOWN = 8,
+
+    /**
+     * Direction key left
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_LEFT = 9,
+
+    /**
+     * Direction key right
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_RIGHT = 10,
+
+    /**
+     * Direction key center
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_CENTER = 11,
+
+    /**
+     * Brightness up key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS_UP = 12,
+
+    /**
+     * Brightness down key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS_DOWN = 13,
+
+    /**
+     * ESC key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ESCAPE = 14,
+
+    /**
+     * F1 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F1 = 15,
+
+    /**
+     * F2 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F2 = 16,
+
+    /**
+     * F3 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F3 = 17,
+
+    /**
+     * F4 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F4 = 18,
+
+    /**
+     * F5 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F5 = 19,
+
+    /**
+     * F6 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F6 = 20,
+
+    /**
+     * F7 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F7 = 21,
+
+    /**
+     * F8 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F8 = 22,
+
+    /**
+     * F9 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F9 = 23,
+
+    /**
+     * F10 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F10 = 24,
+
+    /**
+     * F11 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F11 = 25,
+
+    /**
+     * F12 function key
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F12 = 26
   }
 
   /**
@@ -1814,6 +2003,55 @@ declare namespace systemManager {
    * @since 26.1.0
    */
   function getVolumeDegree(volumeType: AudioVolumeType): number;
+
+  /**
+   * Installs the font file from the specified path to the system font library.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } path - The path to the font file to install.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201060 - Font file does not exist.
+   * @throws { BusinessError } 9201061 - Font not supported.
+   * @throws { BusinessError } 9201062 - Font already installed.
+   * @throws { BusinessError } 9201063 - Number of installed fonts exceeds the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function installFont(path: string): Promise<void>;
+ 
+  /**
+   * Uninstalls installed font files from the system font library by font name.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } fullName - Name of the font to uninstall.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201064 - Font to uninstall does not exist.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function uninstallFont(fullName: string): Promise<void>;
 }
 
 export default systemManager;

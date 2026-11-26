@@ -38,12 +38,13 @@ import sendablePreferences from '@ohos.data.sendablePreferences';
 import sendableRelationalStore from '@ohos.data.sendableRelationalStore';
 import intelligence from '@ohos.data.intelligence';
 import { ContentFormCard, FormType } from '@ohos.data.UdmfComponents';
+import dataFabricAddress from '@ohos.data.dataFabricAddress';
 
 export {
   DataShareExtensionAbility, DataShareResultSet, DataType, ValueType, ValuesBucket, cloudData, cloudExtension, 
   commonType, dataShare, dataSharePredicates, distributedDataObject, distributedKVStore, preferences,
   relationalStore, unifiedDataChannel, uniformTypeDescriptor, uniformDataStruct, sendablePreferences, dataAbility,
-  sendableRelationalStore, intelligence, ContentFormCard, FormType
+  sendableRelationalStore, intelligence, ContentFormCard, FormType, dataFabricAddress
 };
 
 /*** if arkts static */
@@ -58,8 +59,9 @@ import { ContentFormCard, FormType } from '@ohos.data.UdmfComponents';
 import relationalStore from '@ohos.data.relationalStore';
 import preferences from '@ohos.data.preferences';
 import intelligence from '@ohos.data.intelligence';
+import dataFabricAddress from '@ohos.data.dataFabricAddress';
 export {
   cloudData, cloudExtension, commonType, distributedDataObject, unifiedDataChannel, uniformTypeDescriptor,
-  uniformDataStruct, ContentFormCard, FormType, relationalStore, preferences, intelligence
+  uniformDataStruct, ContentFormCard, FormType, relationalStore, preferences, intelligence, dataFabricAddress
 };
 /*** endif */

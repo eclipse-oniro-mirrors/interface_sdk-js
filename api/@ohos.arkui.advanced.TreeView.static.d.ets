@@ -28,7 +28,7 @@
  */
 import { ResourceStr } from '@ohos.arkui.component';
 import { Component } from '@ohos.arkui.component';
-import { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
+import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 import { Builder } from '@ohos.arkui.component';
 
 /**

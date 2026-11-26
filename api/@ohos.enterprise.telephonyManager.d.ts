@@ -209,8 +209,9 @@ declare namespace telephonyManager {
    *     EnterpriseAdminExtensionAbility and the bundle name of the application.
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
-   * @param { Array<string> } numbers - List of call numbers to remove. The total length of the array must not exceed 1,
-   *     000.
+   * @param { Array<string> } numbers - List of call numbers to remove. In versions earlier than API 26.1.0, the total
+   *     length of the array must not exceed 1000. The total length of the array in API 26.1.0 and later versions cannot
+   *     exceed 10000.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -326,8 +327,9 @@ declare namespace telephonyManager {
    *     EnterpriseAdminExtensionAbility and the bundle name of the application.
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
-   * @param { Array<string> } numbers - List of call numbers to remove. The total length of the array must not exceed 1,
-   *     000.
+   * @param { Array<string> } numbers - List of call numbers to remove. In versions earlier than API 26.1.0, the total
+   *     length of the array must not exceed 1000. The total length of the array in API 26.1.0 and later versions cannot
+   *     exceed 10000.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.

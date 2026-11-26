@@ -3959,6 +3959,138 @@ declare enum FunctionKey {
    * @since 12 dynamic
    */
   DPAD_RIGHT,
+
+  /**
+   * CapsLock key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * ScrollLock key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SCROLL_LOCK = 19,
+
+  /**
+   * Pause/Break key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAUSE_BREAK = 20,
+
+  /**
+   * NumLock key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  NUM_LOCK = 21,
+
+  /**
+   * Insert key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  INSERT = 22,
+
+  /**
+   * Delete key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DELETE = 23,
+
+  /**
+   * Home key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  HOME = 24,
+
+  /**
+   * End key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  END = 25,
+
+  /**
+   * Page Up key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAGE_UP = 26,
+
+  /**
+   * Page Down key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAGE_DOWN = 27,
+
+  /**
+   * Enter key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  ENTER = 28,
+
+  /**
+   * Backspace key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BACKSPACE = 29,
 }
 
 /**
@@ -6799,7 +6931,7 @@ declare enum ImmersiveStrategy {
   AVOID_CUTOUT = 0,
 
   /**
-   * Avoid the three-button navigation bar area on the phone.
+   * Avoid the three-button navigation bar area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6890,7 +7022,68 @@ declare enum ImmersiveStrategy {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  NAVIGATION_EXPAND_SAFE_AREA = 8
+  NAVIGATION_EXPAND_SAFE_AREA = 8,
+
+  /**
+   * Expands the TabBar of Tabs as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TABS_EXPAND_SAFE_AREA = 9
+}
+
+/**
+ * Enumerates the phases of a touchpad event.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum TouchPadEventPhase {
+  /**
+   * A contact begins.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BEGIN = 0,
+
+  /**
+   * A contact moves.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOVE = 1,
+
+  /**
+   * A contact ends.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  END = 2,
+
+  /**
+   * A contact is canceled.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  CANCEL = 3
 }
 
 /**
@@ -6924,4 +7117,55 @@ declare enum ShadowClipMode {
    * @since 26.1.0 dynamic
    */
   BOUNDS_SHAPE = 1,
+}
+
+/**
+ * Defines the vibrancy modes, which specify whether to apply a brighten or darken effect to the content to improve
+ * readability against translucent material backgrounds.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum VibrancyMode {
+  /**
+   * Vibrancy effect is disabled, the content has no vibrancy effect.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  DISABLED = 0,
+  /**
+   * Auto mode. When the system material of the component itself or an ancestor component can auto color-invert,
+   * the vibrancy effect follows the material's color-invert result (brighten when the material samples a dark color,
+   * darken when it samples a light color);
+   * otherwise follows the control's dark/light color mode (brighten in dark mode, darken in light mode).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  AUTO = 1,
+  /**
+   * Brighten mode. Fixedly brightens the content to improve readability against dark backgrounds.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  BRIGHTEN = 2,
+  /**
+   * Darken mode. Fixedly darkens the content to improve readability against light backgrounds.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  DARKEN = 3
 }

@@ -928,6 +928,58 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
   supportEmptyBranchInLazyLoading(supported: boolean | undefined): WaterFlowAttribute;
 
   /**
+   * Sets the header of the **WaterFlow** component. The header is displayed at the start of the main axis and
+   * participates in the total size, scrollable boundary, and index-based scrolling of the water flow. When the header
+   * size changes, the total size and scrollable range are updated accordingly.
+   *
+   * @param { CustomBuilder | ComponentContent | undefined } builder - Header of the **WaterFlow** component.
+   *     <br>Default value: **undefined**.
+   * @returns { WaterFlowAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  header(builder: CustomBuilder | ComponentContent | undefined): WaterFlowAttribute;
+
+  /**
+   * Sets the footer of the **WaterFlow** component. The footer is displayed at the end of the main axis and
+   * participates in the total size, scrollable boundary, and index-based scrolling of the water flow. When the footer
+   * size changes, the total size and scrollable range are updated accordingly.
+   *
+   * This attribute is independent of the **footer** and **footerContent** in
+   * [WaterFlowOptions]{@link WaterFlowOptions}: the existing **footer**, **footerContent**, and **sections**
+   * capabilities and their priority are not affected by this attribute.
+   *
+   * @param { CustomBuilder | ComponentContent | undefined } builder - Footer of the **WaterFlow** component.
+   *     <br>Default value: **undefined**.
+   * @returns { WaterFlowAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  footer(builder: CustomBuilder | ComponentContent | undefined): WaterFlowAttribute;
+
+  /**
+   * Sets whether the header set via [header]{@link WaterFlowAttribute#header} is pinned to the start of the viewport
+   * and the footer set via [footer]{@link WaterFlowAttribute#footer} is pinned to the end of the viewport during
+   * scrolling. This attribute takes effect only when the header or footer is set.
+   *
+   * @param { StickyStyle } style - Sticky style of the header and footer.
+   *     <br>Default value: **StickyStyle.None**.
+   * @returns { WaterFlowAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sticky(style: StickyStyle): WaterFlowAttribute;
+
+  /**
    * Triggered when the **WaterFlow** content reaches the start position.
    *
    * @param { function } event - Callback triggered when the **WaterFlow** content reaches the start position.

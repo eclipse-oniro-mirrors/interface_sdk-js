@@ -1828,7 +1828,7 @@ declare namespace util {
      * 将输入的Uint8Array字节数组进行Base64编码，返回一个字符串结果。该方法支持多种编码格式，包括标准Base64编码、MIME格式的Base64编码（带有换行符）、URL安全格式的Base64编码等。
      *
      * @param { Uint8Array } src - 待编码的Uint8Array对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 待编码的Uint8Array对象。<br>**说明**：从API version 26.1.0开始，支持传入collections.Uint8Array（Sendable字节数组），可直接编码跨并发实例（TaskPool/Worker）传递的字节数据，无需先拷贝为普通Uint8Array。[since 26.1.0]
+     * @param { Uint8Array | collections.Uint8Array } src - 待编码的Uint8Array对象。<br>**说明**：从API版本26.1.0开始，支持传入collections.Uint8Array（Sendable字节数组），可直接编码跨并发实例（TaskPool/Worker）传递的字节数据，无需先拷贝为普通Uint8Array。[since 26.1.0]
      * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE 和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME，表示使用Base64编码。如果返回值超过76个字符，则会在每76个字符处进行换行，并以'\r\n'结束每行。如果返回值少于76个字符，则会抛出异常。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。[since 10 - 11]
      * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE 和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME，表示使用Base64编码。如果返回值超过76个字符，则会在每76个字符处进行换行，并以'\r\n'结束每行。如果返回值少于76个字符，则会抛出异常。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。[since 12]
      * @returns { string } 返回编码后的字符串。
@@ -1869,7 +1869,7 @@ declare namespace util {
      * 将输入参数异步编码后输出对应文本。使用Promise异步回调。
      *
      * @param { Uint8Array } src - 异步编码输入的Uint8Array对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 异步编码输入的Uint8Array对象。<br>**说明**：从API version 26.1.0开始，支持传入collections.Uint8Array（Sendable字节数组），可直接编码跨并发实例（TaskPool/Worker）传递的字节数据，无需先拷贝为普通Uint8Array。[since 26.1.0]
+     * @param { Uint8Array | collections.Uint8Array } src - 异步编码输入的Uint8Array对象。<br>**说明**：从API版本26.1.0开始，支持传入collections.Uint8Array（Sendable字节数组），可直接编码跨并发实例（TaskPool/Worker）传递的字节数据，无需先拷贝为普通Uint8Array。[since 26.1.0]
      * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME，表示Base64编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。[since 10]
      * @returns { Promise<string> } Promise对象。编码成功时resolve为Base64编码后的字符串，编码失败时reject为错误对象。
      * @syscap SystemCapability.Utils.Lang

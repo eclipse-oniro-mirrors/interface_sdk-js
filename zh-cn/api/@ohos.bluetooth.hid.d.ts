@@ -20,12 +20,14 @@
 
 import type baseProfile from './@ohos.bluetooth.baseProfile';
 import { Callback } from './@ohos.base';
+/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
+/*** endif */
 
 /**
  * 本模块提供基于人机接口协议（Human Interface Device Profile，HID）技术的蓝牙人机交互能力，支
  * 持获取连接状态等方法。
- * 
+ *
  * 当本端设备被注册为HID设备的角色时，可以使用[HidDeviceProfile]{@link hid.HidDeviceProfile}相关接口，且仅支持与传统蓝牙类型设备连接和交互。
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -48,7 +50,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BluetoothAddress = common.BluetoothAddress;
 
@@ -59,9 +61,10 @@ declare namespace hid {
    * @returns { HidHostProfile } 返回HID Host实例。
    *     该类继承于[BaseProfile]{@link hid.BaseProfile}，因此可以使用其父类中的方法。
    *     和该实例角色相对应的是HID Device角色。
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
    * @since 23 static
@@ -82,11 +85,17 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - 远端设备地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -103,11 +112,17 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - 远端设备地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -127,17 +142,20 @@ declare namespace hid {
    * @returns { HidDeviceProfile } 返回HID Device实例。
    *     该类继承于[BaseProfile]{@link hid.BaseProfile}，因此可以使用其父类中的方法。
    *     和该实例角色相对应的是HID Host角色。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function createHidDeviceProfile(): HidDeviceProfile;
 
   /**
    * 该实例表示蓝牙HID通信中的HID Device角色。
-   * 
+   *
    * 该类继承于[BaseProfile]{@link hid.BaseProfile}，因此可以使用其父类中的方法。
    * 使用该类的方法前，需通过[createHidDeviceProfile]{@link hid.createHidDeviceProfile}方法构造该类的实例。
    * 通过该实例可以操作设备端的行为，如注册HID设备（[registerHidDevice]{@link hid.HidDeviceProfile.registerHidDevice}），发送报告（
@@ -147,12 +165,12 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface HidDeviceProfile extends BaseProfile {
     /**
      * 应用注册HID设备能力，以便与HID主机（如电脑、手机）进行通信。使用callback异步回调。
-     * 
+     *
      * 当应用调用该接口并注册成功后，可以通过调用[connect]{@link hid.HidDeviceProfile.connect}接口连接HID主机。
      * 同一时间仅允许一个应用成功注册HID设备能力，同一应用重复注册将失败，注册成功后其他应用注册也将失败。
      * 当应用不再需要HID设备能力时，需要主动调用[unregisterHidDevice]{@link hid.HidDeviceProfile.unregisterHidDevice}接口解除注册HID设备能力。
@@ -164,8 +182,12 @@ declare namespace hid {
      * @param { HidDeviceQos } inQos - 输入通道的Qos配置，用于定义对端到本端的数据流参数。
      * @param { HidDeviceQos } outQos - 输出通道的Qos配置，用于定义本端到对端的数据流参数。
      * @param { Callback<boolean> } callback - 回调函数。返回true表示HID设备当前为注册状态；返回false表示HID设备当前为解注册状态。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2903050 - Application is not in the foreground.
@@ -173,30 +195,34 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     registerHidDevice(sdp: HidDeviceSdp, inQos: HidDeviceQos, outQos: HidDeviceQos, callback: Callback<boolean>): void;
 
     /**
      * 解除注册本端作为HID设备的能力，并释放所有相关资源。
-     * 
+     *
      * 若调用该接口前，本端已通过调用[connect]{@link hid.HidDeviceProfile.connect}建立与HID主机的连接，调用后本端与HID主机的连接会被断开。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     unregisterHidDevice(): void;
 
     /**
      * 向指定的HID主机发起连接。
-     * 
+     *
      * 调用该接口前需要先调用[registerHidDevice]{@link hid.HidDeviceProfile.registerHidDevice}完成HID设备能力注册。
      * 可通过订阅
      * [on('connectionStateChange')](docroot://reference/apis-connectivity-kit/js-apis-bluetooth-baseProfile.md#baseprofileonconnectionstatechange)
@@ -206,8 +232,12 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BluetoothAddress } deviceId -  需要连接的对端蓝牙设备地址信息，HID设备中不涉及rawAddressType，无需给定该参数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Remote Device profile not supported.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -215,41 +245,49 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     connect(deviceId: BluetoothAddress): void;
 
     /**
      * 断开与当前HID主机的连接，并释放相关的资源。
-     * 
+     *
      * 调用成功后不影响当前HID设备的注册状态，应用仍处于已注册状态，可以再次调用[connect]{@link hid.HidDeviceProfile.connect}连接新的HID主机。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2903052 - App not register.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     disconnect(): void;
 
     /**
      * 向已连接的HID主机发送报告数据。
-     * 
+     *
      * 调用该接口前必须已调用[registerHidDevice]{@link hid.HidDeviceProfile.registerHidDevice}完成注册，并通过
      * [connect]{@link hid.HidDeviceProfile.connect}建立与HID主机的连接。
      * 报告数据的长度和内容必须与HID设备注册时通过[HidDeviceSdp]{@link hid.HidDeviceSdp}所定义的规范保持一致，否则HID主机将无法正确解析。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { int } id  - 对应HID设备注册时通过[HidDeviceSdp]{@link hid.HidDeviceSdp}提供的描述符中定义的报告ID，用于标识报告类型，对于不带ID的简单设备，此参数应设置为
+     * @param { int } id - 对应HID设备注册时通过[HidDeviceSdp]{@link hid.HidDeviceSdp}提供的描述符中定义的报告ID，用于标识报告类型，对于不带ID的简单设备，此参数应设置为
      *     0。对于定义了多个报告ID的设备，此处应传入对应的ID值，该ID值必须与描述符中定义的值保持一致。
-     * @param { Uint8Array } reportData  - 报告数据。其内容长度和解析方式必须严格匹配描述符中为该报告ID定义的格式。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Uint8Array } reportData - 报告数据。其内容长度和解析方式必须严格匹配描述符中为该报告ID定义的格式。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2903052 - App not register.
@@ -257,13 +295,13 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     sendReport(id: int, reportData: Uint8Array): void;
 
     /**
      * 回复已连接HID主机的特定请求。
-     * 
+     *
      * 调用该接口前必须已调用[registerHidDevice]{@link hid.HidDeviceProfile.registerHidDevice}完成注册，并通过
      * [connect]{@link hid.HidDeviceProfile.connect}建立与HID主机的连接。
      * 通过订阅[onGetReport]{@link hid.HidDeviceProfile.onGetReport(callback: Callback<GetReportData>)}应用可以接收主机的请求。
@@ -274,8 +312,12 @@ declare namespace hid {
      * @param { int } id - 对应HID设备注册时通过[HidDeviceSdp]{@link hid.HidDeviceSdp}提供的描述符中定义的报告ID，用于标识报告类型，对于不带ID的简单设备，此参数应设置为
      *     0。对于定义了多个报告ID的设备，此处应传入对应的ID值，该ID值必须与描述符中定义的值保持一致。
      * @param { Uint8Array } reportData - 报告数据。其内容长度和解析方式必须严格匹配描述符中为该报告ID定义的格式。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2903052 - App not register.
@@ -283,7 +325,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     replyReport(type: ReportType, id: int, reportData: Uint8Array): void;
 
@@ -291,14 +333,18 @@ declare namespace hid {
      * 向已连接的HID主机报告特定的错误类型。常用于在收到
      * [onGetReport]{@link hid.HidDeviceProfile.onGetReport(callback: Callback<GetReportData>)}或
      * [onSetReport]{@link hid.HidDeviceProfile.onSetReport(callback: Callback<SetReportData>)}回调后，当数据不符合预期时进行错误回复。
-     * 
+     *
      * 调用该接口前必须已调用[registerHidDevice]{@link hid.HidDeviceProfile.registerHidDevice}完成注册，并通过
      * [connect]{@link hid.HidDeviceProfile.connect}建立与HID主机的连接。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { ErrorReason } error - 表示要报告给HID主机的具体错误类型。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2903052 - App not register.
@@ -306,7 +352,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     reportError(error: ErrorReason): void;
 
@@ -317,12 +363,16 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<GetReportData> } callback - 回调函数，返回收到的报告数据。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onGetReport(callback: Callback<GetReportData>): void;
 
@@ -333,12 +383,16 @@ declare namespace hid {
      * @param { Callback<GetReportData> } [callback] - 指定取消订阅的回调函数通知。若传参，则需与
      *     [onGetReport]{@link hid.HidDeviceProfile.onGetReport(callback: Callback<GetReportData>)}中的回调函数一致；若无传参，则取消订阅所有
      *     回调函数通知。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offGetReport(callback?: Callback<GetReportData>): void;
 
@@ -348,12 +402,16 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<SetReportData> } callback - 回调函数，返回收到的报告数据。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onSetReport(callback: Callback<SetReportData>): void;
 
@@ -364,12 +422,16 @@ declare namespace hid {
      * @param { Callback<SetReportData> } [callback] - 指定取消订阅的回调函数通知。若传参，则需与
      *     [onSetReport]{@link hid.HidDeviceProfile.onSetReport(callback: Callback<SetReportData>)}中的回调函数一致；若无传参，则取消订阅所有
      *     回调函数通知。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offSetReport(callback?: Callback<SetReportData>): void;
 
@@ -378,12 +440,16 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<InterruptData> } callback - 回调函数，返回收到的中断数据。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onInterruptDataReceived(callback: Callback<InterruptData>): void;
 
@@ -394,12 +460,16 @@ declare namespace hid {
      * @param { Callback<InterruptData> } [callback] - 指定取消订阅的回调函数通知。若传参，则需与
      *     [onInterruptDataReceived]{@link hid.HidDeviceProfile.onInterruptDataReceived(callback: Callback<InterruptData>)}
      *     中的回调函数一致；若无传参，则取消订阅所有回调函数通知。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offInterruptDataReceived(callback?: Callback<InterruptData>): void;
 
@@ -408,12 +478,16 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<ProtocolData> } callback - 回调函数。返回收到的协议数据。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onSetProtocol(callback: Callback<ProtocolData>): void;
 
@@ -424,12 +498,16 @@ declare namespace hid {
      * @param { Callback<ProtocolData> } [callback] - 指定取消订阅的回调函数通知。若传参，则需与
      *     [onSetProtocol]{@link hid.HidDeviceProfile.onSetProtocol(callback: Callback<ProtocolData>)}中的回调函数一致；若无传参，则取消订
      *     阅所有回调函数通知。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offSetProtocol(callback?: Callback<ProtocolData>): void;
 
@@ -438,12 +516,16 @@ declare namespace hid {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<void> } callback - 回调函数。当主机断开虚拟链路时返回。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onVirtualCableUnplug(callback: Callback<void>): void;
 
@@ -454,12 +536,16 @@ declare namespace hid {
      * @param { Callback<void> } [callback] - 指定取消订阅的回调函数通知。若传参，则需与
      *     [onVirtualCableUnplug]{@link hid.HidDeviceProfile.onVirtualCableUnplug(callback: Callback<void>)}中的回调函数一致；若无传
      *     参，则取消订阅所有回调函数通知。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offVirtualCableUnplug(callback?: Callback<void>): void;
   }
@@ -471,7 +557,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface HidDeviceSdp {
     /**
@@ -480,7 +566,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     name: string;
     /**
@@ -489,7 +575,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     description: string;
     /**
@@ -498,7 +584,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     provider: string;
     /**
@@ -507,7 +593,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     subclass: Subclass;
     /**
@@ -516,7 +602,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     descriptors: Uint8Array;
   }
@@ -527,7 +613,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface HidDeviceQos {
     /**
@@ -536,7 +622,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     serviceType?: ServiceType;
     /**
@@ -545,7 +631,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     tokenRate?: int;
     /**
@@ -554,7 +640,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     tokenBucketSize?: int;
     /**
@@ -563,7 +649,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     peakBandwidth?: int;
     /**
@@ -572,7 +658,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     latency?: int;
     /**
@@ -581,7 +667,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     delayVariation?: int;
   }
@@ -589,10 +675,11 @@ declare namespace hid {
   /**
    * 描述HID主机向HID设备发送的GET_REPORT传输请求事件的信息。
    *
+   * @typedef GetReportData
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface GetReportData {
     /**
@@ -601,7 +688,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     type: ReportType;
     /**
@@ -611,7 +698,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     id: int;
     /**
@@ -620,7 +707,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     bufferSize: int;
   }
@@ -631,7 +718,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface SetReportData {
     /**
@@ -640,7 +727,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     type: ReportType;
     /**
@@ -650,7 +737,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     id: int;
     /**
@@ -659,7 +746,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     data: Uint8Array;
   }
@@ -670,7 +757,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface InterruptData {
     /**
@@ -680,7 +767,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     id: int;
     /**
@@ -689,7 +776,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     data: Uint8Array;
   }
@@ -700,7 +787,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface ProtocolData {
     /**
@@ -709,7 +796,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     protocol: ProtocolType;
   }
@@ -720,7 +807,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum Subclass {
     /**
@@ -729,7 +816,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_UNCATEGORIZED = 0,
     /**
@@ -738,7 +825,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_JOYSTICK = 1,
     /**
@@ -747,7 +834,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_GAMEPAD = 2,
     /**
@@ -756,7 +843,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_REMOTE_CONTROL = 3,
     /**
@@ -765,7 +852,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_SENSING_DEVICE = 4,
     /**
@@ -774,7 +861,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_DIGITIZER_TABLET = 5,
     /**
@@ -783,7 +870,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_CARD_READER = 6,
     /**
@@ -792,7 +879,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_KEYBOARD = 64,
     /**
@@ -801,7 +888,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_MOUSE = 128,
     /**
@@ -810,7 +897,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUBCLASS_COMBO = 192
   }
@@ -821,7 +908,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum ReportType {
     /**
@@ -830,7 +917,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     REPORT_TYPE_INPUT = 1,
     /**
@@ -839,7 +926,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     REPORT_TYPE_OUTPUT = 2,
     /**
@@ -848,7 +935,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     REPORT_TYPE_FEATURE = 3
   }
@@ -859,7 +946,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum ServiceType {
     /**
@@ -868,7 +955,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SERVICE_NO_TRAFFIC = 0,
     /**
@@ -877,7 +964,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SERVICE_BEST_EFFORT = 1,
     /**
@@ -886,7 +973,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SERVICE_GUARANTEED = 2
   }
@@ -897,7 +984,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum ErrorReason {
     /**
@@ -906,7 +993,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RSP_SUCCESS = 0,
     /**
@@ -915,7 +1002,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RSP_NOT_READY = 1,
     /**
@@ -924,7 +1011,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RSP_INVALID_REPORT_ID = 2,
     /**
@@ -933,7 +1020,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RSP_UNSUPPORTED_REQ = 3,
     /**
@@ -942,7 +1029,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RSP_INVALID_PARAM = 4,
     /**
@@ -951,7 +1038,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RSP_UNKNOWN = 14
   }
@@ -962,7 +1049,7 @@ declare namespace hid {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum ProtocolType {
     /**
@@ -971,7 +1058,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     PROTOCOL_BOOT_MODE = 0,
     /**
@@ -980,7 +1067,7 @@ declare namespace hid {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     PROTOCOL_REPORT_MODE = 1
   }
