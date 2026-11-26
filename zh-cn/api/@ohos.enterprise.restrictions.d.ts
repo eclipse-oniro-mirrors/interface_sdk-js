@@ -818,6 +818,24 @@ declare namespace restrictions {
      * @since 26.1.0
      */
     APP_LOCK = 16
+
+     /**
+     * 屏幕截图功能。禁用此功能后，将无法进行屏幕截图。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_SHOT = 17,
+
+    /**
+     * 屏幕录制功能。禁用此功能后，将无法进行屏幕录制。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_RECORD = 18,
   }
 
   /**

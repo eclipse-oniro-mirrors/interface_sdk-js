@@ -896,6 +896,24 @@ declare namespace restrictions {
      * @since 26.1.0
      */
     APP_LOCK = 16
+
+    /**
+     * Screenshot capability. After this capability is disabled, screenshots cannot be taken.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_SHOT = 17,
+
+    /**
+     * Screen recording capability. After this capability is disabled, screen recording cannot be performed.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_RECORD = 18,
   }
 
   /**
