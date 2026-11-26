@@ -503,7 +503,7 @@ declare namespace cliManager {
    * Query all tool summary information. The summary information only contains the fields: name, description, version.
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.1.0]
    * @returns { Promise<Array<ToolSummary>> } List of full tool summaries.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -513,7 +513,7 @@ declare namespace cliManager {
    *     2. System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi [since 26.0.0 - 26.0.0]
-   * @publicapi [since 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -523,7 +523,7 @@ declare namespace cliManager {
    * Query all detailed information of tools
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.1.0]
    * @returns { Promise<Array<ToolInfo>> } List of full tool detail info.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -533,7 +533,7 @@ declare namespace cliManager {
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi [since 26.0.0 - 26.0.0]
-   * @publicapi [since 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -543,7 +543,7 @@ declare namespace cliManager {
    * Get detailed information of a single tool by its name
    *
    * @permission ohos.permission.QUERY_CLI_TOOL [since 26.0.0 - 26.0.0]
-   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.0.1]
+   * @permission ohos.permission.QUERY_CLI_TOOL or ohos.permission.QUERY_PUBLIC_CLI_TOOL [since 26.1.0]
    * @param { string } toolName - The name of target tool.
    * @returns { Promise<ToolInfo> } detailed information of tool.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -555,7 +555,7 @@ declare namespace cliManager {
    *     2.System service failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi [since 26.0.0 - 26.0.0]
-   * @publicapi [since 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
