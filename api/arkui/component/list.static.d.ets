@@ -917,7 +917,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @param { int | undefined } value - Number of list items to be preloaded.
    *     <br>The value must be greater than or equal to 0. Default value: number of nodes visible on the screen, with
    *     the maximum value of 16.
-   *     <br/>Value range: [0, +∞).
+   *     <br>Value range: [0, +∞).
    * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -933,7 +933,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *     items to be preloaded.
    *     <br>Default value: number of nodes visible on the screen, with the maximum value of 16, Passing undefined
    *     will restore the default value.
-   *     <br/>Value range for number type: [0, +∞)
+   *     <br>Value range for number type: [0, +∞)
    * @param { boolean | undefined } show - Whether to display the preloaded list items.
    *     <br> Default value: <em>false</em>. Passing undefined will restore the default value.
    * @returns { this } the attribute of the list.
