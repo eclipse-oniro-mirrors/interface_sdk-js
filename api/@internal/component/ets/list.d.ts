@@ -1468,7 +1468,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    *
    * @param { number } value - Number of list items or list item groups to be preloaded (cached).
    *     <br>Default value: number of nodes visible on the screen, with the maximum value of 16
-   *     <br>Value range: [0, +∞).
+   *     <br/>Value range: [0, +∞).
    *     <br>Values less than 0 are treated as **1**.
    * @returns { ListAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1668,7 +1668,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * Set the limit scrolling strategy of the list so that the list aligns subcomponents in a specified way or stops at a
    * customized suction position when the scrolling ends.
    *
-   * > **Note: * *
+   * > **Note:**
    * >
    * > - The final adsorption position is always within the legal rolling range. For example, when the alignment is
    * > ScrollSnapAlign.CENTER, the first and last subcomponents are docked at the scrollable boundary, not at the center of

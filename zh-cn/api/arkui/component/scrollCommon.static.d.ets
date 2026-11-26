@@ -38,6 +38,8 @@
  */
 export declare interface ScrollSnapOffsetProvider {
   /**
+   * 用于计算惯性阶段滚动距离的回调，在惯性滚动开始时调用一次。
+   *
    * @param { double } velocity - 惯性滚动开始时的速度，朝内容末端滚动时为正。反向布局和RTL方向由组件统一处理。
    *     <br/>单位：vp/s
    * @param { double } decayOffset - 按默认惯性滚动预测的滑行距离。

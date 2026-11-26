@@ -47,7 +47,7 @@ declare interface ScrollSnapOffsetProvider {
    *     <br/>单位：vp/s
    * @param { number } decayOffset - 按默认惯性滚动预测的滑行距离。
    *     <br/>单位：vp
-   *     <br>取值范围：[0, +∞)
+   *     <br/>取值范围：[0, +∞)
    * @returns { number } 惯性阶段的滚动距离，不能为NaN或Infinity，可以超过decayOffset。
    *     返回负数、NaN或Infinity，或回调抛出异常时，该阶段按默认的惯性滑行距离滚动，随后正常进入限位动画阶段。
    *     <br/>单位：vp

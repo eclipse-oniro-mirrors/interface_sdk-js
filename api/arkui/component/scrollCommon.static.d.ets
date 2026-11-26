@@ -30,7 +30,7 @@
  * - calculateApproachOffset: Called once at the beginning of inertial scrolling.
  * - calculateSnapOffset: Called once before the end of the inertia phase and the start of the limit animation.
  *
- * > **Note: * *
+ * > **Note:**
  *
  * > - The unit of offset is vp, and the unit of speed is vp/s.
  * > - Both callbacks are called synchronously in the UI thread and should be used only for calculations, and should not
@@ -44,15 +44,18 @@
  */
 export declare interface ScrollSnapOffsetProvider {
   /**
+   * Callback used to calculate the scrolling distance of the inertia phase. It is called once when the inertia
+   * scrolling starts.
+   *
    * @param { double } velocity - The speed at which inertial scrolling begins, which is positive when scrolling
    *     towards the end of the content. The reverse layout and RTL direction are handled by the component. <br/>Unit:
    *     vp/s
    * @param { double } decayOffset - Rolls the predicted coasting distance by default inertia. <br/>Unit:
-   *     vp<br/>Value range:[0, + △)
-   * @returns { double }Rolling distance in the inertia phase, which cannot be NaN or Infinity and can exceed
+   *     vp<br/>Value range: [0, +∞)
+   * @returns { double } Rolling distance in the inertia phase, which cannot be NaN or Infinity and can exceed
    *     decayOffset. When a negative number, NaN, or Infinity is returned, or an exception is thrown by a callback, the
    *     stage rolls by the default inertial glide distance and then enters the limit animation phase normally.
-   *     <br/>Unit: vp<br/>Value range:[0, + △)
+   *     <br/>Unit: vp<br/>Value range: [0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
