@@ -810,6 +810,18 @@ declare class ButtonAttribute extends CommonMethod<ButtonAttribute> {
    * @since 18 dynamic
    */
   maxFontScale(scale: number | Resource): ButtonAttribute;
+
+  /**
+   * Sets the lightening and darkening mode of the text in the Button component.
+   *
+   * @param { VibrancyMode } mode - Brighten and darken the text inside the button.
+   * @returns { ButtonAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  vibrancyMode(mode: VibrancyMode): ButtonAttribute;
 }
 
 /**
