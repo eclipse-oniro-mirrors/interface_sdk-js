@@ -25,7 +25,8 @@
  *
  * @typedef ToolInfo
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.0]
+ * @publicapi [since 26.1.0]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -35,7 +36,8 @@ export interface ToolInfo {
    * The maximum length is 32 and cannot be empty.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -46,7 +48,8 @@ export interface ToolInfo {
    * provider. The version number is used to identify the tool's feature iteration and compatibility changes.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -57,7 +60,8 @@ export interface ToolInfo {
    * the tool, helping users understand what the tool can do.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -67,7 +71,8 @@ export interface ToolInfo {
    * Executable file path of the CLI tool. It must be an absolute path.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -79,7 +84,8 @@ export interface ToolInfo {
    * corresponding permissions. The default value is an empty array.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -90,7 +96,8 @@ export interface ToolInfo {
    * parameters, used to describe the input data format accepted by the tool.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -101,7 +108,8 @@ export interface ToolInfo {
    * data, used to describe the output data format returned by the tool.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -112,7 +120,8 @@ export interface ToolInfo {
    * is an empty array.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -123,7 +132,8 @@ export interface ToolInfo {
    * is the JSON Schema definition of the event. The default value is an empty object.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -134,7 +144,8 @@ export interface ToolInfo {
    * does not. The default value is **false**.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -145,7 +156,8 @@ export interface ToolInfo {
    * the detailed information of the subcommand. The default value is an empty object.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -158,7 +170,8 @@ export interface ToolInfo {
    *
    * @default false
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -180,7 +193,8 @@ export interface ToolInfo {
  * Describes the summary information of a CLI tool.
  *
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.0]
+ * @publicapi [since 26.1.0]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -190,7 +204,8 @@ export interface ToolSummary {
    * The maximum length is 32 and cannot be empty.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -201,7 +216,8 @@ export interface ToolSummary {
    * provider. The version number is used to identify the tool's feature iteration and compatibility changes.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -212,7 +228,8 @@ export interface ToolSummary {
    * the tool, helping users understand what the tool can do.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -223,7 +240,8 @@ export interface ToolSummary {
  * Describes the information of a CLI tool subcommand.
  *
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.0]
+ * @publicapi [since 26.1.0]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -233,7 +251,8 @@ export interface SubCommandInfo {
    * subcommand.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -245,7 +264,8 @@ export interface SubCommandInfo {
    * corresponding permissions. The default value is an empty array.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -256,7 +276,8 @@ export interface SubCommandInfo {
    * parameters.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -267,7 +288,8 @@ export interface SubCommandInfo {
    * output data.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -278,7 +300,8 @@ export interface SubCommandInfo {
    * is an empty array.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -289,7 +312,8 @@ export interface SubCommandInfo {
    * the value is the JSON Schema definition of the event. The default value is an empty object.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.0]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
