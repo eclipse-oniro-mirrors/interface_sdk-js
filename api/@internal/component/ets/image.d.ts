@@ -1884,9 +1884,26 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
    * @since 21 dynamic
    */
   contentTransition(transition: ContentTransitionEffect): ImageAttribute;
+
+  /**
+   * Brightening and dimming mode of an image. The default value is VibrancyMode.DISABLED. When set, the display of the
+   * picture is brightened or darkened accordingly to improve readability against translucent material backgrounds. This
+   * parameter is valid only for devices with medium or higher computing capabilities. The computing capability level of
+   * a device can be obtained by running the
+   * [getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel()} command.
+   *
+   * @param { VibrancyMode } mode - Brightening and darkening mode. If this parameter is set to undefined or null,
+   *     the default value VibrancyMode.DISABLED is used.
+   * @returns { ImageAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  vibrancyMode(mode: VibrancyMode): ImageAttribute;
 }
 
-/**
+  /**
  * The **Image** component is usually used to display images in applications.
  *
  * > **NOTE**
