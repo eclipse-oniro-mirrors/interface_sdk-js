@@ -31,7 +31,7 @@ import { CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder'
 import { ComponentBuilder } from './builder';
 import { Resource } from '../../global/resource';
 import { ResourceStr, ResourceColor, Length, Font } from './units';
-import { TextAlign, TextOverflow, FontWeight, FontStyle, TextHeightAdaptivePolicy } from './enums';
+import { TextAlign, TextOverflow, FontWeight, FontStyle, TextHeightAdaptivePolicy, VibrancyMode } from './enums';
 import { CommonConfiguration, CommonMethod, ContentModifier, AttributeModifier } from './common';
 
 /**
@@ -634,8 +634,20 @@ export declare interface ButtonAttribute extends CommonMethod {
      * @stagemodelonly
      * @since 26.0.1 staticonly
      */
-    default setButtonOptions(options?: ButtonOptions): this;
-}
+     default setButtonOptions(options?: ButtonOptions): this;
+
+    /**
+     * 设置Button组件内文本的提亮压暗模式。
+     *
+     * @param { VibrancyMode | undefined } mode - 按钮内文本的提亮压暗模式，undefined表示不生效提亮或压暗。
+     * @returns { ButtonAttribute }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default vibrancyMode(mode: VibrancyMode | undefined): this;
+ }
 
 /**
  * 使用文本内容创建相应的按钮组件，此时Button无法包含子组件。

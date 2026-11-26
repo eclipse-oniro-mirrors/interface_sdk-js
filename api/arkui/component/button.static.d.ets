@@ -21,7 +21,7 @@ import { CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder'
 import { ComponentBuilder } from './builder';
 import { Resource } from '../../global/resource';
 import { ResourceStr, ResourceColor, Length, Font } from './units';
-import { TextAlign, TextOverflow, FontWeight, FontStyle, TextHeightAdaptivePolicy } from './enums';
+import { TextAlign, TextOverflow, FontWeight, FontStyle, TextHeightAdaptivePolicy, VibrancyMode } from './enums';
 import { CommonConfiguration, CommonMethod, ContentModifier, AttributeModifier } from './common';
 
 /**
@@ -519,7 +519,20 @@ export declare interface ButtonAttribute extends CommonMethod {
      * @stagemodelonly
      * @since 26.0.1 staticonly
      */
-    default setButtonOptions(options?: ButtonOptions): this;
+     default setButtonOptions(options?: ButtonOptions): this;
+
+    /**
+     * Set the vibrancy mode for the text of the button.
+     *
+     * @param { VibrancyMode | undefined } mode - Vibrancy mode of the text of the button. If the value is undefined,
+     *     no brighten or darken effect is applied.
+     * @returns { ButtonAttribute }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default vibrancyMode(mode: VibrancyMode | undefined): this;
  }
 
 /**
