@@ -21,12 +21,11 @@
 import { AsyncCallback, BusinessError } from './@ohos.base';
  
 /**
- * 提供查询应用卡顿状态和注册监听器的API。
- * 挂起状态改变。
+ * 本模块提供查询应用状态和注册监听的API，可监听应用冻结状态的改变，并通过进程pid列表查询应用当前的冻结状态。
  *
  * > **说明**
  * >
- * > -该模块提供的API为系统API。
+ * > 本模块接口为系统接口。
  *
  * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
  * @systemapi Hide this for inner system use.
@@ -35,7 +34,7 @@ import { AsyncCallback, BusinessError } from './@ohos.base';
  */
 declare namespace suspendManager {
   /**
-   * 枚举应用程序的冻结状态。
+   * 应用程序状态的枚举。
    *
    * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
    * @systemapi Hide this for inner system use.
@@ -73,7 +72,7 @@ declare namespace suspendManager {
   }
  
   /**
-   * 定义挂起状态变化的观察者。
+   * 定义冻结状态变化的观察者。
    *
    * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
    * @systemapi Hide this for inner system use.
@@ -82,11 +81,10 @@ declare namespace suspendManager {
    */
   export interface SuspendStateObserver {  
     /**
-     * 当应用程序转换到活动状态时调用。
+     * 当应用状态转换到活动状态时回调。
      *
-     * @param { Array<int> } pidList - 转换为活动的进程ID列表。
-     * @param { int } uid - 应用的UID。
-     *     <br>取值限定为整数。
+     * @param { Array<int> } pidList - 转换为激活状态的uid对应的pid列表。
+     * @param { int } uid - 应用转为激活状态的uid。
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
@@ -94,11 +92,10 @@ declare namespace suspendManager {
      */
     onActive(pidList: Array<int>, uid: int): void;
     /**
-     * 当应用程序进入doze状态时调用。
+     * 当应用程序进入doze状态时回调。
      *
-     * @param { Array<int> } pidList - 被doze的进程ID列表。
-     * @param { int } uid - 应用的UID。
-     *     <br>取值限定为整数。
+     * @param { Array<int> } pidList - 被doze的uid对应的pid列表。
+     * @param { int } uid - 被doze的应用的uid。
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
@@ -106,11 +103,10 @@ declare namespace suspendManager {
      */
     onDoze(pidList: Array<int>, uid: int): void;
     /**
-     * 当应用程序完全冻结时调用。
+     * 当应用程序完全冻结时回调。
      *
-     * @param { Array<int> } pidList - 被冻结的进程ID列表。
-     * @param { int } uid - 应用的UID。
-     *     <br>取值限定为整数。
+     * @param { Array<int> } pidList - 冻结的uid对应的pid列表。
+     * @param { int } uid - 被冻结的应用uid
      * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
@@ -120,13 +116,12 @@ declare namespace suspendManager {
   }
  
   /**
-   * 注册一个挂起状态观察者来监听应用的挂起状态变化。
+   * 注册一个冻结状态观察者来监听应用冻结状态的变化。
    *
    * @permission ohos.permission.GET_SUSPEND_STATE
-   * @param { SuspendStateObserver } observer - 要注册的观察员。
-   * @param { Array<FreezeState> } stateList - 订阅状态类型列表。
-   * @param { Array<int> } [pidList] - 要筛选的可选进程ID列表。如果未指定或为空，
-   *     所有进程状态更改都会触发回调。
+   * @param { SuspendStateObserver } observer - 要注册的观察者。
+   * @param { Array<FreezeState> } stateList - 订阅状态类型的列表。
+   * @param { Array<int> } [pidList] - 要筛选的可选进程ID列表。如果未指定或为空，所有进程状态更改都会触发回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -138,8 +133,9 @@ declare namespace suspendManager {
    * @since 26.1.0 dynamiconly
    */
   function registerSuspendStateObserver(observer: SuspendStateObserver, stateList: Array<FreezeState>, pidList?: Array<int>): void;
+
   /**
-   * 注销先前注册的挂起状态观察者。
+   * 注销先前注册的冻结状态观察者。
    *
    * @permission ohos.permission.GET_SUSPEND_STATE
    * @param { SuspendStateObserver } observer - 要取消注册的观察者。
@@ -156,11 +152,10 @@ declare namespace suspendManager {
   function unregisterSuspendStateObserver(observer: SuspendStateObserver): void;
  
   /**
-   * 根据进程的PID查询进程的冻结状态。
+   * 根据进程的pid查询进程的冻结状态。
    *
    * @permission ohos.permission.GET_SUSPEND_STATE
-   * @param { Array<int> } pidList - 要查询的进程ID列表。
-   *     <br>必须为正整数。
+   * @param { Array<int> } pidList - 要查询的进程ID列表。必须为正整数。
    * @returns { Array<FreezeState> } The freeze state list. Returns an empty array if no matching states are found.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
