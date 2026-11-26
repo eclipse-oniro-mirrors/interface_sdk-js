@@ -22,6 +22,7 @@ import Want from './@ohos.app.ability.Want';
 import wantConstant from './@ohos.app.ability.wantConstant';
 import type { AsyncCallback } from './@ohos.base';
 import type insightIntent from './@ohos.app.ability.insightIntent';
+import Context from './application/Context';
 /*** if arkts static */
 import { RecordData } from './@ohos.base';
 /*** endif */
@@ -215,6 +216,16 @@ declare namespace insightIntentDriver {
      * @since 26.0.1 dynamic&static
      */
     toolCallId?: string;
+
+    /**
+     * Context.
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    context?: Context;
   }
 
   /**
