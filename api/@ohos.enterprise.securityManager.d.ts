@@ -1747,7 +1747,16 @@ declare namespace securityManager {
      * @stagemodelonly
      * @since 26.0.1
      */
-    EXTENDED_AUTH_REQUIRED = 2
+    EXTENDED_AUTH_REQUIRED = 2,
+
+    /**
+     * Device-associated authentication and other authentication modes are optional.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXTENDED_AUTH_OPTIONAL = 3
   }
 
   /**

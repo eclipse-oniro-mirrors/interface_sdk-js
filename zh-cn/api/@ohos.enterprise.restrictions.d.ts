@@ -600,6 +600,15 @@ declare namespace restrictions {
     POWER_SAVING_MODE = 57,
 
     /**
+     * 最近任务。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    RECENT_TASKS = 58,
+
+    /**
      * 控制中心。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -615,7 +624,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.1.0
      */
-    NOTIFICATION_CENTER = 60
+    NOTIFICATION_CENTER = 60,
+
+    /**
+     * 智慧多窗应用栏。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MULTI_WINDOW_DOCK = 62
   }
 
   /**

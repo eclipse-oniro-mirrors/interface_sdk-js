@@ -1554,7 +1554,16 @@ declare namespace securityManager {
      * @stagemodelonly
      * @since 26.0.1
      */
-    EXTENDED_AUTH_REQUIRED = 2
+    EXTENDED_AUTH_REQUIRED = 2,
+
+    /**
+     * 设备关联认证和其他认证方式可选认证
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXTENDED_AUTH_OPTIONAL = 3
   }
 
   /**
