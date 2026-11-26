@@ -173,7 +173,7 @@ import { AppStorageV2, PersistenceV2, Type, UIUtils, ConnectOptions, Binding, Mu
   CustomComponentLifecycleState, ComponentInit, ComponentAppear, ComponentBuilt, ComponentReuse,
   ComponentActive, ComponentInactive,
   ComponentRecycle, ComponentDisappear, CollectionType, ConnectOptionsCollections,
-  CustomComponentContext, IReusePool, IDefaultReusePool, IReusableInfo,
+  CustomComponentContext, CustomComponentAsyncLoadOptions, IReusePool, IDefaultReusePool, IReusableInfo,
   StorageDefaultCreator, TypeConstructorWithArgs, PersistenceErrorCallback, TypeConstructor, TypeDecorator,
   MonitorCallback, MonitorOptions, GetterCallback, SetterCallback, ObservedResult, DecoratorInfo, ElementInfo,
   RecoverableStorage, RecoverableConnectOptions, RecoverableStorageError, NotifyOnErrorCallback
@@ -437,7 +437,7 @@ export {
   RowLayoutAlgorithm, ColumnLayoutAlgorithm, StackLayoutAlgorithm, GridLayoutAlgorithm, CustomLayoutAlgorithm, LayoutAlgorithm, DynamicLayout, DynamicLayoutAttribute,
   LazyLayoutDirection, LazyLayoutHelper, LazyCustomLayoutAlgorithmOptions, LazyCustomLayoutAlgorithm, LazyLayoutAlgorithm, LazyDynamicLayout, LazyDynamicLayoutAttribute,
   ContainerReader, ContainerReaderAttribute, BreakpointOptions, LazyColumnLayout, LazyColumnLayoutAttribute,
-  CustomComponentContext, IReusePool, IDefaultReusePool, IReusableInfo,
+  CustomComponentContext, CustomComponentAsyncLoadOptions, IReusePool, IDefaultReusePool, IReusableInfo,
   StorageDefaultCreator, TypeConstructorWithArgs, PersistenceErrorCallback, TypeConstructor, TypeDecorator, RecoverableConnectOptions, RecoverableStorageError, NotifyOnErrorCallback,
   MonitorCallback, MonitorOptions, GetterCallback, SetterCallback, ObservedResult, DecoratorInfo, ElementInfo,
   PopupV2, PopupV2InitInfo, PopupV2Button,
