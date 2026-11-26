@@ -633,7 +633,21 @@ declare namespace restrictions {
     SUPER_PRIVACY = 53,
 
     /**
+     * Switch data card.
+     *
+     * Once this feature is disabled, the default data card cannot be switched,
+     * and only the current default data card can be used to access the internet.
+     * Voice and SMS services are not affected.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SWITCH_DATACARD = 54,
+
+    /**
      * Enhanced information.
+     *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
      * @since 26.1.0
