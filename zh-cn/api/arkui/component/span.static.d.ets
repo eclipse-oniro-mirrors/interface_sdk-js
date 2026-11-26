@@ -60,8 +60,7 @@ export declare interface TextBackgroundStyle {
    */
   borderWidth?: Dimension;
   /**
-   * 文本背景边框颜色。
-   * 默认值：**Color.Transparent**。
+   * 文本背景边框颜色。默认跟随字体颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
