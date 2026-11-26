@@ -1095,8 +1095,9 @@ declare namespace backgroundTaskManager {
    *
    * @returns { Promise<TransientTaskInfo> } Promise对象，返回所有短时任务信息。
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
-   * @throws { BusinessError } 9900003 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9900003 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9900004 - System service operation failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.TransientTask
    * @since 20 dynamic
