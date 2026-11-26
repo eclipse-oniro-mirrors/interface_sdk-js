@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * This module provides Wi-Fi management capabilities for enterprise devices, including querying the Wi-Fi enabling
@@ -1169,6 +1170,65 @@ declare namespace wifiManager {
    * @since 20
    */
   function turnOffWifi(admin: Want): void;
+
+  /**
+   * Add the MAC address of the network share.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_WIFI
+   * @param { Array<string> } macAddresses - Indicates the list of available network share MAC addresses.
+   * <br>The maximum length is 1000 characters.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addAllowedHotspotClientList(macAddresses: Array<string>): void;
+
+  /**
+   * Remove the network share MAC address.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_WIFI
+   * @param { Array<string> } macAddresses - Indicates the list of available network share MAC addresses to be removed.
+   * <br>The maximum length is 1000 characters.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeAllowedHotspotClientList(macAddresses: Array<string>): void;
+
+  /**
+   * Obtain the list of available network share MAC addresses.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_WIFI
+   * @param { common.QueryPolicy } [queryPolicy] - Specifies the query policy,
+   * The default value is {@link @ohos.enterprise.common:common.QueryPolicy.SELF}, indicating that the policies set by
+   * the current device management application are queried.
+   * When {@link @ohos.enterprise.common:common.QueryPolicy.ALL} is transferred, the policy set on the current device
+   * can be queried.
+   * @returns { Array<string> }Indicates the list of available network share MAC addresses.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllowedHotspotClientList(queryPolicy?: common.QueryPolicy): Array<string>;
 }
 
 export default wifiManager;

@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * 本模块提供企业设备Wi-Fi管理能力，包括查询Wi-Fi开启状态、配置Wi-Fi连接、管理Wi-Fi名单等。
@@ -1078,6 +1079,63 @@ declare namespace wifiManager {
    * @since 20
    */
   function turnOffWifi(admin: Want): void;
+
+  /**
+   * 添加网络共享MAC地址。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_WIFI
+   * @param { Array<string> } macAddresses - 添加允许连接热点的设备可用名单。
+   *     <br>最大长度为1000。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addAllowedHotspotClientList(macAddresses: Array<string>): void;
+
+  /**
+   * 移除网络共享MAC地址。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_WIFI
+   * @param { Array<string> } macAddresses - 移除允许链接热点的设备可用名单。
+   *     <br>最大长度为1000。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeAllowedHotspotClientList(macAddresses: Array<string>): void;
+
+  /**
+   * 获取网络共享MAC地址可用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_WIFI
+   * @param { common.QueryPolicy } [queryPolicy] - 查询策略。通过queryPolicy指定查询策略，
+   *     默认值为{@link @ohos.enterprise.common:common.QueryPolicy.SELF}，表示查询当前设备管理应用设置的策略；
+   *     传入{@link @ohos.enterprise.common:common.QueryPolicy.ALL}时，可查询当前设备设置的策略。
+   * @returns { Array<string> } 网络共享MAC地址可用名单。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllowedHotspotClientList(queryPolicy?: common.QueryPolicy): Array<string>;
 }
 
 export default wifiManager;
