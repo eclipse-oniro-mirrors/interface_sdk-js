@@ -939,6 +939,71 @@ declare namespace usbManager {
   function getAllowedOpticalDiscDriveBurnUsbDevices(queryPolicy?: common.QueryPolicy): Promise<Array<UsbDevice>>;
 
   /**
+   * Adds USB devices to the burn whitelist for the specified account.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - USB devices to add.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addAllowedOpticalDiscDriveBurnUsbDevicesForAccount(usbDevices: Array<UsbDevice>, accountId: number): void;
+
+  /**
+   * Removes USB devices from the burn whitelist for the specified account.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { Array<UsbDevice> } usbDevices - USB devices to remove.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeAllowedOpticalDiscDriveBurnUsbDevicesForAccount(usbDevices: Array<UsbDevice>, accountId: number): void;
+
+  /**
+   * Obtains USB devices in the burn whitelist for the specified account.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @param { common.QueryPolicy } [policyType] - Query policy type.
+   * @returns { Array<UsbDevice> } Returns the list of USB devices.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllowedOpticalDiscDriveBurnUsbDevicesForAccount(accountId: number, policyType?: common.QueryPolicy): Array<UsbDevice>;
+
+  /**
    * Set the enabling status of external storage device mounting.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
