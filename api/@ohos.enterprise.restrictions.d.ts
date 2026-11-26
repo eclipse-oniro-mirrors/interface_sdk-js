@@ -855,6 +855,15 @@ declare namespace restrictions {
      * @since 26.1.0
      */
     INSTALL_DEVICE_CERTIFICATE = 15,
+
+    /**
+     * App lock.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    APP_LOCK = 16
   }
 
   /**
