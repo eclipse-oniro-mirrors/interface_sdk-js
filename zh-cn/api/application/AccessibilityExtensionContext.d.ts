@@ -796,7 +796,7 @@ export declare interface AccessibilityElement {
    */
   isHint?: boolean;
   /**
-   * 表示元素是否聚焦。true表示元素处于聚焦状态，false表示元素不处于聚焦状态。
+   * 表示元素是否处于聚焦状态。true表示元素处于聚焦状态，false表示元素不处于聚焦状态，默认值为false。
    * 
    * 默认值：false。
    *
