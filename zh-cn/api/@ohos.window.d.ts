@@ -13126,7 +13126,7 @@ declare namespace window {
     setDragKeyFramePolicy(keyFramePolicy: KeyFramePolicy): Promise<KeyFramePolicy>;
 
     /**
-     * 查询当前窗口是否为[自由窗口](docroot://windowmanager/window-terminology.md#自由窗口)模式。
+     * 查询当前窗口是否为[自由窗口](docroot://windowmanager/window-terminology.md#freeform-window自由窗口)模式。
      *
      * @returns { boolean } 返回true表示在自由窗口模式，false表示非自由窗口模式。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
