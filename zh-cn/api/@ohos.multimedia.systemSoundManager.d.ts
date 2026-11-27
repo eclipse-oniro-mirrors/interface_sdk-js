@@ -1482,7 +1482,7 @@ declare namespace systemSoundManager {
     openToneHaptics(context: BaseContext, hapticsUri: string): Promise<int>;
 
     /**
-     * 一键还原所有铃声和震动设置为出厂默认值，并删除自定义音频铃音（保留视频铃声）。
+     * 一键还原所有铃声和振动设置为出厂默认值，并删除自定义音频铃音（保留视频铃声）。
      *
      * 还原范围包括：来电铃声、短信/通知提示音、闹钟铃声的当前选中URI，以及铃音振动设置。还原后各项恢复为出厂预置默认值，同时删除铃音库中通过
      * {@link SystemSoundManager#addCustomizedTone}添加的自定义音频铃声，但保留视频铃声。
