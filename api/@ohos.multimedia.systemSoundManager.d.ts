@@ -1619,9 +1619,9 @@ declare namespace systemSoundManager {
      *
      * @permission ohos.permission.WRITE_RINGTONE
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permisson verification failed. The application does not have the permission
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 202 - Permisson verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 20700003 - Unsupported operation.
      * @throws { BusinessError } 20700008 - I/O error.
      * @syscap SystemCapability.Multimedia.SystemSound.Core
