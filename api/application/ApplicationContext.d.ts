@@ -721,8 +721,6 @@ declare class ApplicationContext extends Context {
    *
    * @param { string } font - Font, which can be registered by calling
    *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}.
-   * @throws { BusinessError } 16000011 - The context does not exist.
-   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @crossplatform [since 21]
