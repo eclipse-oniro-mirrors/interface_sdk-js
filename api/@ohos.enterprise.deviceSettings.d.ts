@@ -721,6 +721,524 @@ declare namespace deviceSettings {
   }
 
   /**
+   * Enumerates control panel quick toggle list icons (1*1 area). Different devices may support
+   * different toggles. If a toggle is not supported by the current device, the setting does not
+   * take effect, and the control panel does not display the corresponding icon.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum ControlPanelQuickToggleType {
+    /**
+     * Flashlight.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FLASHLIGHT = 0,
+
+    /**
+     * Ring mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    RING_MODE = 1,
+
+    /**
+     * Rotation lock.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ROTATION_LOCK = 2,
+
+    /**
+     * Scan.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCAN = 3,
+
+    /**
+     * Harmony Share.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    HARMONY_SHARE = 4,
+
+    /**
+     * Airplane mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    AIRPLANE_MODE = 5,
+
+    /**
+     * Mobile data.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MOBILE_DATA = 6,
+
+    /**
+     * Personal hotspot.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PERSONAL_HOTSPOT = 7,
+
+    /**
+     * Screenshot.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREENSHOT = 8,
+
+    /**
+     * Screen recording.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_RECORDING = 9,
+
+    /**
+     * Wireless cast.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    WIRELESS_CAST = 10,
+
+    /**
+     * Location.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    LOCATION = 11,
+
+    /**
+     * Music recognition.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MUSIC_RECOGNITION = 12,
+
+    /**
+     * NFC.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    NFC = 13,
+
+    /**
+     * Eye comfort mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EYE_COMFORT_MODE = 14,
+
+    /**
+     * Dark mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DARK_MODE = 15,
+
+    /**
+     * Super privacy.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SUPER_PRIVACY = 16,
+
+    /**
+     * Super hub.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SUPER_HUB = 17,
+
+    /**
+     * Power saving mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_SAVING_MODE = 18,
+
+    /**
+     * Performance mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PERFORMANCE_MODE = 19,
+
+    /**
+     * Youth mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    YOUTH_MODE = 20,
+
+    /**
+     * E-book mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EBOOK_MODE = 21,
+
+    /**
+     * Sound recorder.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SOUND_RECORDER = 22,
+
+    /**
+     * Calculator.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CALCULATOR = 23,
+
+    /**
+     * Clock.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CLOCK = 24,
+
+    /**
+     * Remote control.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    REMOTE_CONTROL = 25,
+
+    /**
+     * Camera.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CAMERA = 26,
+
+    /**
+     * Wireless reverse charging.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    WIRELESS_REVERSE_CHARGING = 27,
+
+    /**
+     * Quick remind.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    QUICK_REMIND = 28,
+
+    /**
+     * Celia translate.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CELIA_TRANSLATE = 29,
+
+    /**
+     * Quick note.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    QUICK_NOTE = 30,
+
+    /**
+     * Multi-window.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MULTI_WINDOW = 31,
+
+    /**
+     * Extreme cooling.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXTREME_COOLING = 32,
+
+    /**
+     * Celia captions.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CELIA_CAPTIONS = 33,
+
+    /**
+     * Single-hand mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SINGLE_HAND_MODE = 34,
+
+    /**
+     * Celia meeting.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CELIA_MEETING = 35,
+
+    /**
+     * Education space.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EDUCATION_SPACE = 36,
+
+    /**
+     * Computer mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COMPUTER_MODE = 37,
+
+    /**
+     * Anti-peeping.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ANTI_PEEPING = 38,
+
+    /**
+     * Microphone.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MICROPHONE = 39,
+
+    /**
+     * Keyboard and mouse sharing.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    KEYBOARD_MOUSE_SHARING = 40,
+
+    /**
+     * Display mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DISPLAY_MODE = 41,
+
+    /**
+     * Partial screenshot.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PARTIAL_SCREENSHOT = 42,
+
+    /**
+     * Clipboard history.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CLIPBOARD_HISTORY = 43,
+
+    /**
+     * ECG measurement.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ECG_MEASUREMENT = 44,
+
+    /**
+     * Heart rate measurement.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    HEART_RATE_MEASUREMENT = 45,
+
+    /**
+     * Virtual touchpad.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VIRTUAL_TOUCHPAD = 46,
+
+    /**
+     * Select to speak.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SELECT_TO_SPEAK = 47
+  }
+
+  /**
+   * Enumerates control panel top toggle list icons (1*2 area). Different devices may support
+   * different toggles. If a toggle is not supported by the current device, the setting does not
+   * take effect, and the control panel does not display the corresponding icon.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum ControlPanelTopToggleType {
+    /**
+     * Super Device.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SUPER_DEVICE = 0,
+
+    /**
+     * Brightness.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS = 1,
+
+    /**
+     * Scenario mode.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCENARIO_MODE = 2,
+
+    /**
+     * Volume.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VOLUME = 3,
+
+    /**
+     * Vertical volume and brightness slider.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VOLUME_BRIGHTNESS_SLIDER = 4,
+
+    /**
+     * Hotspot.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    HOTSPOT = 5,
+
+    /**
+     * Mobile data.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MOBILE_DATA = 6
+  }
+
+
+  /**
    * Enterprise display information. This interface is used to set or query the enterprise customized copywriting(
    * enterprise name) displayed on the lock screen and home page.
    *
@@ -1396,6 +1914,147 @@ declare namespace deviceSettings {
    * @since 26.1.0
    */
   function setEnterpriseDisplayInfo(displayInfo: DisPlayInfo): void;
+
+  /**
+   * Sets whether to enable the control panel restricted mode. When enabled, the control panel
+   * displays only the toggles in the whitelist. If no whitelist is configured, all croppable
+   * icons in the area are hidden. When disabled, the whitelist does not take effect.
+   *
+   * This API is a device-level setting. It takes effect for all users and persists after a
+   * restart. If multiple administrators call this API, the last successful setting takes effect.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { boolean } restricted - Whether to enable control panel restricted mode.
+   *     The value **true** means enabling; the value **false** means disabling.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setControlPanelRestricted(restricted: boolean): Promise<void>;
+  /**
+   * Queries whether the control panel restricted mode is enabled.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @returns { Promise<boolean> } Promise used to return the restricted mode status. The value **true**
+   *     means the restricted mode is enabled; the value **false** means the restricted mode is disabled.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getControlPanelRestricted(): Promise<boolean>;
+  /**
+   * Sets the control panel top toggle list (1*2 area) whitelist for a specified account.
+   * The whitelist takes effect only when the restricted mode is enabled. If the restricted mode
+   * is disabled, the whitelist is still saved but does not crop icons. The new list overwrites
+   * the existing list. An empty array means all croppable icons in the area are hidden.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { Array<ControlPanelTopToggleType> } toggleList - Toggle list whitelist for the 1*2 area.
+   *     An empty array means all croppable icons in the area are hidden.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0. The specified user must exist.
+   *     You can call
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}
+   *     to obtain the user ID. Whether cross-user setting is supported depends on the administrator type and the device.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setControlPanelTopToggleListForAccount(toggleList: Array<ControlPanelTopToggleType>,
+    accountId: number): Promise<void>;
+  /**
+   * Queries the control panel top toggle list (1*2 area) whitelist for a specified account.
+   * If no whitelist is configured or the configured whitelist is an empty array, an empty array
+   * is returned.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { number } accountId - User ID, which must be greater than or equal to 0. The specified user must exist.
+   *     You can call
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}
+   *     to obtain the user ID.
+   * @returns { Promise<Array<ControlPanelTopToggleType>> } Promise used to return the control panel 1*2 area
+   *     toggle whitelist. An empty array means no whitelist is configured or all croppable icons in the area
+   *     are hidden.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getControlPanelTopToggleListForAccount(accountId: number): Promise<Array<ControlPanelTopToggleType>>;
+  /**
+   * Sets the control panel quick toggle list (1*1 area) whitelist for a specified account.
+   * The whitelist takes effect only when the restricted mode is enabled. If the restricted mode
+   * is disabled, the whitelist is still saved but does not crop icons. The new list overwrites
+   * the existing list. An empty array means all croppable icons in the area are hidden.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { Array<ControlPanelQuickToggleType> } toggleList - Toggle list whitelist for the 1*1 area.
+   *     An empty array means all croppable icons in the area are hidden.
+   * @param { number } accountId - User ID, which must be greater than or equal to 0. The specified user must exist.
+   *     You can call
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}
+   *     to obtain the user ID. Whether cross-user setting is supported depends on the administrator type and the device.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setControlPanelQuickToggleListForAccount(toggleList: Array<ControlPanelQuickToggleType>,
+    accountId: number): Promise<void>;
+  /**
+   * Queries the control panel quick toggle list (1*1 area) whitelist for a specified account.
+   * If no whitelist is configured or the configured whitelist is an empty array, an empty array
+   * is returned.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { number } accountId - User ID, which must be greater than or equal to 0. The specified user must exist.
+   *     You can call
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}
+   *     to obtain the user ID.
+   * @returns { Promise<Array<ControlPanelQuickToggleType>> } Promise used to return the control panel 1*1 area
+   *     toggle whitelist. An empty array means no whitelist is configured or all croppable icons in the area
+   *     are hidden.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getControlPanelQuickToggleListForAccount(accountId: number): Promise<Array<ControlPanelQuickToggleType>>;
 }
 
 export default deviceSettings;

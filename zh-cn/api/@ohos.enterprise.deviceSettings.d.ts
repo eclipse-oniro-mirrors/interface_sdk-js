@@ -719,6 +719,520 @@ declare namespace deviceSettings {
   }
 
   /**
+   * 控制中心1×1区域可裁剪开关项枚举。不同设备支持的开关项可能不同；不支持的开关项设置后不生效，控制中心不会显示对应图标。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum ControlPanelQuickToggleType {
+    /**
+     * 手电筒
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FLASHLIGHT = 0,
+
+    /**
+     * 响铃
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    RING_MODE = 1,
+
+    /**
+     * 旋转锁定
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ROTATION_LOCK = 2,
+
+    /**
+     * 扫一扫
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCAN = 3,
+
+    /**
+     * 鸿蒙分享
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    HARMONY_SHARE = 4,
+
+    /**
+     * 飞行模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    AIRPLANE_MODE = 5,
+
+    /**
+     * 移动数据
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MOBILE_DATA = 6,
+
+    /**
+     * 个人热点
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PERSONAL_HOTSPOT = 7,
+
+    /**
+     * 截图
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREENSHOT = 8,
+
+    /**
+     * 录屏
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_RECORDING = 9,
+
+    /**
+     * 无线投屏
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    WIRELESS_CAST = 10,
+
+    /**
+     * 位置信息
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    LOCATION = 11,
+
+    /**
+     * 听歌识曲
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MUSIC_RECOGNITION = 12,
+
+    /**
+     * NFC
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    NFC = 13,
+
+    /**
+     * 护眼模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EYE_COMFORT_MODE = 14,
+
+    /**
+     * 深色模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DARK_MODE = 15,
+
+    /**
+     * 超级隐私
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SUPER_PRIVACY = 16,
+
+    /**
+     * 中转站
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SUPER_HUB = 17,
+
+    /**
+     * 省电模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_SAVING_MODE = 18,
+
+    /**
+     * 性能模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PERFORMANCE_MODE = 19,
+
+    /**
+     * 未成年模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    YOUTH_MODE = 20,
+
+    /**
+     * 电子书模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EBOOK_MODE = 21,
+
+    /**
+     * 录音机
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SOUND_RECORDER = 22,
+
+    /**
+     * 计算器
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CALCULATOR = 23,
+
+    /**
+     * 时钟
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CLOCK = 24,
+
+    /**
+     * 智能遥控
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    REMOTE_CONTROL = 25,
+
+    /**
+     * 相机
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CAMERA = 26,
+
+    /**
+     * 无线反向充电
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    WIRELESS_REVERSE_CHARGING = 27,
+
+    /**
+     * 快提醒
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    QUICK_REMIND = 28,
+
+    /**
+     * 小艺翻译
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CELIA_TRANSLATE = 29,
+
+    /**
+     * 速记
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    QUICK_NOTE = 30,
+
+    /**
+     * 自由多窗
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MULTI_WINDOW = 31,
+
+    /**
+     * 极速散热
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EXTREME_COOLING = 32,
+
+    /**
+     * 小艺字幕
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CELIA_CAPTIONS = 33,
+
+    /**
+     * 单手模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SINGLE_HAND_MODE = 34,
+
+    /**
+     * 小艺慧记
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CELIA_MEETING = 35,
+
+    /**
+     * 教育空间
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    EDUCATION_SPACE = 36,
+
+    /**
+     * 电脑模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COMPUTER_MODE = 37,
+
+    /**
+     * 屏幕防窥
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ANTI_PEEPING = 38,
+
+    /**
+     * 麦克风
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MICROPHONE = 39,
+
+    /**
+     * 键鼠共享
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    KEYBOARD_MOUSE_SHARING = 40,
+
+    /**
+     * 显示器模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DISPLAY_MODE = 41,
+
+    /**
+     * 区域截屏
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    PARTIAL_SCREENSHOT = 42,
+
+    /**
+     * 历史剪贴板
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CLIPBOARD_HISTORY = 43,
+
+    /**
+     * 心电测量
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ECG_MEASUREMENT = 44,
+
+    /**
+     * 心率测量
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    HEART_RATE_MEASUREMENT = 45,
+
+    /**
+     * 虚拟触控板
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VIRTUAL_TOUCHPAD = 46,
+
+    /**
+     * 随选朗读
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SELECT_TO_SPEAK = 47
+  }
+
+  /**
+   * 控制中心1×2区域可裁剪开关项枚举。不同设备支持的开关项可能不同；不支持的开关项设置后不生效，控制中心不会显示对应图标。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum ControlPanelTopToggleType {
+    /**
+     * 超级终端
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SUPER_DEVICE = 0,
+
+    /**
+     * 亮度
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS = 1,
+
+    /**
+     * 情景模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCENARIO_MODE = 2,
+
+    /**
+     * 音量
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VOLUME = 3,
+
+    /**
+     * 竖向音量亮度条
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    VOLUME_BRIGHTNESS_SLIDER = 4,
+
+    /**
+     * 热点
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    HOTSPOT = 5,
+
+    /**
+     * 移动数据
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MOBILE_DATA = 6
+  }
+
+
+  /**
    * 企业展示信息。用于设置/查询锁屏与设置首页展示的企业定制文案（企业名称）。
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -1276,6 +1790,124 @@ declare namespace deviceSettings {
    * @since 26.1.0
    */
   function setEnterpriseDisplayInfo(displayInfo: DisPlayInfo): void;
+
+  /**
+   * 设置是否启用控制中心图标裁剪管控模式。启用后，控制中心仅显示白名单中的开关项，未配置白名单时，该区域所有可裁剪图标均隐藏。关闭后，白名单不生效。
+   *
+   * 本接口为设备级设置，对所有用户生效并在重启后保持，多个管理员调用时以最后一次成功设置为准。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { boolean } restricted - 是否启用控制中心图标裁剪管控模式。**true**表示启用；**false**表示关闭。
+   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setControlPanelRestricted(restricted: boolean): Promise<void>;
+  /**
+   * 查询是否启用控制中心图标裁剪管控模式。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @returns { Promise<boolean> } Promise对象，返回管控模式状态。**true**表示已启用；**false**表示未启用。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getControlPanelRestricted(): Promise<boolean>;
+  /**
+   * 设置指定用户控制中心1×2区域开关项白名单。白名单仅在管控模式启用时生效，未启用时仍会保存，但不会裁剪图标。新列表会覆盖原有列表，空数组表示该区域所有可裁剪图标均隐藏。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { Array<ControlPanelTopToggleType> } toggleList - 1×2区域开关项白名单。空数组表示该区域所有可裁剪图标均隐藏。
+   * @param { number } accountId - 用户ID，取值大于等于0且对应用户必须存在。
+   *     accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}获取。
+   *     跨用户设置能力取决于设备管理员类型和设备。
+   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setControlPanelTopToggleListForAccount(toggleList: Array<ControlPanelTopToggleType>,
+    accountId: number): Promise<void>;
+  /**
+   * 查询指定用户控制中心1×2区域开关项白名单。未配置或配置为空数组时返回空数组。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { number } accountId - 用户ID，取值大于等于0且对应用户必须存在。
+   *     accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}获取。
+   * @returns { Promise<Array<ControlPanelTopToggleType>> } Promise对象，返回1×2区域开关项白名单。空数组表示未配置白名单或该区域所有可裁剪图标均隐藏。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getControlPanelTopToggleListForAccount(accountId: number): Promise<Array<ControlPanelTopToggleType>>;
+  /**
+   * 设置指定用户控制中心1×1区域开关项白名单。白名单仅在管控模式启用时生效，未启用时仍会保存，但不会裁剪图标。新列表会覆盖原有列表，空数组表示该区域所有可裁剪图标均隐藏。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { Array<ControlPanelQuickToggleType> } toggleList - 1×1区域开关项白名单。空数组表示该区域所有可裁剪图标均隐藏。
+   * @param { number } accountId - 用户ID，取值大于等于0且对应用户必须存在。
+   *     accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}获取。
+   *     跨用户设置能力取决于设备管理员类型和设备。
+   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setControlPanelQuickToggleListForAccount(toggleList: Array<ControlPanelQuickToggleType>,
+    accountId: number): Promise<void>;
+  /**
+   * 查询指定用户控制中心1×1区域开关项白名单。未配置或配置为空数组时返回空数组。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { number } accountId - 用户ID，取值大于等于0且对应用户必须存在。
+   *     accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}获取。
+   * @returns { Promise<Array<ControlPanelQuickToggleType>> } Promise对象，返回1×1区域开关项白名单。空数组表示未配置白名单或该区域所有可裁剪图标均隐藏。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getControlPanelQuickToggleListForAccount(accountId: number): Promise<Array<ControlPanelQuickToggleType>>;
 }
 
 export default deviceSettings;
