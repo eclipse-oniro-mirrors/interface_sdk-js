@@ -31,7 +31,7 @@ import WorkSchedulerExtensionAbility, {
   WorkSchedulerExtensionContext
 } from '@ohos.WorkSchedulerExtensionAbility';
 import backgroundLoader from '@ohos.resourceschedule.backgroundLoader';
-import suspendManager from '@ohos.resourceschedule.suspendManager.d.ts';
+import suspendManager from '@ohos.resourceschedule.suspendManager';
 
 export {
   WorkSchedulerExtensionAbility, WorkSchedulerExtensionContext, backgroundTaskManager, bundleState,
