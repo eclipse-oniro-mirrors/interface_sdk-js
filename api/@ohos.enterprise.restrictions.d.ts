@@ -655,6 +655,15 @@ declare namespace restrictions {
     ADVANCED_MESSAGE = 55,
 
     /**
+     * Companion AI.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COMPANION_AI = 56,
+
+    /**
      * Power saving mode, including battery saver, ultra battery saver and expedition.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
