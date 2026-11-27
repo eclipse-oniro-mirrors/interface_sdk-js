@@ -635,8 +635,6 @@ declare class ApplicationContext extends Context {
    *
    * @param { string } font - 设置字体类型，字体可以通过
    *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}方法进行注册使用。
-   * @throws { BusinessError } 16000011 - The context does not exist.
-   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @crossplatform [since 21]
