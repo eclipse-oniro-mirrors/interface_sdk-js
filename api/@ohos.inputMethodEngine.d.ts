@@ -3230,8 +3230,9 @@ declare namespace inputMethodEngine {
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
-     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing
-     * the panel.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
@@ -3244,8 +3245,9 @@ declare namespace inputMethodEngine {
      * invoked after it is bound to the edit box.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
-     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing
-     * the panel.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
@@ -3667,7 +3669,7 @@ declare namespace inputMethodEngine {
     /**
      * Obtain the immersive mode of the input method application.
      * @returns { ImmersiveMode } Immersive mode.
-     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
@@ -3795,7 +3797,7 @@ declare namespace inputMethodEngine {
      *         [#01000000, #FFFFFFFF] or [#000000, #FFFFFF]. The value of the fully transparent alpha channel (#00xxxxxx) is
      *         not supported.
      * @returns { Promise<void> } Promise that returns no result.
-     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 22 dynamic

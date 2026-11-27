@@ -3571,7 +3571,9 @@ declare namespace inputMethodEngine {
      * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板显示成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
-     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing the panel.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
@@ -3588,7 +3590,9 @@ declare namespace inputMethodEngine {
      * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
-     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing the panel.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
@@ -4030,7 +4034,7 @@ declare namespace inputMethodEngine {
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
      * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @returns { ImmersiveMode } 沉浸模式。
-     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
@@ -4165,7 +4169,7 @@ declare namespace inputMethodEngine {
      * @param { string | undefined } backgroundColor - 功能键的背景颜色，取值范围为[#01000000, #FFFFFFFF] 或 [#000000, #FFFFFF]，不支持具有完全
      *     透明Alpha通道（#00xxxxxx）的值。
      * @returns { Promise<void> } Promise对象。无返回结果。
-     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 22 dynamic
