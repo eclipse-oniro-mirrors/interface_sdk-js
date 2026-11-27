@@ -157,8 +157,12 @@ declare namespace backgroundLoader {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Taskinfo } taskinfo - The info of background load task.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 9700003 - System service operation failed.
-   * @throws { BusinessError } 9700004 - Check on taskInfo failed.
+   * @throws { BusinessError } 9710001 - Memory operation failed.
+   * @throws { BusinessError } 9710002 - Parcel operation failed.
+   * @throws { BusinessError } 9710003 - Background loader service operation failed.
+   * @throws { BusinessError } 9710004 - Parameter error.
+   * @throws { BusinessError } 9710005 - Background load failed.
+   * @throws { BusinessError } 9710006 - Background load prohibited.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -171,8 +175,11 @@ declare namespace backgroundLoader {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Taskinfo } taskinfo - The info of background load task.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 9700003 - System service operation failed.
-   * @throws { BusinessError } 9700004 - Check on taskInfo failed.
+   * @throws { BusinessError } 9710001 - Memory operation failed.
+   * @throws { BusinessError } 9710002 - Parcel operation failed.
+   * @throws { BusinessError } 9710003 - Background loader service operation failed.
+   * @throws { BusinessError } 9710004 - Parameter error.
+   * @throws { BusinessError } 9710005 - Background load failed.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -185,8 +192,11 @@ declare namespace backgroundLoader {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Taskinfo } taskinfo - The info of background load task.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 9700003 - System service operation failed.
-   * @throws { BusinessError } 9700004 - Check on taskInfo failed.
+   * @throws { BusinessError } 9710001 - Memory operation failed.
+   * @throws { BusinessError } 9710002 - Parcel operation failed.
+   * @throws { BusinessError } 9710003 - Background loader service operation failed.
+   * @throws { BusinessError } 9710004 - Parameter error.
+   * @throws { BusinessError } 9710005 - Background load failed.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -201,8 +211,10 @@ declare namespace backgroundLoader {
    *     <br>The value range is all integers.
    * @returns { Promise<TaskInfo> } Promise used to return the TaskInfo.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 9700003 - System service operation failed.
-   * @throws { BusinessError } 9700004 - Check on taskId failed.
+   * @throws { BusinessError } 9710001 - Memory operation failed.
+   * @throws { BusinessError } 9710002 - Parcel operation failed.
+   * @throws { BusinessError } 9710003 - Background loader service operation failed.
+   * @throws { BusinessError } 9710004 - Parameter error.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
