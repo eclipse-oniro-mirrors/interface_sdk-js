@@ -17,14 +17,20 @@
  * @file
  * @kit ArkUI
  */
-
 /**
- * 为Grid和WaterFlow的scrollSnapStrategy属性提供两阶段限位滚动的自定义偏移量。
+ * 用于自定义限位滚动的距离和吸附位置。此接口适用于[Grid]{@link Grid}、[WaterFlow]{@link WaterFlow}和[List]{@link List}组件的scrollSnapStrategy属性，
+ * 开发者实现接口后，将对象传入scrollSnapStrategy即可使用。
+ * 完整示例参考[示例24（自定义滚动吸附位置）](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#示例24自定义滚动吸附位置)。
  *
- * 偏移量单位为vp，速度单位为vp/s。回调在UI线程同步调用，且必须是纯计算。不提供布局快照；
- * 自定义提供方需要自行维护或推导item几何信息。
- * velocity为逻辑内容滚动偏移量对时间的导数，向内容末端为正；组件负责归一化反向布局和RTL方向。
- * decayOffset为自然摩擦衰减距离的非负幅值。
+ * 自定义限位滚动分为两个阶段：先按指定的距离惯性滚动，再通过限位动画滚动到目标吸附位置。两个回调分别在两个阶段的起始时机调用：
+ * - calculateApproachOffset：在惯性滚动开始时调用一次。
+ * - calculateSnapOffset：在惯性阶段结束、限位动画开始前调用一次。
+ *
+ * > **说明：**
+ *
+ * > - 偏移量的单位是vp，速度的单位是vp/s。
+ * > - 两个回调均在UI线程同步调用，应仅用于计算，不应修改组件布局或应用状态。
+ * > - 回调不提供item的位置和尺寸，开发者需要自行记录或计算这些信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -32,16 +38,20 @@
  * @atomicservice
  * @since 26.1.0 dynamic
  */
+
 declare interface ScrollSnapOffsetProvider {
   /**
-   * 在惯性滚动开始时调用一次，用于计算进入限位动画前的滚动距离。
+   * 用于计算惯性阶段滚动距离的回调，在惯性滚动开始时调用一次。
    *
-   * 返回值为非负有限距离幅值，可以大于或等于decayOffset。
-   * 返回非有限值、负数或回调抛出异常时，按默认惯性滚动预测的距离滑行，随后正常进入限位动画阶段。
-   *
-   * @param { number } velocity - 惯性滚动开始时的速度，向内容末端为正，单位vp/s。
-   * @param { number } decayOffset - 按默认惯性滚动预测的滑行距离，单位vp，取值为非负数。
-   * @returns { number } 惯性阶段的滚动距离，单位vp。
+   * @param { number } velocity - 惯性滚动开始时的速度，朝内容末端滚动时为正。反向布局和RTL方向由组件统一处理。
+   *     <br/>单位：vp/s
+   * @param { number } decayOffset - 按默认惯性滚动预测的滑行距离。
+   *     <br/>单位：vp
+   *     <br/>取值范围：[0, +∞)
+   * @returns { number } 惯性阶段的滚动距离，不能为NaN或Infinity，可以超过decayOffset。
+   *     返回负数、NaN或Infinity，或回调抛出异常时，该阶段按默认的惯性滑行距离滚动，随后正常进入限位动画阶段。
+   *     <br/>单位：vp
+   *     <br/>取值范围：[0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -51,14 +61,15 @@ declare interface ScrollSnapOffsetProvider {
   calculateApproachOffset(velocity: number, decayOffset: number): number;
 
   /**
-   * 每次趋近运动切换到最终限位动画时仅调用一次，用于计算目标偏移量。
+   * 用于计算最终吸附位置的回调，在惯性阶段结束、限位动画开始前调用一次。
    *
-   * 返回值为逻辑滚动轴上的有限目标偏移量。0表示内容起点，朝内容末端为正，反方向为负。
-   * 目标超出可滚动范围时，取最近的边界值。目标偏移量大于当前偏移量时朝内容末端滚动，小于时朝内容起点滚动，相等时不滚动。
-   * 返回非有限值或回调抛出异常时，组件在当前滚动位置停止。
-   *
-   * @param { number } velocity - 本次趋近阶段开始时的速度，向内容末端为正，单位vp/s。
-   * @returns { number } 目标滚动绝对偏移量，单位vp。
+   * @param { number } velocity - 惯性滚动结束时的剩余速度，朝内容末端滚动时为正。反向布局和RTL方向由组件统一处理。
+   *     <br/>单位：vp/s
+   * @returns { number } 最终吸附位置相对内容起点的滚动偏移量，必须为有限数值。沿逻辑主轴朝内容末端方向偏移为正，反方向为负，0表示内容起点。
+   *     实际滚动方向由目标位置与当前滚动位置决定：目标偏移量大于当前偏移量时朝内容末端滚动，小于时朝内容起点滚动，相等时不滚动。
+   *     超出可滚动范围时，目标位置限制在可滚动范围的边界。回调返回NaN、Infinity或抛出异常时，组件在当前滚动位置停止。
+   *     <br/>单位：vp
+   *     <br/>取值范围：组件可滚动范围对应的滚动偏移量。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

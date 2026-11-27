@@ -1,4 +1,4 @@
-'use static'
+'use static';
 /*
  * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,16 +17,26 @@
  * @file
  * @kit ArkUI
  */
-
 /**
- * Provides offsets for a two-stage scroll snap of a scrollable component.
+ * Used to customize the distance and suction position of the kickout roll. This API applies to the scrollSnapStrategy
+ * attribute of the [Grid]{@link Grid}, [WaterFlow]{@link WaterFlow}, and [List]{@link List} components,
+ * After implementing the API, you can transfer the object to scrollSnapStrategy.
+ * For a complete example, refer to [Example 24 (Custom Scroll Adsorption Position)](
+ * docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md# Example 24 Custom Scroll Adsorption Position).
  *
- * Offsets are in vp and velocity is in vp/s. Callbacks are invoked synchronously
- * on the UI thread and must be pure calculations. No layout snapshot is provided;
- * a provider must maintain or derive item geometry itself.
- * velocity is the time derivative of the logical content scroll offset, positive toward
- * the content end. The component normalizes reversed layouts and RTL directions.
- * decayOffset is the non-negative magnitude of the natural friction decay distance.
+ * Custom limit scrolling is divided into two phases: scrolling at the specified distance inertia, and then scrolling to
+ * the target adsorption position through the limit animation. The two callbacks are invoked at the start time of the
+ * two phases:
+ * - calculateApproachOffset: Called once at the beginning of inertial scrolling.
+ * - calculateSnapOffset: Called once before the end of the inertia phase and the start of the limit animation.
+ *
+ * > **Note:**
+ *
+ * > - The unit of offset is vp, and the unit of speed is vp/s.
+ * > - Both callbacks are called synchronously in the UI thread and should be used only for calculations, and should not
+ * > modify the component layout or application state.
+ * > - The callback does not provide the location and size of the item. Developers need to record or calculate the
+ * > information.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -34,15 +44,18 @@
  */
 export declare interface ScrollSnapOffsetProvider {
   /**
-   * Called once during a fling to determine the approach offset.
+   * Callback used to calculate the scrolling distance of the inertia phase. It is called once when the inertia
+   * scrolling starts.
    *
-   * The return value is a non-negative finite distance magnitude and may be greater than
-   * or equal to decayOffset. A non-finite return value, a negative return value, or a
-   * callback exception falls back to the natural decay offset.
-   *
-   * @param { double } velocity - Current fling velocity, positive toward the content end, in vp/s.
-   * @param { double } decayOffset - Non-negative natural friction decay distance magnitude, in vp.
-   * @returns { double } Approach offset magnitude, in vp.
+   * @param { double } velocity - The speed at which inertial scrolling begins, which is positive when scrolling
+   *     towards the end of the content. The reverse layout and RTL direction are handled by the component. <br/>Unit:
+   *     vp/s
+   * @param { double } decayOffset - Rolls the predicted coasting distance by default inertia. <br/>Unit:
+   *     vp<br/>Value range: [0, +∞)
+   * @returns { double } Rolling distance in the inertia phase, which cannot be NaN or Infinity and can exceed
+   *     decayOffset. When a negative number, NaN, or Infinity is returned, or an exception is thrown by a callback, the
+   *     stage rolls by the default inertial glide distance and then enters the limit animation phase normally.
+   *     <br/>Unit: vp<br/>Value range: [0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -50,16 +63,20 @@ export declare interface ScrollSnapOffsetProvider {
   calculateApproachOffset(velocity: double, decayOffset: double): double;
 
   /**
-   * Called once when the approach motion hands off to the final snap animation.
+   * Callback used to calculate the final suction position, called once before the end of the inertia phase and the
+   * start of the limit animation.
    *
-   * The return value is an absolute content scroll target; 0 is valid. A finite target
-   * outside the legal scroll range is clamped to that range.
-   * A non-finite return value or a callback exception uses the component fallback target.
-   * A Grid custom strategy stays at the approach endpoint without returning to the gesture start position.
-   *
-   * @param { double } velocity - Velocity at the start of this approach stage,
-   * positive toward the content end, in vp/s.
-   * @returns { double } Absolute target scroll offset, in vp.
+   * @param { double } velocity - Remaining speed at the end of inertia scrolling, positive when scrolling towards
+   *     the end of the content. Reverse layout and RTL direction are handled by the component. Unit: vp/s
+   * @returns { double }The scrolling offset of the final adsorption position relative to the starting point of the
+   *     content, which must be a finite value. The offset along the logical axis towards the end of the content is
+   *     positive, and the reverse direction is negative. 0 indicates the start of the content. The actual scrolling
+   *     direction is determined by the target position and the current scrolling position. If the target offset is
+   *     greater than the current offset, scroll towards the end of the content. If the target offset is less than the
+   *     current offset, scroll towards the start of the content. If the target offset is equal, do not scroll. When the
+   *     scrollable range is exceeded, the target position is limited to the boundary of the scrollable range. When the
+   *     callback returns NaN, Infinity, or throws an exception, the component stops at the current scrolling position.
+   *     Unit: vp Value range: scrolling offset corresponding to the scrolling range of the component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static

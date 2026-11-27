@@ -1462,18 +1462,22 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   scrollSnapAlign(value: ScrollSnapAlign): ListAttribute;
 
   /**
-   * 为List设置两阶段滚动捕捉策略。
+   * 设置List的限位滚动策略，使List在滚动结束时按指定方式对齐子组件，或停在自定义的吸附位置。
    *
-   * **ScrollSnapAlign.START**、**ScrollSnapAlign.CENTER**和**ScrollSnapAlign.END**选择
-   * 内置策略。**ScrollSnapAlign.NONE**无效，会抛出401异常。
-   * 自定义提供程序要求**ComputingSnapOffset**为函数。传递
-   * **undefined**或没有参数将清除策略。
+   * > **说明：**
+   * >
+   * > - 最终吸附位置始终在合法滚动范围内。例如对齐方式为ScrollSnapAlign.CENTER时，首尾子组件会停靠在可滚动边界处，而非视口中央。
+   * >   此行为与scrollSnapAlign不同：scrollSnapAlign以对齐效果优先，CENTER挡位下首尾子组件仍会居中，列表可能露出空白区域。
+   * > - 启用限位滚动后，通过onMove接口发起的拖拽结束时，或鼠标框选操作结束时，也会触发限位滚动。
+   * > - ListItemGroup作为整体参与对齐。
+   * > - 该属性与scrollSnapAlign互斥，后设置者生效。
+   * > - scrollSnapStrategy的限位动画不受scrollSnapAnimationSpeed影响，scrollSnapAnimationSpeed仅影响scrollSnapAlign属性产生的限位动画速度。
    *
-   * > **说明**
-   * > 该属性和**scrollSnapAlign**使用last-set-wins语义。最后的快照使用
-   * > 列表弹簧动画并遵循**scrollSnapAnimationSpeed**。
-   *
-   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐或自定义提供程序。
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 限位滚动策略。
+   *     传入ScrollSnapAlign枚举时，使用内置对齐方式：START、CENTER、END分别将子组件对齐到视口沿滚动轴的起始、中央和末尾位置。
+   *     传入实现ScrollSnapOffsetProvider接口的对象时，由开发者计算滚动距离和最终吸附位置：calculateApproachOffset确定惯性阶段的滚动距离，
+   *     calculateSnapOffset确定最终吸附位置。
+   *     不设置或传入ScrollSnapAlign.NONE、undefined时，不启用限位滚动，List不做吸附对齐，按惯性自然滑行至停止。
    * @returns { ListAttribute } 列表的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
