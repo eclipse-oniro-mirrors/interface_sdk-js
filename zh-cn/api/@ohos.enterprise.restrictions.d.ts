@@ -604,6 +604,15 @@ declare namespace restrictions {
     ADVANCED_MESSAGE = 55,
 
     /**
+     * 伴随式AI。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COMPANION_AI = 56,
+
+    /**
      * 省电模式，包含省电模式、超级省电模式和户外探索。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
