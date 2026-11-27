@@ -1761,6 +1761,21 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
    * @since 21 dynamic
    */
   contentTransition(transition: ContentTransitionEffect): ImageAttribute;
+
+  /**
+   * 设置图片的提亮压暗模式，默认值VibrancyMode.DISABLED。
+   * 设置后，图片的显示会相应变亮或变暗，以提高在半透明材质背景下的可读性。
+   * 仅在计算能力中等及以上的设备生效。设备的计算能力等级可
+   * 通过[getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel()}获取。
+   *
+   * @param { VibrancyMode } mode - 提亮压暗的模式。设置为undefined或null时，取默认值VibrancyMode.DISABLED。
+   * @returns { ImageAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  vibrancyMode(mode: VibrancyMode): ImageAttribute;
 }
 
 /**
